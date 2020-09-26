@@ -89,11 +89,12 @@
     <script>var _hmt = _hmt || []; (function () { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })();</script>
 </head>
 
-<body class="lang-zh-hans bg-gray">
+<body class="lang-zh-hans">
     <script src="https://cdn.jsdelivr.net/gh/xhemj/mingyan@D20200926/mingyan.js"></script>
     <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/nathco/jQuery.fontFlex@latest/jQuery.fontFlex.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/mumuy/browser@latest/Browser.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
     <div id="main">
         <h3><span id="name" class="label wave">有一位老师</span><span>曾经说过</span>：</h3>
         <h1><strong><span id="mingyan" class="label label-secondary">你可能要刷新才能看到这一条名言~~</span></strong></h1>
@@ -121,7 +122,9 @@
             };
             return re;
         };
-
+        if (qs("vc")) {
+            var vConsole = new VConsole();
+        }
         function rdNum(minNum, maxNum) {
             switch (arguments.length) {
                 case 1:
@@ -137,8 +140,8 @@
         };
 
         $(function () {
-            $('h1').fontFlex(25, 30, 70);
-            $('h3').fontFlex(25, 30, 70);
+            $('h1').fontFlex(30, 50, 70);
+            $('h3').fontFlex(30, 50, 70);
         });
 
         function showmingyan() {
@@ -196,30 +199,32 @@
             }
             var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br>";
             for (i = 0; i < mingyan.length; i++) {
-                showall += "<div><a style=\"color:black\" id=\"showall_item\" href=\"./?id=" + i + "\">" + mingyan[i] + "</a></div>";
+                showall += "<div><a style=\"color:black\" id=\"showall_item\" class=\"" + i + "\" href=\"./?id=" + i + "\">" + mingyan[i] + "</a></div>";
             };
             showall += "</br></br></br>"
             $("#showall").html(showall);
             $("#showall").fadeIn();
             $("footer").html("当前名言数量：" + mingyan.length + "</br><a href=javascript:; onclick=\"hide_showall()\">返回<\/a>");
         };
-
+        var sn = 0;
         setInterval(function () {
             if ($("input#searchbar").val()) {
                 var now1 = $("input#searchbar").val();
                 var now2 = $("input#searchbar").val();
+
                 if (now1 == now2) {
                     $("a#showall_item").each(function () {
                         if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
+                            sn = sn + 1;
                             $(this).html($(this).text().replace($("input#searchbar").val(), "<span class=\"label label-secondary\">" + $("input#searchbar").val() + "</span>"));
                             $(this).show();
                         } else {
                             $(this).hide();
                         }
-
                     });
                 } else {
                     $("a#showall_item").hide();
+                    console.log("1")
                 }
             } else {
                 $("a#showall_item").show();
@@ -227,6 +232,8 @@
                     $(this).html($(this).html().replace("<span class=\"label label-secondary\">", ""));
                     $(this).html($(this).html().replace("</span>", ""));
                 })
+            }
+            for (i<0;i<mingyan.length;i++){
             }
         }, 100);
         showmingyan();
