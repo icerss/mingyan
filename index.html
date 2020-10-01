@@ -1,3 +1,4 @@
+
 <head>
     <!-- BY:                                                                                                              
       ___           ___           ___           ___            ___   
@@ -16,16 +17,17 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="dns-prefetch" href="https://fonts.loli.net">
-	<link rel="dns-prefetch" href="https://cdn.staticfile.org">
-	<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-	<link rel="dns-prefetch" href="https://cdn.bootcss.com">
+    <link rel="dns-prefetch" href="https://fonts.loli.net">
+    <link rel="dns-prefetch" href="https://cdn.staticfile.org">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.bootcss.com">
     <title>名言 | xhemj</title>
     <link rel="stylesheet preload"
         href="https://fonts.loli.net/css?family=Roboto:300,300italic,700,700italic&display=swap">
     <link rel="stylesheet" href="https://cdn.staticfile.org/spectre.css/0.5.9/spectre.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/milligram@1.4.1/dist/milligram.min.css">
+    <link href="https://t.js.org/css/ljs.css" type="text/css" rel="stylesheet">
 
     <style>
         body {
@@ -98,13 +100,26 @@
     <script src="https://cdn.jsdelivr.net/gh/nathco/jQuery.fontFlex@latest/jQuery.fontFlex.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/mumuy/browser@latest/Browser.js"></script>
     <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+    <script type="text/javascript" src="https://t.js.org/js/t.js"></script>
     <div id="main">
         <h3><span id="name" class="label wave">有一位老师</span><span>曾经说过</span>：</h3>
         <h1><strong><span id="mingyan" class="label label-secondary">加载中~~</span></strong></h1>
         <p id="info"></p>
     </div>
     <div id="showall"></div>
+    <div id="change">Translate</div>
     <footer></footer>
-	<script src="./mingyan.js"></script>
-	<script src="./main.js"></script>
+    <script src="https://mingyan.now.sh/mingyan.js"></script>
+    <script src="https://mingyan.now.sh/main.js"></script>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    includedLanguages: 'en,zh-CN,hr,cs,da,nl,fr,de,el,iw,hu,ga,it,ja,ko,pt,ro,ru,sr,es,th,vi',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                },
+                'change'
+            );
+        }
+    </script>
 </body>
