@@ -66,7 +66,7 @@ $(document).ready(function () {
             $("#main").fadeIn();
             var title = "名言 | " + my;
             document.title = title;
-            var description = name + "曾经说过：" + my + "，点进来看看吧！";
+            var description = name + "曾经说过：" + my;
             $(document).attr(description);
             $('meta[property="og:description"]').attr('content', description);
             $('meta[name="og:description"]').attr('content', description);
