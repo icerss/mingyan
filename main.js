@@ -23,9 +23,6 @@ function qs(qs) {
     };
     return re;
 };
-if (qs("vc")) {
-    var vConsole = new VConsole();
-};
 function rdNum(minNum, maxNum) {
     switch (arguments.length) {
         case 1:
