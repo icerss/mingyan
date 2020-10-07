@@ -8,7 +8,7 @@ var _hmt = _hmt || []; (function () {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();
-var footer = "当前名言数量：" + mingyan.length + "</br><a href=\"./\">主页<\/a> &nbsp;&nbsp; | &nbsp;&nbsp; <a href=\"#search\" onclick=\"showall()\">名言搜索<\/a>";
+var footer = $("footer").html().replace("$1",mingyan.length)
 var ua = new Browser();
 $("#showall").hide();
 $("footer").html(footer);
@@ -59,7 +59,7 @@ function showmingyan() {
             var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2]
         };
         console.info("已选取第" + n + "条名言：" + my);
-        $("p#info").html("<a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言");
+        $("p#info").html("<div class=\"info-text\"><a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言</div>");
         $("span#mingyan").text(my);
         $("span#name").text(name);
         $("#main").fadeIn();

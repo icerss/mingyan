@@ -5,6 +5,31 @@ body {
 	padding-right: 10%;
 	word-break: break-all;
 	font-weight: 500;
+	background-color: #f6f8fa;
+	background-image: url(https://i.loli.net/2020/08/05/7z3idfuDgq12pxk.png);
+}
+
+header {
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	height:55px;
+	background:#fff;
+	box-shadow:0 1px 10px rgba(0,0,0,.05);
+	border-bottom:1px solid #e3e4e6;
+	display:flex;
+	justify-content:space-between;
+	align-items:center
+}
+
+header .left {
+	text-align: left;
+	font-size:20px;
+	font-weight: bold;
+	color:#5755d9;
+	transform: translateX(50%)
+
 }
 
 footer {
@@ -14,7 +39,9 @@ footer {
 	width: 100%;
 	background-color: whitesmoke;
 	text-align: center;
-	font-weight: bold
+	font-weight: bold;
+	box-shadow:0 1px 10px rgba(0,0,0,.05);
+	border-bottom:1px solid #e3e4e6;
 }
 
 @media(min-width:40.0rem) {
@@ -59,5 +86,14 @@ footer {
 }
 
 .main {
-	font-family: 'Noto Sans SC', sans-serif
+	font-family: 'Noto Sans SC', sans-serif;
+	font-weight: bold;
+}
+
+footer {
+	background-color: #fff
+}
+
+#mingyan {
+	transform: translateY(-20%);
 }
