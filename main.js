@@ -8,7 +8,7 @@ var _hmt = _hmt || []; (function () {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();
-var footer = $("footer").html().replace("$1",mingyan.length)
+var footer = $("footer").html().replace("$1", mingyan.length);
 var ua = new Browser();
 $("#showall").hide();
 $("footer").html(footer);
@@ -25,7 +25,7 @@ function qs(qs) {
 };
 if (qs("vc")) {
     var vConsole = new VConsole();
-}
+};
 function rdNum(minNum, maxNum) {
     switch (arguments.length) {
         case 1:
@@ -48,15 +48,15 @@ function showmingyan() {
         if (qs("id") != "") {
             var n = qs("id");
         } else if (location.hash != "" && location.hash != "#search") {
-            var n = location.hash.replace("#", "")
+            var n = location.hash.replace("#", "");
         } else {
             var n = rdNum(0, mingyan.length - 1);
         };
-        var name = mingyan[n].split("：")[0]
+        var name = mingyan[n].split("：")[0];
         if (mingyan[n].split("：").length = 2) {
-            var my = mingyan[n].split("：")[1]
+            var my = mingyan[n].split("：")[1];
         } else if (mingyan[n].split("：").length = 3) {
-            var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2]
+            var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
         };
         console.info("已选取第" + n + "条名言：" + my);
         $("p#info").html("<div class=\"info-text\"><a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言</div>");
@@ -94,9 +94,9 @@ function showall() {
     $("#main").hide();
     $("input#searchbar").val("");
     if (ua.device != 'Mobile') {
-        var inputbar_width = "60%"
+        var inputbar_width = "60%";
     } else {
-        var inputbar_width = "auto"
+        var inputbar_width = "auto";
     }
     var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br>";
     for (i = 0; i < mingyan.length; i++) {
@@ -109,37 +109,35 @@ function showall() {
 };
 var sn = 0;
 if (location.hash == "#search") {
-    showall()
+    showall();
 };
-setInterval(function () {
-    if ($("input#searchbar").val()) {
-        var now1 = $("input#searchbar").val();
-        var now2 = $("input#searchbar").val();
 
-        if (now1 == now2) {
-            $("a#showall_item").each(function () {
-                if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
-                    sn = sn + 1;
-                    $(this).html($(this).text().replace($("input#searchbar").val(), "<span class=\"label label-secondary\">" + $("input#searchbar").val() + "</span>"));
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
+setInterval(function () {
+    if ($("#searchbar").is(":focus")) {
+        if ($("input#searchbar").val()) {
+            var now1 = $("input#searchbar").val();
+            var now2 = $("input#searchbar").val();
+            if (now1 == now2) {
+                $("a#showall_item").each(function () {
+                    if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
+                        sn = sn + 1;
+                        $(this).html($(this).text().replace($("input#searchbar").val(), "<span class=\"label label-secondary\">" + $("input#searchbar").val() + "</span>"));
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
         } else {
-            $("a#showall_item").hide();
-            console.log("1")
+            $("a#showall_item").show();
+            $("a#showall_item").each(function () {
+                $(this).html($(this).html().replace("<span class=\"label label-secondary\">", ""));
+                $(this).html($(this).html().replace("</span>", ""));
+            })
         }
-    } else {
-        $("a#showall_item").show();
-        $("a#showall_item").each(function () {
-            $(this).html($(this).html().replace("<span class=\"label label-secondary\">", ""));
-            $(this).html($(this).html().replace("</span>", ""));
-        })
     }
-    for (i < 0; i < mingyan.length; i++) { }
-},
-    100);
+}, 100);
+
 $(document).ready(function () {
     showmingyan();
 })
