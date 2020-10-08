@@ -8,7 +8,7 @@ var _hmt = _hmt || []; (function () {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();
-var footer = $("footer").html().replace("$1", mingyan.length);
+var footer = $("footer").html().replace("$1", mingyan.length + 1);
 var ua = new Browser();
 $("#showall").hide();
 $("footer").html(footer);
@@ -64,12 +64,11 @@ function showmingyan() {
             var title = "名言 | " + my;
             document.title = title;
             var description = name + "曾经说过：" + my;
-            $(document).attr(description);
+            $('meta[name="description"]').attr("content",description);
             $('meta[property="og:description"]').attr('content', description);
             $('meta[name="og:description"]').attr('content', description);
             $('meta[property="og:title"]').attr('content', title);
-            $('meta[name="og:title"]').attr('content', title);
-
+            $('meta[name="og:title"]').attr('content', title);  
         }
     } catch (err) {
         console.error(err);
@@ -77,6 +76,7 @@ function showmingyan() {
         $("#info").html("错误信息：</br>" + err + "</br>建议：<a href=\"javascript:reload()\">点我刷新页面</a>");
         $("#main").fadeIn();
         $("#info").fadeIn();
+        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
     };
 };
 if (ua.device != 'Mobile') {
@@ -115,10 +115,6 @@ function showall() {
     $("#showall").fadeIn();
     $("footer").html("当前名言数量：" + mingyan.length + "</br><a href=javascript:; onclick=\"hide_showall()\">返回<\/a>");
 };
-if (location.hash == "#search") {
-    showall();
-};
-
 setInterval(function () {
     if ($("#searchbar").is(":focus")) {
         if ($("input#searchbar").val()) {
