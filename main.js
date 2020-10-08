@@ -147,7 +147,9 @@ setInterval(function () {
         $(".e").text("无结果");
         $(".e").show();
     } else {
-        $(".e").hide();
+        if ($("#searchbar").is(":focus")) {
+            $(".e").hide();
+        }
     }
 }, 100);
 
