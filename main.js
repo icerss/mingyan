@@ -81,11 +81,11 @@ function showmingyan() {
 };
 if (ua.device != 'Mobile') {
     var inputbar_width = "60%";
-    $("#main").css("transform","translateY(15%)")
+    $("#main").css("transform","translateY(15%)");
 } else {
     var inputbar_width = "auto";
-    $("#main").css("transform","translateY(30%)")
-}
+    $("#main").css("transform","translateY(30%)");
+};
 function reload() {
     if (location.hash != "") {
         location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
@@ -106,7 +106,7 @@ function hide_showall() {
 function showall() {
     $("#main").hide();
     $("input#searchbar").val("");
-    var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br>";
+    var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br><span class=\"e\"></span>";
     for (i = 0; i < mingyan.length; i++) {
         showall += "<div><a style=\"color:black\" id=\"showall_item\" class=\"" + i + "\" href=\"./?id=" + i + "\">" + mingyan[i] + "</a></div>";
     };
@@ -115,7 +115,6 @@ function showall() {
     $("#showall").fadeIn();
     $("footer").html("当前名言数量：" + mingyan.length + "</br><a href=javascript:; onclick=\"hide_showall()\">返回<\/a>");
 };
-var sn = 0;
 if (location.hash == "#search") {
     showall();
 };
@@ -128,13 +127,13 @@ setInterval(function () {
             if (now1 == now2) {
                 $("a#showall_item").each(function () {
                     if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
-                        sn = sn + 1;
                         $(this).html($(this).text().replace($("input#searchbar").val(), "<span class=\"label label-secondary\">" + $("input#searchbar").val() + "</span>"));
                         $(this).show();
                     } else {
                         $(this).hide();
                     }
                 });
+                $(".e").hide();
             }
         } else {
             $("a#showall_item").show();
@@ -142,6 +141,10 @@ setInterval(function () {
                 $(this).html($(this).html().replace("<span class=\"label label-secondary\">", ""));
                 $(this).html($(this).html().replace("</span>", ""));
             })
+        }
+        if ($("#showall")[0]["innerText"].match(/^\s*$/) != null) {
+            $(".e").text("无结果");
+            $(".e").show();
         }
     }
 }, 100);
