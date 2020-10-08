@@ -74,17 +74,17 @@ function showmingyan() {
     } catch (err) {
         console.error(err);
         $("#mingyan").text("名言加载失败");
-        $("#info").html("错误信息：</br>" + err +"</br>建议：<a href=\"javascript:reload()\">点我刷新页面</a>");
+        $("#info").html("错误信息：</br>" + err + "</br>建议：<a href=\"javascript:reload()\">点我刷新页面</a>");
         $("#main").fadeIn();
         $("#info").fadeIn();
     };
 };
 if (ua.device != 'Mobile') {
     var inputbar_width = "60%";
-    $("#main").css("transform","translateY(15%)");
+    $("#main").css("transform", "translateY(15%)");
 } else {
     var inputbar_width = "auto";
-    $("#main").css("transform","translateY(30%)");
+    $("#main").css("transform", "translateY(30%)");
 };
 function reload() {
     if (location.hash != "") {
@@ -142,10 +142,12 @@ setInterval(function () {
                 $(this).html($(this).html().replace("</span>", ""));
             })
         }
-        if ($("#showall")[0]["innerText"].match(/^\s*$/) != null) {
-            $(".e").text("无结果");
-            $(".e").show();
-        }
+    }
+    if ($("#showall")[0]["innerText"].match(/^\s*$/) != null) {
+        $(".e").text("无结果");
+        $(".e").show();
+    } else {
+        $(".e").hide();
     }
 }, 100);
 
