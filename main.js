@@ -39,37 +39,53 @@ function rdNum(minNum, maxNum) {
 $('h1').fontFlex(30, 50, 70);
 $('h3').fontFlex(30, 50, 70);
 function showmingyan() {
-    $("#main").hide();
-    if (mingyan.length != 0) {
-        console.info("加载名言列表成功");
-        if (qs("id") != "") {
-            var n = qs("id");
-        } else if (location.hash != "" && location.hash != "#search") {
-            var n = location.hash.replace("#", "");
-        } else {
-            var n = rdNum(0, mingyan.length - 1);
-        };
-        var name = mingyan[n].split("：")[0];
-        if (mingyan[n].split("：").length = 2) {
-            var my = mingyan[n].split("：")[1];
-        } else if (mingyan[n].split("：").length = 3) {
-            var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
-        };
-        console.info("已选取第" + n + "条名言：" + my);
-        $("p#info").html("<div class=\"info-text\"><a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言</div>");
-        $("span#mingyan").text(my);
-        $("span#name").text(name);
+    try {
+        $("#main").hide();
+        if (mingyan.length != 0) {
+            console.info("加载名言列表成功");
+            if (qs("id") != "") {
+                var n = qs("id");
+            } else if (location.hash != "" && location.hash != "#search") {
+                var n = location.hash.replace("#", "");
+            } else {
+                var n = rdNum(0, mingyan.length - 1);
+            };
+            var name = mingyan[n].split("：")[0];
+            if (mingyan[n].split("：").length = 2) {
+                var my = mingyan[n].split("：")[1];
+            } else if (mingyan[n].split("：").length = 3) {
+                var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
+            };
+            console.info("已选取第" + n + "条名言：" + my);
+            $("p#info").html("<div class=\"info-text\"><a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言</div>");
+            $("span#mingyan").text(my);
+            $("span#name").text(name);
+            $("#main").fadeIn();
+            var title = "名言 | " + my;
+            document.title = title;
+            var description = name + "曾经说过：" + my;
+            $(document).attr(description);
+            $('meta[property="og:description"]').attr('content', description);
+            $('meta[name="og:description"]').attr('content', description);
+            $('meta[property="og:title"]').attr('content', title);
+            $('meta[name="og:title"]').attr('content', title);
+
+        }
+    } catch (err) {
+        console.error(err);
+        $("#mingyan").text("名言加载失败");
+        $("#info").html("错误信息：</br>" + err +"</br>建议：<a href=\"javascript:reload()\">点我刷新页面</a>");
         $("#main").fadeIn();
-        var title = "名言 | " + my;
-        document.title = title;
-        var description = name + "曾经说过：" + my;
-        $(document).attr(description);
-        $('meta[property="og:description"]').attr('content', description);
-        $('meta[name="og:description"]').attr('content', description);
-        $('meta[property="og:title"]').attr('content', title);
-        $('meta[name="og:title"]').attr('content', title);
-    }
+        $("#info").fadeIn();
+    };
 };
+if (ua.device != 'Mobile') {
+    var inputbar_width = "60%";
+    $("#main").css("transform","translateY(15%)")
+} else {
+    var inputbar_width = "auto";
+    $("#main").css("transform","translateY(30%)")
+}
 function reload() {
     if (location.hash != "") {
         location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
@@ -90,11 +106,6 @@ function hide_showall() {
 function showall() {
     $("#main").hide();
     $("input#searchbar").val("");
-    if (ua.device != 'Mobile') {
-        var inputbar_width = "60%";
-    } else {
-        var inputbar_width = "auto";
-    }
     var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br>";
     for (i = 0; i < mingyan.length; i++) {
         showall += "<div><a style=\"color:black\" id=\"showall_item\" class=\"" + i + "\" href=\"./?id=" + i + "\">" + mingyan[i] + "</a></div>";

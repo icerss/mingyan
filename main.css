@@ -86,15 +86,11 @@ footer {
 .main {
 	font-family: 'Noto Sans SC', sans-serif;
 	font-weight: bold;
-	transform: translateY(15%);
+	
 }
 
 footer {
 	background-color: #fff
-}
-
-#mingyan {
-	transform: translateY(-20%);
 }
 
 body {
