@@ -1,4 +1,4 @@
-var date = 20200930;
+var date = 20201008;
 var mingyan = [
 //====老王名言====
 "老王：你是屁股吗？", 
@@ -19,7 +19,7 @@ var mingyan = [
 //====潘哥名言====
 "潘哥：你的眼睛是被屎糊了吗？",
 "潘哥：屎被眼睛糊了！",
-"潘哥：周末玩游戏玩太多了哦，今天肾虚了?！",
+"潘哥：周末玩游戏玩太多了哦，今天不行了?！",
 "潘哥：跟着画-柳景浩!",
 "潘哥：盒[hèr]子",
 "潘哥：笑死[shǐ]人了",
@@ -230,6 +230,12 @@ var mingyan = [
 "恪人：Warerma！",
 "Oranjezelv：ERSS",
 "Oranjezelv：耳散伞",
+"Oranjezelv：我不会啊！！",
+"Oranjezelv：音乐喜剧",
+"Oranjezelv：空调进行曲",
+"Oranjezelv：元老院不允许……",
+"Oranjezelv：实在是太erss了",
+"Oranjezelv：精神科尔多瓦人作死事业专用纸板",
 "BlackToy：IYAMAYA:用心创造惊叹物品",
 "BlackToy：把他放到五楼的办公室",
 "BlackToy：我们打架受伤，请假一年",
@@ -245,11 +251,5 @@ var mingyan = [
 "小柳DJ：你有病啊！SB！",
 "小柳DJ：WDNMD！！！",
 "Hihi：巴西！一定是巴西！",
-"沃恪：我不会啊！！",
 "臧哥：优~~~~~秀~~~~~！",
-"Oranjezelv：音乐喜剧",
-"Oranjezelv：空调进行曲",
-"Oranjezelv：元老院不允许……",
-"Oranjezelv：实在是太erss了",
-"Oranjezelv：精神科尔多瓦人作死事业专用纸板",
 "臧哥：草率啊！"]
