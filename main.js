@@ -8,7 +8,7 @@ var _hmt = _hmt || []; (function () {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();
-var footer = $("footer").html().replace("$1", mingyan.length + 1);
+var footer = $("footer").html().replace("$1", mingyan.length);
 var ua = new Browser();
 $("#showall").hide();
 $("footer").html(footer);
