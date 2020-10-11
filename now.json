@@ -7,6 +7,5 @@
             },
             "dest": "/$1"
         }
-    ],
-    "cleanUrls": true
+    ]
 }
