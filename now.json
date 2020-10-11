@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "https://7868-xhemj-0gjckebwf7276129-1256004056.tcb.qcloud.la/index.html"
-    }
-  ]
-}
