@@ -76,7 +76,7 @@ function showmingyan() {
         $("#info").html("错误信息：</br>" + err + "</br>建议：<a href=\"javascript:reload()\">点我刷新页面</a>");
         $("#main").fadeIn();
         $("#info").fadeIn();
-        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
+        //location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
     };
 };
 if (ua.device != 'Mobile') {
