@@ -1,0 +1,11 @@
+{
+    "routes": [
+        {
+            "src": "/(.*)",
+            "headers": {
+                "cache-control": "max-age=86400"
+            },
+            "dest": "/$1"
+        }
+    ]
+}
