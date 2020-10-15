@@ -156,7 +156,7 @@ function webprint() {
     var headstr = "<title>名言 | ERSS</title>";
     var footstr = "</body></html>";
     document.getElementById("searchbar").style.display = "none";
-    var printData = document.getElementById("showall").innerHTML;
+    var printData = document.getElementById("showall").innerHTML.replace(/<a /g,"<span ").replace(/<\/a>/g,"<\/span>");
     var wind = window.open("", "","toolbar=no,scrollbars=yes,menubar=no");
     wind.document.body.innerHTML = headstr + document.head.innerHTML + printData + footstr;
     wind.print();
