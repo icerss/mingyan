@@ -64,11 +64,11 @@ function showmingyan() {
             var title = "名言 | " + my;
             document.title = title;
             var description = name + "曾经说过：" + my;
-            $('meta[name="description"]').attr("content",description);
+            $('meta[name="description"]').attr("content", description);
             $('meta[property="og:description"]').attr('content', description);
             $('meta[name="og:description"]').attr('content', description);
             $('meta[property="og:title"]').attr('content', title);
-            $('meta[name="og:title"]').attr('content', title);  
+            $('meta[name="og:title"]').attr('content', title);
         }
     } catch (err) {
         console.error(err);
@@ -149,7 +149,22 @@ setInterval(function () {
         }
     }
 }, 100);
-
+function webprint() {
+    showall();
+    var userAgent = navigator.userAgent.toLowerCase();
+    var oldstr = document.body.innerHTML;
+    var headstr = "<title>名言 | ERSS</title>";
+    var footstr = "</body></html>";
+    document.getElementById("searchbar").style.display = "none";
+    var printData = document.getElementById("showall").innerHTML;
+    var wind = window.open("", "","toolbar=no,scrollbars=yes,menubar=no");
+    wind.document.body.innerHTML = headstr + document.head.innerHTML + printData + footstr;
+    wind.print();
+    document.getElementById("searchbar").style.display = "block";
+    wind.close();
+    window.document.body.innerHTML = oldstr;
+    location.reload()
+}
 $(document).ready(function () {
     showmingyan();
 })
