@@ -72,6 +72,7 @@ function showmingyan() {
         }
     } catch (err) {
         console.error(err);
+        console.error("名言加载失败");
         $("#mingyan").text("名言加载失败");
         $("#info").html("错误信息：</br>" + err + "</br>建议：<a href=\"javascript:reload()\">点我刷新页面</a>");
         $("#main").fadeIn();
