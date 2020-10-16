@@ -1,6 +1,6 @@
 /*
 * ©2020 xhemj
-* 2020/10/8
+* 2020/10/16
 */
 var _hmt = _hmt || []; (function () {
     var hm = document.createElement("script");
@@ -36,6 +36,22 @@ function rdNum(minNum, maxNum) {
             break;
     };
 };
+function mypic(my) {
+    var pic_list = [
+        "虾扯蛋"
+    ]
+    if (my.indexOf(pic_list) != -1) {
+        console.log("ok");
+        if (my == "虾扯蛋") {
+            var pic = "https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg";
+            return my + "<\/br><img src=\""+ pic +"\" class=\"mypic\"><\/img>"
+        }
+    } else {
+        return my
+    }
+
+    //<\/br><img src=\"https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg\"><\/img>
+};
 $('h1').fontFlex(30, 50, 70);
 $('h3').fontFlex(30, 50, 70);
 function showmingyan() {
@@ -56,9 +72,10 @@ function showmingyan() {
             } else if (mingyan[n].split("：").length = 3) {
                 var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
             };
+
             console.info("已选取第" + n + "条名言：" + my);
             $("p#info").html("<div class=\"info-text\"><a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言</div>");
-            $("span#mingyan").text(my);
+            $("span#mingyan").html(mypic(my));
             $("span#name").text(name);
             $("#main").fadeIn();
             var title = "名言 | " + my;
