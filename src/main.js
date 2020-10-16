@@ -124,7 +124,8 @@ setInterval(function () {
             if (now1 == now2) {
                 $("a#showall_item").each(function () {
                     if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
-                        $(this).html($(this).text().replace($("input#searchbar").val(), "<span class=\"label label-secondary\">" + $("input#searchbar").val() + "</span>"));
+                        var reg = "/" + $("input#searchbar").val() + "/g";
+                        $(this).html($(this).text().replace(eval(reg), "<span class=\"label label-secondary\">" + $("input#searchbar").val() + "</span>"));
                         $(this).show();
                     } else {
                         $(this).hide();
