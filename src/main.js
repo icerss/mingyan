@@ -36,16 +36,16 @@ function rdNum(minNum, maxNum) {
             break;
     };
 };
+var pic_list = [
+    "虾扯蛋"
+];
 function mypic(my) {
-    var pic_list = [
-        "虾扯蛋"
-    ]
     if (my.indexOf(pic_list) != -1) {
         console.log("ok");
         if (my == "虾扯蛋") {
-            var pic = "https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg";
-            return my + "<\/br><img src=\""+ pic +"\" class=\"mypic\"><\/img>"
-        }
+            var pic = "https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg"
+        };
+        return my + "<\/br><img src=\"data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
     } else {
         return my
     }
@@ -67,10 +67,11 @@ function showmingyan() {
                 var n = rdNum(0, mingyan.length - 1);
             };
             var name = mingyan[n].split("：")[0];
-            if (mingyan[n].split("：").length = 2) {
+            if (mingyan[n].split("：").length == 2) {
                 var my = mingyan[n].split("：")[1];
-            } else if (mingyan[n].split("：").length = 3) {
+            } else if (mingyan[n].split("：").length == 3) {
                 var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
+                console.log(my)
             };
 
             console.info("已选取第" + n + "条名言：" + my);
@@ -102,13 +103,17 @@ if (ua.device != 'Mobile') {
     $("#main").css("transform", "translateY(15%)");
 } else {
     var inputbar_width = "auto";
-    $("#main").css("transform", "translateY(30%)");
+    if ($("span#mingyan").text().indexOf(pic_list) != -1) {
+        $("#main").css("transform", "translateY(20%)");
+    } else {
+        $("#main").css("transform", "translateY(30%)");
+    }
 };
 function reload() {
     if (location.hash != "") {
-        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
+        location.href = "https://" + location.hostname + ":" + location.port + location.pathname;
     } else if (qs("id") != "") {
-        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
+        location.href = "https://" + location.hostname + ":" + location.port + location.pathname;
     } {
         showmingyan();
     }
@@ -169,13 +174,12 @@ setInterval(function () {
 }, 100);
 function webprint() {
     showall();
-    var userAgent = navigator.userAgent.toLowerCase();
     var oldstr = document.body.innerHTML;
     var headstr = "<title>名言 | ERSS</title>";
     var footstr = "</body></html>";
     document.getElementById("searchbar").style.display = "none";
-    var printData = document.getElementById("showall").innerHTML.replace(/<a /g,"<span ").replace(/<\/a>/g,"<\/span>");
-    var wind = window.open("", "","toolbar=no,scrollbars=yes,menubar=no");
+    var printData = document.getElementById("showall").innerHTML.replace(/<a /g, "<span ").replace(/<\/a>/g, "<\/span>");
+    var wind = window.open("", "", "toolbar=no,scrollbars=yes,menubar=no");
     wind.document.body.innerHTML = headstr + document.head.innerHTML + printData + footstr;
     wind.print();
     document.getElementById("searchbar").style.display = "block";
@@ -185,4 +189,5 @@ function webprint() {
 }
 $(document).ready(function () {
     showmingyan();
+    lazyload();
 })
