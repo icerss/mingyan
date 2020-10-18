@@ -8,7 +8,7 @@ var _hmt = _hmt || []; (function () {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();
-var footer = $("footer").html().replace("$1", mingyan.length);
+var footer = $("footer").html().replace("0", mingyan.length);
 var ua = new Browser();
 $("#showall").hide();
 $("footer").html(footer);
@@ -45,12 +45,11 @@ function mypic(my) {
         if (my == "虾扯蛋") {
             var pic = "https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg"
         };
+        myPicMobie ();
         return my + "<\/br><img src=\"data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
     } else {
         return my
     }
-
-    //<\/br><img src=\"https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg\"><\/img>
 };
 $('h1').fontFlex(30, 50, 70);
 $('h3').fontFlex(30, 50, 70);
@@ -73,7 +72,6 @@ function showmingyan() {
                 var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
                 console.log(my)
             };
-
             console.info("已选取第" + n + "条名言：" + my);
             $("p#info").html("<div class=\"info-text\"><a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言</div>");
             $("span#mingyan").html(mypic(my));
@@ -103,17 +101,18 @@ if (ua.device != 'Mobile') {
     $("#main").css("transform", "translateY(15%)");
 } else {
     var inputbar_width = "auto";
-    if ($("span#mingyan").text().indexOf(pic_list) != -1) {
-        $("#main").css("transform", "translateY(20%)");
-    } else {
-        $("#main").css("transform", "translateY(30%)");
+    $("#main").css("transform", "translateY(30%)");
+};
+function myPicMobie (){
+    if (ua.device == 'Mobile') {
+        $("#main").css("transform", "translateY(15%)");
     }
 };
 function reload() {
     if (location.hash != "") {
-        location.href = "https://" + location.hostname + ":" + location.port + location.pathname;
+        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
     } else if (qs("id") != "") {
-        location.href = "https://" + location.hostname + ":" + location.port + location.pathname;
+        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
     } {
         showmingyan();
     }
