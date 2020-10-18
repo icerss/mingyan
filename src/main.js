@@ -137,6 +137,7 @@ function showall() {
     $("#showall").fadeIn();
     $("footer").html("当前名言数量：" + mingyan.length + "</br><a href=javascript:; onclick=\"hide_showall()\">返回<\/a>");
 };
+
 setInterval(function () {
     if ($("#searchbar").is(":focus")) {
         if ($("input#searchbar").val()) {
