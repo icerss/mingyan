@@ -43,8 +43,9 @@ function mypic(my) {
     if (my.indexOf(pic_list) != -1) {
         console.log("ok");
         if (my == "虾扯蛋") {
-            var pic = "https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg"
+            var pic = "https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8"
             //https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg
+            //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
         };
         myPicMobie ();
         return my + "<\/br><img src=\"data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
