@@ -1,0 +1,21 @@
+name: Aliyun OSS
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          
+    - name: Deploy 🚀
+      uses: manyuanrong/setup-ossutil@v1.0
+      with:
+        endpoint: "oss-cn-hongkong.aliyuncs.com"
+        access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+        access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
+    - name: Deply To OSS 🚀
+      run: ossutil cp ./ oss://xhemj/ -rf
