@@ -20,7 +20,6 @@ jobs:
           
       - name: Deply To OSS 🚀
         run: |
-          rm -r .git
-          rm -r .github
           ossutil cp ./ oss://xhemj/ -rf
-          
+          ossutil rm oss://xhemj/.git/ -r
+          ossutil rm oss://xhemj/.github/ -r
