@@ -3,7 +3,7 @@ name: Aliyun OSS
 on: [push,delete]
 
 jobs:
-  build:
+  OSS:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
