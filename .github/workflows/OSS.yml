@@ -22,6 +22,5 @@ jobs:
         run: |
           rm -r .git
           rm -r .github
-          rm -r ossutil_output
           ossutil cp ./ oss://xhemj/ -rf
           
