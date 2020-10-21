@@ -112,9 +112,9 @@ function myPicMobie (){
 };
 function reload() {
     if (location.hash != "") {
-        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
+        location.href = "https://" + location.hostname + ":" + location.port + location.pathname;
     } else if (qs("id") != "") {
-        location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
+        location.href = "https://" + location.hostname + ":" + location.port + location.pathname;
     } {
         showmingyan();
     }
@@ -137,7 +137,7 @@ function showall() {
     showall += "</br></br></br>";
     $("#showall").html(showall);
     $("#showall").fadeIn();
-    $("footer").html("当前名言数量：" + mingyan.length + "</br><a href=javascript:; onclick=\"hide_showall()\">返回<\/a>");
+    $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"hide_showall()\">返回<\/a>");
 };
 
 setInterval(function () {
