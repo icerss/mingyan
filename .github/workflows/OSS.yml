@@ -27,4 +27,8 @@ jobs:
           ossutil rm oss://xhemj/ossutil_output/ -r -f
           ossutil du oss://xhemj
           echo success[$ip]
+                    
+      - name: Info 💡
+        run: |
+          ossutil ls oss://xhemj
           
