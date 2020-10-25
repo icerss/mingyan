@@ -1,19 +1,21 @@
 /*
 * ©2020 xhemj
-* 2020/10/24
+* 2020/10/25
 */
-(function () {
+var my = {};
+(function (m) {
     var _hmt = _hmt || []; (function () {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-    var footer = $("footer").html().replace("0", mingyan.length);
+    m.version = "2020/10/25";
+    var footer = $("footer").html().replace("99+", mingyan.length);
     var ua = new Browser();
     $("#showall").hide();
     $("footer").html(footer);
-    function qs(qs) {
+    qs = function (qs) {
         var s = location.href;
         s = s.replace("?", "?&").split("&");
         var re = "";
@@ -24,7 +26,7 @@
         };
         return re;
     };
-    function rdNum(minNum, maxNum) {
+    rdNum = function (minNum, maxNum) {
         switch (arguments.length) {
             case 1:
                 return parseInt(Math.random() * minNum + 1, 10);
@@ -37,26 +39,26 @@
                 break;
         };
     };
-    var pic_list = [
+    $('h1').fontFlex(30, 50, 70);
+    $('h3').fontFlex(30, 50, 70);
+    m.pic_list = [
         "虾扯蛋"
     ];
-    function mypic(my) {
-        if (my.indexOf(pic_list) != -1) {
+    m.pic = function (my) {
+        if (my.indexOf(m.pic_list) != -1) {
             console.log("ok");
             if (my == "虾扯蛋") {
                 var pic = "https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8"
                 //https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg
                 //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
             };
-            myPicMobie();
+            m.PicMobie();
             return my + "<\/br><img src=\"data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
         } else {
             return my
         }
     };
-    $('h1').fontFlex(30, 50, 70);
-    $('h3').fontFlex(30, 50, 70);
-    function showmingyan() {
+    m.show = function () {
         try {
             $("#main").hide();
             if (mingyan.length != 0) {
@@ -76,8 +78,8 @@
                     console.log(my)
                 };
                 console.info("已选取第" + n + "条名言：" + my);
-                $("p#info").html("<div class=\"info-text\"><a href=\"" + "http://" + location.hostname + ":" + location.port + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"reload()\">点击</a>查看更多名言</div>");
-                $("span#mingyan").html(mypic(my));
+                $("p#info").html("<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\">点击</a>查看更多名言</div>");
+                $("span#mingyan").html(m.pic(my));
                 $("span#name").text(name);
                 $("#main").fadeIn();
                 var title = "名言 | " + my;
@@ -93,7 +95,7 @@
             console.error(err);
             console.error("名言加载失败");
             $("#mingyan").text("名言加载失败");
-            $("#info").html("错误信息：</br>" + err + "</br>建议：<a href=\"javascript:reload()\">点我刷新页面</a>");
+            $("#info").html("错误信息：</br>" + err + "</br>建议：<a href=\"javascript:my.reload()\">点我刷新页面</a>");
             $("#main").fadeIn();
             $("#info").fadeIn();
             //location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
@@ -106,21 +108,21 @@
         var inputbar_width = "auto";
         $("#main").css("transform", "translateY(30%)");
     };
-    function myPicMobie() {
+    m.PicMobie = function () {
         if (ua.device == 'Mobile') {
             $("#main").css("transform", "translateY(15%)");
         }
     };
-    function reload() {
+    m.reload = function () {
         if (location.hash != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } else if (qs("id") != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } {
-            showmingyan();
+            m.show();
         }
     };
-    function hide_showall() {
+    m.hide_showall = function () {
         $("#showall").hide();
         $("#main").fadeIn();
         $("footer").html(footer);
@@ -128,7 +130,7 @@
             location.href = "#";
         }
     };
-    function showall() {
+    m.all = function () {
         $("#main").hide();
         $("input#searchbar").val("");
         var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br><span class=\"e\"></span>";
@@ -138,7 +140,7 @@
         showall += "</br></br></br>";
         $("#showall").html(showall);
         $("#showall").fadeIn();
-        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"hide_showall()\">返回<\/a>");
+        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
     };
 
     setInterval(function () {
@@ -175,8 +177,8 @@
             }
         }
     }, 100);
-    function webprint() {
-        showall();
+    m.print = function () {
+        m.all();
         var oldstr = document.body.innerHTML;
         var headstr = "<title>名言 | ERSS</title>";
         var footstr = "</body></html>";
@@ -191,11 +193,6 @@
         location.reload()
     }
 
-    showmingyan();
+    m.show();
     lazyload();
-    window.showmingyan = showmingyan;
-    window.showall = showall;
-    window.reload = reload;
-    window.hide_showall = hide_showall;
-    window.webprint = webprint;
-})()
+})(my)
