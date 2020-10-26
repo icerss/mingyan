@@ -3,14 +3,15 @@
 * 2020/10/25
 */
 var my = {};
-(function (m) {
-    var _hmt = _hmt || []; (function () {
+(function (t) {
+    var _hmt = _hmt || [];
+    (function () {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
         var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-    m.version = "2020/10/25";
+        s.parentNode.insertBefore(hm, s)
+    })()
+    t.version = "2020/10/25";
     var footer = $("footer").html().replace("99+", mingyan.length);
     var ua = new Browser();
     $("#showall").hide();
@@ -41,24 +42,24 @@ var my = {};
     };
     $('h1').fontFlex(30, 50, 70);
     $('h3').fontFlex(30, 50, 70);
-    m.pic_list = [
+    t.pic_list = [
         "虾扯蛋"
     ];
-    m.pic = function (my) {
-        if (my.indexOf(m.pic_list) != -1) {
+    t.pic = function (my) {
+        if (my.indexOf(t.pic_list) != -1) {
             console.log("ok");
             if (my == "虾扯蛋") {
                 var pic = "https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8"
                 //https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg
                 //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
             };
-            m.PicMobie();
+            t.PicMobie();
             return my + "<\/br><img src=\"data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
         } else {
             return my
         }
     };
-    m.show = function () {
+    t.show = function () {
         try {
             $("#main").hide();
             if (mingyan.length != 0) {
@@ -79,7 +80,7 @@ var my = {};
                 };
                 console.info("已选取第" + n + "条名言：" + my);
                 $("p#info").html("<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\">点击</a>查看更多名言</div>");
-                $("span#mingyan").html(m.pic(my));
+                $("span#mingyan").html(t.pic(my));
                 $("span#name").text(name);
                 $("#main").fadeIn();
                 var title = "名言 | " + my;
@@ -108,21 +109,21 @@ var my = {};
         var inputbar_width = "auto";
         $("#main").css("transform", "translateY(30%)");
     };
-    m.PicMobie = function () {
+    t.PicMobie = function () {
         if (ua.device == 'Mobile') {
             $("#main").css("transform", "translateY(15%)");
         }
     };
-    m.reload = function () {
+    t.reload = function () {
         if (location.hash != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } else if (qs("id") != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } {
-            m.show();
+            t.show();
         }
     };
-    m.hide_showall = function () {
+    t.hide_showall = function () {
         $("#showall").hide();
         $("#main").fadeIn();
         $("footer").html(footer);
@@ -130,7 +131,7 @@ var my = {};
             location.href = "#";
         }
     };
-    m.all = function () {
+    t.all = function () {
         $("#main").hide();
         $("input#searchbar").val("");
         var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br><span class=\"e\"></span>";
@@ -142,8 +143,7 @@ var my = {};
         $("#showall").fadeIn();
         $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
     };
-
-    setInterval(function () {
+    t.search = function () {
         if ($("#searchbar").is(":focus")) {
             if ($("input#searchbar").val()) {
                 var now1 = $("input#searchbar").val();
@@ -176,9 +176,10 @@ var my = {};
                 $(".e").hide();
             }
         }
-    }, 100);
-    m.print = function () {
-        m.all();
+    };
+    setInterval(t.search, 100);
+    t.print = function () {
+        t.all();
         var oldstr = document.body.innerHTML;
         var headstr = "<title>名言 | ERSS</title>";
         var footstr = "</body></html>";
@@ -192,7 +193,6 @@ var my = {};
         window.document.body.innerHTML = oldstr;
         location.reload()
     }
-
-    m.show();
+    t.show();
     lazyload();
 })(my)
