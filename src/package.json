@@ -1,0 +1,20 @@
+{
+  "name": "mingyan-static",
+  "version": "2.2.4",
+  "description": "https://github.com/xhemj/mingyan",
+  "main": "",
+  "jsdelivr":"main.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xhemj/mingyan.git"
+  },
+  "author": "xhemj",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/xhemj/mingyan/issues"
+  },
+  "homepage": "https://github.com/xhemj/mingyan#readme"
+}
