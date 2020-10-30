@@ -10,7 +10,12 @@ var my = {};
         hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
-    })()
+    })();
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./src/sw.js');
+        })
+    };
     t.version = "2020/10/25";
     var footer = $("footer").html().replace("99+", mingyan.length);
     var ua = new Browser();

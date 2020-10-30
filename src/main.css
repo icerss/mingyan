@@ -8,14 +8,6 @@ body {
 	padding-right: 10%;
 	text-align: center
 }
-#loading{
-	height: 2px;
-	position: fixed;
-	top: 0;
-	z-index: 9999;
-	background:#5755d9;
-	box-shadow:#807fe2 1px 0 6px 1px
-  }
 header {
 	position:fixed;
 	top:0;
@@ -36,6 +28,13 @@ header .left {
 	font-weight: bold;
 	color:#5755d9;
 	transform: translateX(50%)
+}
+header .right {
+	text-align: right;
+	font-size:20px;
+	font-weight: bold;
+	color:#5755d9;
+	transform: translateX(-100%)
 }
 footer {
 	position: fixed;
