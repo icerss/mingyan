@@ -21,7 +21,6 @@ workbox.routing.registerRoute(
         cacheName: 'js-cache',
     })
 );
-
 workbox.routing.registerRoute(
     /.*\.html/,
     workbox.strategies.cacheFirst({

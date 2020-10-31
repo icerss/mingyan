@@ -16,11 +16,36 @@ var my = {};
             navigator.serviceWorker.register('./src/sw.js');
         })
     };
-    t.version = "2020/10/25";
-    var footer = $("footer").html().replace("99+", mingyan.length);
     var ua = new Browser();
+    t.version = "2020/10/25";
+    if (ua.device != 'Mobile'){
+        var header_text = `
+        <a class="left" href="/" one-link-mark="yes">ERSS 名言</a>
+        <div class="right">
+            <a class="aline" href="./">主&nbsp;&nbsp;页</a>
+            <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>
+            <a class="aline" href="javascript:;" onclick="my.print()">打印名言列表</a>
+        </div>
+        `
+        var footer_text = `<div>当前名言数量：999+</br>&copy`+ new Date().getFullYear()+` xhemj</div>`;
+    }else{
+        var header_text = `
+            <a class="left" href="/" one-link-mark="yes">ERSS 名言</a>
+            <div class="right"></div>
+        `;
+        var footer_text = `
+            <div>当前名言数量：999+</br>
+            <a class="aline" href="./">主&nbsp;&nbsp;页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a class="aline" href="javascript:;" onclick="my.print()">打印名言列表</a>
+            </div>
+        `;
+    };
+    var footer = footer_text.replace("999+", mingyan.length);
+    $("#md").hide();
     $("#showall").hide();
     $("footer").html(footer);
+    $("#header .container").html(header_text);
     qs = function (qs) {
         var s = location.href;
         s = s.replace("?", "?&").split("&");
@@ -50,6 +75,7 @@ var my = {};
     t.pic_list = [
         "虾扯蛋"
     ];
+    t.lazypic = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2IoMjU1LCAyNTUsIDI1NSk7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB3aWR0aD0iMjAwcHgiIGhlaWdodD0iMjAwcHgiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOWI0ZGNhIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1kYXNoYXJyYXk9IjQyLjc2NDgyMTM3MDQ0MjcxIDQyLjc2NDgyMTM3MDQ0MjcxIiBkPSJNMjQuMyAzMEMxMS40IDMwIDUgNDMuMyA1IDUwczYuNCAyMCAxOS4zIDIwYzE5LjMgMCAzMi4xLTQwIDUxLjQtNDAgQzg4LjYgMzAgOTUgNDMuMyA5NSA1MHMtNi40IDIwLTE5LjMgMjBDNTYuNCA3MCA0My42IDMwIDI0LjMgMzB6IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0eWxlPSJ0cmFuc2Zvcm06c2NhbGUoMC44KTt0cmFuc2Zvcm0tb3JpZ2luOjUwcHggNTBweCI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hvZmZzZXQiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiBrZXlUaW1lcz0iMDsxIiB2YWx1ZXM9IjA7MjU2LjU4ODkyODIyMjY1NjI1Ij48L2FuaW1hdGU+PC9wYXRoPg0KPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+PC9zdmc+";
     t.pic = function (my) {
         if (my.indexOf(t.pic_list) != -1) {
             console.log("ok");
@@ -59,7 +85,7 @@ var my = {};
                 //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
             };
             t.PicMobie();
-            return my + "<\/br><img src=\"data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
+            return my + "<\/br><img src=\""+ t.lazypic +"\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
         } else {
             return my
         }
@@ -148,6 +174,15 @@ var my = {};
         $("#showall").fadeIn();
         $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
     };
+    t.about = function() {
+        $("#main").hide();
+        $("#showall").hide();
+        $.get("./src/md/about.md",function(data) {
+            $("#md").html(marked(data));
+            $("#md").fadeIn();
+        })
+        
+    }
     t.search = function () {
         if ($("#searchbar").is(":focus")) {
             if ($("input#searchbar").val()) {
@@ -199,5 +234,5 @@ var my = {};
         location.reload()
     }
     t.show();
-    lazyload();
+    lazyload()
 })(my)
