@@ -24,9 +24,7 @@ jobs:
           ossutil cp ./ oss://xhemj/ -r -f
           ossutil rm oss://xhemj/.git/ -r -f
           ossutil rm oss://xhemj/.github/ -r -f
-          ossutil rm oss://xhemj/ossutil_output/ -r -f
-          ossutil du oss://xhemj
-          ossutil set-meta oss://xhemj/src/ Cache-Control:public, max-age=86400 -r
+          ossutil set-meta oss://xhemj/src/ Cache-Control:public,max-age=86400 --include "*.js" --include "*.css" --include "*.min.js" -r -f
           echo success[$ip]
                     
       - name: Info 💡
