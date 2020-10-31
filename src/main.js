@@ -89,8 +89,8 @@ var my = {};
         if (my.indexOf(t.pic_list) != -1) {
             console.log("ok");
             if (my == "虾扯蛋") {
-                var pic = "https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8"
-                //https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg
+                var pic = "https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg"
+                //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
                 //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
             };
             t.PicMobie();
