@@ -18,7 +18,7 @@ jobs:
           bucket: xhemj
           accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
-          folder: ./
+          folder: .
           htmlCacheControl: max-age=600
           otherCacheControl: max-age=259200
           imageCacheControl: max-age=864000
