@@ -12,11 +12,17 @@ jobs:
           persist-credentials: false
           
       - name: Setting 🔧
-        uses: manyuanrong/setup-ossutil@v1.0
+        uses: fangbinwei/aliyun-oss-website-action@v1
         with:
           endpoint: ${{ secrets.ENDPOINT }}
-          access-key-id: ${{ secrets.ACCESS_KEY_ID }}
-          access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
+          bucket: xhemj
+          accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+          accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
+          folder: ./
+          htmlCacheControl: max-age=600
+          otherCacheControl: max-age=259200
+          imageCacheControl: max-age=864000
+          cname: true
           
       - name: Deply To OSS 🚀
         run: |
@@ -24,11 +30,5 @@ jobs:
           ossutil cp ./ oss://xhemj/ -r -f
           ossutil rm oss://xhemj/.git/ -r -f
           ossutil rm oss://xhemj/.github/ -r -f
-          ossutil rm oss://xhemj/ossutil_output/ -r -f
           ossutil du oss://xhemj
           echo success[$ip]
-                    
-      - name: Info 💡
-        run: |
-          ossutil ls oss://xhemj
-          
