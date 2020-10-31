@@ -1,9 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/10/25
+* 2020/10/31
 */
 var my = {};
 (function (t) {
+    t.version = "2020/10/31";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -17,7 +18,6 @@ var my = {};
         })
     };
     var ua = new Browser();
-    t.version = "2020/10/25";
     if (ua.device != 'Mobile'){
         var header_text = `
         <a class="left" href="/" one-link-mark="yes">ERSS 名言</a>
