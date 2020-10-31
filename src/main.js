@@ -18,17 +18,24 @@ var my = {};
         })
     };
     var ua = new Browser();
-    if (ua.device != 'Mobile'){
+    /* 页面基础功能 */
+    $(".app").html(`
+    <div id="header"><div class="container"></div></div>
+    <div id="main" class="main"><h3><span id="name" class="label wave">有一位老师</span><span>曾经说过</span>：</h3><h1><strong><span id="mingyan" class="label label-secondary">加载中~~</span></strong></h1><p id="info"></p></br></br></br></div><div id="showall"></div>
+    <div id="md"></div>
+    <footer></footer>
+    `)
+    if (ua.device != 'Mobile') {
         var header_text = `
-        <a class="left" href="/" one-link-mark="yes">ERSS 名言</a>
+        <a class="left" href="./" one-link-mark="yes">ERSS 名言</a>
         <div class="right">
             <a class="aline" href="./">主&nbsp;&nbsp;页</a>
             <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>
-            <a class="aline" href="javascript:;" onclick="my.print()">打印名言列表</a>
+            <a class="aline" href="javascript:;" onclick="my.more()">更多</a>
         </div>
         `
-        var footer_text = `<div>当前名言数量：999+</br>&copy`+ new Date().getFullYear()+` xhemj</div>`;
-    }else{
+        var footer_text = `<div>当前名言数量：999+</br>&copy` + new Date().getFullYear() + ` ERSS</div>`;
+    } else {
         var header_text = `
             <a class="left" href="/" one-link-mark="yes">ERSS 名言</a>
             <div class="right"></div>
@@ -37,7 +44,7 @@ var my = {};
             <div>当前名言数量：999+</br>
             <a class="aline" href="./">主&nbsp;&nbsp;页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a class="aline" href="javascript:;" onclick="my.print()">打印名言列表</a>
+            <a class="aline" href="javascript:;" onclick="my.more()">更多</a>
             </div>
         `;
     };
@@ -46,6 +53,7 @@ var my = {};
     $("#showall").hide();
     $("footer").html(footer);
     $("#header .container").html(header_text);
+    /****/
     qs = function (qs) {
         var s = location.href;
         s = s.replace("?", "?&").split("&");
@@ -72,6 +80,7 @@ var my = {};
     };
     $('h1').fontFlex(30, 50, 70);
     $('h3').fontFlex(30, 50, 70);
+    /* 图片菜单 */
     t.pic_list = [
         "虾扯蛋"
     ];
@@ -85,13 +94,60 @@ var my = {};
                 //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
             };
             t.PicMobie();
-            return my + "<\/br><img src=\""+ t.lazypic +"\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
+            return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload\"><\/img>"
         } else {
             return my
         }
     };
+    /****/
+    /* 打印功能 */
+    t.print = function () {
+        t.all();
+        var oldstr = document.body.innerHTML;
+        var headstr = "<title>名言 | ERSS</title>";
+        var footstr = "</body></html>";
+        document.getElementById("searchbar").style.display = "none";
+        var printData = document.getElementById("showall").innerHTML.replace(/<a /g, "<span ").replace(/<\/a>/g, "<\/span>");
+        var wind = window.open("", "", "toolbar=no,scrollbars=yes,menubar=no");
+        wind.document.body.innerHTML = headstr + document.head.innerHTML + printData + footstr;
+        wind.print();
+        document.getElementById("searchbar").style.display = "block";
+        wind.close();
+        window.document.body.innerHTML = oldstr;
+        location.reload()
+    };
+    /****/
+    /* 下载功能 */
+    t.download = function () {
+        t.dfile("名言列表（" + t.version + "）", mingyan.join("\n"))
+    };
+    t.dfile = function (fileName, content) {
+        const aTag = document.createElement('a');
+        const blob = new Blob([content]);
+        aTag.download = fileName;
+        aTag.style = "display: none";
+        aTag.href = URL.createObjectURL(blob);
+        document.body.appendChild(aTag);
+        aTag.click();
+        setTimeout(function () {
+            document.body.removeChild(aTag);
+            window.URL.revokeObjectURL(blob);
+        }, 100);
+    };
+
+    /****/
+    /* 按下回车切换名言 */
+    $(document).keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13' || keycode == '32') {
+            t.reload()
+        }
+    });
+    /****/
+    /* 主功能：名言显示 */
     t.show = function () {
         try {
+            $("#md").hide();
             $("#main").hide();
             if (mingyan.length != 0) {
                 console.info("加载名言列表成功");
@@ -110,7 +166,8 @@ var my = {};
                     console.log(my)
                 };
                 console.info("已选取第" + n + "条名言：" + my);
-                $("p#info").html("<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\">点击</a>查看更多名言</div>");
+                $("p#info").html(
+                    "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\">点击</a>查看更多名言</div>");
                 $("span#mingyan").html(t.pic(my));
                 $("span#name").text(name);
                 $("#main").fadeIn();
@@ -139,22 +196,30 @@ var my = {};
     } else {
         var inputbar_width = "auto";
         $("#main").css("transform", "translateY(30%)");
+        $("#md").css("transform", "translateY(50px)");
     };
+    /****/
+    /* 修复手机端图片菜单位置 */
     t.PicMobie = function () {
         if (ua.device == 'Mobile') {
             $("#main").css("transform", "translateY(15%)");
         }
     };
+    /****/
+    /* 刷新名言 */
     t.reload = function () {
         if (location.hash != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
-        } else if (qs("id") != "") {
+        } else if (qs("id") != "" || qs("mail") != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } {
             t.show();
         }
     };
+    /****/
+    /* 隐藏搜索列表 */
     t.hide_showall = function () {
+        $("#md").hide();
         $("#showall").hide();
         $("#main").fadeIn();
         $("footer").html(footer);
@@ -162,7 +227,10 @@ var my = {};
             location.href = "#";
         }
     };
+    /****/
+    /* 搜索列表功能 */
     t.all = function () {
+        $("#md").hide();
         $("#main").hide();
         $("input#searchbar").val("");
         var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br><span class=\"e\"></span>";
@@ -174,15 +242,64 @@ var my = {};
         $("#showall").fadeIn();
         $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
     };
-    t.about = function() {
+    /****/
+    /* Markdown转html */
+    t.md = function (id, url) {
+        $.get(url, function (data) {
+            marked.setOptions({
+                breaks: true
+            });
+            var html = marked(data);
+            html = html.replace(/<a /g, "<a target=\"_blank\" ");
+            $(id).html("<strong>" + html + "</strong></br></br></br></br>");
+            $(id).fadeIn();
+        })
+    };
+    /****/
+    /* 更多页面 */
+    t.more = function () {
         $("#main").hide();
         $("#showall").hide();
-        $.get("./src/md/about.md",function(data) {
-            $("#md").html(marked(data));
-            $("#md").fadeIn();
-        })
-        
+        $("#md").html(`
+        <strong>
+        <div style="text-align: center">
+        <style>h1{font-size:30px}h3{font-size:20px}</style>
+        <h1>更多</h1>
+            <h3><a href="javascript:;" onclick="my.md_all()">查看全部名言</a></h3> 
+            <h3><a href="javascript:;" onclick="my.print()">打印名言列表</a></h3> 
+            <h3><a href="javascript:;" onclick="my.download()">下载名言列表（.txt）</a></h3> 
+            <h3><a href="javascript:;" onclick="my.about()">关于</a></h3> 
+            </div></div></strong>
+        `)
+        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
+        $("#md").fadeIn();
     }
+    /****/
+    /* 关于页面 */
+    t.about = function () {
+        $("#md").hide();
+        $("#main").hide();
+        $("#showall").hide();
+        t.md("#md", "./src/md/about.md");
+        $("#md").fadeIn();
+        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
+    };
+    /****/
+    /* Markdown名言列表 */
+    t.md_all = function () {
+        $("#md").hide();
+        $("#main").hide();
+        $("#showall").hide();
+        var out = ``;
+        for (i = 0; i < mingyan.length; i++) {
+            out += mingyan[i] + "</br>"
+        };
+        out += `</br></br></br></br>`;
+        $("#md").html(marked(out));
+        $("#md").fadeIn()
+    }
+    /****/
+    /* 搜索功能 */
     t.search = function () {
         if ($("#searchbar").is(":focus")) {
             if ($("input#searchbar").val()) {
@@ -218,21 +335,13 @@ var my = {};
         }
     };
     setInterval(t.search, 100);
-    t.print = function () {
-        t.all();
-        var oldstr = document.body.innerHTML;
-        var headstr = "<title>名言 | ERSS</title>";
-        var footstr = "</body></html>";
-        document.getElementById("searchbar").style.display = "none";
-        var printData = document.getElementById("showall").innerHTML.replace(/<a /g, "<span ").replace(/<\/a>/g, "<\/span>");
-        var wind = window.open("", "", "toolbar=no,scrollbars=yes,menubar=no");
-        wind.document.body.innerHTML = headstr + document.head.innerHTML + printData + footstr;
-        wind.print();
-        document.getElementById("searchbar").style.display = "block";
-        wind.close();
-        window.document.body.innerHTML = oldstr;
-        location.reload()
-    }
+    /****/
+    /* 邮箱 */
+    if (qs("mail")) {
+        window.open("mailto:" + qs("mail").replace("---", "@"));
+        t.reload()
+    };
+    /****/
     t.show();
     lazyload()
 })(my)
