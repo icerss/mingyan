@@ -26,6 +26,7 @@ jobs:
           ossutil rm oss://xhemj/.github/ -r -f
           ossutil rm oss://xhemj/ossutil_output/ -r -f
           ossutil du oss://xhemj
+          ossutil set-meta oss://xhemj/src/ Cache-Control:public, max-age=86400 -r
           echo success[$ip]
                     
       - name: Info 💡
