@@ -30,11 +30,11 @@ var my = {};
     if (ua.device != 'Mobile') {
         var header_text = `
         <div class="mdui-toolbar">
-        <a href="javascript:my.more();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
+        <a href="javascript:;" onclick="my.more()" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
         <a href="./"><span class="mdui-typo-title left">ERSS名言</span></a>
         <div class="mdui-toolbar-spacer"></div>
-        <a href="javascript:my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-        <a href="javascript:my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
+        <a href="javascript:;" onclick="my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+        <a href="javascript:;" onclick="my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
     </div>
         `
         var footer_text = `
@@ -48,11 +48,11 @@ var my = {};
         var header_text = `
         <header>
         <div class="mdui-toolbar">
-        <a href="javascript:my.more();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
+        <a href="javascript:;" onclick="my.more()" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
         <a href="./"><span class="mdui-typo-title left">ERSS名言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
         <div class="mdui-toolbar-spacer"></div>
-        <a href="javascript:my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-        <a href="javascript:my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
+        <a href="javascript:;" onclick="my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+        <a href="javascript:;" onclick="my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
     </div>
     </header>
         `;
@@ -277,17 +277,7 @@ var my = {};
     t.more = function () {
         $("#main").hide();
         $("#showall").hide();
-        $("#md").html(`
-        <strong>
-        <div style="text-align: center">
-        <style>h1{font-size:30px}h3{font-size:20px}</style>
-        <h1>更多</h1>
-            <h3><a href="javascript:;" onclick="my.md_all()">查看全部名言</a></h3> 
-            <h3><a href="javascript:;" onclick="my.print()">打印名言列表</a></h3> 
-            <h3><a href="javascript:;" onclick="my.download()">下载名言列表（.txt）</a></h3> 
-            <h3><a href="javascript:;" onclick="my.about()">关于</a></h3> 
-            </div></div></strong>
-        `)
+        t.md("#md", "./src/md/more.md");
         $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
         $("#md").fadeIn();
     }
