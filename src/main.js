@@ -96,22 +96,31 @@ var my = {};
     };
     $('h1').fontFlex(30, 50, 70);
     $('h3').fontFlex(30, 50, 70);
-    /* 图片菜单 */
-    t.pic_list = [
-        "虾扯蛋"
-    ];
+    /* 图片彩蛋 */
     t.lazypic = "./src/loading.svg";
     t.pic = function (my) {
-        if (my.indexOf(t.pic_list) != -1) {
-            console.log("ok");
+        var name = my.split("：")[0];
+        var my = my.split("：")[1];
+        if (my == "虾扯蛋" || my == "解") {
             if (my == "虾扯蛋") {
                 var pic = "https://i.loli.net/2020/10/16/TQ3i5EH2wD9KF6d.jpg"
                 //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
                 //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
             };
+            if (my == "解") {
+                var solvePicUrl = {
+                    "老王":"https://i.loli.net/2020/11/01/KPVwxYQXM2fLODN.jpg",
+                    "潘哥":"https://i.loli.net/2020/11/01/iTkIWzwKaL92otl.jpg",
+                    "老朱":"https://i.loli.net/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
+                    "老俞":"https://i.loli.net/2020/11/01/lURnTwHouGbM8B7.jpg"
+                };
+                var pic = solvePicUrl[name];
+            };
             t.PicMobie();
+            lazyload();
             return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable\"><\/img>"
         } else {
+            lazyload();
             return my
         }
     };
@@ -184,7 +193,7 @@ var my = {};
                 console.info("已选取第" + n + "条名言：" + my);
                 $("p#info").html(
                     "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\" >点击</a>查看更多名言</div>");
-                $("span#mingyan").html(t.pic(my));
+                $("span#mingyan").html(t.pic(name + "：" + my));
                 $("span#name").text(name);
                 $("#main").fadeIn();
                 var title = "名言 | " + my;
@@ -195,6 +204,7 @@ var my = {};
                 $('meta[name="og:description"]').attr('content', description);
                 $('meta[property="og:title"]').attr('content', title);
                 $('meta[name="og:title"]').attr('content', title);
+                lazyload();
             }
         } catch (err) {
             console.error(err);
@@ -219,7 +229,10 @@ var my = {};
     t.PicMobie = function () {
         if (ua.device == 'Mobile') {
             $("#main").css("transform", "translateY(15%)");
-        }
+        } else {
+            $("#main").css("transform", "translateY(10%)");
+        };
+        lazyload();
     };
     /****/
     /* 刷新名言 */
@@ -230,7 +243,8 @@ var my = {};
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } {
             t.show();
-        }
+        };
+        lazyload();
     };
     /****/
     /* 隐藏搜索列表 */
