@@ -21,24 +21,40 @@ var my = {};
     /* 页面基础功能 */
     $(".app").html(`
     <div id="header"><div class="container"></div></div>
+    <div>
     <div id="main" class="main"><h3><span id="name" class="label wave">有一位老师</span><span>曾经说过</span>：</h3><h1><strong><span id="mingyan" class="label label-secondary">加载中~~</span></strong></h1><p id="info"></p></br></br></br></div><div id="showall"></div>
     <div id="md"></div>
+    </div>
     <footer></footer>
     `)
     if (ua.device != 'Mobile') {
         var header_text = `
-        <a class="left" href="./" one-link-mark="yes">ERSS 名言</a>
-        <div class="right">
-            <a class="aline" href="./">主&nbsp;&nbsp;页</a>
-            <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>
-            <a class="aline" href="javascript:;" onclick="my.more()">更多</a>
-        </div>
+        <div class="mdui-toolbar">
+        <a href="javascript:my.more();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
+        <a href="./"><span class="mdui-typo-title left">ERSS名言</span></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="javascript:my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+        <a href="javascript:my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
+    </div>
         `
-        var footer_text = `<div>当前名言数量：999+</br>&copy` + new Date().getFullYear() + ` ERSS</div>`;
+        var footer_text = `
+        <div>当前名言数量：999+</br>
+        <a class="aline" href="./">主&nbsp;&nbsp;页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a class="aline" href="javascript:;" onclick="my.more()">更多</a>
+        </div>
+        `;
     } else {
         var header_text = `
-            <a class="left" href="/" one-link-mark="yes">ERSS 名言</a>
-            <div class="right"></div>
+        <header>
+        <div class="mdui-toolbar">
+        <a href="javascript:my.more();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
+        <a href="./"><span class="mdui-typo-title left">ERSS名言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="javascript:my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+        <a href="javascript:my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
+    </div>
+    </header>
         `;
         var footer_text = `
             <div>当前名言数量：999+</br>
@@ -167,7 +183,7 @@ var my = {};
                 };
                 console.info("已选取第" + n + "条名言：" + my);
                 $("p#info").html(
-                    "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\">点击</a>查看更多名言</div>");
+                    "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\" >点击</a>查看更多名言</div>");
                 $("span#mingyan").html(t.pic(my));
                 $("span#name").text(name);
                 $("#main").fadeIn();
@@ -233,7 +249,7 @@ var my = {};
         $("#md").hide();
         $("#main").hide();
         $("input#searchbar").val("");
-        var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br><span class=\"e\"></span>";
+        var showall = "<input style=\"" + inputbar_width + "\"" + " type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br></br><span class=\"e\"></span>";
         for (i = 0; i < mingyan.length; i++) {
             showall += "<div><a style=\"color:black\" id=\"showall_item\" class=\"" + i + "\" href=\"./?id=" + i + "\">" + mingyan[i] + "</a></div>";
         };
