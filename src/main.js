@@ -12,6 +12,8 @@ var my = {};
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
     })();
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1279400947'%3E%3C/span%3E%3Cscript src='https://s9.cnzz.com/z_stat.php%3Fid%3D1279400947' type='text/javascript'%3E%3C/script%3E"));
+    $("#cnzz_stat_icon_1279400947").hide();
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./src/sw.js');
@@ -109,10 +111,10 @@ var my = {};
             };
             if (my == "解") {
                 var solvePicUrl = {
-                    "老王":"https://i.loli.net/2020/11/01/KPVwxYQXM2fLODN.jpg",
-                    "潘哥":"https://i.loli.net/2020/11/01/iTkIWzwKaL92otl.jpg",
-                    "老朱":"https://i.loli.net/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
-                    "老俞":"https://i.loli.net/2020/11/01/lURnTwHouGbM8B7.jpg"
+                    "老王": "https://i.loli.net/2020/11/01/KPVwxYQXM2fLODN.jpg",
+                    "潘哥": "https://i.loli.net/2020/11/01/iTkIWzwKaL92otl.jpg",
+                    "老朱": "https://i.loli.net/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
+                    "老俞": "https://i.loli.net/2020/11/01/lURnTwHouGbM8B7.jpg"
                 };
                 var pic = solvePicUrl[name];
             };
