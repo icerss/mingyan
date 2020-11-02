@@ -12,8 +12,6 @@ var my = {};
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
     })();
-    document.write(unescape("%3Cspan id='cnzz_stat_icon_1279400947'%3E%3C/span%3E%3Cscript src='https://s9.cnzz.com/z_stat.php%3Fid%3D1279400947' type='text/javascript'%3E%3C/script%3E"));
-    $("#cnzz_stat_icon_1279400947").hide();
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./src/sw.js');
@@ -193,8 +191,9 @@ var my = {};
                     console.log(my)
                 };
                 console.info("已选取第" + n + "条名言：" + my);
+                _hmt.push(['_trackEvent', "名言", "查看", n , name + "：" + my]);
                 $("p#info").html(
-                    "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload()\" >点击</a>查看更多名言</div>");
+                    "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
                 $("span#mingyan").html(t.pic(name + "：" + my));
                 $("span#name").text(name);
                 $("#main").fadeIn();
