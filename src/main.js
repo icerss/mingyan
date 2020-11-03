@@ -30,11 +30,11 @@ var my = {};
     if (ua.device != 'Mobile') {
         var header_text = `
         <div class="mdui-toolbar">
-        <a href="javascript:;" onclick="my.more()" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
+        <a href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , 'icon-menu']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
         <a href="./"><span class="mdui-typo-title left">ERSS名言</span></a>
         <div class="mdui-toolbar-spacer"></div>
-        <a href="javascript:;" onclick="my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-        <a href="javascript:;" onclick="my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
+        <a href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , 'icon-search']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+        <a href="javascript:;" onclick="my.reload();my.hide_showall();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , 'icon-refresh']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
     </div>
         `
         var footer_text = `
@@ -48,11 +48,11 @@ var my = {};
         var header_text = `
         <header>
         <div class="mdui-toolbar">
-        <a href="javascript:;" onclick="my.more()" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
+        <a href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , 'icon-menu']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
         <a href="./"><span class="mdui-typo-title left">ERSS名言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
         <div class="mdui-toolbar-spacer"></div>
-        <a href="javascript:;" onclick="my.all();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-        <a href="javascript:;" onclick="my.reload();my.hide_showall();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
+        <a href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , 'icon-search']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+        <a href="javascript:;" onclick="my.reload();my.hide_showall();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , 'icon-refresh']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
     </div>
     </header>
         `;
@@ -191,7 +191,7 @@ var my = {};
                     console.log(my)
                 };
                 console.info("已选取第" + n + "条名言：" + my);
-                _hmt.push(['_trackEvent', "名言", "查看", n , name + "：" + my]);
+                _hmt.push(['_trackEvent', "名言", "查看", "自动" , name + "：" + my]);
                 $("p#info").html(
                     "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
                 $("span#mingyan").html(t.pic(name + "：" + my));
