@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/10/31
+* 2020/11/05
 */
 var my = {};
 (function (t) {
-    t.version = "2020/10/31";
+    t.version = "2020/11/05";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -19,51 +19,20 @@ var my = {};
     };
     var ua = new Browser();
     /* 页面基础功能 */
-    $(".app").html(`
-    <div id="header"><div class="container"></div></div>
-    <div>
-    <div id="main" class="main"><h3><span id="name" class="label wave">有一位老师</span><span>曾经说过</span>：</h3><h1><strong><span id="mingyan" class="label label-secondary">加载中~~</span></strong></h1><p id="info"></p></br></br></br></div><div id="showall"></div>
-    <div id="md"></div>
-    </div>
-    <footer></footer>
-    `)
-    if (ua.device != 'Mobile') {
-        var header_text = `
-        <div class="mdui-toolbar">
-        <a href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , 'icon-menu']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
-        <a href="./"><span class="mdui-typo-title left">ERSS名言</span></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <a href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , 'icon-search']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-        <a href="javascript:;" onclick="my.reload();my.hide_showall();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , 'icon-refresh']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
-    </div>
-        `
-        var footer_text = `
-        <div>当前名言数量：999+</br>
-        <a class="aline" href="./">主&nbsp;&nbsp;页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a class="aline" href="javascript:;" onclick="my.more()">更多</a>
-        </div>
-        `;
-    } else {
-        var header_text = `
-        <header>
-        <div class="mdui-toolbar">
-        <a href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , 'icon-menu']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
-        <a href="./"><span class="mdui-typo-title left">ERSS名言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <a href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , 'icon-search']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-        <a href="javascript:;" onclick="my.reload();my.hide_showall();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , 'icon-refresh']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
-    </div>
-    </header>
-        `;
-        var footer_text = `
-            <div>当前名言数量：999+</br>
-            <a class="aline" href="./">主&nbsp;&nbsp;页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a class="aline" href="javascript:;" onclick="my.all()">名言搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a class="aline" href="javascript:;" onclick="my.more()">更多</a>
-            </div>
-        `;
-    };
+    var footer_text = `
+    <div>当前名言数量：999+</br>
+    <a class="aline" href="./" onclick="_hmt.push(['_trackEvent', '名言', '主页', '手动' , '主页']);">主&nbsp;&nbsp;页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a class="aline" href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , '名言搜索']);">名言搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a class="aline" href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , '更多']);">更多</a>
+    </div>`;
+    var header_text = `
+    <div class="mdui-toolbar">
+    <a href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , 'icon-menu']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
+    <a href="./" onclick="_hmt.push(['_trackEvent', '名言', '主页', '手动' , '主页']);"><span class="mdui-typo-title left">ERSS名言</span></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <a href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , 'icon-search']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+    <a href="javascript:;" onclick="my.reload();my.hide_showall();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , 'icon-refresh']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
+    </div>`;
     var footer = footer_text.replace("999+", mingyan.length);
     $("#md").hide();
     $("#showall").hide();
@@ -191,7 +160,7 @@ var my = {};
                     console.log(my)
                 };
                 console.info("已选取第" + n + "条名言：" + my);
-                _hmt.push(['_trackEvent', "名言", "查看", "自动" , name + "：" + my]);
+                _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
                 $("p#info").html(
                     "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
                 $("span#mingyan").html(t.pic(name + "：" + my));
