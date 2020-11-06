@@ -33,7 +33,7 @@
     <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple-400">email</i>
     <div class="mdui-list-item-content">
       <div class="mdui-list-item-title">xhemj</div>
-      <div class="mdui-list-item-text">xhemj_service[AT]126.com</div>
+      <div class="mdui-list-item-text">xhemj_service@126.com</div>
       </div><a href="mailto:xhemj_service@126.com"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
   </li>
 
