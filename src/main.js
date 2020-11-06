@@ -19,25 +19,10 @@ var my = {};
     };
     var ua = new Browser();
     /* 页面基础功能 */
-    var footer_text = `
-    <div>当前名言数量：999+</br>
-    <a class="aline" href="./" onclick="_hmt.push(['_trackEvent', '名言', '主页', '手动' , '主页']);">主&nbsp;&nbsp;页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a class="aline" href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , '名言搜索']);">名言搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a class="aline" href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , '更多']);">更多</a>
-    </div>`;
-    var header_text = `
-    <div class="mdui-toolbar">
-    <a href="javascript:;" onclick="my.more();_hmt.push(['_trackEvent', '名言', '更多', '手动' , 'icon-menu']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '更多'}"><i class="mdui-icon material-icons">menu</i></a>
-    <a href="./" onclick="_hmt.push(['_trackEvent', '名言', '主页', '手动' , '主页']);"><span class="mdui-typo-title left">ERSS名言</span></a>
-    <div class="mdui-toolbar-spacer"></div>
-    <a href="javascript:;" onclick="my.all();_hmt.push(['_trackEvent', '名言', '搜索', '手动' , 'icon-search']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-    <a href="javascript:;" onclick="my.reload();my.hide_showall();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , 'icon-refresh']);" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '刷新'}"><i class="mdui-icon material-icons">refresh</i></a>
-    </div>`;
-    var footer = footer_text.replace("999+", mingyan.length);
+    var footer = $("footer").html().replace("999+", mingyan.length);
     $("#md").hide();
     $("#showall").hide();
     $("footer").html(footer);
-    $("#header .container").html(header_text);
     /****/
     qs = function (qs) {
         var s = location.href;
@@ -134,7 +119,7 @@ var my = {};
     $(document).keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13' || keycode == '32') {
-            t.reload()
+            t.reload();
         }
     });
     /****/
