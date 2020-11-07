@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/11/05
+* 2020/11/07
 */
-var my = {};
+my = {};
 (function (t) {
-    t.version = "2020/11/05";
+    t.version = "2020/11/07";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -129,7 +129,7 @@ var my = {};
             $("#md").hide();
             $("#main").hide();
             if (mingyan.length != 0) {
-                console.info("加载名言列表成功");
+                //console.info("加载名言列表成功");
                 if (qs("id") != "") {
                     var n = qs("id");
                 } else if (location.hash != "" && location.hash != "#search") {
@@ -144,7 +144,7 @@ var my = {};
                     var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
                     console.log(my)
                 };
-                console.info("已选取第" + n + "条名言：" + my);
+                //console.info("已选取第" + n + "条名言：" + my);
                 _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
                 $("p#info").html(
                     "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
@@ -317,6 +317,20 @@ var my = {};
         t.reload()
     };
     /****/
+    t.log = function () {
+        console.group("");
+        console.log("%c ------------⚠--------------\n" +
+            "%c  Power BY ⚡ %c xhemj %c ⚡\n" +
+            "%c \t ©2020 xhemj\n" +
+            "%c ---------------------------\n" +
+            "%c 💬联系：%cxhemj_service@126.com%c💬",
+            "font-size:20px;font-weight:900;", "font-size:20px;font-weight:900;", "font-size:20px;color:#C30AFF;font-weight:900;", "font-size:20px;font-weight:900;", "color:#867676;font-size:20px;font-weight:900;", "font-size:20px;font-weight:900;", "font-weight:100;", "color:#C30AFF", "font-weight:100;");
+        console.groupEnd();
+    }
     t.show();
-    lazyload()
+    $(document).ready(function () {
+        t.log();
+    });
+    lazyload();
+    t.show();
 })(my)
