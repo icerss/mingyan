@@ -231,6 +231,7 @@ var my = {};
     /****/
     /* Markdown转html */
     t.md = function (id, url) {
+        $(id).html("<strong>" + `<div style="text-align: center" class="mdui-ripple"><style>h1{font-size:30px}</style><h1>加载中……</h1></div>` + "</strong></br></br></br></br>");
         $.get(url, function (data) {
             marked.setOptions({
                 breaks: true
@@ -250,8 +251,6 @@ var my = {};
         $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
         $("#md").fadeIn();
     }
-    /****/
-    /* 关于页面 */
     t.about = function () {
         $("#md").hide();
         $("#main").hide();
