@@ -317,20 +317,6 @@ my = {};
         t.reload()
     };
     /****/
-    t.log = function () {
-        console.group("");
-        console.log("%c ------------⚠--------------\n" +
-            "%c  Power BY ⚡ %c xhemj %c ⚡\n" +
-            "%c \t ©2020 xhemj\n" +
-            "%c ---------------------------\n" +
-            "%c 💬联系：%cxhemj_service@126.com%c💬",
-            "font-size:20px;font-weight:900;", "font-size:20px;font-weight:900;", "font-size:20px;color:#C30AFF;font-weight:900;", "font-size:20px;font-weight:900;", "color:#867676;font-size:20px;font-weight:900;", "font-size:20px;font-weight:900;", "font-weight:100;", "color:#C30AFF", "font-weight:100;");
-        console.groupEnd();
-    }
-    t.show();
-    $(document).ready(function () {
-        t.log();
-    });
     lazyload();
     t.show();
 })(my)
