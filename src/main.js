@@ -51,22 +51,22 @@ my = {};
     $('h1').fontFlex(30, 50, 70);
     $('h3').fontFlex(30, 50, 70);
     /* 图片彩蛋 */
-    t.lazypic = "./src/loading.svg";
+    t.lazypic = "https://s-sh-1943-pic1.oss.dogecdn.com/loading.svg";
     t.pic = function (my) {
         var name = my.split("：")[0];
         var my = my.split("：")[1];
         if (my == "虾扯蛋" || my == "解") {
             if (my == "虾扯蛋") {
-                var pic = "https://s-sh-1943-xhemj.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg"
+                var pic = "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg"
                 //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
                 //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
             };
             if (my == "解") {
                 var solvePicUrl = {
-                    "老王": "https://s-sh-1943-xhemj.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg",
-                    "潘哥": "https://s-sh-1943-xhemj.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg",
-                    "老朱": "https://s-sh-1943-xhemj.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
-                    "老俞": "https://s-sh-1943-xhemj.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg"
+                    "老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg",
+                    "潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg",
+                    "老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
+                    "老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg"
                 };
                 var pic = solvePicUrl[name];
             };
