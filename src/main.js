@@ -51,7 +51,7 @@ my = {};
     $('h1').fontFlex(30, 50, 70);
     $('h3').fontFlex(30, 50, 70);
     /* 图片彩蛋 */
-    t.lazypic = "https://s-sh-1943-pic1.oss.dogecdn.com/loading.svg";
+    t.lazypic = "./src/loading.svg";
     t.pic = function (my) {
         var name = my.split("：")[0];
         var my = my.split("：")[1];
@@ -322,7 +322,7 @@ my = {};
     var titleTime;
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
-            document.title = '名言 | 你不继续看名言吗？';
+            document.title = '名言 | 来看名言呀！';
             clearTimeout(titleTime);
         }
         else {
