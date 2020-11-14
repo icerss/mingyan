@@ -6,18 +6,6 @@
     <h3><a onclick="my.print()">打印名言列表</a></h3> 
     <h3><a onclick="my.download()">下载名言列表（.txt）</a></h3> 
     <h3><a onclick="my.about()">关于</a></h3> 
-
----
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<div class="github-badge" title="作者就是我啦！！"><span class="badge-subject">Author</span><span class="badge-value bg-blue">xhemj</span></div> 
-<div class="github-badge" title="速度还可以吧？"><span class="badge-subject">Hosted</span><span class="badge-value bg-red"><span id="host">Github</span></span></div>
-<div class="github-badge" title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速"><span class="badge-subject">CDN</span><span class="badge-value bg-pink">Jsdelivr & Cloudflare</span></div>
-<div class="github-badge" title="ERSS~~~"><span class="badge-subject">&copy;</span><span class="badge-value bg-brightgreen">2020 xhemj & ERSS</span></div>
-</br>
-<div class="github-badge" title="多来看看呀！"><span class="badge-subject">PV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_pv">999+</span></span></div>
-<div class="github-badge" title="还是挺多人来的"><span class="badge-subject">UV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_uv">999+</span></span></div>
 <script>
 var domain_list = {
     "i.xhemj.eu.org":"Cloudflare & 阿里云香港oss",
@@ -34,5 +22,23 @@ var domain_list = {
     "127.0.0.1":"本地"
 };
 $("#host").text(domain_list[location.hostname]);
+twikoo.init({ envId: 'xhemj-0gjckebwf7276129' });
 </script>
 </div></strong>
+
+---
+
+<div id="twikoo"></div>
+
+---
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div style="text-align: center" class="mdui-ripple">
+<div class="github-badge" title="作者就是我啦！！"><span class="badge-subject">Author</span><span class="badge-value bg-blue">xhemj</span></div> 
+<div class="github-badge" title="速度还可以吧？"><span class="badge-subject">Hosted</span><span class="badge-value bg-red"><span id="host">Github</span></span></div>
+<div class="github-badge" title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速"><span class="badge-subject">CDN</span><span class="badge-value bg-pink">Jsdelivr & Cloudflare</span></div>
+<div class="github-badge" title="ERSS~~~"><span class="badge-subject">&copy;</span><span class="badge-value bg-brightgreen">2020 xhemj & ERSS</span></div>
+</br>
+<div class="github-badge" title="多来看看呀！"><span class="badge-subject">PV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_pv">999+</span></span></div>
+<div class="github-badge" title="还是挺多人来的"><span class="badge-subject">UV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_uv">999+</span></span></div>
+</div>

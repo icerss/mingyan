@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/11/07
+* 2020/11/14
 */
 my = {};
 (function (t) {
-    t.version = "2020/11/07";
+    t.version = "2020/11/14";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -115,14 +115,6 @@ my = {};
     };
 
     /****/
-    /* 按下回车切换名言 */
-    $(document).keypress(function (event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13' || keycode == '32') {
-            t.reload();
-        }
-    });
-    /****/
     /* 主功能：名言显示 */
     t.show = function () {
         try {
@@ -137,6 +129,7 @@ my = {};
                 } else {
                     var n = rdNum(0, mingyan.length - 1);
                 };
+
                 var name = mingyan[n].split("：")[0];
                 if (mingyan[n].split("：").length == 2) {
                     var my = mingyan[n].split("：")[1];
