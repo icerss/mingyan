@@ -2,28 +2,10 @@
 <div style="text-align: center" class="mdui-ripple">
 <style>h1{font-size:30px}h3{font-size:20px}</style>
     <h1>更多</h1>
-    <h3><a onclick="my.md_all()">查看全部名言</a></h3> 
+    <h3><a onclick="my.md_all()">全部名言</a></h3> 
     <h3><a onclick="my.print()">打印名言列表</a></h3> 
     <h3><a onclick="my.download()">下载名言列表（.txt）</a></h3> 
     <h3><a onclick="my.about()">关于</a></h3> 
-<script>
-var domain_list = {
-    "i.xhemj.eu.org":"Cloudflare & 阿里云香港oss",
-    "www.xhemj.eu.org":"阿里云香港OSS",
-    "xhemj.eu.org":"阿里云香港OSS",
-    "www.xhemj.ink":"阿里云香港OSS",
-    "xhemj.ink":"阿里云香港OSS",
-    "mingyan.js.org":"Vercel",
-    "mingyan.now.sh":"Vercel",
-    "mingyan.xhemj.now.sh":"Vercel",
-    "xhemj.oss-cn-hongkong.aliyuncs.com":"阿里云香港OSS",
-    "cn.mingyan.js.org":"Coding Pages",
-    "xhemj.github.io":"Github Pages",
-    "127.0.0.1":"本地"
-};
-$("#host").text(domain_list[location.hostname]);
-twikoo.init({ envId: 'xhemj-0gjckebwf7276129' });
-</script>
 </div></strong>
 
 ---
@@ -42,3 +24,25 @@ twikoo.init({ envId: 'xhemj-0gjckebwf7276129' });
 <div class="github-badge" title="多来看看呀！"><span class="badge-subject">PV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_pv">999+</span></span></div>
 <div class="github-badge" title="还是挺多人来的"><span class="badge-subject">UV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_uv">999+</span></span></div>
 </div>
+<script>
+var domain_list = {
+    "i.xhemj.eu.org":"Cloudflare & 阿里云香港oss",
+    "www.xhemj.eu.org":"阿里云香港OSS",
+    "xhemj.eu.org":"阿里云香港OSS",
+    "www.xhemj.ink":"阿里云香港OSS",
+    "xhemj.ink":"阿里云香港OSS",
+    "mingyan.js.org":"Vercel",
+    "mingyan.now.sh":"Vercel",
+    "mingyan.xhemj.now.sh":"Vercel",
+    "xhemj.oss-cn-hongkong.aliyuncs.com":"阿里云香港OSS",
+    "cn.mingyan.js.org":"Coding Pages",
+    "xhemj.github.io":"Github Pages",
+    "127.0.0.1":"本地"
+};
+$("#host").text(domain_list[location.hostname]);
+twikoo.init({ envId: 'xhemj-0gjckebwf7276129' });
+function tk() {
+    $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank">Twikoo</a></br>&copy; 2020 <a href="https://mingyan.js.org">ERSS名言</a></div>`)
+};
+setTimeout(tk,100)
+</script>

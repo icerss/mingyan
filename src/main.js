@@ -224,6 +224,9 @@ my = {};
     /****/
     /* Markdown转html */
     t.md = function (id, url) {
+        $("#md").hide();
+        $("#main").hide();
+        $("#showall").hide();
         $(id).html("<strong>" + `<div style="text-align: center" class="mdui-ripple"><style>h1{font-size:30px}</style><h1>加载中……</h1></div>` + "</strong></br></br></br></br>");
         $.get(url, function (data) {
             marked.setOptions({
@@ -233,24 +236,17 @@ my = {};
             html = html.replace(/<a /g, "<a target=\"_blank\" ");
             $(id).html("<strong>" + html + "</strong></br></br></br></br>");
             $(id).fadeIn();
-        })
+        });
+        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
+        $("#md").fadeIn();
     };
     /****/
     /* 更多页面 */
     t.more = function () {
-        $("#main").hide();
-        $("#showall").hide();
         t.md("#md", "./src/md/more.md");
-        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
-        $("#md").fadeIn();
     }
     t.about = function () {
-        $("#md").hide();
-        $("#main").hide();
-        $("#showall").hide();
         t.md("#md", "./src/md/about.md");
-        $("#md").fadeIn();
-        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
     };
     /****/
     /* Markdown名言列表 */
@@ -266,6 +262,50 @@ my = {};
         $("#md").html(marked(out));
         $("#md").fadeIn()
     }
+    /****/
+    /* Markdown名言列表
+    t.tongji = function () {
+        $("#md").hide();
+        $("#main").hide();
+        $("#showall").hide();
+        var o = "";
+        for (i = 0; i < mingyan.length; i++) {
+            try {
+                var a1 = mingyan[i].split("：")[0];
+                var a2 = mingyan[i + 1].split("：")[0];
+            } catch (e) { }
+            console.log(a1 + "-" + a2);
+            if (a1 == a2) {
+                o += a1
+            } else {
+                o += a2
+            };
+        };
+        //console.log(out);
+        var count = [
+            "数学老王：" + o.match(/老王/g).length,
+            "数学老俞：" + o.match(/老俞/g).length,
+            "数学潘哥：" + o.match(/潘哥/g).length,
+            "语文老朱：" + o.match(/老朱/g).length,
+            "物理刘老师：" + o.match(/物理刘老师/g).length,
+            "物理王老师：" + o.match(/物理王老师/g).length,
+            "地理吴老师：" + o.match(/地理吴老师/g).length,
+            "地理朱老师：" + o.match(/地理朱老师/g).length,
+            "政治王老师：" + o.match(/政治王老师/g).length,
+            "化学吴老师：" + o.match(/化学吴老师/g).length,
+            "历史李老师：" + o.match(/历史李老师/g).length,
+            "美术林老师：" + o.match(/美术林老师/g).length,
+            "体育吴老师：" + o.match(/体育吴老师/g).length,
+            "体育俞老师：" + o.match(/体育俞老师/g).length,
+            "生物吴老师：" + o.match(/生物吴老师/g).length
+        ];
+        window.count = count;
+        //console.log(count);
+        var out = "";
+        out += count.join(" 句</br>") + "</br></br></br></br>";
+        $("#md").html(marked(out));
+        $("#md").fadeIn()
+    }; */
     /****/
     /* 搜索功能 */
     t.search = function () {
