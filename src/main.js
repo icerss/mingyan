@@ -23,6 +23,9 @@ my = {};
     $("#md").hide();
     $("#showall").hide();
     $("footer").html(footer);
+    db = function (i) {
+        console.log("[DB]" + i)
+    }
     /****/
     qs = function (qs) {
         var s = location.href;
@@ -63,10 +66,10 @@ my = {};
             };
             if (my == "解") {
                 var solvePicUrl = {
-                    "老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg",
-                    "潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg",
-                    "老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
-                    "老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg"
+                    "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg",
+                    "数学潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg",
+                    "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
+                    "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg"
                 };
                 var pic = solvePicUrl[name];
             };
@@ -131,17 +134,23 @@ my = {};
                 };
 
                 var name = mingyan[n].split("：")[0];
+                db(name);
                 if (mingyan[n].split("：").length == 2) {
                     var my = mingyan[n].split("：")[1];
+                    db(my);
                 } else if (mingyan[n].split("：").length == 3) {
                     var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
-                    console.log(my)
+                    db(my);
                 };
                 //console.info("已选取第" + n + "条名言：" + my);
                 _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
                 $("p#info").html(
                     "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
-                $("span#mingyan").html(t.pic(name + "：" + my));
+                if (my == "虾扯蛋" || my == "解") {
+                    $("span#mingyan").html(t.pic(name + "：" + my));
+                } else {
+                    $("span#mingyan").html(my);
+                }
                 $("span#name").text(name);
                 $("#main").fadeIn();
                 var title = "名言 | " + my;
