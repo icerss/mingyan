@@ -23,9 +23,11 @@ my = {};
     $("#md").hide();
     $("#showall").hide();
     $("footer").html(footer);
+    var dbnum = 1;
     db = function (i) {
-        console.log("[DB]" + i)
-    }
+        console.log("#"+ dbnum + " -> "+"%c[DB]%c" + i,"color:red","color:black");
+        dbnum++;
+    };
     /****/
     qs = function (qs) {
         var s = location.href;
@@ -82,21 +84,21 @@ my = {};
         }
     };
     /****/
-    /* 打印功能 */
+    /* 功能 */
     t.print = function () {
         t.all();
-        var oldstr = document.body.innerHTML;
+        var oldstr = $("body").html();
         var headstr = "<title>名言 | ERSS</title>";
         var footstr = "</body></html>";
-        document.getElementById("searchbar").style.display = "none";
+        $("#searchbar").hide();
         var printData = document.getElementById("showall").innerHTML.replace(/<a /g, "<span ").replace(/<\/a>/g, "<\/span>");
         var wind = window.open("", "", "toolbar=no,scrollbars=yes,menubar=no");
         wind.document.body.innerHTML = headstr + document.head.innerHTML + printData + footstr;
         wind.print();
-        document.getElementById("searchbar").style.display = "block";
+        $("#searchbar").show();
         wind.close();
         window.document.body.innerHTML = oldstr;
-        location.reload()
+        location.reload();
     };
     /****/
     /* 下载功能 */
@@ -124,7 +126,7 @@ my = {};
             $("#md").hide();
             $("#main").hide();
             if (mingyan.length != 0) {
-                //console.info("加载名言列表成功");
+                db("加载名言列表成功");
                 if (qs("id") != "") {
                     var n = qs("id");
                 } else if (location.hash != "" && location.hash != "#search") {
@@ -142,7 +144,7 @@ my = {};
                     var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
                     db(my);
                 };
-                //console.info("已选取第" + n + "条名言：" + my);
+                db("已选取第" + n + "条名言：" + my);
                 _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
                 $("p#info").html(
                     "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
@@ -272,7 +274,7 @@ my = {};
         $("#md").fadeIn()
     }
     /****/
-    /* Markdown名言列表
+    /* Markdown名言列表 */
     t.tongji = function () {
         $("#md").hide();
         $("#main").hide();
@@ -283,7 +285,7 @@ my = {};
                 var a1 = mingyan[i].split("：")[0];
                 var a2 = mingyan[i + 1].split("：")[0];
             } catch (e) { }
-            console.log(a1 + "-" + a2);
+            db(a1 + "-" + a2);
             if (a1 == a2) {
                 o += a1
             } else {
@@ -293,7 +295,7 @@ my = {};
         //console.log(out);
         var count = [
             "数学老王：" + o.match(/老王/g).length,
-            "数学老俞：" + o.match(/老俞/g).length,
+            "英语老俞：" + o.match(/老俞/g).length,
             "数学潘哥：" + o.match(/潘哥/g).length,
             "语文老朱：" + o.match(/老朱/g).length,
             "物理刘老师：" + o.match(/物理刘老师/g).length,
@@ -311,10 +313,10 @@ my = {};
         window.count = count;
         //console.log(count);
         var out = "";
-        out += count.join(" 句</br>") + "</br></br></br></br>";
+        out += count.join(" 句</br>") + " 句</br></br></br></br>";
         $("#md").html(marked(out));
         $("#md").fadeIn()
-    }; */
+    }; 
     /****/
     /* 搜索功能 */
     t.search = function () {
