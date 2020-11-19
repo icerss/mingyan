@@ -23,10 +23,10 @@ my = {};
     $("#md").hide();
     $("#showall").hide();
     $("footer").html(footer);
-    var dbnum = 1;
+    var dn = 1;
     db = function (i) {
-        console.log("#"+ dbnum + " -> "+"%c[DB]%c" + i,"color:red","color:black");
-        dbnum++;
+        console.log("#"+ dn + " -> "+"%c[DB]%c" + i,"color:red","color:black");
+        dn++;
     };
     /****/
     qs = function (qs) {
