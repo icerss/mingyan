@@ -1,10 +1,9 @@
 'use strict';
 
-const version = 'xhemj v-20201121121';
+const version = 'xhemj v-20201121125';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
-  '/',
   '/src/offline.html',
   './src/loading.svg'
 ];
