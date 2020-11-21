@@ -12,7 +12,7 @@ jobs:
           persist-credentials: false
           
       - name: Setting 🔧
-        uses: manyuanrong/setup-ossutil@v1.0
+        uses: manyuanrong/setup-ossutil@v2.0
         with:
           endpoint: ${{ secrets.ENDPOINT }}
           access-key-id: ${{ secrets.ACCESS_KEY_ID }}
@@ -27,8 +27,3 @@ jobs:
           ossutil rm oss://xhemj/.github/ -r -f
           ossutil set-meta oss://xhemj/src/ Cache-Control:public,max-age=86400 --include "*.js" --include "*.css" --include "*.min.js" -r -f
           echo success[$ip]
-                    
-      - name: Info 💡
-        run: |
-          ossutil ls oss://xhemj
-          

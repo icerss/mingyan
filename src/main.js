@@ -12,9 +12,14 @@ my = {};
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
     })();
+    var dn = 1;
+    db = function (i) {
+        console.log("#"+ dn + " -> "+"%c[DB]%c" + i,"color:red","color:black");
+        dn++;
+    };
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./src/sw.js');
+            navigator.serviceWorker.register('./sw.js');
         })
     };
     var ua = new Browser();
@@ -23,11 +28,6 @@ my = {};
     $("#md").hide();
     $("#showall").hide();
     $("footer").html(footer);
-    var dn = 1;
-    db = function (i) {
-        console.log("#"+ dn + " -> "+"%c[DB]%c" + i,"color:red","color:black");
-        dn++;
-    };
     /****/
     qs = function (qs) {
         var s = location.href;
