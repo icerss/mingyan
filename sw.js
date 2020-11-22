@@ -1,18 +1,22 @@
 'use strict';
 
-const version = 'xhemj v-20201121125';
+const version = 'xhemj v-2020112220759';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
   '/src/offline.html',
-  './src/loading.svg'
+  './src/loading.svg',
+  './404.html',
+  './src/md/more.md',
+  './src/md/about.md'
 ];
 
 const ignoreFetch = [
   /https?:\/\/hm.baidu.com\//,
   /https?:\/\/www.google-analytics.com\//,
   /https?:\/\/www.googletagmanager.com\//,
-  /https?:\/\/busuanzi.ibruce.info\//
+  /https?:\/\/busuanzi.ibruce.info\//,
+  /https?:\/\/tcb-api.tencentcloudapi.com\//
 ];
 
 //////////

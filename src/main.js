@@ -12,14 +12,25 @@ my = {};
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
     })();
+    loadJs = function (url) {
+        var su = document.createElement("script");
+        su.src = url;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(su, s)
+    };
+    loadJs("https://www.bilibili.com/gentleman/polyfill.js?features=fetch");
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RE30WVG95Q');
     var dn = 1;
     db = function (i) {
-        console.log("#"+ dn + " -> "+"%c[DB]%c" + i,"color:red","color:black");
+        console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
         dn++;
     };
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js?t=202011211123');
+            navigator.serviceWorker.register('./sw.js?t=202011220759');
         })
     };
     var ua = new Browser();
@@ -316,7 +327,7 @@ my = {};
         out += count.join(" 句</br>") + " 句</br></br></br></br>";
         $("#md").html(marked(out));
         $("#md").fadeIn()
-    }; 
+    };
     /****/
     /* 搜索功能 */
     t.search = function () {
