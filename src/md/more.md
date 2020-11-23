@@ -23,6 +23,8 @@
 </br>
 <div class="github-badge" title="多来看看呀！"><span class="badge-subject">PV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_pv">999+</span></span></div>
 <div class="github-badge" title="还是挺多人来的"><span class="badge-subject">UV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_uv">999+</span></span></div>
+</br>
+<a href="https://icp.gov.moe" target="_blank">萌ICP备 </a><a href="https://icp.gov.moe/?keyword=20200503" target="_blank"> 20200503号</a>
 </div>
 <script>
 var domain_list = {
