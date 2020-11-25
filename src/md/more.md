@@ -44,7 +44,10 @@ var domain_list = {
 $("#host").text(domain_list[location.hostname]);
 twikoo.init({ envId: 'xhemj-0gjckebwf7276129' });
 function tk() {
-    $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank">Twikoo</a></br>&copy; 2020 <a href="https://mingyan.js.org">ERSS名言</a></div>`)
+    $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2020 <a href="https://mingyan.js.org">ERSS名言</a></div>`);
+    $(".tk-avatar-img").each(function(){
+        $(this).attr("src",$(this).attr("src").replace(/gravatar.loli.net/g,"s-sh-1943-gravatar.oss.dogecdn.com"))
+    })
 };
 setTimeout(tk,100)
 </script>
