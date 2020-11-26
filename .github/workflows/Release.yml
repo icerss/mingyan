@@ -18,21 +18,28 @@ jobs:
         id: tag_main
         uses: ashley-taylor/read-json-property-action@v1.0
         with:
-          path: ./src/version.json
+          path: ./.github/version.json
           property: version
 
       - name: Read tag_latest
         id: tag_latest
         uses: ashley-taylor/read-json-property-action@v1.0
         with:
-          path: ./src/version.json
+          path: ./.github/version.json
           property: version
+          
+        - name: Read Date
+        id: date
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+          path: ./.github/version.json
+          property: date
 
       - name: Read description
         id: description
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./src/version.info
+          path: ./.github/version.info
 
       - name: ZIP files
         run: |
@@ -45,8 +52,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: v${{steps.tag_latest.outputs.value}}
-          release_name: ERSS_Mingyan_v${{steps.tag_latest.outputs.value}}
+          release_name: ERSS Mingyan v${{steps.tag_latest.outputs.value}}
           body: |
+            ${{steps.date.outputs.value}}
             ${{steps.description.outputs.content}}
           draft: false
           prerelease: false
