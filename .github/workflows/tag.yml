@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - "src/version.json"
-      - "./.github/workflows/tag.yml"
+      - ".github/workflows/tag.yml"
 
 jobs:
   build:
