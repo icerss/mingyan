@@ -28,7 +28,7 @@ jobs:
           path: ./.github/version.json
           property: version
           
-        - name: Read Date
+      - name: Read Date
         id: date
         uses: ashley-taylor/read-json-property-action@v1.0
         with:
