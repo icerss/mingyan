@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - "src/version.json"
+      - "./.github/workflows/tag.yml"
 
 jobs:
   build:
@@ -31,7 +32,7 @@ jobs:
         id: description
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./src/main/resources/release.info
+          path: ./src/version.info
 
       - name: ZIP files
         run: |
