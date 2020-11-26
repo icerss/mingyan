@@ -1,4 +1,4 @@
-name: Tag
+name: Release
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - "src/version.json"
-      - ".github/workflows/tag.yml"
+      - ".github/workflows/Release.yml"
 
 jobs:
   build:
