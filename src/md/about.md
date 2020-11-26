@@ -23,9 +23,24 @@
   </li>
 </ul>
 
+---
+
 **特别感谢**：
-- 厦门市音乐学校
-- 厦大食堂
+<ul class="mdui-list">
+  <li class="mdui-list-item mdui-ripple" >
+      <div class="mdui-list-item-content">厦门市音乐学校</div>
+  </li>
+  <li class="mdui-list-item mdui-ripple" >
+      <div class="mdui-list-item-content">厦大食堂</div>
+  </li>
+  <li class="mdui-list-item mdui-ripple" >
+      <div class="mdui-list-item-content">ERSS恪人族</div>
+  </li>
+  <li class="mdui-list-item mdui-ripple" >
+      <div class="mdui-list-item-content">厦门市音乐学校的全体老师和同学们</div>
+  </li>
+</ul>
+
 ---
 联系：
 
