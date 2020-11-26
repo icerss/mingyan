@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - name: Read tag_main
         id: tag_main
         uses: ashley-taylor/read-json-property-action@v1.0
