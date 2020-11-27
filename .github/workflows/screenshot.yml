@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "src/version.json"
+      - ".github/workflows/Release.yml"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    if: "!contains(github.event.head_commit.message, '[skip release]')"
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GH_PAT }}
+        
+      - name: setting
+        run: |
+          date=$(date +"%Y-%m-%d-%H-%M-%S")
+          rm -f -r screenshot
+          mkdir screenshot
+          cd screenshot
+          
+      - name: Screenshot Website
+        uses: swinton/screenshot-website@v1.x
+        with:
+          source: https://mingyan.js.org/
+          destination: $date-${{ matrix.os }}.png
+          full-page: true
+          
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.5.1
+        with:
+          commit_message: ":arrow_up: Update Screenshot"
