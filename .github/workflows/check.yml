@@ -39,4 +39,4 @@ jobs:
         with:
           commit_user_name: Xhemj Bot
           commit_user_email: xhemj_service@126.com
-          commit_message: 📝 ${{steps.tag_latest.outputs.value}} Check! [skip check] [skip OSS] [skip release]
+          commit_message: 📝 ${{steps.tag_latest.outputs.value}} Check! [skip check] [skip oss] [skip release]
