@@ -32,7 +32,7 @@ jobs:
         
       - name: Check Release Setting
         run: |
-          echo 📝 ${{steps.tag_latest.outputs.value}} (${{github.event.head_commit.message}}) Check! >> ./.github/log/check.txt
+          echo 📝 ${{steps.tag_latest.outputs.value}}-${{github.event.head_commit.message}}-Check! >> ./.github/log/check.txt
           
       - name: Check Release - xhemj
         if: github.repository == 'xhemj/mingyan'
