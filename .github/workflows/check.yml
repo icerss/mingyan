@@ -32,7 +32,9 @@ jobs:
         
       - name: Check Release Setting
         run: |
-          echo 📝 ${{steps.tag_latest.outputs.value}}-check >> ./.github/version.info
+          date=$(date "+%Y-%m-%d %H:%M:%S")
+          ip=$(curl -s https://api.ip.sb/ip)
+          echo 📝 $date ${{steps.tag_latest.outputs.value}} Check![$ip](${{github.event.head_commit.message}}) >> ./.github/log/check.log
           
       - name: Check Release - xhemj
         if: github.repository == 'xhemj/mingyan'
