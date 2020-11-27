@@ -1,0 +1,42 @@
+name: Check
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip check]')"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PAT }}
+          
+      - name: Read tag_main
+        id: tag_main
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+          path: ./.github/version.json
+          property: version
+
+      - name: Read tag_latest
+        id: tag_latest
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+          path: ./.github/version.json
+          property: version
+        
+      - name: Check Release Setting
+        run: |
+          echo 📝 ${{steps.tag_latest.outputs.value}}-check >> ./.github/version.info
+          
+      - name: Check Release
+        uses: stefanzweifel/git-auto-commit-action@v4.7.2
+        with:
+          commit_user_name: Xhemj Bot
+          commit_user_email: xhemj_service@126.com
+          commit_message: 📝 ${{steps.tag_latest.outputs.value}} Check! [skip check] [skip OSS] [skip release]
