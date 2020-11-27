@@ -34,20 +34,10 @@ jobs:
         run: |
           echo 📝 ${{steps.tag_latest.outputs.value}}-${{github.event.head_commit.message}}-Check! >> ./.github/log/check.txt
           
-      - name: Check Release - xhemj
-        if: github.repository == 'xhemj/mingyan'
+      - name: Check Release
         uses: stefanzweifel/git-auto-commit-action@v4.7.2
         with:
-          commit_user_name: Xhemj Bot
+          commit_user_name: Xhemj Bot [Check]
           commit_user_email: xhemj_service@126.com
-          commit_message: 📝 ${{steps.tag_latest.outputs.value}} Check! [skip check] [skip oss] [skip release]
-      
-      - name: Check Release - icerss
-        if: github.repository == 'icerss/mingyan'
-        uses: stefanzweifel/git-auto-commit-action@v4.7.2
-        with:
-          commit_user_name: Xhemj Bot
-          commit_user_email: xhemj_service@126.com
-          commit_author: xhemj-bot <xhemj_service@126.com>
           commit_message: 📝 ${{steps.tag_latest.outputs.value}} Check! [skip check] [skip oss] [skip release]  
           
