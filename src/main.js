@@ -265,10 +265,10 @@ my = {};
     /****/
     /* 更多页面 */
     t.more = function () {
-        t.md("#md", "./src/md/more.md?t=202011251846");
+        t.md("#md", "./src/md/more.md?t=202011280000");
     }
     t.about = function () {
-        t.md("#md", "./src/md/about.md");
+        t.md("#md", "./src/md/about.md?t=202011280000");
     };
     /****/
     /* Markdown名言列表 */
