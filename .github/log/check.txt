@@ -3,3 +3,4 @@
 📝 2.2.6-2:修复release.yml
 📝 2.2.6-2:测试webhook [skip oss]
 📝 2.2.6-2:Merge branch master of github.com:icerss/mingyan into master
+📝 2.2.6-2:更新about
