@@ -285,6 +285,27 @@ my = {};
         $("#md").fadeIn()
     }
     /****/
+    /*function time(i) {
+        var a = i;
+        a = a.split("T");
+        var time = a[1];
+        time = time.split(":");
+        var h = time[0] * 1 + 8;
+        var min = time[1];
+        var s = time[2].split("Z")[0];
+        var ut = a[0] + " " + h + ":" + min + ":" + s;
+        return ut;
+    };
+    $.get("https://api.github.com/repos/xhemj/mingyan/commits?page=1&per_page=1000", function (data) {
+        for (i = 0; i < data.length; i++) {
+            console.log(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
+        }
+    });
+    $.get("https://api.github.com/repos/xhemj/mingyan/commits?page=2&per_page=1000", function (data) {
+        for (i = 0; i < data.length; i++) {
+            console.log(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
+        }
+    });* /
     /* Markdown名言列表 */
     t.tongji = function () {
         $("#md").hide();
