@@ -58,9 +58,6 @@ $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
     time = time.split(":");
     var h = time[0] * 1 + 8;
     var min = time[1];
-    if (h.length = 1) {
-        var h = "0" + h
-    };
     var s = time[2].split("Z")[0];
     var ut = a[0] + " " + h + ":" + min + ":" + s;
     $("#uptime").text(ut);

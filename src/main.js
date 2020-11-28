@@ -265,7 +265,7 @@ my = {};
     /****/
     /* 更多页面 */
     t.more = function () {
-        t.md("#md", "./src/md/more.md?t=202011280917");
+        t.md("#md", "./src/md/more.md?t=202011281532");
     }
     t.about = function () {
         t.md("#md", "./src/md/about.md?t=202011280000");
