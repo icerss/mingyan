@@ -1,0 +1,20 @@
+name: Check
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip push]')"
+
+    steps:
+      - name: Webhook Push
+        if: github.repository == 'xhemj/mingyan'
+        uses: joelwmale/webhook-action@master
+        with:
+          url: ${{ secrets.WEBHOOK_URL }}?TA_action_on=1&TA_title=xhemj&TA_content=Github%E4%BB%93%E5%BA%93%EF%BC%88xhemj/mingyan%EF%BC%89%E5%B7%B2%E6%9B%B4%E6%96%B0\n%E5%86%85%E5%AE%B9%EF%BC%9A\n${{github.event.head_commit.message}}&TA_url=https://github.com/xhemj/mingyan
+          headers: ''
+          body: ''
