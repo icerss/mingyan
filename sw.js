@@ -1,6 +1,6 @@
 'use strict';
 
-const version = 'xhemj v-2020112220759';
+const version = 'xhemj v-202011280920';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
@@ -16,7 +16,8 @@ const ignoreFetch = [
   /https?:\/\/www.google-analytics.com\//,
   /https?:\/\/www.googletagmanager.com\//,
   /https?:\/\/busuanzi.ibruce.info\//,
-  /https?:\/\/tcb-api.tencentcloudapi.com\//
+  /https?:\/\/tcb-api.tencentcloudapi.com\//,
+  /https?:\/\/api.github.com\//
 ];
 
 //////////

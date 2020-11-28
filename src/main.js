@@ -30,7 +30,7 @@ my = {};
     };
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js?t=202011220759');
+            navigator.serviceWorker.register('./sw.js?t=20201180917');
         })
     };
     var ua = new Browser();
@@ -265,7 +265,7 @@ my = {};
     /****/
     /* 更多页面 */
     t.more = function () {
-        t.md("#md", "./src/md/more.md?t=202011280000");
+        t.md("#md", "./src/md/more.md?t=202011280917");
     }
     t.about = function () {
         t.md("#md", "./src/md/about.md?t=202011280000");
