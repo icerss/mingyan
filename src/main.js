@@ -33,6 +33,10 @@ my = {};
             navigator.serviceWorker.register('./sw.js?t=20201180917');
         })
     };
+    window.onload = function () {
+        var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+        db('Page load time is ' + loadTime + "ms");
+    };
     var ua = new Browser();
     /* 页面基础功能 */
     var footer = $("footer").html().replace("999+", mingyan.length);
@@ -114,8 +118,10 @@ my = {};
     /****/
     /* 下载功能 */
     t.download = function () {
-        t.dfile("名言列表（" + t.version + "）", mingyan.join("\n"))
+        var blob = new Blob([mingyan.join("\n")], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, "名言列表（" + my.version + "）");
     };
+    /* 已使用FileSaver.js替代 - 2020-11-28
     t.dfile = function (fileName, content) {
         const aTag = document.createElement('a');
         const blob = new Blob([content]);
@@ -128,7 +134,7 @@ my = {};
             document.body.removeChild(aTag);
             window.URL.revokeObjectURL(blob);
         }, 100);
-    };
+    };*/
 
     /****/
     /* 主功能：名言显示 */
