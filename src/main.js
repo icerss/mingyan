@@ -358,7 +358,7 @@ my = {};
     /****/
     /* 搜索功能 */
     t.search = function () {
-        if ($("#searchbar").is(":focus")) {
+        if ($("#searchbar").is(":focus") || qs("q") != "") {
             if ($("input#searchbar").val()) {
                 var now1 = $("input#searchbar").val();
                 var now2 = $("input#searchbar").val();
@@ -391,7 +391,7 @@ my = {};
             }
         }
     };
-    setInterval(t.search, 100);
+    var search = setInterval(t.search, 100);
     /****/
     /* 邮箱 */
     if (qs("mail")) {
@@ -413,5 +413,23 @@ my = {};
     });
     /****/
     lazyload();
-    t.show();
+    /* 路由 */
+    if (location.pathname == "/about" || location.pathname == "/search") {
+        if (location.pathname == "/about") {
+            my.about()
+        };
+        if (location.pathname == "/search") {
+            my.all();
+            if (qs("q")) {
+                $("#searchbar").val(decodeURI(qs("q")));
+                $("#searchbar").focus();
+            }
+        };
+    } else if (location.pathname == "/") {
+        t.show();
+    } else {
+        clearInterval(search);
+        $(".app").load("./src/_404.html");
+    };
+    /****/
 })(my)
