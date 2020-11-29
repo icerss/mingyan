@@ -140,6 +140,7 @@ my = {};
     /* 主功能：名言显示 */
     t.show = function () {
         try {
+            history.pushState({}, "名言 | ERSS", "/");
             $("#md").hide();
             $("#main").hide();
             if (mingyan.length != 0) {
@@ -236,6 +237,7 @@ my = {};
     /****/
     /* 搜索列表功能 */
     t.all = function () {
+        history.pushState({}, "名言 | 搜索", "/search");
         $("#md").hide();
         $("#main").hide();
         $("input#searchbar").val("");
@@ -272,9 +274,11 @@ my = {};
     /* 更多页面 */
     t.more = function () {
         t.md("#md", "./src/md/more.md?t=202011281532");
+        history.pushState({}, "名言 | 更多", "/");
     }
     t.about = function () {
         t.md("#md", "./src/md/about.md?t=202011280000");
+        history.pushState({}, "名言 | 关于", "/about");
     };
     /****/
     /* Markdown名言列表 */
@@ -427,6 +431,7 @@ my = {};
         };
     } else if (location.pathname == "/") {
         t.show();
+        history.pushState({}, "名言 | ERSS", "/");
     } else {
         clearInterval(search);
         $(".app").load("./src/_404.html");
