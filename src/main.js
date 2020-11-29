@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/11/28
+* 2020/11/29
 */
 my = {};
 (function (t) {
-    t.version = "2020/11/28";
+    t.version = "2020/11/29";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
