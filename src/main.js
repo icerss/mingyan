@@ -140,7 +140,6 @@ my = {};
     /* 主功能：名言显示 */
     t.show = function () {
         try {
-            history.pushState({}, "名言 | ERSS", "/");
             $("#md").hide();
             $("#main").hide();
             if (mingyan.length != 0) {
@@ -431,7 +430,6 @@ my = {};
         };
     } else if (location.pathname == "/") {
         t.show();
-        history.pushState({}, "名言 | ERSS", "/");
     } else {
         clearInterval(search);
         $(".app").load("./src/_404.html");
