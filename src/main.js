@@ -428,11 +428,21 @@ my = {};
                 $("#searchbar").focus();
             }
         };
-    } else if (location.pathname == "/") {
+    } else if (location.pathname == "/" || location.pathname == "/index.html") {
         t.show();
     } else {
         clearInterval(search);
         $(".app").load("./src/_404.html");
     };
+    /****/
+    /* Headroom.js */
+    if (Headroom.cutsTheMustard) {
+        var myElement = document.getElementById("header");
+        var headroom = new Headroom(myElement, {
+            "offset": 300,
+            "tolerance": 5
+        });
+        headroom.init();
+    }
     /****/
 })(my)
