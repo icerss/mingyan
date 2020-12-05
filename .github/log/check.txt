@@ -15,3 +15,4 @@
 📝 2.2.7-1:加入N张图片
 📝 2.2.7-1:测试名言分享2
 📝 2.2.7-1:Merge branch master of github.com:icerss/mingyan into master
+📝 2.2.7-1:Merge branch master of github.com:icerss/mingyan into master
