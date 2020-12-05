@@ -109,9 +109,6 @@ my = {};
             t.PicMobie();
             lazyload();
             var special = "";
-            if (my == "悲伤") {
-                var special = "style=\"max-width: 300px;\""
-            };
             return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
             lazyload();
