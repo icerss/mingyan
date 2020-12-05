@@ -272,11 +272,12 @@ my = {};
     /****/
     /* 刷新名言 */
     t.reload = function () {
+        history.pushState({}, "名言 | ERSS", "/");
         if (location.hash != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } else if (qs("id") != "" || qs("mail") != "") {
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
-        } {
+        } else {
             t.show();
         };
         lazyload();
