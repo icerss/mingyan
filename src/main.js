@@ -72,15 +72,29 @@ my = {};
     $('h3').fontFlex(30, 50, 70);
     /* 图片彩蛋 */
     t.lazypic = "./src/loading.svg";
+    var pic_list = {
+        "虾扯蛋": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg",
+        //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
+        //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
+        "真让人头大": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QiXVSahT3kAJf6B.jpg",
+        "对称轴平行": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/qv1RkDBbt6CyEJf.jpg",
+        "零食杜绝": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/SWx85EvdXBOqloJ.jpg",
+        "耳散伞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/jpH7LQiaqTnXyCf.jpg",
+        "歪瓜裂枣": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/KQsc8YDEHf1vi2x.jpg",
+        "悲伤": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/hHv8U3EGt4P12IX.jpg",
+        "肾虚": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/wBHo8kezKDnEcAP.jpg",
+        "眉目清秀": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/6k7czyYqmfvlWPn.jpg",
+        "困死了": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/lmcDK2MCrO8nAtw.jpg",
+        "我在打麻将": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QwzvoYL1daXq8in.jpg",
+        "松鼠": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/C1Zq9nXfaTW2hDe.jpg",
+        "来看王雷吧": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/Uxg3OpL2eBArP7s.jpg",
+        "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg",
+        "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg"
+    };
     t.pic = function (my) {
         var name = my.split("：")[0];
         var my = my.split("：")[1];
-        if (my == "虾扯蛋" || my == "解") {
-            if (my == "虾扯蛋") {
-                var pic = "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg"
-                //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
-                //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
-            };
+        if (my == "解" || pic_list[my] != undefined) {
             if (my == "解") {
                 var solvePicUrl = {
                     "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg",
@@ -89,17 +103,41 @@ my = {};
                     "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg"
                 };
                 var pic = solvePicUrl[name];
+            } else if (pic_list[my] != undefined) {
+                var pic = pic_list[my];
             };
             t.PicMobie();
             lazyload();
-            return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable\"><\/img>"
+            var special = "";
+            if (my == "悲伤") {
+                var special = "style=\"max-width: 300px;\""
+            };
+            return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
             lazyload();
             return my
         }
     };
     /****/
-    /* 功能 */
+    /* 文字彩蛋 */
+    var text_list = {
+        "松鼠": "课本上曾经出现过",
+        "来看王雷吧": "曾经在语文课上说过",
+        "零食杜绝": "曾经出现过",
+        "耳散伞": "曾经有过"
+    };
+    t.text = function (my) {
+        var name = my.split("：")[0];
+        var my = my.split("：")[1];
+        if (text_list[my] != undefined) {
+            var text = text_list[my];
+            return text
+        } else {
+            return "曾经说过"
+        };
+    };
+    /****/
+    /* 打印功能 */
     t.print = function () {
         t.all();
         var oldstr = $("body").html();
@@ -114,6 +152,11 @@ my = {};
         wind.close();
         window.document.body.innerHTML = oldstr;
         location.reload();
+    };
+    /****/
+    /* 分享功能 */
+    t.share = function (name, my) {
+        return md5("1" + md5(name + "|" + my + "ERSS MINGYAN (c) xhemj"))
     };
     /****/
     /* 下载功能 */
@@ -151,7 +194,6 @@ my = {};
                 } else {
                     var n = rdNum(0, mingyan.length - 1);
                 };
-
                 var name = mingyan[n].split("：")[0];
                 db(name);
                 if (mingyan[n].split("：").length == 2) {
@@ -165,12 +207,14 @@ my = {};
                 _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
                 $("p#info").html(
                     "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
-                if (my == "虾扯蛋" || my == "解") {
+                if (my == "解" || pic_list[my] != undefined) {
                     $("span#mingyan").html(t.pic(name + "：" + my));
                 } else {
                     $("span#mingyan").html(my);
                 }
+                var verb = t.text(name + "：" + my);
                 $("span#name").text(name);
+                $("span#verb").html(verb);
                 $("#main").fadeIn();
                 var title = "名言 | " + my;
                 document.title = title;
@@ -415,7 +459,7 @@ my = {};
         }
     });
     /****/
-    lazyload();
+
     /* 路由 */
     if (location.pathname == "/about" || location.pathname == "/search") {
         if (location.pathname == "/about") {
@@ -445,4 +489,32 @@ my = {};
         headroom.init();
     }
     /****/
+    lazyload();
+    $('.fancybox').fancybox({
+        buttons: [
+            "zoom",
+            "share",
+            "slideShow",
+            "fullScreen",
+            "download",
+            "close"
+        ],
+        lang: "zh-cn",
+        i18n: {
+            "zh-cn": {
+                CLOSE: "关闭",
+                NEXT: "下一张",
+                PREV: "前一张",
+                ERROR: "图片加载失败， <br/> 请稍后再试。",
+                FULL_SCREEN: "全屏",
+                THUMBS: "略缩图",
+                DOWNLOAD: "下载",
+                SHARE: "分享",
+                ZOOM: "缩放"
+            }
+        }
+    });
+    $(document).ready(function () {
+        loadJs("https://cdn.jsdelivr.net/gh/emn178/js-md5@master/build/md5.min.js")
+    });
 })(my)
