@@ -187,7 +187,6 @@ my = {};
           });
           $(".swal-content__input").attr("value",location.protocol + "//" + location.host + "/" + t.my_encode(name,my));
           $(".swal-content__input").attr("onclick","this.select()");
-          $(".swal-content__input").attr("readonly",true);
           $(".swal-content__input").select();
     };
     /****/
