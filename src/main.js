@@ -176,10 +176,18 @@ my = {};
             title: "分享当前名言",
             text: "请手动复制下面的链接，把他发给别人吧",
             icon: "info",
-            content: "input"
+            content: {
+                element: "input",
+                attributes: {
+                  placeholder: "加载出错了？刷新试试吧",
+                  value: location.protocol + "//" + location.host + "/" + t.my_encode(name,my),
+                  type: "text"
+                }
+              }
           });
           $(".swal-content__input").attr("value",location.protocol + "//" + location.host + "/" + t.my_encode(name,my));
           $(".swal-content__input").attr("onclick","this.select()");
+          $(".swal-content__input").attr("readonly",true);
           $(".swal-content__input").select();
     };
     /****/
