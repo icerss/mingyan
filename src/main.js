@@ -152,8 +152,22 @@ my = {};
     };
     /****/
     /* 分享功能 */
-    t.share = function (name, my) {
-        return md5("1" + md5(name + "|" + my + "ERSS MINGYAN (c) xhemj"))
+    t.my_encode = function (name, my) {
+        return md5("1" + md5(encodeURI(name + "||" + my + "ERSS MINGYAN (c) xhemj")))
+    };
+    t.my_decode = function (id) {
+        for (i = 0; i < mingyan.length; i++) {
+            var name = mingyan[i].split("：")[0];
+            //db(name)
+            var my = mingyan[i].split("：")[1];
+            //db(my)
+            if (id == t.my_encode(name, my)) {
+                console.log("encode" + id);
+                return i
+            } else {
+                //db("no")
+            }
+        }
     };
     /****/
     /* 下载功能 */
@@ -178,19 +192,23 @@ my = {};
 
     /****/
     /* 主功能：名言显示 */
-    t.show = function () {
+    t.show = function (id) {
         try {
             $("#md").hide();
             $("#main").hide();
             if (mingyan.length != 0) {
                 db("加载名言列表成功");
-                if (qs("id") != "") {
-                    var n = qs("id");
-                } else if (location.hash != "" && location.hash != "#search") {
-                    var n = location.hash.replace("#", "");
+                if (!id) {
+                    if (qs("id") != "") {
+                        var n = qs("id");
+                    } else if (location.hash != "" && location.hash != "#search") {
+                        var n = location.hash.replace("#", "");
+                    } else {
+                        var n = rdNum(0, mingyan.length - 1);
+                    };
                 } else {
-                    var n = rdNum(0, mingyan.length - 1);
-                };
+                    var n = id;
+                }
                 var name = mingyan[n].split("：")[0];
                 db(name);
                 if (mingyan[n].split("：").length == 2) {
@@ -472,8 +490,13 @@ my = {};
     } else if (location.pathname == "/" || location.pathname == "/index.html") {
         t.show();
     } else {
-        clearInterval(search);
-        $(".app").load("./src/_404.html");
+        if (location.pathname.split("/")[1].length == 32) {
+            var id = t.my_decode(location.pathname.split("/")[1]);
+            t.show(id)
+        } else {
+            clearInterval(search);
+            $(".app").load("./src/_404.html");
+        }
     };
     /****/
     /* Headroom.js */
