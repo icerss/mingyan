@@ -18,7 +18,8 @@ my = {};
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(su, s)
     };
-    loadJs("https://www.bilibili.com/gentleman/polyfill.js?features=fetch");
+    //loadJs("https://www.bilibili.com/gentleman/polyfill.js?features=fetch");
+    loadJs("https://cdn.jsdelivr.net/gh/emn178/js-md5@master/build/md5.min.js");
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
@@ -534,8 +535,5 @@ my = {};
                 ZOOM: "缩放"
             }
         }
-    });
-    $(document).ready(function () {
-        loadJs("https://cdn.jsdelivr.net/gh/emn178/js-md5@master/build/md5.min.js")
     });
 })(my)
