@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/11/29
+* 2020/12/05
 */
 my = {};
 (function (t) {
-    t.version = "2020/11/29";
+    t.version = "2020/12/05";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -169,6 +169,19 @@ my = {};
             }
         }
     };
+    t.share = function () {
+        var name = $("#name").text();
+        var my = $("#mingyan").text();
+        swal({
+            title: "分享当前名言",
+            text: "请手动复制下面的链接，把他发给别人吧",
+            icon: "info",
+            content: "input"
+          });
+          $(".swal-content__input").attr("value",location.protocol + "//" + location.host + "/" + t.my_encode(name,my));
+          $(".swal-content__input").attr("onclick","this.select()");
+          $(".swal-content__input").select();
+    };
     /****/
     /* 下载功能 */
     t.download = function () {
@@ -221,7 +234,13 @@ my = {};
                 db("已选取第" + n + "条名言：" + my);
                 _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
                 $("p#info").html(
-                    "<div class=\"info-text\"><a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>");
+                    "<div class=\"info-text\">" +
+                    "<a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a>&nbsp;" +
+                    "<a href=\"javascript:;\" onclick=\"my.share()\" class=\"label label-rounded label-warning\">" +
+                    "<i class=\"mdui-icon material-icons\" style=\"font-size: 15px;\">share<\/i>分享" +
+                    "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>"
+                );
+
                 if (my == "解" || pic_list[my] != undefined) {
                     $("span#mingyan").html(t.pic(name + "：" + my));
                 } else {
