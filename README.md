@@ -1,15 +1,12 @@
-<style>
-@import url('https://cdn.jsdelivr.net/combine/npm/spectre.css,npm/normalize.min.css,npm/milligram@1.4.1/dist/milligram.min.css');
-</style>
 <div style="text-align:center">
 
 ![mingyan.png](https://i.loli.net/2020/12/06/jJvHc62dTaBXxRL.png)
 
-## ERSS 名言
+# ERSS 名言
 
 [![@ERSS](https://badgen.net/badge/icon/ERSS?icon=bitcoin-lightning&amp;label)](https://github.com/icerss/mingyan) [![@xhemj](https://badgen.net/badge/icon/xhemj/mingyan?icon=github&amp;label)](https://github.com/xhemj) ![@tag](https://badgen.net/github/tag/xhemj/mingyan) ![@commit](https://badgen.net/github/last-commit/xhemj/mingyan)
 
-#### 快来看看大家的名言吧！
+### 快来看看大家的名言吧！
 [https://mingyan.js.org](https://mingyan.js.org)
 
 </div>
