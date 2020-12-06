@@ -89,7 +89,8 @@ my = {};
         "松鼠": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/C1Zq9nXfaTW2hDe.jpg",
         "来看王雷吧": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/Uxg3OpL2eBArP7s.jpg",
         "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg",
-        "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg"
+        "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg",
+        "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png"
     };
     t.pic = function (my) {
         var name = my.split("：")[0];
@@ -118,7 +119,7 @@ my = {};
     /****/
     /* 文字彩蛋 */
     var text_list = {
-        "松鼠": "课本上曾经出现过",
+        "松鼠": "的课本上</br>曾经出现过",
         "来看王雷吧": "曾经在语文课上说过",
         "零食杜绝": "曾经出现过",
         "耳散伞": "曾经有过"
@@ -259,7 +260,7 @@ my = {};
                 $("#main").fadeIn();
                 var title = "名言 | " + my;
                 document.title = title;
-                var description = name + "曾经说过：" + my;
+                var description = name + verb + "：" + my;
                 $('meta[name="description"]').attr("content", description);
                 $('meta[property="og:description"]').attr('content', description);
                 $('meta[name="og:description"]').attr('content', description);
