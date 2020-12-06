@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/12/05
+* 2020/12/06
 */
 my = {};
 (function (t) {
-    t.version = "2020/12/05";
+    t.version = "2020/12/06";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -110,7 +110,7 @@ my = {};
             t.PicMobie();
             lazyload();
             var special = "";
-            return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
+            return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
             lazyload();
             return my
