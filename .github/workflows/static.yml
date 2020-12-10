@@ -1,30 +1,43 @@
-name: Aliyun OSS
+name: Static
 
 on: [push,delete]
 
 jobs:
-  OSS:
+  Static:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip oss]')"
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout 
         uses: actions/checkout@v2
         with:
           persist-credentials: false
           
-      - name: Setting 🔧
+      - name: OSS - Setting 
         uses: manyuanrong/setup-ossutil@v2.0
         with:
           endpoint: ${{ secrets.ENDPOINT }}
           access-key-id: ${{ secrets.ACCESS_KEY_ID }}
           access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
           
-      - name: Deply To OSS 🚀
+      - name: Remove
+        run: |
+          rm -rf .git
+          rm -rf .github
+          
+      - name: Deply To OSS 
         run: |
           ip=$(curl -s https://api.ip.sb/ip)
           ossutil rm oss://xhemj/ossutil_output/ -r -f
           ossutil cp ./ oss://xhemj/ -r -f
-          ossutil rm oss://xhemj/.git/ -r -f
-          ossutil rm oss://xhemj/.github/ -r -f
           ossutil set-meta oss://xhemj/src/ Cache-Control:public,max-age=86400 --include "*.js" --include "*.css" --include "*.min.js" -r -f
           echo success[$ip]
+          
+      - name: Deply To COS 
+        if: github.repository == 'xhemj/mingyan'
+        uses: zkqiang/tencent-cos-action@v0.1.0
+        with:
+          args: delete -r -f / && upload -r ./ /
+          secret_id: ${{ secrets.TENCENT_SECRET_ID }}
+          secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
+          bucket: mingyan-1256004056
+          region: ap-chengdu
