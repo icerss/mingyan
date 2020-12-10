@@ -37,7 +37,11 @@ my = {};
         var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
         db('Page load time is ' + loadTime + "ms");
     };
-    var ua = new Browser();
+    try {
+        var ua = new Browser();
+    } catch(e) {
+        location.reload();
+    };
     /* 页面基础功能 */
     var footer = $("footer").html().replace("999+", mingyan.length);
     $("#md").hide();
@@ -180,15 +184,15 @@ my = {};
             content: {
                 element: "input",
                 attributes: {
-                  placeholder: "加载出错了？刷新试试吧",
-                  value: location.protocol + "//" + location.host + "/" + t.my_encode(name,my),
-                  type: "text"
+                    placeholder: "加载出错了？刷新试试吧",
+                    value: location.protocol + "//" + location.host + "/" + t.my_encode(name, my),
+                    type: "text"
                 }
-              }
-          });
-          $(".swal-content__input").attr("value",location.protocol + "//" + location.host + "/" + t.my_encode(name,my));
-          $(".swal-content__input").attr("onclick","this.select()");
-          $(".swal-content__input").select();
+            }
+        });
+        $(".swal-content__input").attr("value", location.protocol + "//" + location.host + "/" + t.my_encode(name, my));
+        $(".swal-content__input").attr("onclick", "this.select()");
+        $(".swal-content__input").select();
     };
     /****/
     /* 下载功能 */
