@@ -507,6 +507,7 @@ my = {};
     });
     /****/
 
+    
     /* 路由 */
     if (location.pathname == "/about" || location.pathname == "/search") {
         if (location.pathname == "/about") {
