@@ -494,7 +494,7 @@ my = {};
     };
     /****/
     /* 标题变化 */
-    var title = document.title;
+    var title = '名言 | ERSS';
     var titleTime;
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
