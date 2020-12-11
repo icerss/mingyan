@@ -12,31 +12,31 @@ jobs:
         with:
           persist-credentials: false
           
-      - name: OSS - Setting 
-        uses: manyuanrong/setup-ossutil@v2.0
-        with:
-          endpoint: ${{ secrets.ENDPOINT }}
-          access-key-id: ${{ secrets.ACCESS_KEY_ID }}
-          access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
+      #- name: OSS - Setting 
+      #  uses: manyuanrong/setup-ossutil@v2.0
+      #  with:
+      #    endpoint: ${{ secrets.ENDPOINT }}
+      #    access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+      #    access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
           
       - name: Remove
         run: |
           rm -rf .git
           rm -rf .github
           
-      - name: Deply To OSS 
-        run: |
-          ip=$(curl -s https://api.ip.sb/ip)
-          ossutil rm oss://xhemj/ossutil_output/ -r -f
-          ossutil cp ./ oss://xhemj/ -r -f
-          ossutil set-meta oss://xhemj/src/ Cache-Control:public,max-age=86400 --include "*.js" --include "*.css" --include "*.min.js" -r -f
-          echo success[$ip]
+      #- name: Deply To OSS 
+      #  run: |
+      #    ip=$(curl -s https://api.ip.sb/ip)
+      #    ossutil rm oss://xhemj/ossutil_output/ -r -f
+      #    ossutil cp ./ oss://xhemj/ -r -f
+      #    ossutil set-meta oss://xhemj/src/ Cache-Control:public,max-age=86400 --include "*.js" --include "*.css" --include "*.min.js" -r -f
+      #    echo success[$ip]
           
       - name: Deply To COS 
         if: github.repository == 'xhemj/mingyan'
         uses: zkqiang/tencent-cos-action@v0.1.0
         with:
-          args: delete -r -f / && upload -r ./ /
+          args: delete -r -f / && upload -r ./ / -H "{"Cache-Control":"public,max-age=86400"}"
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
           secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
           bucket: mingyan-1256004056
