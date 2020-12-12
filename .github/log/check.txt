@@ -25,3 +25,4 @@
 📝 2.2.7-1:更换jsdelivr - cdn
 📝 2.2.7-1:修复闪频
 📝 2.2.7-1:修复分享功能
+📝 2.2.7-1:Merge branch master of github.com:icerss/mingyan into master
