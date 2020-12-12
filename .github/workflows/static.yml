@@ -36,7 +36,7 @@ jobs:
         if: github.repository == 'xhemj/mingyan'
         uses: zkqiang/tencent-cos-action@v0.1.0
         with:
-          args: delete -r -f / && upload -r ./ / -H "{"Cache-Control":"public,max-age=86400"}"
+          args: upload -r ./ / -H "{'Cache-Control':'public, max-age=604800, s-maxage=43200'}"
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
           secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
           bucket: mingyan-1256004056
