@@ -163,14 +163,15 @@ my = {};
     t.my_decode = function (id) {
         for (i = 0; i < mingyan.length; i++) {
             var name = mingyan[i].split("：")[0];
-            //db(name)
+            db(name)
             var my = mingyan[i].split("：")[1];
-            //db(my)
+            db(my)
             if (id == t.my_encode(name, my)) {
-                console.log("encode" + id);
+                db("encode:" + id);
+                db(i);
                 return i
             } else {
-                //db("no")
+                db("no")
             }
         }
     };
@@ -506,8 +507,6 @@ my = {};
         }
     });
     /****/
-
-    
     /* 路由 */
     if (location.pathname == "/about" || location.pathname == "/search") {
         if (location.pathname == "/about") {
@@ -525,7 +524,8 @@ my = {};
     } else {
         if (location.pathname.split("/")[1].length == 32) {
             var id = t.my_decode(location.pathname.split("/")[1]);
-            t.show(id)
+            var myid = new Number(id);
+            t.show(myid.toString());
         } else {
             clearInterval(search);
             $(".app").load("./src/_404.html");
@@ -543,6 +543,8 @@ my = {};
     }
     /****/
     lazyload();
+    setInterval(lazyload,1000);
+
     $('.fancybox').fancybox({
         buttons: [
             "zoom",
