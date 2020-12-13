@@ -1,0 +1,24 @@
+{
+  "name": "@xhemj/mingyan",
+  "version": "2.2.7",
+  "description": "xhemj",
+  "main": "src/main.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xhemj/mingyan.git"
+  },
+  "keywords": [
+    "xhemj",
+    "mingyan",
+    "ERSS"
+  ],
+  "author": "xhemj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xhemj/mingyan/issues"
+  },
+  "homepage": "https://github.com/xhemj/mingyan#readme"
+}
