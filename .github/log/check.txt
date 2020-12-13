@@ -27,3 +27,4 @@
 📝 2.2.7-1:修复分享功能
 📝 2.2.7-1:Merge branch master of github.com:icerss/mingyan into master
 📝 2.2.7-1:cdn
+📝 2.2.7-1:cache-control
