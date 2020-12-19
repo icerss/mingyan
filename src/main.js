@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/12/06
+* 2020/12/19
 */
 my = {};
 (function (t) {
-    t.version = "2020/12/06";
+    t.version = "2020/12/19";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -497,7 +497,7 @@ my = {};
         history.pushState({}, "名言 | 更多", "/");
     }
     t.about = function () {
-        t.md("#md", "./src/md/about.md?t=202011280000");
+        t.md("#md", "./src/md/about.md?t=202012191228");
         history.pushState({}, "名言 | 关于", "/about");
     };
     /****/
