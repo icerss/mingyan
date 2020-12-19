@@ -10,7 +10,7 @@
 
 ---
 
-<div id="twikoo"></div>
+<div id="tcomment"></div>
 
 ---
 
@@ -44,7 +44,7 @@ var domain_list = {
     "127.0.0.1":"本地"
 };
 $("#host").text(domain_list[location.hostname]);
-twikoo.init({ envId: 'xhemj-0gjckebwf7276129' });
+twikoo.init({ envId: 'xhemj-0gjckebwf7276129' , el: '#tcomment'});
 function tk() {
     $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2020 <a href="https://mingyan.js.org">ERSS名言</a></div>`);
     $(".tk-avatar-img").each(function(){
