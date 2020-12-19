@@ -1,0 +1,21 @@
+name: Header Comments CI
+on:
+    workflow_run:
+    workflows:
+      - Header Comments CI
+    types:
+      - completed
+      
+  pull_request_target:
+    types:
+      - labeled
+jobs:
+  Header:
+    name: Add comments
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.head_commit.message, '[skip header]')"
+    steps:
+      - uses: reitermarkus/automerge@v1
+        with:
+          token: ${{ secrets.GH_BOT_PAT }}
+          required-labels: Header-Comments-CI
