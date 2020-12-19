@@ -9,10 +9,11 @@
     "theme_color": "#fff", 
     "icons": [
       {
-        "src": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/13/OIBe7JKFSWw3Z56.jpg", 
-        "type": "image/jpeg", 
+        "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/icon.png", 
+        "type": "image/png", 
         "sizes": "400x400",
         "purpose": "any maskable"
       }
+      
     ]
   }
