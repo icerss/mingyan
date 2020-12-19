@@ -1,3 +1,8 @@
+/**
+ * ERSS Mingyan
+ * (c) 2020 Xhemj
+ * https://github.com/icerss/mingyan */
+
 /*
 * ©2020 xhemj
 * 2020/12/19
