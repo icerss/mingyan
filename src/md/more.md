@@ -63,5 +63,5 @@ $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
     $("#uptime").text(ut);
     console.log(ut);
 });
-setTimeout(tk,100);
+setTimeout(tk,200);
 </script>

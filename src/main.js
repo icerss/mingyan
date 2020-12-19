@@ -24,9 +24,12 @@ my = {};
     gtag('js', new Date());
     gtag('config', 'G-RE30WVG95Q');
     var dn = 1;
+    var dbmode = true;
     db = function (i) {
-        console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
-        dn++;
+        if (dbmode) {
+            console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
+            dn++;
+        }
     };
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -39,7 +42,7 @@ my = {};
     };
     try {
         var ua = new Browser();
-    } catch(e) {
+    } catch (e) {
         location.reload();
     };
     /* 页面基础功能 */
@@ -74,6 +77,7 @@ my = {};
     };
     $('h1').fontFlex(30, 50, 70);
     $('h3').fontFlex(30, 50, 70);
+    /* 彩蛋系统 */
     /* 图片彩蛋 */
     t.lazypic = "./src/loading.svg";
     var pic_list = {
@@ -84,21 +88,23 @@ my = {};
         "对称轴平行": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/qv1RkDBbt6CyEJf.jpg",
         "零食杜绝": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/SWx85EvdXBOqloJ.jpg",
         "耳散伞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/jpH7LQiaqTnXyCf.jpg",
-        "歪瓜裂枣": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/KQsc8YDEHf1vi2x.jpg",
+        "歪瓜裂枣": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/6k7czyYqmfvlWPn.jpg",
         "悲伤": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/hHv8U3EGt4P12IX.jpg",
         "肾虚": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/wBHo8kezKDnEcAP.jpg",
-        "眉目清秀": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/6k7czyYqmfvlWPn.jpg",
+        "眉目清秀": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/KQsc8YDEHf1vi2x.jpg",
         "困死了": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/lmcDK2MCrO8nAtw.jpg",
         "我在打麻将": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QwzvoYL1daXq8in.jpg",
         "松鼠": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/C1Zq9nXfaTW2hDe.jpg",
         "来看王雷吧": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/Uxg3OpL2eBArP7s.jpg",
         "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg",
         "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg",
-        "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png"
+        "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png",
+        "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png"
     };
     t.pic = function (my) {
         var name = my.split("：")[0];
         var my = my.split("：")[1];
+        var special = "onclick=\"my.my_click()\"";
         if (my == "解" || pic_list[my] != undefined) {
             if (my == "解") {
                 var solvePicUrl = {
@@ -113,14 +119,142 @@ my = {};
             };
             t.PicMobie();
             lazyload();
-            var special = "";
-            return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
+
+            return `<div id="my_text" ${special}>${my}</div><div id="my_pic">
+                            <img src="${t.lazypic}" data-src="${pic}" data-pic-id=${my} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
+                        </div>`
+            // return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
             lazyload();
-            return my
-        }
+            return `<div id="my_text" ${special}>${my}</div>`
+        };
     };
-    /****/
+    /* 刷新名言彩蛋 */
+    var reload_time = 0;
+    if (localStorage.getItem("reload-time")) {
+        var reload_time = localStorage.getItem("reload-time")
+    };
+    t.reload_time_add = function () {
+        reload_time++;
+        localStorage.setItem("reload-time", reload_time);
+        db(reload_time);
+        if (reload_time == 10) {
+            swal({
+                title: "获得成就",
+                text: "点击 100 次有惊喜",
+                icon: "success",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+        };
+        if (reload_time == 100) {
+            swal({
+                title: "获得成就",
+                text: "点击 500 次有惊喜",
+                icon: "success",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+        };
+        if (reload_time == 500) {
+            swal({
+                title: "获得成就",
+                text: "点击 1000 次有惊喜，\n很大的惊喜哦！",
+                icon: "success",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+        };
+        if (reload_time == 1000) {
+            swal({
+                title: "获得成就",
+                text: "点击 10000 次有惊喜，\n你都到这一步了，干嘛不看看后面的惊喜呢？",
+                icon: "success",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+        };
+        if (reload_time == 10000) {
+            swal({
+                title: "获得成就",
+                text: "你好无聊啊……",
+                icon: "success",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+        };
+    };
+    /* 三人头像彩蛋 */
+    var my_face_click_time = "";
+    t.my_face_click = function (i) {
+
+        if (i == "xhemj") {
+            my_face_click_time += "1"
+        };
+        if (i == "BlackToy") {
+            my_face_click_time += "2"
+        };
+        if (i == "Oranjezelv") {
+            my_face_click_time += "3"
+        };
+        db(my_face_click_time);
+        if (my_face_click_time.indexOf("1") != -1 && my_face_click_time.indexOf("2") != -1 && my_face_click_time.indexOf("3") != -1) {
+            swal({
+                title: "获得成就",
+                text: "彩蛋还没做好~~",
+                icon: "info",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+            my_face_click_time = "";
+        };
+
+    };
+    /* 其它文字彩蛋 */
+    t.my_click = function () {
+        if ($("#mingyan").text().indexOf("绿帽子") != -1) {
+            swal({
+                title: "Fuck ♂ You ♂",
+                text: "骚骚恪曾经说过：Fuck ♂ You ♂",
+                icon: "",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+        };
+        if ($("#mingyan").text().indexOf("垃圾真好吃") != -1) {
+            swal({
+                title: "获得成就",
+                text: "最美垃圾人",
+                icon: "success",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+        };
+        if ($("#mingyan").text().indexOf("来一起唱啊！！") != -1) {
+            swal({
+                title: "获得成就",
+                text: "Shape OF You！",
+                icon: "success",
+                button: "关闭",
+                closeOnClickOutside: false
+            });
+            const ap = new APlayer({
+                container: document.getElementById('player'),
+                fixed: true,
+                lrcType: 3,
+                audio: [{
+                    name: 'Shape of You',
+                    artist: 'Ed Sheeran',
+                    url: 'https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3',
+                    cover: 'https://i.loli.net/2020/12/19/L1NY8U7nhRjyQMa.jpg',
+                    lrc: 'https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc'
+                }]
+            });
+            $(".aplayer .aplayer-lrc").css("transform","translateY(-55px)");
+            ap.play();
+        };
+    };
+
     /* 文字彩蛋 */
     var text_list = {
         "松鼠": "的课本上</br>曾经出现过",
@@ -251,14 +385,9 @@ my = {};
                     "<a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a>&nbsp;" +
                     "<a href=\"javascript:;\" onclick=\"my.share()\" class=\"label label-rounded label-warning\">" +
                     "<i class=\"mdui-icon material-icons\" style=\"font-size: 15px;\">share<\/i>分享" +
-                    "</a></br><a href=\"javascript:;\" onclick=\"my.reload();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>"
+                    "</a></br><a id=\"reload\" href=\"javascript:;\" onclick=\"my.reload();my.reload_time_add();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>"
                 );
-
-                if (my == "解" || pic_list[my] != undefined) {
-                    $("span#mingyan").html(t.pic(name + "：" + my));
-                } else {
-                    $("span#mingyan").html(my);
-                }
+                $("span#mingyan").html(t.pic(name + "：" + my));
                 var verb = t.text(name + "：" + my);
                 $("span#name").text(name);
                 $("span#verb").html(verb);
@@ -543,7 +672,7 @@ my = {};
     }
     /****/
     lazyload();
-    setInterval(lazyload,1000);
+    setInterval(lazyload, 1000);
 
     $('.fancybox').fancybox({
         buttons: [
