@@ -1,0 +1,17 @@
+{
+    "name": "ERSS名言", 
+    "short_name": "ERSS名言", 
+    "descriptions": "快来看看厦门市音乐学校老师和同学们的名言吧！——ERSS！", 
+    "start_url": "/?from=pwa", 
+    "background_color": "#fff", 
+    "display": "standalone", 
+    "scope": "/", 
+    "theme_color": "#fff", 
+    "icons": [
+      {
+        "src": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/13/1qPSLQigHbzCGa4.jpg", 
+        "type": "image/jpeg", 
+        "sizes": "64x64"
+      }
+    ]
+  }
