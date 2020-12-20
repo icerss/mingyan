@@ -24,7 +24,7 @@ my = {};
     gtag('js', new Date());
     gtag('config', 'G-RE30WVG95Q');
     var dn = 1;
-    var dbmode = true;
+    var dbmode = false;
     db = function (i) {
         if (dbmode) {
             console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
@@ -99,7 +99,14 @@ my = {};
         "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg",
         "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg",
         "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png",
-        "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png"
+        "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png",
+        "我先吃柠檬，你先别吃，好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/dRJblpFtxycYCzq.png",
+        "卷星人冲击波！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/TuGmYhQX9LorMZc.jpg",
+        "赌金": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/aRZ8pVl7WgmOJUv.jpg",
+        "老王乌贼": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/2j1cZKYHwFQlDdC.jpg",
+        "Boom！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/9p64wZyFHB8DblA.jpg",
+        "功夫面条": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/XkAf3Oq9PEyQmpI.jpg",
+        "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg"
     };
     t.pic = function (my) {
         var name = my.split("：")[0];
@@ -121,7 +128,7 @@ my = {};
             lazyload();
 
             return `<div id="my_text" ${special}>${my}</div><div id="my_pic">
-                            <img src="${t.lazypic}" data-src="${pic}" data-pic-id=${my} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
+                            <a href="javascript:;"><img src="${t.lazypic}" data-src="${pic}" data-pic-id=${my} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img></a>
                         </div>`
             // return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
@@ -250,7 +257,7 @@ my = {};
                     lrc: 'https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc'
                 }]
             });
-            $(".aplayer .aplayer-lrc").css("transform","translateY(-55px)");
+            $(".aplayer .aplayer-lrc").css("transform", "translateY(-55px)");
             ap.play();
         };
     };
