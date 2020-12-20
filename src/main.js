@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/12/19
+* 2020/12/20
 */
 my = {};
 (function (t) {
-    t.version = "2020/12/19";
+    t.version = "2020/12/20";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -24,7 +24,7 @@ my = {};
     gtag('js', new Date());
     gtag('config', 'G-RE30WVG95Q');
     var dn = 1;
-    var dbmode = false;
+    var dbmode = true;
     db = function (i) {
         if (dbmode) {
             console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
@@ -299,6 +299,8 @@ my = {};
     /****/
     /* 分享功能 */
     t.my_encode = function (name, my) {
+        db(name);
+        db(my);
         return md5("1" + md5(encodeURI(name + "||" + my + "ERSS MINGYAN (c) xhemj")))
     };
     t.my_decode = function (id) {
@@ -318,7 +320,7 @@ my = {};
     };
     t.share = function () {
         var name = $("#name").text();
-        var my = $("#mingyan").text();
+        var my = $("#mingyan").text().replace(/\s*/g,"");
         swal({
             title: "分享当前名言",
             text: "请手动复制下面的链接，把他发给别人吧",
