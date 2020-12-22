@@ -80,6 +80,14 @@ my = {};
     /* 彩蛋系统 */
     /* 图片彩蛋 */
     t.lazypic = "./src/loading.svg";
+    /**
+     * 名言图片彩蛋
+     * var pic_list = {
+     *   ...
+     *   "名言": "图片链接"
+     *   ...
+     * }
+     */
     var pic_list = {
         "虾扯蛋": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg",
         //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
@@ -100,13 +108,14 @@ my = {};
         "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg",
         "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png",
         "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png",
-        "我先吃柠檬，你先别吃，好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/dRJblpFtxycYCzq.png",
+        "我先吃柠檬，你先别吃，好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/UPHZQG8YszhRgpb.png",
         "卷星人冲击波！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/TuGmYhQX9LorMZc.jpg",
         "赌金": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/aRZ8pVl7WgmOJUv.jpg",
         "老王乌贼": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/2j1cZKYHwFQlDdC.jpg",
         "Boom！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/9p64wZyFHB8DblA.jpg",
         "功夫面条": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/XkAf3Oq9PEyQmpI.jpg",
-        "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg"
+        "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg",
+        "替身：面条达人！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/T8C2Hjm74Ookfp6.jpg"
     };
     t.pic = function (my) {
         var name = my.split("：")[0];

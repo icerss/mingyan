@@ -481,6 +481,7 @@ var mingyan = [
     "BlackToy：搞那么夸张干什么啊？",
     "BlackToy：记得关太阳",
     "BlackToy：我先吃柠檬，你先别吃，好吃",
+    "BlackToy：替身：面条达人！",
     "xhemj：ICERSS",
     "xhemj：Dolby Junior",
     "xhemj：我家没有网啊！",
