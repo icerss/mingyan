@@ -119,9 +119,15 @@ my = {};
     };
     t.pic = function (my) {
         var name = my.split("：")[0];
-        var my = my.split("：")[1];
+        if (my.split("：").length == 2) {
+            var my_out = my.split("：")[1];
+            db(my_out);
+        } else if (my.split("：").length == 3) {
+            var my_out = my.split("：")[1] + "：" + my.split("：")[2];
+            db(my_out);
+        };
         var special = "onclick=\"my.my_click()\"";
-        if (my == "解" || pic_list[my] != undefined) {
+        if (my == "解" || pic_list[my_out] != undefined) {
             if (my == "解") {
                 var solvePicUrl = {
                     "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg",
@@ -130,19 +136,18 @@ my = {};
                     "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg"
                 };
                 var pic = solvePicUrl[name];
-            } else if (pic_list[my] != undefined) {
-                var pic = pic_list[my];
+            } else if (pic_list[my_out] != undefined) {
+                var pic = pic_list[my_out];
             };
             t.PicMobie();
             lazyload();
-
-            return `<div id="my_text" ${special}>${my}</div><div id="my_pic">
-                            <a href="javascript:;"><img src="${t.lazypic}" data-src="${pic}" data-pic-id=${my} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img></a>
-                        </div>`
+            return `<div id="my_text" ${special}>${my_out}</div><div id="my_pic">
+                            <a href="javascript:;"><img src="${t.lazypic}" data-src="${pic}" data-pic-id=${my_out} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img></a>
+                        </div>`;
             // return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
             lazyload();
-            return `<div id="my_text" ${special}>${my}</div>`
+            return `<div id="my_text" ${special}>${my_out}</div>`;
         };
     };
     /* 刷新名言彩蛋 */
@@ -329,7 +334,7 @@ my = {};
     };
     t.share = function () {
         var name = $("#name").text();
-        var my = $("#mingyan").text().replace(/\s*/g,"");
+        var my = $("#mingyan").text().replace(/\s*/g, "");
         swal({
             title: "分享当前名言",
             text: "请手动复制下面的链接，把他发给别人吧",
