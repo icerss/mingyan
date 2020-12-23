@@ -42,9 +42,7 @@ my = {};
     };
     try {
         var ua = new Browser();
-    } catch (e) {
-        location.reload();
-    };
+    } catch (e) { };
     /* 页面基础功能 */
     var footer = $("footer").html().replace("999+", mingyan.length);
     $("#md").hide();
@@ -672,12 +670,16 @@ my = {};
             }
         };
     } else if (location.pathname == "/" || location.pathname == "/index.html") {
-        t.show();
+        $(document).ready(function () {
+            t.show();
+        });
     } else {
         if (location.pathname.split("/")[1].length == 32) {
             var id = t.my_decode(location.pathname.split("/")[1]);
             var myid = new Number(id);
-            t.show(myid.toString());
+            $(document).ready(function () {
+                t.show(myid.toString());
+            });
         } else {
             clearInterval(search);
             $(".app").load("./src/_404.html");
