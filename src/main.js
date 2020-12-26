@@ -692,8 +692,8 @@ my = {};
             } else {
                 clearInterval(search);
                 $(".app").load("./src/_404.html");
-            }
-    }
+            };
+    };
     /****/
     /* Headroom.js */
     if (Headroom.cutsTheMustard) {
