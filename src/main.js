@@ -658,33 +658,42 @@ my = {};
     });
     /****/
     /* 路由 */
-    if (location.pathname == "/about" || location.pathname == "/search") {
-        if (location.pathname == "/about") {
-            my.about()
-        };
-        if (location.pathname == "/search") {
+    switch (location.pathname) {
+        case "/about":
+            my.about();
+            break;
+        case "/search":
             my.all();
             if (qs("q")) {
                 $("#searchbar").val(decodeURI(qs("q")));
                 $("#searchbar").focus();
-            }
-        };
-    } else if (location.pathname == "/" || location.pathname == "/index.html") {
-        $(document).ready(function () {
-            t.show();
-        });
-    } else {
-        if (location.pathname.split("/")[1].length == 32) {
-            var id = t.my_decode(location.pathname.split("/")[1]);
-            var myid = new Number(id);
+            };
+            break;
+        case "/":
             $(document).ready(function () {
-                t.show(myid.toString());
+                t.show();
             });
-        } else {
-            clearInterval(search);
-            $(".app").load("./src/_404.html");
-        }
-    };
+            if (md5(qs("pre_id")) == "75b167bd7f43794cdf171c2f30853d7a") {
+                clearInterval(search);
+                $(".app").load("./src/2021.html");
+            };
+        case "/index.html":
+            $(document).ready(function () {
+                t.show();
+            });
+            break;
+        default:
+            if (location.pathname.split("/")[1].length == 32) {
+                var id = t.my_decode(location.pathname.split("/")[1]);
+                var myid = new Number(id);
+                $(document).ready(function () {
+                    t.show(myid.toString());
+                });
+            } else {
+                clearInterval(search);
+                $(".app").load("./src/_404.html");
+            }
+    }
     /****/
     /* Headroom.js */
     if (Headroom.cutsTheMustard) {
