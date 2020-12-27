@@ -40,9 +40,16 @@ my = {};
         var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
         db('Page load time is ' + loadTime + "ms");
     };
+    var isSupportWebp = function () {
+        try {
+            return document.createElement('canvas').toDataURL('image/webp', 0.5).indexOf('data:image/webp') === 0;
+        } catch (err) {
+            return false;
+        };
+    };
     try {
         var ua = new Browser();
-    } catch (e) { };
+    } catch (e) {};
     /* 页面基础功能 */
     var footer = $("footer").html().replace("999+", mingyan.length);
     $("#md").hide();
@@ -115,6 +122,13 @@ my = {};
         "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg/webp",
         "替身：面条达人！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/T8C2Hjm74Ookfp6.jpg/webp"
     };
+    var solvePicUrl = {
+        "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg/webp",
+        "数学潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg/webp",
+        "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg/webp",
+        "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg/webp"
+    };
+    
     t.pic = function (my) {
         var name = my.split("：")[0];
         if (my.split("：").length == 2) {
@@ -127,15 +141,13 @@ my = {};
         var special = "onclick=\"my.my_click()\"";
         if (my_out == "解" || pic_list[my_out] != undefined) {
             if (my_out == "解") {
-                var solvePicUrl = {
-                    "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg/webp",
-                    "数学潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg/webp",
-                    "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg/webp",
-                    "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg/webp"
-                };
+                
                 var pic = solvePicUrl[name];
             } else if (pic_list[my_out] != undefined) {
                 var pic = pic_list[my_out];
+            };
+            if (!isSupportWebp()) {
+                var pic = pic.replace("/webp","");
             };
             t.PicMobie();
             lazyload();
