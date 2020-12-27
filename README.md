@@ -23,3 +23,10 @@
 - IYAMAYA 工作室
 - 厦门市音乐学校的全体老师和同学们
 
+
+
+<div style="text-align:center">
+
+![](https://img.shields.io/badge/BY%20XHEMJ%20-11111.svg?style=for-the-badge&labelColor=000000&logoWidth=20)
+
+</div>
