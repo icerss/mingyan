@@ -482,6 +482,11 @@ var mingyan = [
     "BlackToy：记得关太阳",
     "BlackToy：我先吃柠檬，你先别吃，好吃",
     "BlackToy：替身：面条达人！",
+    "BlackToy：卷星人冲击波！",
+    "BlackToy：赌金",
+    "BlackToy：老王乌贼",
+    "BlackToy：功夫面条",
+    "BlackToy：水果战车",
     "xhemj：ICERSS",
     "xhemj：Dolby Junior",
     "xhemj：我家没有网啊！",
@@ -504,9 +509,4 @@ var mingyan = [
     "八班：耳散伞",
     "学校食堂：保加利亚乳杆菌",
     "黑板：零食杜绝",
-    "QQ屁股：Boom！",
-    "某人：卷星人冲击波！",
-    "某人：赌金",
-    "某人：老王乌贼",
-    "某人：功夫面条",
-    "某人：水果战车"]
+    "QQ屁股：Boom！"]
