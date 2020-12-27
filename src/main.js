@@ -24,7 +24,7 @@ my = {};
     gtag('js', new Date());
     gtag('config', 'G-RE30WVG95Q');
     var dn = 1;
-    var dbmode = true;
+    var dbmode = false;
     db = function (i) {
         if (dbmode) {
             console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
@@ -87,33 +87,33 @@ my = {};
      * }
      */
     var pic_list = {
-        "虾扯蛋": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg",
+        "虾扯蛋": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg/webp",
         //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
         //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
-        "真让人头大": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QiXVSahT3kAJf6B.jpg",
-        "对称轴平行": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/qv1RkDBbt6CyEJf.jpg",
-        "零食杜绝": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/SWx85EvdXBOqloJ.jpg",
-        "耳散伞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/jpH7LQiaqTnXyCf.jpg",
-        "歪瓜裂枣": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/6k7czyYqmfvlWPn.jpg",
-        "悲伤": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/hHv8U3EGt4P12IX.jpg",
-        "肾虚": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/wBHo8kezKDnEcAP.jpg",
-        "眉目清秀": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/KQsc8YDEHf1vi2x.jpg",
-        "困死了": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/lmcDK2MCrO8nAtw.jpg",
-        "我在打麻将": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QwzvoYL1daXq8in.jpg",
-        "松鼠": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/C1Zq9nXfaTW2hDe.jpg",
-        "来看王雷吧": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/Uxg3OpL2eBArP7s.jpg",
-        "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg",
-        "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg",
-        "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png",
-        "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png",
-        "我先吃柠檬，你先别吃，好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/UPHZQG8YszhRgpb.png",
-        "卷星人冲击波！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/TuGmYhQX9LorMZc.jpg",
-        "赌金": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/aRZ8pVl7WgmOJUv.jpg",
-        "老王乌贼": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/2j1cZKYHwFQlDdC.jpg",
-        "Boom！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/9p64wZyFHB8DblA.jpg",
-        "功夫面条": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/XkAf3Oq9PEyQmpI.jpg",
-        "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg",
-        "替身：面条达人！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/T8C2Hjm74Ookfp6.jpg"
+        "真让人头大": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QiXVSahT3kAJf6B.jpg/webp",
+        "对称轴平行": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/qv1RkDBbt6CyEJf.jpg/webp",
+        "零食杜绝": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/SWx85EvdXBOqloJ.jpg/webp",
+        "耳散伞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/jpH7LQiaqTnXyCf.jpg/webp",
+        "歪瓜裂枣": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/6k7czyYqmfvlWPn.jpg/webp",
+        "悲伤": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/hHv8U3EGt4P12IX.jpg/webp",
+        "肾虚": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/wBHo8kezKDnEcAP.jpg/webp",
+        "眉目清秀": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/KQsc8YDEHf1vi2x.jpg/webp",
+        "困死了": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/lmcDK2MCrO8nAtw.jpg/webp",
+        "我在打麻将": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QwzvoYL1daXq8in.jpg/webp",
+        "松鼠": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/C1Zq9nXfaTW2hDe.jpg/webp",
+        "来看王雷吧": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/Uxg3OpL2eBArP7s.jpg/webp",
+        "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg/webp",
+        "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg/webp",
+        "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png/webp",
+        "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png/webp",
+        "我先吃柠檬，你先别吃，好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/UPHZQG8YszhRgpb.png/webp",
+        "卷星人冲击波！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/TuGmYhQX9LorMZc.jpg/webp",
+        "赌金": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/aRZ8pVl7WgmOJUv.jpg/webp",
+        "老王乌贼": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/2j1cZKYHwFQlDdC.jpg/webp",
+        "Boom！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/9p64wZyFHB8DblA.jpg/webp",
+        "功夫面条": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/XkAf3Oq9PEyQmpI.jpg/webp",
+        "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg/webp",
+        "替身：面条达人！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/T8C2Hjm74Ookfp6.jpg/webp"
     };
     t.pic = function (my) {
         var name = my.split("：")[0];
@@ -125,13 +125,13 @@ my = {};
             db(my_out);
         };
         var special = "onclick=\"my.my_click()\"";
-        if (my == "解" || pic_list[my_out] != undefined) {
-            if (my == "解") {
+        if (my_out == "解" || pic_list[my_out] != undefined) {
+            if (my_out == "解") {
                 var solvePicUrl = {
-                    "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg",
-                    "数学潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg",
-                    "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
-                    "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg"
+                    "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg/webp",
+                    "数学潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg/webp",
+                    "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg/webp",
+                    "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg/webp"
                 };
                 var pic = solvePicUrl[name];
             } else if (pic_list[my_out] != undefined) {
@@ -140,7 +140,7 @@ my = {};
             t.PicMobie();
             lazyload();
             return `<div id="my_text" ${special}>${my_out}</div><div id="my_pic">
-                            <a href="javascript:;"><img src="${t.lazypic}" data-src="${pic}" data-pic-id=${my_out} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img></a>
+                            <img src="${t.lazypic}" data-src="${pic}" data-pic-id=${my_out} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
                         </div>`;
             // return my + "<\/br><img src=\"" + t.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
@@ -709,28 +709,30 @@ my = {};
     lazyload();
     setInterval(lazyload, 1000);
 
-    $('.fancybox').fancybox({
-        buttons: [
-            "zoom",
-            "share",
-            "slideShow",
-            "fullScreen",
-            "download",
-            "close"
-        ],
-        lang: "zh-cn",
-        i18n: {
-            "zh-cn": {
-                CLOSE: "关闭",
-                NEXT: "下一张",
-                PREV: "前一张",
-                ERROR: "图片加载失败， <br/> 请稍后再试。",
-                FULL_SCREEN: "全屏",
-                THUMBS: "略缩图",
-                DOWNLOAD: "下载",
-                SHARE: "分享",
-                ZOOM: "缩放"
+    setTimeout(() => {
+        $('.fancybox').fancybox({
+            buttons: [
+                "zoom",
+                "share",
+                "slideShow",
+                "fullScreen",
+                "download",
+                "close"
+            ],
+            lang: "zh-cn",
+            i18n: {
+                "zh-cn": {
+                    CLOSE: "关闭",
+                    NEXT: "下一张",
+                    PREV: "前一张",
+                    ERROR: "图片加载失败， <br/> 请稍后再试。",
+                    FULL_SCREEN: "全屏",
+                    THUMBS: "略缩图",
+                    DOWNLOAD: "下载",
+                    SHARE: "分享",
+                    ZOOM: "缩放"
+                }
             }
-        }
-    });
+        });
+    }, 500);
 })(my)
