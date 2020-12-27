@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/12/20
+* 2020/12/27
 */
 my = {};
 (function (t) {
-    t.version = "2020/12/20";
+    t.version = "2020/12/27";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -677,6 +677,7 @@ my = {};
                 clearInterval(search);
                 $(".app").load("./src/2021.html");
             };
+            break;
         case "/index.html":
             $(document).ready(function () {
                 t.show();
