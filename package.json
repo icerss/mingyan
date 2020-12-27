@@ -1,6 +1,6 @@
 {
   "name": "@xhemj/mingyan",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "xhemj",
   "main": "src/main.min.js",
   "scripts": {
@@ -15,8 +15,7 @@
     "mingyan",
     "ERSS"
   ],
-  "author": "xhemj",
-  "license": "ISC",
+  "author": "xhemj"
   "bugs": {
     "url": "https://github.com/xhemj/mingyan/issues"
   },
