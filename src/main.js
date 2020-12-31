@@ -683,8 +683,8 @@ my = {};
                     data: {
                         event: "add",
                         name: name,
-                        ip: ip,
-                        addr: addr
+                        ip: ip
+                        //addr: addr
                     }
                 })
                 .then((res) => {
@@ -732,14 +732,11 @@ my = {};
                 })
         },
         getIp = function (callback) {
-            $.getJSON("http://ip-api.com/json/?lang=zh-CN&callback=?",
+            $.getJSON("https://ip.xhemj.now.sh/api/ip",
                 function (json) {
                     db("获取成功");
                     var res = {
-                        "ip": json.query,
-                        "country": json.country,
-                        "region": json.regionName,
-                        "city": json.city
+                        "ip": json.ip
                     };
                     if (typeof callback == "function") {
                         callback(res);
