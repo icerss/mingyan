@@ -1,10 +1,10 @@
 /*
 * ©2020 xhemj
-* 2020/12/27
+* 2020/12/31
 */
 my = {};
 (function (t) {
-    t.version = "2020/12/27";
+    t.version = "2020/12/31";
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -756,58 +756,61 @@ my = {};
     };
     login();
     t.ranking = function () {
-        my.ranking_api.getIp(function (ip_data) {
-            console.log(ip_data.ip);
-            var ip = ip_data.ip;
-            my.ranking_api.list(function (list) {
-                var data = list.result.res.data;
-                var out = "";
-                for (i = 0; i < data.length; i++) {
-                    if (data[i]["ip"] == ip) {
-                        out += "a"
+        if (new Date().getTime() >= 1609430400000 /* 2021-01-01 00:00:00 */) {
+            my.ranking_api.getIp(function (ip_data) {
+                console.log(ip_data.ip);
+                var ip = ip_data.ip;
+                my.ranking_api.list(function (list) {
+                    var data = list.result.res.data;
+                    var out = "";
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i]["ip"] == ip) {
+                            out += "a"
+                        };
                     };
-                };
-                console.log(out);
-                if (!out && !localStorage.getItem("__mingyan_2021_ranking_data__")) {
-                    db("新用户");
-                    localStorage.setItem("__mingyan_2021_ranking_data__", `__${ip}__`);
-                    t.ranking_api.add(
-                        "一位不知道名字的访客", //name
-                        ip, //ip
-                        ip_data.country + " " + ip_data.region + " " + ip_data.city, //addr
-                        function (add_data) { //callback
-                            localStorage.setItem("__mingyan_2021_ranking_data__", `__${ip}__`)
-                            var id = add_data.result.res.id;
-                            var num = data.length;
-                            swal({
-                                title: `第${num + 1}个人！！`,
-                                text: `恭喜你成为2021年第${num + 1}个查看名言的人！！`,
-                                icon: "success",
-                                content: {
-                                    element: "input",
-                                    attributes: {
-                                        placeholder: "写个名字记录一下你是谁吧！",
-                                        type: "text"
+                    console.log(out);
+                    if (!out && !localStorage.getItem("___mingyan_2021_ranking_data__")) {
+                        db("新用户");
+                        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);
+                        t.ranking_api.add(
+                            "一位不知道名字的访客", //name
+                            ip, //ip
+                            ip_data.country + " " + ip_data.region + " " + ip_data.city, //addr
+                            function (add_data) { //callback
+                                localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`)
+                                var id = add_data.result.res.id;
+                                var num = data.length;
+                                swal({
+                                    title: `第${num + 1}个人！！`,
+                                    text: `恭喜你成为2021年第${num + 1}个查看名言的人！！`,
+                                    icon: "success",
+                                    content: {
+                                        element: "input",
+                                        attributes: {
+                                            placeholder: "写个名字记录一下你是谁吧！",
+                                            type: "text"
+                                        }
                                     }
-                                }
-                            })
-                                .then(name => {
-                                    if (name) {
-                                        my.ranking_api.update(id, name, function (update_data) {
-                                            console.log(update_data);
-                                        });
-                                        location.href = "./";
-                                    };
                                 })
-                        }
-                    );
-                } else {
-                    db("老用户");
-                    localStorage.setItem("__mingyan_2021_ranking_data__", `__${ip}__`);
-                    location.href = "./";
-                };
+                                    .then(name => {
+                                        if (name) {
+                                            my.ranking_api.update(id, name, function (update_data) {
+                                                console.log(update_data);
+                                            });
+                                            location.href = "./";
+                                        };
+                                    })
+                            }
+                        );
+                    } else {
+                        db("老用户");
+                        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);
+                        location.href = "./";
+                    };
+                });
             });
-        });
+        }
+
     };
 
     /* 路由 */
@@ -826,14 +829,14 @@ my = {};
             $(document).ready(function () {
                 t.show();
             });
-            if (md5(qs("pre_id")) == "21393b2b0a1636474774869d3429d2de") {
-                if (qs("force_action") == "2021" || !localStorage.getItem("__mingyan_2021_ranking_data__")) {
+            //if (md5(qs("pre_id")) == "21393b2b0a1636474774869d3429d2de") {
+                if (qs("force_action") == "2021" || !localStorage.getItem("___mingyan_2021_ranking_data__")) {
                     t.ranking();
                 };
                 if (qs("force_action") == "clear_save") {
-                    localStorage.removeItem("__mingyan_2021_ranking_data__");
+                    localStorage.removeItem("___mingyan_2021_ranking_data__");
                 };
-            }
+            //}
             break;
         case "/index.html":
             $(document).ready(function () {
@@ -841,9 +844,9 @@ my = {};
             });
             break;
         case "/2021/":
-            if (md5(qs("pre_id")) == "21393b2b0a1636474774869d3429d2de") {
+            //if (md5(qs("pre_id")) == "21393b2b0a1636474774869d3429d2de") {
                 t.ranking();
-            }
+            //}
             break;
         default:
             if (location.pathname.split("/")[1].length == 32) {
