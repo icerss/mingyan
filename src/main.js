@@ -676,15 +676,15 @@ my = {};
      */
 
     t.ranking_api = {
-        add = function (name, ip, addr, callback) {
+        add = function (name, ip, callback) {
             app
                 .callFunction({
                     name: "mingyan",
                     data: {
                         event: "add",
                         name: name,
-                        ip: ip
-                        //addr: addr
+                        ip: ip,
+                        ua: navigator.userAgent.toString() || ""
                     }
                 })
                 .then((res) => {
@@ -775,7 +775,6 @@ my = {};
                         t.ranking_api.add(
                             "一位不知道名字的访客", //name
                             ip, //ip
-                            ip_data.country + " " + ip_data.region + " " + ip_data.city, //addr
                             function (add_data) { //callback
                                 localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`)
                                 var id = add_data.result.res.id;
