@@ -19,7 +19,7 @@
 <div class="github-badge" title="作者就是我啦！！"><span class="badge-subject">Author</span><span class="badge-value bg-blue">xhemj</span></div> 
 <div class="github-badge" title="速度还可以吧？"><span class="badge-subject">Hosted</span><span class="badge-value bg-red"><span id="host">Github</span></span></div>
 <div class="github-badge" title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速"><span class="badge-subject">CDN</span><span class="badge-value bg-pink">Jsdelivr & Cloudflare</span></div>
-<div class="github-badge" title="ERSS~~~"><span class="badge-subject">&copy;</span><span class="badge-value bg-brightgreen">2020 xhemj & ERSS</span></div>
+<div class="github-badge" title="ERSS~~~"><span class="badge-subject">&copy;</span><span class="badge-value bg-brightgreen">2021 Xhemj</span></div>
 </br>
 <div class="github-badge" title="多来看看呀！"><span class="badge-subject">PV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_pv">999+</span></span></div>
 <div class="github-badge" title="还是挺多人来的"><span class="badge-subject">UV</span><span class="badge-value bg-yellow"><span id="busuanzi_value_site_uv">999+</span></span></div>
@@ -47,9 +47,6 @@ $("#host").text(domain_list[location.hostname]);
 twikoo.init({ envId: 'xhemj-0gjckebwf7276129' , el: '#tcomment'});
 function tk() {
     $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2020 <a href="https://mingyan.js.org">ERSS名言</a></div>`);
-    $(".tk-avatar-img").each(function(){
-        $(this).attr("src",$(this).attr("src").replace(/gravatar.loli.net/g,"s-sh-1943-gravatar.oss.dogecdn.com"))
-    })
 };
 $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
     var a = data["updated_at"];

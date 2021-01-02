@@ -4,7 +4,13 @@
 */
 my = {};
 (function (t) {
+    /* 配置 */
     t.version = "2020/12/31";
+    t.config = {
+        ___DEBUG__ = false,
+        ___date_version___ = 202101021322
+    };
+    /****/
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -24,12 +30,11 @@ my = {};
     gtag('js', new Date());
     gtag('config', 'G-RE30WVG95Q');
     var dn = 1;
-    var dbmode = true;
     db = function (i) {
-        if (dbmode) {
+        if (t.config.___DEBUG__) {
             console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
             dn++;
-        }
+        };
     };
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -163,52 +168,40 @@ my = {};
     /* 刷新名言彩蛋 */
     var reload_time = 0;
     if (localStorage.getItem("reload-time")) {
-        var reload_time = localStorage.getItem("reload-time")
+        localStorage.setItem("___mingyan_reload_time__", localStorage.getItem("reload-time"))
+        localStorage.removeItem("reload-time")
+    };
+    if (localStorage.getItem("___mingyan_reload_time__")) {
+        var reload_time = localStorage.getItem("___mingyan_reload_time__")
     };
     t.reload_time_add = function () {
         reload_time++;
-        localStorage.setItem("reload-time", reload_time);
+        localStorage.setItem("___mingyan_reload_time__", reload_time);
         db(reload_time);
-        if (reload_time == 10) {
-            swal({
-                title: "获得成就",
-                text: "点击 100 次有惊喜",
-                icon: "success",
-                button: "关闭",
-                closeOnClickOutside: false
-            });
+        var title = "获得成就", text;
+        switch (reload_time) {
+            case 10:
+                text = "点击 100 次有惊喜";
+                break;
+            case 100:
+                text = "点击 500 次有惊喜";
+                break;
+            case 500:
+                text = "点击 1000 次有惊喜，\n很大的惊喜哦！";
+                break;
+            case 1000:
+                text = "点击 10000 次有惊喜，\n你都到这一步了，干嘛不看看后面的惊喜呢？";
+                break;
+            case 10000:
+                text = "你好无聊啊……";
+                break;
+            default:
+                text = "";
         };
-        if (reload_time == 100) {
+        if (text) {
             swal({
-                title: "获得成就",
-                text: "点击 500 次有惊喜",
-                icon: "success",
-                button: "关闭",
-                closeOnClickOutside: false
-            });
-        };
-        if (reload_time == 500) {
-            swal({
-                title: "获得成就",
-                text: "点击 1000 次有惊喜，\n很大的惊喜哦！",
-                icon: "success",
-                button: "关闭",
-                closeOnClickOutside: false
-            });
-        };
-        if (reload_time == 1000) {
-            swal({
-                title: "获得成就",
-                text: "点击 10000 次有惊喜，\n你都到这一步了，干嘛不看看后面的惊喜呢？",
-                icon: "success",
-                button: "关闭",
-                closeOnClickOutside: false
-            });
-        };
-        if (reload_time == 10000) {
-            swal({
-                title: "获得成就",
-                text: "你好无聊啊……",
+                title: title,
+                text: text,
                 icon: "success",
                 button: "关闭",
                 closeOnClickOutside: false
@@ -526,11 +519,11 @@ my = {};
     /****/
     /* 更多页面 */
     t.more = function () {
-        t.md("#md", "./src/md/more.md?t=202012191730");
+        t.md("#md", "./src/md/more.md?t=" + t.config.___date_version___);
         history.pushState({}, "名言 | 更多", "/");
     }
     t.about = function () {
-        t.md("#md", "./src/md/about.md?t=202012191730");
+        t.md("#md", "./src/md/about.md?t=" + t.config.___date_version___);
         history.pushState({}, "名言 | 关于", "/about");
     };
     /****/
@@ -732,7 +725,7 @@ my = {};
                 })
         },
         getIp = function (callback) {
-            $.getJSON("https://ip.xhemj.now.sh/api/ip",
+            $.getJSON("https://ip.xhemj.now.sh/api/ip?t___" + new Date().getTime() + rdNum(0,new Date().getTime()) + "__",
                 function (json) {
                     db("获取成功");
                     var res = {
@@ -829,12 +822,12 @@ my = {};
                 t.show();
             });
             //if (md5(qs("pre_id")) == "21393b2b0a1636474774869d3429d2de") {
-                if (qs("force_action") == "2021" || !localStorage.getItem("___mingyan_2021_ranking_data__")) {
-                    t.ranking();
-                };
-                if (qs("force_action") == "clear_save") {
-                    localStorage.removeItem("___mingyan_2021_ranking_data__");
-                };
+            if (qs("force_action") == "2021" || !localStorage.getItem("___mingyan_2021_ranking_data__")) {
+                t.ranking();
+            };
+            if (qs("force_action") == "clear_save") {
+                localStorage.removeItem("___mingyan_2021_ranking_data__");
+            };
             //}
             break;
         case "/index.html":
@@ -844,7 +837,7 @@ my = {};
             break;
         case "/2021/":
             //if (md5(qs("pre_id")) == "21393b2b0a1636474774869d3429d2de") {
-                t.ranking();
+            t.ranking();
             //}
             break;
         default:
