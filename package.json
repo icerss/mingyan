@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/xhemj/mingyan/issues"
   },
-  "homepage": "https://github.com/xhemj/mingyan#readme"
+  "homepage": "https://github.com/xhemj/mingyan#readme",
+  "devDependencies": {
+    "path": "^0.12.7"
+  }
 }
