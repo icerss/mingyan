@@ -4,7 +4,7 @@
   "description": "xhemj",
   "main": "src/main.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ncc": "ncc build ./src/main.min.js -o dist -m"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,7 @@
   "homepage": "https://github.com/xhemj/mingyan#readme",
   "devDependencies": {
     "path": "^0.12.7"
+  },
+  "dependencies": {
   }
 }
