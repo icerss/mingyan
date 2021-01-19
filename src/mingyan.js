@@ -511,4 +511,4 @@ var mingyan = [
     "学校食堂：保加利亚乳杆菌",
     "黑板：零食杜绝",
     "QQ屁股：Boom！"];
-module.exports = mingyan
+//module.exports = mingyan
