@@ -2,3 +2,4 @@ build.bat
 node_modules/
 package.json
 package-lock.json
+.vercel

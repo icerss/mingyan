@@ -3,9 +3,7 @@
   "version": "2.2.8",
   "description": "xhemj",
   "main": "src/main.min.js",
-  "scripts": {
-    "ncc": "ncc build ./src/main.min.js -o dist -m"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xhemj/mingyan.git"
@@ -20,9 +18,6 @@
     "url": "https://github.com/xhemj/mingyan/issues"
   },
   "homepage": "https://github.com/xhemj/mingyan#readme",
-  "devDependencies": {
-    "path": "^0.12.7"
-  },
-  "dependencies": {
-  }
+  "devDependencies": { },
+  "dependencies": { }
 }

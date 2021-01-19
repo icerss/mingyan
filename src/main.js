@@ -38,7 +38,7 @@ my = {};
     };
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js?t=20201180917');
+            navigator.serviceWorker.register('./sw.js?t=202011810');
         })
     };
     window.onload = function () {
