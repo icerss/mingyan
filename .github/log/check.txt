@@ -57,3 +57,4 @@
 📝 2.2.8:Create FUNDING.yml
 📝 2.2.8:Delete FUNDING.yml
 📝 2.2.8:pure.js
+📝 2.2.8:cdn
