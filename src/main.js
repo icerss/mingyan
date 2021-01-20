@@ -4,6 +4,50 @@
 */
 my = {};
 (function (t) {
+    /**
+     * 格式：
+     * "名言": "图片链接"
+     */
+    const pic_list = {
+        "虾扯蛋": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg/webp",
+        //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
+        //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
+        "真让人头大": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QiXVSahT3kAJf6B.jpg/webp",
+        "对称轴平行": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/qv1RkDBbt6CyEJf.jpg/webp",
+        "零食杜绝": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/SWx85EvdXBOqloJ.jpg/webp",
+        "耳散伞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/jpH7LQiaqTnXyCf.jpg/webp",
+        "歪瓜裂枣": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/6k7czyYqmfvlWPn.jpg/webp",
+        "悲伤": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/hHv8U3EGt4P12IX.jpg/webp",
+        "肾虚": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/wBHo8kezKDnEcAP.jpg/webp",
+        "眉目清秀": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/KQsc8YDEHf1vi2x.jpg/webp",
+        "困死了": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/lmcDK2MCrO8nAtw.jpg/webp",
+        "我在打麻将": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QwzvoYL1daXq8in.jpg/webp",
+        "松鼠": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/C1Zq9nXfaTW2hDe.jpg/webp",
+        "来看王雷吧": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/Uxg3OpL2eBArP7s.jpg/webp",
+        "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg/webp",
+        "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg/webp",
+        "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png/webp",
+        "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png/webp",
+        "我先吃柠檬，你先别吃，好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/UPHZQG8YszhRgpb.png/webp",
+        "卷星人冲击波！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/TuGmYhQX9LorMZc.jpg/webp",
+        "赌金": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/aRZ8pVl7WgmOJUv.jpg/webp",
+        "老王乌贼": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/2j1cZKYHwFQlDdC.jpg/webp",
+        "Boom！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/9p64wZyFHB8DblA.jpg/webp",
+        "功夫面条": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/XkAf3Oq9PEyQmpI.jpg/webp",
+        "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg/webp",
+        "替身：面条达人！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/T8C2Hjm74Ookfp6.jpg/webp"
+    };
+    /**
+     * 格式：
+     * "名字": "图片链接"
+     */
+    const solvePicUrl = {
+        "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg/webp",
+        "数学潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg/webp",
+        "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg/webp",
+        "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg/webp"
+    };
+
     /* 配置 */
     t.version = "2021/01/03";
     t.config = {
@@ -90,50 +134,6 @@ my = {};
     /* 彩蛋系统 */
     /* 图片彩蛋 */
     t.lazypic = "./src/loading.svg";
-    /**
-     * 名言图片彩蛋
-     * var pic_list = {
-     *   ...
-     *   "名言": "图片链接"
-     *   ...
-     * }
-     */
-    var pic_list = {
-        "虾扯蛋": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/10/16/TQ3i5EH2wD9KF6d.jpg/webp",
-        //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
-        //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
-        "真让人头大": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QiXVSahT3kAJf6B.jpg/webp",
-        "对称轴平行": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/qv1RkDBbt6CyEJf.jpg/webp",
-        "零食杜绝": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/SWx85EvdXBOqloJ.jpg/webp",
-        "耳散伞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/jpH7LQiaqTnXyCf.jpg/webp",
-        "歪瓜裂枣": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/6k7czyYqmfvlWPn.jpg/webp",
-        "悲伤": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/hHv8U3EGt4P12IX.jpg/webp",
-        "肾虚": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/wBHo8kezKDnEcAP.jpg/webp",
-        "眉目清秀": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/KQsc8YDEHf1vi2x.jpg/webp",
-        "困死了": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/lmcDK2MCrO8nAtw.jpg/webp",
-        "我在打麻将": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/QwzvoYL1daXq8in.jpg/webp",
-        "松鼠": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/C1Zq9nXfaTW2hDe.jpg/webp",
-        "来看王雷吧": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/Uxg3OpL2eBArP7s.jpg/webp",
-        "跑面": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/UAV5BHjlwQxcznN.jpg/webp",
-        "绿帽子": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/05/TNgspLGvQWVKxCw.jpg/webp",
-        "搞那么夸张干什么啊？": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/06/5yaWEP1KdwVcCIu.png/webp",
-        "垃圾真好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/kDxAfJ8dg7IlhaO.png/webp",
-        "我先吃柠檬，你先别吃，好吃": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/UPHZQG8YszhRgpb.png/webp",
-        "卷星人冲击波！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/TuGmYhQX9LorMZc.jpg/webp",
-        "赌金": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/aRZ8pVl7WgmOJUv.jpg/webp",
-        "老王乌贼": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/2j1cZKYHwFQlDdC.jpg/webp",
-        "Boom！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/9p64wZyFHB8DblA.jpg/webp",
-        "功夫面条": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/XkAf3Oq9PEyQmpI.jpg/webp",
-        "水果战车": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/20/JBilT9zCbkI1LKN.jpg/webp",
-        "替身：面条达人！": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/22/T8C2Hjm74Ookfp6.jpg/webp"
-    };
-    var solvePicUrl = {
-        "数学老王": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/KPVwxYQXM2fLODN.jpg/webp",
-        "数学潘哥": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/iTkIWzwKaL92otl.jpg/webp",
-        "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg/webp",
-        "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg/webp"
-    };
-
     t.pic = function (my) {
         var name = my.split("：")[0];
         if (my.split("：").length == 2) {
@@ -384,10 +384,15 @@ my = {};
             $("#main").hide();
             if (mingyan.length != 0) {
                 db("加载名言列表成功");
+                var hashname = {
+                    "#/search": true,
+                    "#/more": true,
+                    "#/about": true
+                };
                 if (!id) {
                     if (qs("id") != "") {
                         var n = qs("id");
-                    } else if (location.hash != "" && location.hash != "#search") {
+                    } else if (location.hash != "" && hashname[location.hash] != true) {
                         var n = location.hash.replace("#", "");
                     } else {
                         var n = rdNum(0, mingyan.length - 1);
@@ -395,6 +400,7 @@ my = {};
                 } else {
                     var n = id;
                 }
+                if (hashname[location.hash] == true) return;
                 var name = mingyan[n].split("：")[0];
                 db(name);
                 if (mingyan[n].split("：").length == 2) {
@@ -483,7 +489,7 @@ my = {};
     /****/
     /* 搜索列表功能 */
     t.all = function () {
-        history.pushState({}, "名言 | 搜索", "/search");
+        //location.hash = "#/search";
         $("#md").hide();
         $("#main").hide();
         $("input#searchbar").val("");
@@ -520,11 +526,11 @@ my = {};
     /* 更多页面 */
     t.more = function () {
         t.md("#md", "./src/md/more.md?t=" + t.config.___date_version___);
-        history.pushState({}, "名言 | 更多", "/");
+        //location.hash = "#/more";
     }
     t.about = function () {
         t.md("#md", "./src/md/about.md?t=" + t.config.___date_version___);
-        history.pushState({}, "名言 | 关于", "/about");
+        //location.hash = "#/about";
     };
     /****/
     /* Markdown名言列表 */
@@ -598,7 +604,7 @@ my = {};
             "体育俞老师：" + o.match(/体育俞老师/g).length,
             "生物吴老师：" + o.match(/生物吴老师/g).length
         ];
-        window.count = count;
+        //window.count = count;
         //console.log(count);
         var out = "";
         out += count.join(" 句</br>") + " 句</br></br></br></br>";
@@ -905,16 +911,38 @@ my = {};
     };
 
     /* 路由 */
+    window.addEventListener("hashchange", hashchange);
+    function hashchange() {
+        switch (location.hash) {
+            case "#/about":
+                location.pathname = "/"
+                my.hide_showall();
+                my.about();
+                break;
+            case "#/search":
+                location.pathname = "/"
+                my.hide_showall();
+                my.all();
+                break;
+            case "#/more":
+                location.pathname = "/"
+                my.hide_showall();
+                my.more();
+                break;
+            default:
+                break;
+        };
+    };
+    hashchange();
     switch (location.pathname) {
         case "/about":
-            my.about();
+            location.hash = "#/about"
             break;
         case "/search":
-            my.all();
-            if (qs("q")) {
-                $("#searchbar").val(decodeURI(qs("q")));
-                $("#searchbar").focus();
-            };
+            location.hash = "#/search"
+            break;
+        case "/more":
+            location.hash = "#/more"
             break;
         case "/":
             $(document).ready(function () {
