@@ -47,7 +47,11 @@ my = {};
         "语文老朱": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/xvUdlJW8XG1zbeZ.jpg/webp",
         "英语老俞": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/lURnTwHouGbM8B7.jpg/webp"
     };
-
+    const hashname = {
+        "#/search": true,
+        "#/more": true,
+        "#/about": true
+    };
     /* 配置 */
     t.version = "2021/01/03";
     t.config = {
@@ -379,16 +383,12 @@ my = {};
     /****/
     /* 主功能：名言显示 */
     t.show = function (id) {
+        initfancybox();
         try {
             $("#md").hide();
             $("#main").hide();
             if (mingyan.length != 0) {
                 db("加载名言列表成功");
-                var hashname = {
-                    "#/search": true,
-                    "#/more": true,
-                    "#/about": true
-                };
                 if (!id) {
                     if (qs("id") != "") {
                         var n = qs("id");
@@ -495,12 +495,12 @@ my = {};
         $("input#searchbar").val("");
         var showall = "<input style=\"" + inputbar_width + "\"" + " onclick=\"this.select()\" type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br></br><span class=\"e\"></span>";
         for (i = 0; i < mingyan.length; i++) {
-            showall += "<div><a style=\"color:black\" id=\"showall_item\" class=\"" + i + "\" href=\"./?id=" + i + "\">" + mingyan[i] + "</a></div>";
+            showall += "<div><a style=\"color:black\" id=\"showall_item\" class=\"" + i + "\" href=\"./#" + i + "\" onclick=\"my.hide_showall()\">" + mingyan[i] + "</a></div>";
         };
         showall += "</br></br></br>";
         $("#showall").html(showall);
         $("#showall").fadeIn();
-        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"my.hide_showall()\">返回<\/a>");
+        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=\"./\" onclick=\"my.hide_showall()\">返回<\/a>");
         $("#searchbar").focus();
     };
     /****/
@@ -913,24 +913,29 @@ my = {};
     /* 路由 */
     window.addEventListener("hashchange", hashchange);
     function hashchange() {
-        switch (location.hash) {
-            case "#/about":
-                location.pathname = "/"
-                my.hide_showall();
-                my.about();
-                break;
-            case "#/search":
-                location.pathname = "/"
-                my.hide_showall();
-                my.all();
-                break;
-            case "#/more":
-                location.pathname = "/"
-                my.hide_showall();
-                my.more();
-                break;
-            default:
-                break;
+        initfancybox();
+        if (hashname[location.hash] == true) {
+            switch (location.hash) {
+                case "#/about":
+                    location.pathname = "/"
+                    my.hide_showall();
+                    my.about();
+                    break;
+                case "#/search":
+                    location.pathname = "/"
+                    my.hide_showall();
+                    my.all();
+                    break;
+                case "#/more":
+                    location.pathname = "/"
+                    my.hide_showall();
+                    my.more();
+                    break;
+                default:
+                    break;
+            };
+        } else if (location.hash.split("#").length > 1) {
+            my.show(location.hash.split("#")[1])
         };
     };
     hashchange();
@@ -993,30 +998,32 @@ my = {};
     lazyload();
     setInterval(lazyload, 1000);
 
-    setTimeout(() => {
-        $('.fancybox').fancybox({
-            buttons: [
-                "zoom",
-                "share",
-                "slideShow",
-                "fullScreen",
-                "download",
-                "close"
-            ],
-            lang: "zh-cn",
-            i18n: {
-                "zh-cn": {
-                    CLOSE: "关闭",
-                    NEXT: "下一张",
-                    PREV: "前一张",
-                    ERROR: "图片加载失败， <br/> 请稍后再试。",
-                    FULL_SCREEN: "全屏",
-                    THUMBS: "略缩图",
-                    DOWNLOAD: "下载",
-                    SHARE: "分享",
-                    ZOOM: "缩放"
+    function initfancybox() {
+        setTimeout(() => {
+            $('.fancybox').fancybox({
+                buttons: [
+                    "zoom",
+                    "share",
+                    "slideShow",
+                    "fullScreen",
+                    "download",
+                    "close"
+                ],
+                lang: "zh-cn",
+                i18n: {
+                    "zh-cn": {
+                        CLOSE: "关闭",
+                        NEXT: "下一张",
+                        PREV: "前一张",
+                        ERROR: "图片加载失败， <br/> 请稍后再试。",
+                        FULL_SCREEN: "全屏",
+                        THUMBS: "略缩图",
+                        DOWNLOAD: "下载",
+                        SHARE: "分享",
+                        ZOOM: "缩放"
+                    }
                 }
-            }
-        });
-    }, 500);
+            });
+        }, 500);
+    }
 })(my)
