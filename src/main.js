@@ -875,7 +875,8 @@ my = {};
                                                     placeholder: "写个名字记录一下你是谁吧！",
                                                     type: "text"
                                                 }
-                                            }
+                                            },
+                                            closeOnClickOutside: false
                                         })
                                             .then(name => {
                                                 if (name) {
