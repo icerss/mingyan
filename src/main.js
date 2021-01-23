@@ -56,7 +56,7 @@ my = {};
     t.version = "2021/01/03";
     t.config = {
         ___DEBUG__ = false,
-        ___date_version___ = 202101021322
+        ___date_version___ = 202101231822
     };
     /****/
     var _hmt = _hmt || [];
@@ -394,12 +394,13 @@ my = {};
                         var n = qs("id");
                     } else if (location.hash != "" && hashname[location.hash] != true) {
                         var n = location.hash.replace("#", "");
+                        db("n=" + n);
                     } else {
                         var n = rdNum(0, mingyan.length - 1);
                     };
                 } else {
                     var n = id;
-                }
+                };
                 if (hashname[location.hash] == true) return;
                 var name = mingyan[n].split("：")[0];
                 db(name);
@@ -413,17 +414,20 @@ my = {};
                 db("已选取第" + n + "条名言：" + my);
                 _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
                 $("p#info").html(
-                    "<div class=\"info-text\">" +
-                    "<a href=\"" + "//" + location.hostname + location.pathname + "#" + n + "\" class=\"label label-rounded label-warning\">" + "#" + n + "</a>&nbsp;" +
-                    "<a href=\"javascript:;\" onclick=\"my.share()\" class=\"label label-rounded label-warning\">" +
-                    "<i class=\"mdui-icon material-icons\" style=\"font-size: 15px;\">share<\/i>分享" +
-                    "</a></br><a id=\"reload\" href=\"javascript:;\" onclick=\"my.reload();my.reload_time_add();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);\" >点击</a>查看更多名言</div>"
+                    `<div class="info-text">
+                    <a href="#${n}" class="label label-rounded label-warning">#${n}</a>&nbsp;
+                    <!-- <a href="javascript:;" onclick="my.share()" class="label label-rounded label-warning">
+                    <i class="mdui-icon material-icons" style="font-size: 15px;">share</i>分享</a> -->
+                    </br><a style="color:#9B4DC9" id="reload" href="#${rdNum(0, mingyan.length - 1)}" onclick="my.reload_time_add();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
                 );
                 $("span#mingyan").html(t.pic(name + "：" + my));
                 var verb = t.text(name + "：" + my);
                 $("span#name").text(name);
                 $("span#verb").html(verb);
                 $("#main").fadeIn();
+                if ($("#mingyan").text().indexOf("来一起唱啊！！") != -1) {
+                    loadJs("https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js");
+                };
                 var title = "名言 | " + my;
                 document.title = title;
                 var description = name + verb + "：" + my;
@@ -472,6 +476,7 @@ my = {};
             location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         } else {
             t.show();
+            db("show：L479")
         };
         lazyload();
     };
@@ -953,6 +958,7 @@ my = {};
         case "/":
             $(document).ready(function () {
                 t.show();
+                db("show：L960")
             });
             //if (md5(qs("pre_id")) == "21393b2b0a1636474774869d3429d2de") {
             if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) {
@@ -971,6 +977,7 @@ my = {};
         case "/index.html":
             $(document).ready(function () {
                 t.show();
+                db("show：L979")
             });
             break;
         default:
@@ -979,6 +986,7 @@ my = {};
                 var myid = new Number(id);
                 $(document).ready(function () {
                     t.show(myid.toString());
+                    db("show：L988")
                 });
             } else {
                 clearInterval(search);

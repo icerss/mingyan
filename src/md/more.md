@@ -5,7 +5,7 @@
     <h3><a onclick="my.md_all()">全部名言</a></h3> 
     <h3><a onclick="my.print()">打印名言列表</a></h3> 
     <h3><a onclick="my.download()">下载名言列表（.txt）</a></h3> 
-    <h3><a onclick="my.about()">关于</a></h3> 
+    <h3><a style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3> 
 </div></strong>
 
 ---
@@ -26,7 +26,7 @@
 </br>
 <div class="github-badge" title="会慢慢更新的"><span class="badge-subject">更新时间</span><span class="badge-value bg-lightgrey"><span id="uptime">2020-00-00 00:00:00</span></span></div>
 </br>
-<a href="https://icp.gov.moe" target="_blank">萌ICP备 </a><a href="https://icp.gov.moe/?keyword=20200503" target="_blank"> 20200503号</a>
+<a href="https://icp.gov.moe" target="_blank">萌备 </a><a href="https://icp.gov.moe/?keyword=20200503" target="_blank"> 20200503号</a>
 </div>
 <script>
 var domain_list = {
@@ -41,6 +41,7 @@ var domain_list = {
     "xhemj.oss-cn-hongkong.aliyuncs.com":"阿里云香港OSS",
     "cn.mingyan.js.org":"Coding Pages",
     "xhemj.github.io":"Github Pages",
+    "www.erss.club":"Vercel",
     "127.0.0.1":"本地"
 };
 $("#host").text(domain_list[location.hostname]);
@@ -50,15 +51,8 @@ function tk() {
 };
 $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
     var a = data["updated_at"];
-    a = a.split("T");
-    var time = a[1];
-    time = time.split(":");
-    var h = time[0] * 1 + 8;
-    var min = time[1];
-    var s = time[2].split("Z")[0];
-    var ut = a[0] + " " + h + ":" + min + ":" + s;
-    $("#uptime").text(ut);
-    console.log(ut);
+    $("#uptime").text(new Date(a).toLocaleString());
+    console.log(new Date(a).toLocaleString());
 });
 setTimeout(tk,200);
 </script>
