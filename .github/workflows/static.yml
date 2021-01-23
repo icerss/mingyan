@@ -36,7 +36,7 @@ jobs:
         if: github.repository == 'xhemj/mingyan'
         uses: zkqiang/tencent-cos-action@v0.1.0
         with:
-          args: upload -r ./ / 
+          args: upload -r ./src src
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
           secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
           bucket: mingyan-1256004056
