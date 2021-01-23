@@ -3,7 +3,6 @@
   "version": "2.2.8",
   "description": "xhemj",
   "main": "src/main.min.js",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xhemj/mingyan.git"
