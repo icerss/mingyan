@@ -697,26 +697,26 @@ my = {};
         //             };
         //         })
         // },
-        list = function () {
-            return new Promise(function (resolve, reject) {
-                app
-                    .callFunction({
-                        name: "mingyan",
-                        data: {
-                            event: "list"
-                        }
-                    })
-                    .then((res) => {
-                        db("获取成功");
-                        console.log(res);
-                        resolve(res);
-                    })
-                    .catch(function (e) {
-                        reject(e)
-                    })
-            })
+        // list = function () {
+        //     return new Promise(function (resolve, reject) {
+        //         app
+        //             .callFunction({
+        //                 name: "mingyan",
+        //                 data: {
+        //                     event: "list"
+        //                 }
+        //             })
+        //             .then((res) => {
+        //                 db("获取成功");
+        //                 console.log(res);
+        //                 resolve(res);
+        //             })
+        //             .catch(function (e) {
+        //                 reject(e)
+        //             })
+        //     })
 
-        },
+        // },
         // update = function (id, name, callback) {
         //     app
         //         .callFunction({
@@ -805,62 +805,43 @@ my = {};
                 .then(function (ip_data) {
                     console.log(ip_data.ip);
                     var ip = ip_data.ip;
-                    my.ranking_api.list()
-                        .then(function (list) {
-                            var data = list.result.res.data;
-                            var out = "";
-                            for (i = 0; i < data.length; i++) {
-                                if (data[i]["ip"] == ip) {
-                                    out += "a"
-                                };
-                            };
-                            console.log(out);
-                            if (!out && !localStorage.getItem("___mingyan_2021_ranking_data__")) {
-                                db("新用户");
-                                localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);
-                                t.ranking_api.add("一位不知道名字的访客", ip)
-                                    .then(function (add_data) { //callback
-                                        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`)
-                                        var id = add_data.result.res.id;
-                                        var num = data.length;
-                                        swal({
-                                            title: `第${num + 1}个人！！`,
-                                            text: `恭喜你成为2021年第${num + 1}个查看名言的人！！`,
-                                            icon: "success",
-                                            content: {
-                                                element: "input",
-                                                attributes: {
-                                                    placeholder: "写个名字记录一下你是谁吧！",
-                                                    type: "text"
-                                                }
-                                            },
-                                            closeOnClickOutside: false
-                                        })
-                                            .then(name => {
-                                                if (name) {
-                                                    my.ranking_api.update(id, name)
-                                                        .then(function (update_data) {
-                                                            console.log(update_data);
-                                                        })
-                                                        .catch(function (e) {
-                                                            console.error(e)
-                                                        });
-                                                    location.href = "./";
-                                                };
-                                            })
+                    if (!localStorage.getItem("___mingyan_2021_ranking_data__")) {
+                        db("新用户");
+                        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);
+                        t.ranking_api.add("一位不知道名字的访客", ip)
+                            .then(function (add_data) { //callback
+                                localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`)
+                                var id = add_data.result.res.id;
+                                swal({
+                                    title: `第N个人！！`,
+                                    text: `恭喜你成为2021年第N个查看名言的人！！（因技术原因，暂时无法公开名次）`,
+                                    icon: "success",
+                                    content: {
+                                        element: "input",
+                                        attributes: {
+                                            placeholder: "写个名字记录一下你是谁吧！",
+                                            type: "text"
+                                        }
+                                    },
+                                    closeOnClickOutside: false
+                                })
+                                    .then(name => {
+                                        if (name) {
+                                            my.ranking_api.update(id, name)
+                                                .then(function (update_data) {
+                                                    console.log(update_data);
+                                                })
+                                                .catch(function (e) {
+                                                    console.error(e)
+                                                });
+                                            location.href = "./";
+                                        };
                                     })
-                                    .catch(function (e) {
-                                        console.error(e)
-                                    });
-                            } else {
-                                db("老用户");
-                                localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);
-                                location.href = "./";
-                            };
-                        })
-                        .catch(function (e) {
-                            console.error(e)
-                        });
+                            })
+                            .catch(function (e) {
+                                console.error(e)
+                            });
+                        }
                 })
                 .catch(function (e) {
                     console.error(e)
