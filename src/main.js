@@ -872,6 +872,27 @@ my = {}; // 就用my吧
                         reject(e)
                     });
             })
+        },
+        //获取当前排名人数
+        getNum = function () {
+            return new Promise(function (resolve, reject) {
+                app
+                    .callFunction({
+                        name: "mingyan",
+                        data: {
+                            event: "getnum"
+                        }
+                    })
+                    .then((res) => {
+                        db("获取成功");
+                        console.log(res);
+                        resolve(res);
+                    })
+                    .catch(function (e) {
+                        reject(e)
+                    });
+
+            })
         }
     };
     // 初始化tcb
@@ -904,33 +925,40 @@ my = {}; // 就用my吧
                             .then(function (add_data) {
                                 localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 不知道为什么要再存一遍，但不想删了
                                 var id = add_data.result.res.id; // 留id以便于之后更新名字
-                                // 弹窗
-                                swal({
-                                    title: `第N个人！！`,
-                                    text: `恭喜你成为2021年第N个查看名言的人！！（因技术原因，暂时无法公开名次）`, // 其实是其它原因/滑稽
-                                    icon: "success",
-                                    content: {
-                                        element: "input",
-                                        attributes: {
-                                            placeholder: "写个名字记录一下你是谁吧！",
-                                            type: "text"
-                                        }
-                                    },
-                                    closeOnClickOutside: false
-                                })
-                                    .then(name => {
-                                        if (name) { // 之后就是更新名字啦！
-                                            my.ranking_api.update(id, name)
-                                                .then(function (update_data) {
-                                                    console.log(update_data);
-                                                })
-                                                // 这么多catch？
-                                                .catch(function (e) {
-                                                    console.error(e)
-                                                });
-                                            location.href = "./";
-                                        };
+                                t.ranking_api.getNum()
+                                    .then(function (num_data) { // 获取当前排名
+                                        var num = num_data["result"]["res1"]["data"][0]["num"];
+                                        // 弹窗
+                                        swal({
+                                            title: `第${num}个人！！`,
+                                            text: `恭喜你成为2021年第${num}个查看名言的人！！`, // 解决了！！（2021-01-26）
+                                            icon: "success",
+                                            content: {
+                                                element: "input",
+                                                attributes: {
+                                                    placeholder: "写个名字记录一下你是谁吧！",
+                                                    type: "text"
+                                                }
+                                            },
+                                            closeOnClickOutside: false
+                                        })
+                                            .then(name => {
+                                                if (name) { // 之后就是更新名字啦！
+                                                    my.ranking_api.update(id, name)
+                                                        .then(function (update_data) {
+                                                            console.log(update_data);
+                                                        })
+                                                        // 这么多catch？
+                                                        .catch(function (e) {
+                                                            console.error(e)
+                                                        });
+                                                    location.href = "./";
+                                                };
+                                            })
                                     })
+                                    .catch(function (e) {
+                                        console.error(e)
+                                    });
                             })
                             .catch(function (e) {
                                 console.error(e)
