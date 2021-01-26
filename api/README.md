@@ -1,1 +1,0 @@
-## Mingyan-Ranking-Api

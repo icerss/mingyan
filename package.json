@@ -18,7 +18,5 @@
   },
   "homepage": "https://github.com/xhemj/mingyan#readme",
   "devDependencies": {},
-  "dependencies": {
-    "@cloudbase/node-sdk": "^2.5.0"
-  }
+  "dependencies": {}
 }
