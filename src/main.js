@@ -432,8 +432,9 @@ let _mingyan = {};
 
     /****/
     /* 主功能：名言显示 */
+    let skipCheckHash = false; // 看是否不检查hash值
     /**
-     * 名言显示韩式
+     * 名言显示主函数
      * @param {Num} id 名言ID（可不传入）
      */
     _mingyan.show = function (id) {
@@ -457,7 +458,11 @@ let _mingyan = {};
                 } else {
                     var n = id; // 若有从函数传入id就用这个
                 };
-                if (hashName[location.hash] == true) return; // 若有出发hash路由的地址就返回
+                // hash路由
+                skipCheckHash = true;
+                location.hash = "#" + n;
+                skipCheckHash = false; // 再调回来
+                if (hashName[location.hash] == true) return; // 若有触发hash路由的地址就返回
                 let name = mingyan[n].split("：")[0];
                 db(name);
                 if (mingyan[n].split("：").length == 2) {
@@ -988,7 +993,7 @@ let _mingyan = {};
                 default:
                     break;
             };
-        } else if (location.hash.split("#").length > 1) { // 否则就显示名言
+        } else if (location.hash.split("#").length > 1 && !skipCheckHash) { // 否则就显示名言
             _mingyan.show(location.hash.split("#")[1])
         };
     };
