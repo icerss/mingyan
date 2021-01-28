@@ -115,6 +115,7 @@ let _mingyan = {};
 
     /**
      * 获取url参数
+     * @param {String} qs 要获取的参数名
      */
     function qs(qs) {
         let s = location.href;
@@ -129,7 +130,9 @@ let _mingyan = {};
     };
 
     /**
-     * 随机数
+     * 生成随机整数
+     * @param {Num} minNum 最小值
+     * @param {Num} maxNum 最大值
      */
     function randomNumber(minNum, maxNum) {
         switch (arguments.length) {
@@ -529,19 +532,25 @@ let _mingyan = {};
     /****/
 
     /**
-     * 刷新名言（应该是废弃了 2021-01-24）
+     * 刷新名言
      */
     _mingyan.reload = function () {
-        history.pushState({}, "名言 | ERSS", "/");
-        if (location.hash != "") {
-            location.href = "//" + location.hostname + ":" + location.port + location.pathname;
-        } else if (qs("id") != "" || qs("mail") != "") {
-            location.href = "//" + location.hostname + ":" + location.port + location.pathname;
+        // 已废弃（2021-01-24）
+        // history.pushState({}, "名言 | ERSS", "/");
+        // if (location.hash != "") {
+        //     location.href = "//" + location.hostname + ":" + location.port + location.pathname;
+        // } else if (qs("id") != "" || qs("mail") != "") {
+        //     location.href = "//" + location.hostname + ":" + location.port + location.pathname;
+        // } else {
+        //     _mingyan.show();
+        //     db("show：L479")
+        // };
+        // lazyload();
+        if ($("#reload").attr("href")) {
+            _mingyan.show($("#reload").attr("href").split("#")[1])
         } else {
-            _mingyan.show();
-            db("show：L479")
+            location.hash = "#" + randomNumber(0,mingyan.length - 1)
         };
-        lazyload();
     };
     /****/
 
