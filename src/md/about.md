@@ -1,3 +1,4 @@
+<!-- Start about.md -->
 ## ERSS 名言
 
 [![@ERSS](https://badgen.net/badge/icon/ERSS?icon=bitcoin-lightning&amp;label)](https://github.com/icerss/mingyan)[![@xhemj](https://badgen.net/badge/icon/xhemj/mingyan?icon=github&amp;label)](https://github.com/xhemj)![@tag](https://badgen.net/github/tag/xhemj/mingyan)![@commit](https://badgen.net/github/last-commit/xhemj/mingyan)
@@ -7,17 +8,17 @@
 **制作**：
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple" >
-      <div class="mdui-list-item-avatar" onclick="my.my_face_click('xhemj')"><img class="lazyload" src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/cSEzu59fHmlyDqT.png"/></div>
+      <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('xhemj')"><img class="lazyload" src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/cSEzu59fHmlyDqT.png"/></div>
       <div class="mdui-list-item-content">xhemj</div>
       <a href="https://space.bilibili.com/226208916"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
   </li>
     <li class="mdui-list-item mdui-ripple" >
-      <div class="mdui-list-item-avatar" onclick="my.my_face_click('BlackToy')"><img class="lazyload" src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg"/></div>
+      <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('BlackToy')"><img class="lazyload" src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg"/></div>
       <div class="mdui-list-item-content">BlackToy</div>
       <a href="https://space.bilibili.com/337073401"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
   </li>
     <li class="mdui-list-item mdui-ripple" >
-      <div class="mdui-list-item-avatar" onclick="my.my_face_click('Oranjezelv')"><img class="lazyload" src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/ejgOW7QY8MFmDU5.jpg"/></div>
+      <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('Oranjezelv')"><img class="lazyload" src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/ejgOW7QY8MFmDU5.jpg"/></div>
       <div class="mdui-list-item-content">Oranjezelv</div>
       <a href="https://space.bilibili.com/368095014"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
   </li>
@@ -51,8 +52,8 @@
     <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple-400">email</i>
     <div class="mdui-list-item-content">
       <div class="mdui-list-item-title">xhemj</div>
-      <div class="mdui-list-item-text">xhemj_service@126.com</div>
-      </div><a href="mailto:xhemj_service@126.com"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
+      <div class="mdui-list-item-text">xhemj@erss.club</div>
+      </div><a href="mailto:xhemj@erss.club"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
   </li>
 
 
@@ -67,3 +68,4 @@
   </li>
 
 <script>lazyload()</script>
+<!-- End about.md -->

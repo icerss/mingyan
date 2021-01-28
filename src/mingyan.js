@@ -3,7 +3,7 @@
 * 2020/12/24
 */
 
-var mingyan = [
+const mingyan = [
     //====老王名言====
     "数学老王：你是屁股吗？",
     "数学老王：肾虚都没你这样",
@@ -557,7 +557,7 @@ var mingyan = [
  * 格式：
  * "名言": "图片链接" 
  */
-const pic_list = {
+const mingyanPicUrl = {
     "虾扯蛋": "/2020/10/16/TQ3i5EH2wD9KF6d.jpg",
     //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
     //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
@@ -599,7 +599,7 @@ const pic_list = {
  * 格式：
  * "名言": "动词"
  */
-const text_list = {
+const specialVerbList = {
     "松鼠": "的课本上</br>曾经出现过",
     "来看王雷吧": "曾经在语文课上说过",
     "零食杜绝": "曾经出现过",
