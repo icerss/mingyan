@@ -177,7 +177,7 @@ let _mingyan = {};
             };
             // 支持WEBP格式
             if (isSupportWebp()) {
-                let pic = pic + "/webp"
+                var pic = pic + "/webp"
             };
             _mingyan.checkPicForMobie();
             lazyload();
