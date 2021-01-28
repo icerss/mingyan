@@ -1,7 +1,9 @@
 name: Static
 
-on: [push,delete]
-
+on:
+  push:
+  delete:
+  workflow_dispatch:
 
 jobs:
   Static:
