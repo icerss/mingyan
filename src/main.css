@@ -35,7 +35,9 @@ body {
 	padding-right: 10%;
 	position:relative;
 	font-family: "ZCOOL KuaiLe";
+	background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/27/fRuFkxBg4edS2Qh.png");
 }
+
 /* https://github.com/yb/uptime-status/blob/master/src/app.css#L38-L75 */
 #header {
 	position:fixed;
@@ -53,6 +55,8 @@ body {
 	align-items:center;
 	height:55px
 }
+/****/
+
 #header .left {
 	font-size:20px;
 	font-weight:700;
@@ -67,7 +71,6 @@ body {
 	margin-left:15px;
 	font-weight: bold
 }
-/**  **/
 footer {
 	position: fixed;
 	left: 0;
@@ -155,7 +158,4 @@ footer {
 }
 .headroom--unpinned {
     transform: translateY(-100%);
-}
-body {
-	background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/27/fRuFkxBg4edS2Qh.png")
 }

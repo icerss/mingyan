@@ -17,7 +17,7 @@ my = {}; // 就用my吧
      */
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js?t=202011810');
+            navigator.serviceWorker.register('./sw.js?t=202101281305');
         })
     };
 
@@ -1126,7 +1126,7 @@ my = {}; // 就用my吧
     };
     t.console();
     /**
-     * Yeah！！写完啦！！
+     * 耶！！写完啦！！
      * 从2020-04-30 到  现在，
      * 这个网最初只是我们几个人开玩笑着说一说，
      * 谁知道真的能成功呢？
