@@ -452,17 +452,21 @@ let _mingyan = {};
                     } else if (location.hash != "" && hashName[location.hash] != true /* 排除保留的hash路由地址 */) { // 如果有传入hash就用hash传入的ID
                         var n = location.hash.replace("#", "");
                         db("n=" + n);
+                    } else if (localStorage.getItem("___mingyan_id__")) {
+                        var n = localStorage.getItem("___mingyan_id__") // 如果有储存上一次看到哪一条就用这个id
                     } else {
                         var n = randomNumber(0, mingyan.length - 1); // 否则就随机生成
                     };
                 } else {
                     var n = id; // 若有从函数传入id就用这个
                 };
+                if (hashName[location.hash] == true) return; // 若有触发hash路由的地址就返回
                 // hash路由
                 skipCheckHash = true;
                 location.hash = "#" + n;
                 skipCheckHash = false; // 再调回来
-                if (hashName[location.hash] == true) return; // 若有触发hash路由的地址就返回
+                // 储存看到哪一条下一次继续
+                localStorage.setItem("___mingyan_id__", n);
                 let name = mingyan[n].split("：")[0];
                 db(name);
                 if (mingyan[n].split("：").length == 2) {
@@ -554,7 +558,7 @@ let _mingyan = {};
         if ($("#reload").attr("href")) {
             _mingyan.show($("#reload").attr("href").split("#")[1])
         } else {
-            location.hash = "#" + randomNumber(0,mingyan.length - 1)
+            location.hash = "#" + randomNumber(0, mingyan.length - 1)
         };
     };
     /****/
