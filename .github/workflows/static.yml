@@ -2,6 +2,7 @@ name: Static
 
 on: [push,delete]
 
+
 jobs:
   Static:
     runs-on: ubuntu-latest

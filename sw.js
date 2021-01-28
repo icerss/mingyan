@@ -1,10 +1,10 @@
 'use strict';
 
-const version = 'xhemj_202101191019';
+const version = 'xhemj_202101281303';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
-  '/src/offline.html',
+  '/src/offline.html?t=202101281303',
   './src/loading.svg'
 ];
 
@@ -18,7 +18,8 @@ const ignoreFetch = [
   /https?:\/\/cdn.jsdelivr.net\//,
   /https?:\/\/thirdqq.qlogo.cn\//,
   /https?:\/\/lib.baomitu.com\//,
-  /https?:\/\/7.dusays.com\//
+  /https?:\/\/7.dusays.com\//,
+  /https?:\/\/ip.xhemj.now.sh\//
 ];
 
 function onInstall(event) {
@@ -93,7 +94,7 @@ function offlineResponse(request) {
   if (request.url.match(/\.(jpg|png|gif|svg|jpeg)(\?.*)?$/)) {
     return caches.match('/src/loading.svg')
   } else {
-    return caches.match('/src/offline.html')
+    return caches.match('/src/offline.html?t=202101281303')
   }
 }
 
