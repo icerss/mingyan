@@ -518,10 +518,10 @@ let _mingyan = {};
     };
     // 针对手机进行位置调整
     if (ua.device != 'Mobile') {
-        let inputbar_width = "60%";
+        var inputbar_width = "60%";
         $("#main").css("transform", "translateY(15%)");
     } else {
-        let inputbar_width = "auto";
+        var inputbar_width = "auto";
         $("#main").css("transform", "translateY(30%)");
         $("#md").css("transform", "translateY(50px)");
     };
