@@ -1,11 +1,11 @@
 /*
 * ©2020 xhemj
-* 2021/01/28
+* 2021/01/29
 */
 let _mingyan = {};
 (function (mingyan, _mingyan) {
     /* 配置 */
-    _mingyan.version = "2021/01/28";
+    _mingyan.version = "2021/01/29";
     _mingyan.config = {
         ___DEBUG__: false,
         ___date_version___: 202101291824
