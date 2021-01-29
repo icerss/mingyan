@@ -49,6 +49,13 @@
 联系：
 
   <li class="mdui-list-item mdui-ripple">
+    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple-400">feedback</i>
+    <div class="mdui-list-item-content">
+      <div class="mdui-list-item-title">QQ交流群</div>
+      <div class="mdui-list-item-text">1084808352</div>
+      </div><a href="https://jq.qq.com/?_wv=1027&k=jKy2qW7R"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
+  </li>
+  <li class="mdui-list-item mdui-ripple">
     <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple-400">email</i>
     <div class="mdui-list-item-content">
       <div class="mdui-list-item-title">xhemj</div>

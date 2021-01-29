@@ -9,11 +9,16 @@
     "theme_color": "#fff", 
     "icons": [
       {
-        "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/icon.png", 
+        "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/128x128.png", 
         "type": "image/png", 
-        "sizes": "400x400",
+        "sizes": "128x128",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/500x500.png", 
+        "type": "image/png", 
+        "sizes": "500x500",
         "purpose": "any maskable"
       }
-      
     ]
   }

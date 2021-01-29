@@ -3,12 +3,12 @@
 * 2021/01/28
 */
 let _mingyan = {};
-(function (_mingyan) {
+(function (mingyan, _mingyan) {
     /* 配置 */
     _mingyan.version = "2021/01/28";
     _mingyan.config = {
         ___DEBUG__: false,
-        ___date_version___: 202101281954
+        ___date_version___: 202101291824
     };
     /****/
 
@@ -571,11 +571,14 @@ let _mingyan = {};
         $("#showall").hide();
         $("#main").fadeIn();
         $("footer").html(footer);
-        if (location.hash == "#search") {
-            location.href = "#";
-        }
     };
     /****/
+    /**
+     * 隐藏主区域
+     */
+    _mingyan.hideMain = function () {
+        $("#main").hide();
+    };
 
     /**
      * 显示搜索列表
@@ -595,7 +598,8 @@ let _mingyan = {};
         showall += "</br></br></br>"; // 加换行比较好看
         $("#showall").html(showall);
         $("#showall").fadeIn();
-        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=\"./\" onclick=\"_mingyan.hideElement()\">返回<\/a>");
+        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=\"javascript:;\" onclick=\"_mingyan.clearHash()\">返回<\/a>");
+        _mingyan.initLogo();
         $("#searchbar").focus();
     };
     /****/
@@ -619,7 +623,8 @@ let _mingyan = {};
             $(id).html("<strong>" + html + "</strong></br></br></br></br>");  // 加换行比较好看
             $(id).fadeIn();
         });
-        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"_mingyan.hideElement()\">返回<\/a>"); // 更改footer
+        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"_mingyan.clearHash()\">返回<\/a>"); // 更改footer
+        _mingyan.initLogo();
         $("#md").fadeIn();
     };
     /****/
@@ -972,26 +977,58 @@ let _mingyan = {};
     };
 
     /**
+     * 图片水印
+     */
+    _mingyan.initLogo = function () {
+        let iswebp = "";
+        if (isSupportWebp) {
+            iswebp = "/webp"
+        };
+        $("footer").append(`<div id="logo"><div>`);
+        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/29/SKEaGUo7nWvkswe.png${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
+        if (ua.device != 'Mobile') {
+            $("#logo").css({
+                "position": "absolute",
+                "bottom": "-100px",
+                "width": "140px",
+                "height": "auto"
+            });
+        } else {
+            $("#logo").css({
+                "position": "absolute",
+                "bottom": "-80px",
+                "width": "110px",
+                "height": "auto"
+            });
+        };
+    };
+    _mingyan.initLogo();
+
+    /**
      * hash路由主函数
      */
     window.addEventListener("hashchange", onHashChange);
     function onHashChange() {
         initfancybox();
+        _mingyan.initLogo();
         if (hashName[location.hash] == true) { // 如果在hash保留路径中
             switch (location.hash) {
                 case "#/about":
                     location.pathname = "/"
                     _mingyan.hideElement();
+                    _mingyan.hideMain();
                     _mingyan.about();
                     break;
                 case "#/search":
                     location.pathname = "/"
                     _mingyan.hideElement();
+                    _mingyan.hideMain();
                     _mingyan.showAll();
                     break;
                 case "#/more":
                     location.pathname = "/"
                     _mingyan.hideElement();
+                    _mingyan.hideMain();
                     _mingyan.more();
                     break;
                 default:
@@ -1121,6 +1158,20 @@ let _mingyan = {};
             "\n", purple, yellow, purple, yellow, purple, yellow, purple, yellow, purple) // 就是这一段颜色做了好久……
     };
     _mingyan.console();
+
+
+    /**
+     * 清除hash路由（回到首页）
+     */
+    _mingyan.goHome = _mingyan.clearHash = function () {
+        skipCheckHash = true;
+        location.hash = '';
+        _mingyan.hideElement();
+        skipCheckHash = false;
+
+    };
+
+
     /**
      * 耶！！写完啦！！
      * 从2020-04-30 到  现在，
@@ -1137,4 +1188,4 @@ let _mingyan = {};
      *     —— Xhemj 2021-01-01
      */
 
-})(_mingyan);
+})(mingyan, _mingyan);
