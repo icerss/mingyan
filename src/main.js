@@ -981,25 +981,25 @@ let _mingyan = {};
      * 图片水印
      */
     _mingyan.initLogo = function () {
-        let iswebp = "";
+        let iswebp = "png";
         if (isSupportWebp) {
-            iswebp = "/webp"
+            iswebp = "png/webp"
         };
         $("footer").append(`<div id="logo"><div>`);
-        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/29/SKEaGUo7nWvkswe.png${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
+        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/30/1PZ2sFjUd8EfLT6.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
         if (ua.device != 'Mobile') {
             $("#logo").css({
                 "position": "absolute",
-                "bottom": "-100px",
-                "width": "140px",
-                "height": "auto"
+                "bottom": "0px",
+                "right": "0px",
+                "width": "150px"
             });
         } else {
             $("#logo").css({
                 "position": "absolute",
-                "bottom": "-80px",
-                "width": "110px",
-                "height": "auto"
+                "bottom": "0px",
+                "right": "0px",
+                "width": "120px"
             });
         };
     };
@@ -1019,18 +1019,21 @@ let _mingyan = {};
                     _mingyan.hideElement();
                     _mingyan.hideMain();
                     _mingyan.about();
+                    $("#logo").css("opacity", 0.5); // 设置右小角小人透明度
                     break;
                 case "#/search":
                     location.pathname = "/"
                     _mingyan.hideElement();
                     _mingyan.hideMain();
                     _mingyan.showAll();
+                    $("#logo").css("opacity", 0.5);
                     break;
                 case "#/more":
                     location.pathname = "/"
                     _mingyan.hideElement();
                     _mingyan.hideMain();
                     _mingyan.more();
+                    $("#logo").css("opacity", 0.5);
                     break;
                 default:
                     break;
