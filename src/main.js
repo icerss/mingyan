@@ -11,7 +11,6 @@ let _mingyan = {};
         ___DEBUG__: false,
         ___date_version___: 202101302001
     };
-    /****/
 
     /**
      * ServiceWorker
@@ -31,39 +30,6 @@ let _mingyan = {};
     };
 
     /**
-     * Hash路由保留地址
-     */
-    const hashName = {
-        "#/search": true,
-        "#/more": true,
-        "#/about": true
-    };
-
-    /**
-     * Broswer.js初始化
-     */
-    let ua = new Browser();
-
-    /* 页面基础功能 */
-    /**
-     * 显示名言数量
-     */
-    let footer = $("footer").html().replace("999+", mingyan.length);
-
-    /**
-     * 初始化
-     */
-    $("#md").hide();   // 隐藏文字区域
-    $("#showall").hide();  // 隐藏搜索区域
-    $("footer").html(footer);  // 运用Footer
-
-    /**
-     * fontFlex初始化
-     */
-    $('h1').fontFlex(30, 50, 70);
-    $('h3').fontFlex(30, 50, 70);
-
-    /**
      * 百度统计代码
      */
     var _hmt = _hmt || [];
@@ -75,6 +41,37 @@ let _mingyan = {};
     })();
 
     /**
+     * 谷歌统计代码
+     */
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RE30WVG95Q');
+
+    /* 常量 */
+    // Hash路由保留地址
+    let hashName = {
+        "#/search": true,
+        "#/more": true,
+        "#/about": true
+    };
+    let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
+    _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
+
+    /**
+     * 初始化
+     */
+    let ua = new Browser(); // Broswer.js初始化
+    let footer = $("footer").html().replace("999+", mingyan.length); // 首页Footer初始化
+    let faceClickTime = ""; // 初始化头像彩蛋点击数
+    $("#md").hide();   // 隐藏文字区域
+    $("#showall").hide();  // 隐藏搜索区域
+    $("footer").html(footer);  // 运用Footer
+    $('h1').fontFlex(30, 50, 70); // fontFlex初始化
+    $('h3').fontFlex(30, 50, 70);
+
+
+    /**
      * 动态加载JS
      */
     function loadJs(url) {
@@ -83,14 +80,6 @@ let _mingyan = {};
         let s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(su, s)
     };
-
-    /**
-     * 谷歌统计代码
-     */
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-RE30WVG95Q');
 
     /**
      * 控制台输出
@@ -152,10 +141,6 @@ let _mingyan = {};
 
     /* 图片彩蛋 */
     /**
-     * 懒加载图片地址
-     */
-    _mingyan.lazypic = "./src/loading.svg";
-    /**
      * 图片彩蛋
      * @param {String} my 完整名言
      */
@@ -168,8 +153,7 @@ let _mingyan = {};
             var my_out = my.split("：")[1] + "：" + my.split("：")[2];
             db(my_out);
         };
-        let special = "onclick=\"_mingyan.onMingyanClick()\"";
-        let baseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
+        let special = `onclick="_mingyan.onMingyanClick()"`;
         if (my_out == "解" || mingyanPicUrl[my_out] != undefined) {
             if (my_out == "解") {
                 var pic = solvePicUrl[name];
@@ -183,7 +167,7 @@ let _mingyan = {};
             _mingyan.checkPicForMobie();
             lazyload();
             return `<div id="my_text" ${special}>${my_out}</div><div id="my_pic">
-                            <img src="${_mingyan.lazypic}" data-src="${baseUrl}${pic}" data-pic-id=${my_out} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
+                            <img src="${_mingyan.lazypic}" data-src="${picBaseUrl}${pic}" data-pic-id=${my_out} class="mypic lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
                         </div>`;
             // return my + "<\/br><img src=\"" + _mingyan.lazypic + "\" data-src=\"" + pic + "\" class=\"mypic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
@@ -243,7 +227,6 @@ let _mingyan = {};
     };
 
     /* 三人头像彩蛋 */
-    let faceClickTime = "";
     /**
      * 三人头像点击量
      * @param {String} i 名字
@@ -334,7 +317,6 @@ let _mingyan = {};
             return "曾经说过"
         };
     };
-    /****/
 
     /* 打印功能 */
     _mingyan.print = function () {
@@ -352,7 +334,7 @@ let _mingyan = {};
         window.document.body.innerHTML = oldstr;
         location.reload();
     };
-    /****/
+
 
     /* 分享功能（现已废弃） */
     /**
@@ -409,7 +391,7 @@ let _mingyan = {};
         $(".swal-content__input").attr("onclick", "this.select()");
         $(".swal-content__input").select();
     };
-    /****/
+
 
     /* 下载功能 */
     _mingyan.download = function () {
@@ -431,7 +413,7 @@ let _mingyan = {};
         }, 100);
     };*/
 
-    /****/
+
     /* 主功能：名言显示 */
     let skipCheckHash = false; // 看是否不检查hash值
     /**
@@ -526,7 +508,7 @@ let _mingyan = {};
         $("#main").css("transform", "translateY(30%)");
         $("#md").css("transform", "translateY(50px)");
     };
-    /****/
+
 
     /**
      * 修复手机端图片菜单位置
@@ -539,7 +521,7 @@ let _mingyan = {};
         };
         lazyload();
     };
-    /****/
+
 
     /**
      * 刷新名言
@@ -562,7 +544,7 @@ let _mingyan = {};
             location.hash = "#" + randomNumber(0, mingyan.length - 1)
         };
     };
-    /****/
+
 
     /**
      * 隐藏搜索列表和文字区域
@@ -573,7 +555,7 @@ let _mingyan = {};
         $("#main").fadeIn();
         $("footer").html(footer);
     };
-    /****/
+
     /**
      * 隐藏主区域
      */
@@ -591,19 +573,20 @@ let _mingyan = {};
         $("#main").hide();
         $("input#searchbar").val("");
         // 搜索框
-        let showall = "<input style=\"" + inputbar_width + "\"" + " onclick=\"this.select()\" type=\"search\" id=\"searchbar\" placeholder=\"搜索……\" results=\"5\"></input></br></br><span class=\"e\"></span>";
+        let showall = `<input style="${inputbar_width}" onclick="this.select()" type="search" id="searchbar" placeholder="搜索……" results="5"></input>
+        </br></br><span class="e"></span>`;
         for (i = 0; i < mingyan.length; i++) {
             // 默认列出全部名言
-            showall += "<div><a style=\"color:black\" id=\"showall_item\" class=\"" + i + "\" href=\"./#" + i + "\" onclick=\"_mingyan.hideElement()\">" + mingyan[i] + "</a></div>";
+            showall += `<div><a style="color:black" id="showall_item" class="${i}" href="#${i}" onclick="_mingyan.hideElement()">${mingyan[i]}</a></div>`;
         };
         showall += "</br></br></br>"; // 加换行比较好看
         $("#showall").html(showall);
         $("#showall").fadeIn();
-        $("footer").html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=\"javascript:;\" onclick=\"_mingyan.clearHash()\">返回<\/a>");
+        $("footer").html(`当前名言数量：${mingyan.length}</br><a class="aline" href="javascript:;" onclick="_mingyan.clearHash()">返回</a>`);
         _mingyan.initLogo();
         $("#searchbar").focus();
     };
-    /****/
+
 
     /**
      * Markdown转成网页
@@ -614,7 +597,7 @@ let _mingyan = {};
         $("#md").hide();
         $("#main").hide();
         $("#showall").hide();
-        $(id).html("<strong>" + `<div style="text-align: center" class="mdui-ripple"><style>h1{font-size:30px}</style><h1>加载中……</h1></div>` + "</strong></br></br></br></br>");
+        $(id).html("<strong>" + `<div style="text-align: center" class="mdui-ripple"><style>h1{font-size:30px}</style><h1>加载中……</h1></div></strong></br></br></br></br>`);
         $.get(url, function (data) { // 获取文件
             marked.setOptions({
                 breaks: true
@@ -628,7 +611,7 @@ let _mingyan = {};
         _mingyan.initLogo();
         $("#md").fadeIn();
     };
-    /****/
+
 
     /**
      * 更多页面
@@ -644,7 +627,7 @@ let _mingyan = {};
         _mingyan.mdToHtml("#md", "./src/md/about.md?t=" + _mingyan.config.___date_version___);
         //location.hash = "#/about";
     };
-    /****/
+
 
     /**
      * Markdown名言列表
@@ -661,7 +644,7 @@ let _mingyan = {};
         $("#md").html(marked(out));
         $("#md").fadeIn()
     }
-    /****/
+
 
     /*function time(i) { 已废弃 2021-01-24
         let a = i;
@@ -730,7 +713,7 @@ let _mingyan = {};
         $("#md").html(marked(out));
         $("#md").fadeIn()
     };
-    /****/
+
 
     /**
      * 搜索主函数
@@ -750,7 +733,7 @@ let _mingyan = {};
                             $("a#showall_item").each(function () {
                                 if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
                                     let reg = "/" + $("input#searchbar").val() + "/g"; // 拼接正规表达式
-                                    $(this).html($(this).text().replace(eval(reg), "<span class=\"label label-secondary\">" + $("input#searchbar").val() + "</span>")); // 关键词加颜色凸显
+                                    $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
                                     $(this).show();
                                 } else {
                                     $(this).hide();
@@ -782,7 +765,6 @@ let _mingyan = {};
     };
     // 没100ms执行一次
     let search = setInterval(_mingyan.search, 100);
-    /****/
 
     /**
      * 邮箱 （已废弃 2020-11-28）
@@ -791,7 +773,6 @@ let _mingyan = {};
         window.open("mailto:" + qs("mail").replace("---", "@"));
         _mingyan.reload()
     };
-    /****/
 
     /**
      * 标题变化
@@ -807,7 +788,7 @@ let _mingyan = {};
             document.title = title;
         }
     });
-    /****/
+
     /**
      * 2021!!!
      * 排行榜系统
@@ -1093,7 +1074,7 @@ let _mingyan = {};
                 $(".app").load("./src/_404.html");
             };
     };
-    /****/
+
 
     /**
      * 初始化Headroom.js
@@ -1106,7 +1087,7 @@ let _mingyan = {};
         });
         headroom.init();
     }
-    /****/
+
     // 图片懒加载
     lazyload();
     // 不知道为什么有时候会加载失败
@@ -1172,7 +1153,7 @@ let _mingyan = {};
         location.hash = '';
         _mingyan.hideElement();
         skipCheckHash = false;
-
+        _mingyan.show();
     };
 
 
