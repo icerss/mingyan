@@ -9,7 +9,7 @@ let _mingyan = {};
     _mingyan.version = "2021/01/29";
     _mingyan.config = {
         ___DEBUG__: false,
-        ___date_version___: 202101291824
+        ___date_version___: 202101302001
     };
     /****/
 
