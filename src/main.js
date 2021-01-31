@@ -963,7 +963,7 @@ let _mingyan = {};
      */
     _mingyan.initLogo = function () {
         let iswebp = "png";
-        if (isSupportWebp) {
+        if (isSupportWebp()) {
             iswebp = "png/webp"
         };
         $("footer").append(`<div id="logo"><div>`);
