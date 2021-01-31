@@ -1,14 +1,14 @@
 /*
 * ©2020 xhemj
-* 2021/01/29
+* 2021/01/31
 */
 
 let _mingyan = {};
 (function (mingyan, _mingyan) {
     /* 配置 */
-    _mingyan.version = "2021/01/29";
+    _mingyan.version = "2021/01/31";
     _mingyan.config = {
-        ___DEBUG__: false,
+        ___DEBUG__: true,
         ___date_version___: 202101302001
     };
 
@@ -85,10 +85,17 @@ let _mingyan = {};
      * 控制台输出
      */
     let dn = 1;
+    let log = console.log;
     function db(i) {
         if (_mingyan.config.___DEBUG__) {
-            console.log("#" + dn + " -> " + "%c[DB]%c" + i, "color:red", "color:black");
-            dn++;
+            if (typeof i == "string") {
+                log(`[ERSS名言]#${dn} -> ${i}`);
+                dn++;
+            } else {
+                log(`[ERSS名言]#${dn} -> `);
+                log(i);
+                dn++
+            };
         };
     };
 
@@ -535,7 +542,6 @@ let _mingyan = {};
         //     location.href = "//" + location.hostname + ":" + location.port + location.pathname;
         // } else {
         //     _mingyan.show();
-        //     db("show：L479")
         // };
         // lazyload();
         if ($("#reload").attr("href")) {
@@ -659,12 +665,12 @@ let _mingyan = {};
     };
     $.get("https://api.github.com/repos/xhemj/mingyan/commits?page=1&per_page=1000", function (data) {
         for (i = 0; i < data.length; i++) {
-            console.log(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
+            db(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
         }
     });
     $.get("https://api.github.com/repos/xhemj/mingyan/commits?page=2&per_page=1000", function (data) {
         for (i = 0; i < data.length; i++) {
-            console.log(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
+            db(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
         }
     });* /
  
@@ -688,7 +694,7 @@ let _mingyan = {};
                 o += a2
             };
         };
-        //console.log(out);
+        //db(out);
         let count = [ // 匹配写了好久
             "数学老王：" + o.match(/老王/g).length,
             "英语老俞：" + o.match(/老俞/g).length,
@@ -707,7 +713,7 @@ let _mingyan = {};
             "生物吴老师：" + o.match(/生物吴老师/g).length
         ];
         //window.count = count;
-        //console.log(count);
+        //db(count);
         let out = "";
         out += count.join(" 句</br>") + " 句</br></br></br></br>";
         $("#md").html(marked(out));
@@ -804,7 +810,7 @@ let _mingyan = {};
         await auth.anonymousAuthProvider().signIn();
         const loginState = await auth.getLoginState();
         db("登陆成功");
-        console.log(loginState);
+        db(loginState);
     };
     login();
     // 基础函数
@@ -824,7 +830,7 @@ let _mingyan = {};
                     })
                     .then((res) => {
                         db("添加成功");
-                        console.log(res);
+                        db(res);
                         resolve(res);
                     })
                     .catch(function (e) {
@@ -848,7 +854,7 @@ let _mingyan = {};
                     })
                     .then((res) => {
                         db("获取成功");
-                        console.log(res);
+                        db(res);
                         resolve(res);
                     })
                     .catch(function (e) {
@@ -884,7 +890,7 @@ let _mingyan = {};
                     })
                     .then((res) => {
                         db("获取成功");
-                        console.log(res);
+                        db(res);
                         resolve(res);
                     })
                     .catch(function (e) {
@@ -902,7 +908,7 @@ let _mingyan = {};
         if (new Date().getTime() >= 1609430400000 /* 2021-01-01 00:00:00 */) { // 如果到了2021年
             _mingyan.rankingApi.getIp() // 先来一个ip看看
                 .then(function (ip_data) {
-                    console.log(ip_data.ip);
+                    db(ip_data.ip);
                     let ip = ip_data.ip;
                     if (!localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果没有存过数据
                         db("新用户");
@@ -932,7 +938,7 @@ let _mingyan = {};
                                                 if (name) { // 之后就是更新名字啦！
                                                     _mingyan.rankingApi.update(id, name)
                                                         .then(function (update_data) {
-                                                            console.log(update_data);
+                                                            db(update_data);
                                                         })
                                                         // 这么多catch？
                                                         .catch(function (e) {
@@ -971,14 +977,14 @@ let _mingyan = {};
         if (ua.device != 'Mobile') {
             $("#logo").css({
                 "position": "absolute",
-                "bottom": "0px",
+                "bottom": "50px",
                 "right": "0px",
                 "width": "150px"
             });
         } else {
             $("#logo").css({
                 "position": "absolute",
-                "bottom": "0px",
+                "bottom": "50px",
                 "right": "0px",
                 "width": "120px"
             });
@@ -1042,7 +1048,6 @@ let _mingyan = {};
         case "/":
             $(document).ready(function () {
                 _mingyan.show();
-                db("show：L960")
             });
             if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果是新用户
                 _mingyan.ranking();
@@ -1066,7 +1071,6 @@ let _mingyan = {};
                 let myid = new Number(id);
                 $(document).ready(function () {
                     _mingyan.show(myid.toString());
-                    db("show：L988")
                 });
             } else {
                 // 否则返回404
@@ -1132,6 +1136,7 @@ let _mingyan = {};
     _mingyan.console = function () {
         let purple = "font-weight: 900;color: #9b4dca;font-size: 15px";
         let yellow = "font-weight: 900;color: #ffb700;font-size: 15px"
+        console.log("欢迎！")
         console.log("\n" +
             "%c诗曰：\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40%c________\n%c" +
             "\40\40王颢维尼熊猫，\40\40\40\40\40\40\40\40%c|\40ERSS\40|\n%c" +
@@ -1141,6 +1146,9 @@ let _mingyan = {};
             "\40\40抠出一根面条。\n" +
             "\40\40\40\40\40\40————— 天净沙·梗" +
             "\n", purple, yellow, purple, yellow, purple, yellow, purple, yellow, purple) // 就是这一段颜色做了好久……
+        $.get("https://api.github.com/repos/xhemj/mingyan/commits", function (res) {
+            db(`[ERSS名言] 版本：${res[0]["sha"].slice(0, 7)}`)
+        });
     };
     _mingyan.console();
 
@@ -1156,6 +1164,15 @@ let _mingyan = {};
         _mingyan.show();
     };
 
+    /**
+     * 开放函数
+     */
+    window.isSupportWebp = isSupportWebp;
+    window.qs = qs;
+    window.randomNumber = randomNumber;
+    window.loadJs = loadJs;
+    window.db = db;
+    window.log = log;
 
     /**
      * 耶！！写完啦！！
