@@ -537,6 +537,17 @@ let _mingyan = {};
         };
     };
 
+
+    /**
+     * 修复搜索框长度
+     */
+    if (ua.device != 'Mobile') {
+        var inputbar_width = "60%";
+    } else {
+        var inputbar_width = "auto";
+        $("#main").css("transform", "translateY(30%)");
+    };
+    
     /**
      * 修复手机端名言文字位置
      */
