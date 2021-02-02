@@ -159,3 +159,16 @@ footer {
 .headroom--unpinned {
     transform: translateY(-100%);
 }
+.fadeIn_show {
+	transition: opacity 400ms;
+}
+.fadeIn_hide {
+	opacity: 0;
+}
+.fadeOut_show {
+	opacity: 1;
+}
+.fadeOut_hide {
+	opacity: 0;
+	transition: opacity 400ms;
+}

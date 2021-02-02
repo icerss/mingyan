@@ -48,6 +48,36 @@ let _mingyan = {};
     gtag('js', new Date());
     gtag('config', 'G-RE30WVG95Q');
 
+    /**
+     * 基础函数（测试）
+     */
+    let _ = {};
+    let _$ = function (el) {
+        return document.querySelector(el);
+    };
+    (function (_) {
+        _.get = function (url, callback, isJson) {
+            let request = new XMLHttpRequest();
+            request.open('GET', url, true);
+
+            request.onload = function () {
+                if (this.status >= 200 && this.status < 400) {
+                    let data = this.response;
+                    if (isJson) {
+                        data = JSON.parse(data);
+                    };
+                    callback(data);
+                }
+            };
+
+            request.onerror = function () {
+                console.error("Error")
+            };
+
+            request.send();
+        };
+    })(_);
+
     /* 常量 */
     // Hash路由保留地址
     let hashName = {
@@ -88,7 +118,7 @@ let _mingyan = {};
     let log = console.log;
     function db(i) {
         if (_mingyan.config.___DEBUG__) {
-            if (typeof i == "string") {
+            if (typeof i == "string" || typeof i == "number") {
                 log(`[ERSS名言]#${dn} -> ${i}`);
                 dn++;
             } else {
@@ -545,9 +575,9 @@ let _mingyan = {};
         // };
         // lazyload();
         if ($("#reload").attr("href")) {
-            _mingyan.show($("#reload").attr("href").split("#")[1])
+            location.hash = "#" + $("#reload").attr("href").split("#")[1];
         } else {
-            location.hash = "#" + randomNumber(0, mingyan.length - 1)
+            location.hash = "#" + randomNumber(0, mingyan.length - 1);
         };
     };
 
@@ -604,7 +634,7 @@ let _mingyan = {};
         $("#main").hide();
         $("#showall").hide();
         $(id).html("<strong>" + `<div style="text-align: center" class="mdui-ripple"><style>h1{font-size:30px}</style><h1>加载中……</h1></div></strong></br></br></br></br>`);
-        $.get(url, function (data) { // 获取文件
+        _.get(url, function (data) { // 获取文件
             marked.setOptions({
                 breaks: true
             });
@@ -663,12 +693,12 @@ let _mingyan = {};
         let ut = a[0] + " " + h + ":" + min + ":" + s;
         return ut;
     };
-    $.get("https://api.github.com/repos/xhemj/mingyan/commits?page=1&per_page=1000", function (data) {
+    _.get("https://api.github.com/repos/xhemj/mingyan/commits?page=1&per_page=1000", function (data) {
         for (i = 0; i < data.length; i++) {
             db(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
         }
     });
-    $.get("https://api.github.com/repos/xhemj/mingyan/commits?page=2&per_page=1000", function (data) {
+    _.get("https://api.github.com/repos/xhemj/mingyan/commits?page=2&per_page=1000", function (data) {
         for (i = 0; i < data.length; i++) {
             db(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
         }
@@ -1136,7 +1166,7 @@ let _mingyan = {};
     _mingyan.console = function () {
         let purple = "font-weight: 900;color: #9b4dca;font-size: 15px";
         let yellow = "font-weight: 900;color: #ffb700;font-size: 15px"
-        console.log("欢迎！")
+        db("欢迎！")
         console.log("\n" +
             "%c诗曰：\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40\40%c________\n%c" +
             "\40\40王颢维尼熊猫，\40\40\40\40\40\40\40\40%c|\40ERSS\40|\n%c" +
@@ -1145,10 +1175,10 @@ let _mingyan = {};
             "\40\40三天之内，\n" +
             "\40\40抠出一根面条。\n" +
             "\40\40\40\40\40\40————— 天净沙·梗" +
-            "\n", purple, yellow, purple, yellow, purple, yellow, purple, yellow, purple) // 就是这一段颜色做了好久……
-        $.get("https://api.github.com/repos/xhemj/mingyan/commits", function (res) {
+            "\n", purple, yellow, purple, yellow, purple, yellow, purple, yellow, purple); // 就是这一段颜色做了好久……
+        _.get("https://api.github.com/repos/xhemj/mingyan/commits", function (res) {
             db(`[ERSS名言] 版本：${res[0]["sha"].slice(0, 7)}`)
-        });
+        }, true);
     };
     _mingyan.console();
 
@@ -1173,6 +1203,8 @@ let _mingyan = {};
     window.loadJs = loadJs;
     window.db = db;
     window.log = log;
+    window._ = _;
+    window._$ = _$;
 
     /**
      * 耶！！写完啦！！
