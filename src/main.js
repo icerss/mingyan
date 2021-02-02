@@ -536,19 +536,25 @@ let _mingyan = {};
             //location.href = "http://" + location.hostname + ":" + location.port + location.pathname;
         };
     };
-    // 针对手机进行位置调整
-    if (ua.device != 'Mobile') {
-        var inputbar_width = "60%";
-        $("#main").css("transform", "translateY(15%)");
-    } else {
-        var inputbar_width = "auto";
-        $("#main").css("transform", "translateY(30%)");
-        $("#md").css("transform", "translateY(50px)");
-    };
-
 
     /**
-     * 修复手机端图片菜单位置
+     * 修复手机端名言文字位置
+     */
+    _mingyan.checkTextForMobie = function () {
+        // 针对手机进行位置调整
+        if (ua.device != 'Mobile') {
+            var inputbar_width = "60%";
+            $("#main").css("transform", "translateY(15%)");
+        } else {
+            var inputbar_width = "auto";
+            $("#main").css("transform", "translateY(30%)");
+            $("#md").css("transform", "translateY(50px)");
+        };
+    };
+    _mingyan.checkTextForMobie();
+
+    /**
+     * 修复手机端图片彩蛋位置
      */
     _mingyan.checkPicForMobie = function () {
         if (ua.device == 'Mobile') {
@@ -558,7 +564,6 @@ let _mingyan = {};
         };
         lazyload();
     };
-
 
     /**
      * 刷新名言
@@ -1025,9 +1030,9 @@ let _mingyan = {};
     /**
      * hash路由主函数
      */
-    window.addEventListener("hashchange", onHashChange);
-    function onHashChange() {
+    _mingyan.onHashChange = function () {
         initfancybox();
+        _mingyan.checkTextForMobie();
         _mingyan.initLogo();
         if (hashName[location.hash] == true) { // 如果在hash保留路径中
             switch (location.hash) {
@@ -1059,7 +1064,8 @@ let _mingyan = {};
             _mingyan.show(location.hash.split("#")[1])
         };
     };
-    onHashChange();
+    _mingyan.onHashChange();
+    window.addEventListener("hashchange",  _mingyan.onHashChange);
 
     /**
      * 旧版historypush路由 已废弃 2021-01-24
