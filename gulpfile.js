@@ -2,8 +2,8 @@ const { task, src, dest, series } = require('gulp')
 const minifycss = require('gulp-minify-css')
 const terser = require('gulp-terser')
 const rename = require('gulp-rename')
-const concat = require('gulp-concat');
-const babel = require('gulp-babel');
+const concat = require('gulp-concat')
+const babel = require('gulp-babel')
 
 const css = function () {
     return src(['src/*.css'])
