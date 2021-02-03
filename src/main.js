@@ -148,7 +148,7 @@ let _mingyan = {};
         let s = location.href;
         s = s.replace("?", "?&").split("&");
         let re = "";
-        for (i = 1; i < s.length; i++) {
+        for (let i = 1; i < s.length; i++) {
             if (s[i].indexOf(qs + "=") == 0) {
                 re = s[i].replace(qs + "=", "");
             };
@@ -390,7 +390,7 @@ let _mingyan = {};
      * @param {String} id 传入的分享ID
      */
     _mingyan.decodeMingyan = function (id) {
-        for (i = 0; i < mingyan.length; i++) {
+        for (let i = 0; i < mingyan.length; i++) {
             let name = mingyan[i].split("：")[0];
             db(name)
             let my = mingyan[i].split("：")[1];
@@ -547,17 +547,15 @@ let _mingyan = {};
         var inputbar_width = "auto";
         $("#main").css("transform", "translateY(30%)");
     };
-    
+
     /**
      * 修复手机端名言文字位置
      */
     _mingyan.checkTextForMobie = function () {
         // 针对手机进行位置调整
         if (ua.device != 'Mobile') {
-            var inputbar_width = "60%";
             $("#main").css("transform", "translateY(15%)");
         } else {
-            var inputbar_width = "auto";
             $("#main").css("transform", "translateY(30%)");
             $("#md").css("transform", "translateY(50px)");
         };
@@ -627,7 +625,7 @@ let _mingyan = {};
         // 搜索框
         let showall = `<input style="${inputbar_width}" onclick="this.select()" type="search" id="searchbar" placeholder="搜索……" results="5"></input>
         </br></br><span class="e"></span>`;
-        for (i = 0; i < mingyan.length; i++) {
+        for (let i = 0; i < mingyan.length; i++) {
             // 默认列出全部名言
             showall += `<div><a style="color:black" id="showall_item" class="${i}" href="#${i}" onclick="_mingyan.hideElement()">${mingyan[i]}</a></div>`;
         };
@@ -689,7 +687,7 @@ let _mingyan = {};
         $("#main").hide();
         $("#showall").hide();
         let out = ``;
-        for (i = 0; i < mingyan.length; i++) {
+        for (let i = 0; i < mingyan.length; i++) {
             out += mingyan[i] + "</br>"
         };
         out += `</br></br></br></br>`;
@@ -710,12 +708,12 @@ let _mingyan = {};
         return ut;
     };
     _.get("https://api.github.com/repos/xhemj/mingyan/commits?page=1&per_page=1000", function (data) {
-        for (i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             db(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
         }
     });
     _.get("https://api.github.com/repos/xhemj/mingyan/commits?page=2&per_page=1000", function (data) {
-        for (i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             db(time(data[i]["commit"]["committer"]["date"]) + " " + data[i]["commit"]["message"])
         }
     });* /
@@ -728,7 +726,7 @@ let _mingyan = {};
         $("#main").hide();
         $("#showall").hide();
         let o = "";
-        for (i = 0; i < mingyan.length; i++) {
+        for (let i = 0; i < mingyan.length; i++) {
             try {
                 let a1 = mingyan[i].split("：")[0];
                 let a2 = mingyan[i + 1].split("：")[0];
