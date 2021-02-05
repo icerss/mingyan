@@ -4,6 +4,7 @@ const terser = require('gulp-terser')
 const rename = require('gulp-rename')
 const concat = require('gulp-concat')
 const babel = require('gulp-babel')
+const sourcemaps = require('gulp-sourcemaps')
 
 const css = function () {
     return src(['src/*.css'])
@@ -12,19 +13,19 @@ const css = function () {
             suffix: '.min'
         }))
         .pipe(dest('dist'))
-        .pipe(minifycss())
 }
 css.displayName = 'minifycss'
 task(css);
 
 const js = function () {
     return src(['src/**/*.js'])
+        .pipe(sourcemaps.init())
         .pipe(terser())
         .pipe(rename({
             suffix: '.min'
         }))
+        .pipe(sourcemaps.write("."))
         .pipe(dest('dist'))
-        .pipe(terser())
 }
 js.displayName = 'minifyjs'
 task(js)
@@ -49,11 +50,28 @@ task(gobabel);
 
 const minbabeljs = function () {
     return src('./dist/all.min.js')
+        .pipe(sourcemaps.init())
         .pipe(terser())
+        .pipe(sourcemaps.write("."))
         .pipe(dest('dist'))
-        .pipe(terser())
 }
 minbabeljs.displayName = 'minifybabeljs'
 task(minbabeljs)
 
-task('default', series(['minifycss', 'minifyjs', 'concat', 'babel', 'minifybabeljs']))
+const copyhtml = function () {
+    return src('./index.html')
+        .pipe(rename("404.html"))
+        .pipe(dest('.'))
+}
+copyhtml.displayName = 'copyhtml'
+task(copyhtml)
+
+const addheader = function () {
+    return src(['./src/HEADER', 'dist/all.min.js'])
+        .pipe(concat('all.min.js'))
+        .pipe(dest('./dist'));
+}
+addheader.displayName = 'addheader'
+task(addheader)
+
+task('default', series(['minifycss', 'minifyjs', 'concat', 'babel', 'minifybabeljs', 'copyhtml', 'addheader']))
