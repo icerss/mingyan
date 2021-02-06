@@ -8,7 +8,7 @@
     "url": "git+https://github.com/xhemj/mingyan.git"
   },
   "scripts": {
-    "build": "gulp"
+    "gulp": "gulp"
   },
   "keywords": [
     "xhemj",
