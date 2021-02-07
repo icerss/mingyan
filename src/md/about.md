@@ -19,7 +19,7 @@
   </li>
     <li class="mdui-list-item mdui-ripple" >
       <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('Oranjezelv')"><img class="lazyload" src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/ejgOW7QY8MFmDU5.jpg"/></div>
-      <div class="mdui-list-item-content">Oranjezelv</div>
+      <div class="mdui-list-item-content">Oranjezelf</div>
       <a href="https://space.bilibili.com/368095014"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
   </li>
 </ul>
@@ -39,6 +39,9 @@
   </li>
   <li class="mdui-list-item mdui-ripple" >
       <div class="mdui-list-item-content">IYAMAYA 工作室</div>
+  </li>
+  <li class="mdui-list-item mdui-ripple" >
+      <div class="mdui-list-item-content">英语俞老师</div>
   </li>
   <li class="mdui-list-item mdui-ripple" >
       <div class="mdui-list-item-content">厦门市音乐学校的全体老师和同学们</div>

@@ -1,16 +1,16 @@
 /*
-* ©2020 xhemj
-* 2021/02/05
+* ©2020-2021 xhemj
+* 2021/02/07
 */
 
 (function () {
     /* 配置 */
     let _mingyan = _mingyan || {};
 
-    _mingyan.version = "2021/02/05";
+    _mingyan.version = "2021/02/07";
     _mingyan.config = {
         ___DEBUG__: true,
-        ___date_version___: 202101302001
+        ___date_version___: 202102071808
     };
 
     /**
@@ -1023,62 +1023,66 @@
      * 2021彩蛋主函数
      */
     _mingyan.ranking = function () {
-        if (new Date().getTime() >= 1609430400000 /* 2021-01-01 00:00:00 */ && navigator.userAgent.toString().indexOf("bot") == -1 && navigator.userAgent.toString().indexOf("spider") == -1 /* 防止搜索引擎激活 */) { // 如果到了2021年
-            _mingyan.rankingApi.getIp() // 先来一个ip看看
-                .then(function (ip_data) {
-                    db(ip_data.ip);
-                    let ip = ip_data.ip;
-                    if (!localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果没有存过数据
-                        db("新用户");
-                        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 那就存一个吧
-                        _mingyan.rankingApi.add("一位不知道名字的访客", ip) // 默认给一个名字
-                            .then(function (add_data) {
-                                localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 不知道为什么要再存一遍，但不想删了
-                                let id = add_data.result.res.id; // 留id以便于之后更新名字
-                                _mingyan.rankingApi.getNum()
-                                    .then(function (num_data) { // 获取当前排名
-                                        let num = num_data["result"]["res1"]["data"][0]["num"];
-                                        // 弹窗
-                                        swal({
-                                            title: `第${num}个人！！`,
-                                            text: `恭喜你成为2021年第${num}个查看名言的人！！`, // 解决了！！（2021-01-26）
-                                            icon: "success",
-                                            content: {
-                                                element: "input",
-                                                attributes: {
-                                                    placeholder: "写个名字记录一下你是谁吧！",
-                                                    type: "text"
-                                                }
-                                            },
-                                            closeOnClickOutside: false
-                                        })
-                                            .then(name => {
-                                                if (name) { // 之后就是更新名字啦！
-                                                    _mingyan.rankingApi.update(id, name)
-                                                        .then(function (update_data) {
-                                                            db(update_data);
-                                                        })
-                                                        // 这么多catch？
-                                                        .catch(function (e) {
-                                                            console.error(e)
-                                                        });
-                                                    location.href = "./";
-                                                };
-                                            })
+        if (new Date().getTime() < 1609430400000 /* 2021-01-01 00:00:00 */) return;
+        if (navigator.userAgent.toString().indexOf("bot") != -1 && navigator.userAgent.toString().indexOf("spider") != -1 /* 防止搜索引擎激活 */) return;
+        if (localStorage.getItem("___mingyan_2021_ranking_data__")) return;
+        if (qs("force_action") == "skip_ranking" || qs("do") == "sr") {
+            localStorage.setItem("___mingyan_2021_ranking_data__","__SKIP__")
+            return;
+        };
+        _mingyan.rankingApi.getIp() // 先来一个ip看看
+            .then(function (ip_data) {
+                db(ip_data.ip);
+                let ip = ip_data.ip;
+                // 如果没有存过数据
+                db("新用户");
+                localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 那就存一个吧
+                _mingyan.rankingApi.add("一位不知道名字的访客", ip) // 默认给一个名字
+                    .then(function (add_data) {
+                        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 不知道为什么要再存一遍，但不想删了
+                        let id = add_data.result.res.id; // 留id以便于之后更新名字
+                        _mingyan.rankingApi.getNum()
+                            .then(function (num_data) { // 获取当前排名
+                                let num = num_data["result"]["res1"]["data"][0]["num"];
+                                // 弹窗
+                                swal({
+                                    title: `第${num}个人！！`,
+                                    text: `恭喜你成为2021年第${num}个查看名言的人！！`, // 解决了！！（2021-01-26）
+                                    icon: "success",
+                                    content: {
+                                        element: "input",
+                                        attributes: {
+                                            placeholder: "写个名字记录一下你是谁吧！",
+                                            type: "text"
+                                        }
+                                    },
+                                    closeOnClickOutside: false
+                                })
+                                    .then(name => {
+                                        if (name) { // 之后就是更新名字啦！
+                                            _mingyan.rankingApi.update(id, name)
+                                                .then(function (update_data) {
+                                                    db(update_data);
+                                                })
+                                                // 这么多catch？
+                                                .catch(function (e) {
+                                                    console.error(e)
+                                                });
+                                            location.href = "./";
+                                        };
                                     })
-                                    .catch(function (e) {
-                                        console.error(e)
-                                    });
                             })
                             .catch(function (e) {
                                 console.error(e)
                             });
-                    }
-                })
-                .catch(function (e) {
-                    console.error(e)
-                });
-        }
+                    })
+                    .catch(function (e) {
+                        console.error(e)
+                    });
+            })
+            .catch(function (e) {
+                console.error(e)
+            });
 
     };
 
@@ -1164,7 +1168,7 @@
             location.hash = "#/more"
             break;
         case "/index.html":
-        case "/":
+        case "/": // 这边还没废弃
             $(document).ready(function () {
                 _mingyan.show();
             });
