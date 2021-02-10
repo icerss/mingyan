@@ -19,12 +19,10 @@ task(css);
 
 const js = function () {
     return src(['src/**/*.js'])
-        .pipe(sourcemaps.init())
         .pipe(terser())
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(sourcemaps.write("."))
         .pipe(dest('dist'))
 }
 js.displayName = 'minifyjs'
