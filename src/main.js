@@ -1344,8 +1344,8 @@
      *   —— 2021年寒假
      */
 
-    let starApiUrl = "http://localhost:3000/api/";
-    // let starApiUrl = "https://mongodb.xhemj.vercel.app/api/"
+    // let starApiUrl = "http://localhost:3000/api/";
+    let starApiUrl = "https://mingyan-star-api.xhemj.vercel.app/api/"
     // 感谢Vercel的服务！！
     // 感谢MongoDB提供免费的数据库！！
 
