@@ -1,13 +1,13 @@
 /*
 * ©2020-2021 xhemj
-* 2021/02/07
+* 2021/02/11
 */
 
 (function () {
     /* 配置 */
     let _mingyan = _mingyan || {};
 
-    _mingyan.version = "2021/02/07";
+    _mingyan.version = "2021/02/11";
     _mingyan.config = {
         ___DEBUG__: true,
         ___date_version___: 202102071808
@@ -16,9 +16,9 @@
     /**
      * ServiceWorker
      */
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js?t=202101281305');
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("./sw.js?t=202101281305");
         })
     };
 
@@ -27,7 +27,7 @@
      */
     window.onload = function () {
         let loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-        db('Page load time is ' + loadTime + "ms");
+        db("Page load time is " + loadTime + "ms");
     };
 
     /**
@@ -46,8 +46,8 @@
      */
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-RE30WVG95Q');
+    gtag("js", new Date());
+    gtag("config", "G-RE30WVG95Q");
 
     /**
      * 基础函数（测试）
@@ -59,7 +59,7 @@
     (function (_) {
         _.get = function (url, callback, isJson) {
             let request = new XMLHttpRequest();
-            request.open('GET', url, true);
+            request.open("GET", url, true);
 
             request.onload = function () {
                 if (this.status >= 200 && this.status < 400) {
@@ -118,6 +118,7 @@
         window.localStorage.length = (document.cookie.match(/\=/g) || window.localStorage).length;
     }
 
+
     /* 常量 */
     // Hash路由保留地址
     let hashName = {
@@ -137,8 +138,8 @@
     $($md).hide();   // 隐藏文字区域
     $($search).hide();  // 隐藏搜索区域
     $($footer).html(footer);  // 运用Footer
-    $('h1').fontFlex(30, 50, 70); // fontFlex初始化
-    $('h3').fontFlex(30, 50, 70);
+    $("h1").fontFlex(30, 50, 70); // fontFlex初始化
+    $("h3").fontFlex(30, 50, 70);
 
 
     /**
@@ -158,11 +159,17 @@
     let log = console.log;
     function db(i) {
         if (_mingyan.config.___DEBUG__) {
+            let special1 = "";
+            let special2 = "";
+            if (i.toString().split("====").length != 1 && typeof i == "string") {
+                special1 = "%c";
+                special2 = "color: red";
+            };
             if (typeof i == "string" || typeof i == "number") {
-                log(`[ERSS名言]#${dn} -> ${i}`);
+                log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}${i}`, special2);
                 dn++;
             } else {
-                log(`[ERSS名言]#${dn} -> `);
+                log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}`, special2);
                 log(i);
                 dn++
             };
@@ -174,7 +181,7 @@
      */
     function isSupportWebp() {
         try {
-            return document.createElement('canvas').toDataURL('image/webp', 0.5).indexOf('data:image/webp') === 0;
+            return document.createElement("canvas").toDataURL("image/webp", 0.5).indexOf("data:image/webp") === 0;
         } catch (err) {
             return false;
         };
@@ -223,23 +230,25 @@
      */
     _mingyan.checkPic = function (my) {
         let name = my.split("：")[0];
+        let my_out = null;
         if (my.split("：").length == 2) {
-            var my_out = my.split("：")[1];
+            my_out = my.split("：")[1];
             db(my_out);
         } else if (my.split("：").length == 3) {
-            var my_out = my.split("：")[1] + "：" + my.split("：")[2];
+            my_out = my.split("：")[1] + "：" + my.split("：")[2];
             db(my_out);
         };
         let special = `onclick="_mingyan.onMingyanClick()"`;
         if (my_out == "解" || mingyanPicUrl[my_out] != undefined) {
+            let pic = null
             if (my_out == "解") {
-                var pic = solvePicUrl[name];
+                pic = solvePicUrl[name];
             } else if (mingyanPicUrl[my_out] != undefined) {
-                var pic = mingyanPicUrl[my_out];
+                pic = mingyanPicUrl[my_out];
             };
             // 支持WEBP格式
             if (isSupportWebp()) {
-                var pic = pic + "/webp"
+                pic = pic + "/webp"
             };
             _mingyan.checkPicForMobie();
             lazyload();
@@ -363,16 +372,16 @@
                 closeOnClickOutside: false
             });
             // 音乐惊喜
-            var ap = new APlayer({
-                container: document.getElementById('player'),
+            let ap = new APlayer({
+                container: document.getElementById("player"),
                 fixed: true,
                 lrcType: 3,
                 audio: [{
-                    name: 'Shape of You',
-                    artist: 'Ed Sheeran',
-                    url: 'https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3',
-                    cover: 'https://i.loli.net/2020/12/19/L1NY8U7nhRjyQMa.jpg',
-                    lrc: 'https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc'
+                    name: "Shape of You",
+                    artist: "Ed Sheeran",
+                    url: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
+                    cover: "https://i.loli.net/2020/12/19/L1NY8U7nhRjyQMa.jpg",
+                    lrc: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc"
                 }]
             });
             // 调整字幕位置
@@ -477,7 +486,7 @@
     };
     /* 已使用FileSaver.js替代 - 2020-11-28
     _mingyan.dfile = function (fileName, content) {
-        const aTag = document.createElement('a');
+        const aTag = document.createElement("a");
         const blob = new Blob([content]);
         aTag.download = fileName;
         aTag.style = "display: none";
@@ -506,19 +515,20 @@
             $($main).hide();
             if (mingyan.length != 0) {
                 db("加载名言列表成功");
+                let n = 0;
                 if (!id) {
                     if (qs("id") != "") { // 如果有传入?id=xx就用传入的ID
-                        var n = qs("id");
+                        n = qs("id");
                     } else if (location.hash != "" && hashName[location.hash] != true /* 排除保留的hash路由地址 */) { // 如果有传入hash就用hash传入的ID
-                        var n = location.hash.replace("#", "");
+                        n = location.hash.replace("#", "");
                         db("n=" + n);
                     } else if (localStorage.getItem("___mingyan_id__")) {
-                        var n = localStorage.getItem("___mingyan_id__") // 如果有储存上一次看到哪一条就用这个id
+                        n = localStorage.getItem("___mingyan_id__") // 如果有储存上一次看到哪一条就用这个id
                     } else {
-                        var n = randomNumber(0, mingyan.length - 1); // 否则就随机生成
+                        n = randomNumber(0, mingyan.length - 1); // 否则就随机生成
                     };
                 } else {
-                    var n = id; // 若有从函数传入id就用这个
+                    n = id; // 若有从函数传入id就用这个
                 };
                 if (hashName[location.hash] == true) return; // 若有触发hash路由的地址就返回
                 // hash路由
@@ -529,22 +539,29 @@
                 localStorage.setItem("___mingyan_id__", n);
                 let name = mingyan[n].split("：")[0];
                 db(name);
+                let my = null;
                 if (mingyan[n].split("：").length == 2) {
-                    var my = mingyan[n].split("：")[1];
+                    my = mingyan[n].split("：")[1];
                     db(my);
                 } else if (mingyan[n].split("：").length == 3) { // 防止名言中有“：”
-                    var my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
+                    my = mingyan[n].split("：")[1] + "：" + mingyan[n].split("：")[2];
                     db(my);
                 };
                 db("已选取第" + n + "条名言：" + my);
-                _hmt.push(['_trackEvent', "名言", "查看", "自动", name + "：" + my]);
+                _hmt.push(["_trackEvent", "名言", "查看", "自动", name + "：" + my]);
                 // 查看和分享（已废弃 2021-01-24）
                 $("p#info").html(
                     `<div class="info-text">
+                    <!-- 编号 -->
                     <a href="#${n}" class="label label-rounded label-warning">#${n}</a>&nbsp;
-                    <!-- <a href="javascript:;" onclick="_mingyan.share()" class="label label-rounded label-warning">
-                    <i class="mdui-icon material-icons" style="font-size: 15px;">share</i>分享</a> -->
-                    </br><a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
+                    <!-- 分享
+                    <a href="javascript:;" onclick="_mingyan.share()" class="label label-rounded label-warning">
+                    <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe80d;</i>分享</a> -->
+                    <!-- 点赞 -->
+                    <a href="javascript:;" onclick="_mingyan.star()" class="label label-rounded label-warning">
+                    <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe8dc;</i>点赞</a>
+                    </br>
+                    <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(["_trackEvent", "名言", "刷新", "手动" , "点击查看更多名言"]);" >点击</a>查看更多名言</div>`
                 );
                 $("span#mingyan").html(_mingyan.checkPic(name + "：" + my)); // 若有触发图片彩蛋就显示彩蛋
                 let verb = _mingyan.checkText(name + "：" + my);  // 若有触发文字彩蛋就显示彩蛋
@@ -557,11 +574,11 @@
                 let title = "名言 | " + my;
                 document.title = title;
                 let description = name + verb + "：" + my;
-                $('meta[name="description"]').attr("content", description);
-                $('meta[property="og:description"]').attr('content', description);
-                $('meta[name="og:description"]').attr('content', description);
-                $('meta[property="og:title"]').attr('content', title);
-                $('meta[name="og:title"]').attr('content', title);
+                $("meta[name='description']").attr("content", description);
+                $("meta[property='og:description']").attr("content", description);
+                $("meta[name='og:description']").attr("content", description);
+                $("meta[property='og:title']").attr("content", title);
+                $("meta[name='og:title']").attr("content", title);
                 lazyload(); // 图片懒加载
             } else {
                 return false
@@ -581,10 +598,11 @@
     /**
      * 修复搜索框长度
      */
-    if (ua.device != 'Mobile') {
-        var inputbar_width = "60%";
+    let inputbar_width = "";
+    if (ua.device != "Mobile") {
+        inputbar_width = "60%";
     } else {
-        var inputbar_width = "auto";
+        inputbar_width = "auto";
         $($main).css("transform", "translateY(30%)");
     };
 
@@ -593,7 +611,7 @@
      */
     _mingyan.checkTextForMobie = function () {
         // 针对手机进行位置调整
-        if (ua.device != 'Mobile') {
+        if (ua.device != "Mobile") {
             $($main).css("transform", "translateY(15%)");
         } else {
             $($main).css("transform", "translateY(30%)");
@@ -606,7 +624,7 @@
      * 修复手机端图片彩蛋位置
      */
     _mingyan.checkPicForMobie = function () {
-        if (ua.device == 'Mobile') {
+        if (ua.device == "Mobile") {
             $($main).css("transform", "translateY(15%)");
         } else {
             $($main).css("transform", "translateY(10%)");
@@ -867,11 +885,11 @@
     /**
      * 标题变化
      */
-    let title = '名言 | ERSS';
+    let title = "名言 | ERSS";
     let titleTime;
-    document.addEventListener('visibilitychange', function () {
+    document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
-            document.title = '名言 | 来看名言呀！';
+            document.title = "名言 | 来看名言呀！";
             clearTimeout(titleTime);
         }
         else {
@@ -1062,7 +1080,7 @@
         };
         $($footer).append(`<div id="logo"><div>`);
         $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/30/1PZ2sFjUd8EfLT6.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
-        if (ua.device != 'Mobile') {
+        if (ua.device != "Mobile") {
             $("#logo").css({
                 "position": "absolute",
                 "bottom": "50px",
@@ -1192,7 +1210,7 @@
      */
     function initfancybox() {
         setTimeout(() => {
-            $('.fancybox').fancybox({
+            $(".fancybox").fancybox({
                 buttons: [
                     "zoom",
                     "share",
@@ -1247,7 +1265,7 @@
      */
     _mingyan.goHome = _mingyan.clearHash = function () {
         skipCheckHash = true;
-        location.hash = '';
+        location.hash = "";
         _mingyan.hideElement();
         skipCheckHash = false;
         _mingyan.show();
@@ -1319,6 +1337,366 @@
     $(document).ready(function () {
         _mingyan.installPwa();
     });
+
+
+    /**
+     * 名言点赞功能！！
+     *   —— 2021年寒假
+     */
+
+    let starApiUrl = "http://localhost:3000/api/";
+    // let starApiUrl = "https://mongodb.xhemj.vercel.app/api/"
+    // 感谢Vercel的服务！！
+    // 感谢MongoDB提供免费的数据库！！
+
+    _mingyan.starApi = {
+
+        // 是否强制读取数据库
+        "isForceReadDb": false,
+
+        /**
+         * 获取当前点赞数
+         * @param {String} my 完整名言
+         */
+        "getNum": function (my) {
+            if (!my) my = $("#name").text() + "：" + $("#my_text").text();
+            return new Promise(function (resolve, reject) {
+                fetch(starApiUrl, {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "event": "getnum",
+                        "data": {
+                            "my": my,
+                            "id": md5(my),
+                            "t": new Date().getTime()
+                        }
+                    })
+                }).then(res => res.json()).then(json => {
+                    db(json.data[0]);
+                    resolve(json.data[0]);
+                }).catch(function (e) {
+                    reject(e)
+                })
+            })
+        },
+
+        /**
+         * 点赞
+         * @param {String} my 完整名言
+         */
+        "addStar": function (my) {
+            if (!my) my = $("#name").text() + "：" + $("#my_text").text();
+            return new Promise(function (resolve, reject) {
+                fetch(starApiUrl, {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "event": "addstar",
+                        "data": {
+                            "my": my,
+                            "id": md5(my),
+                            "t": new Date().getTime()
+                        }
+                    })
+                }).then(res => res.json()).then(json => {
+                    db(json.data[0]);
+                    resolve(json.data[0]);
+                }).catch(function (e) {
+                    reject(e)
+                })
+            })
+        },
+
+        /**
+         * 取消点赞
+         * @param {String} my 完整名言
+         */
+        "removeStar": function (my) {
+            if (!my) my = $("#name").text() + "：" + $("#my_text").text();
+            return new Promise(function (resolve, reject) {
+                fetch(starApiUrl, {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "event": "removestar",
+                        "data": {
+                            "my": my,
+                            "id": md5(my),
+                            "t": new Date().getTime()
+                        }
+                    })
+                }).then(res => res.json()).then(json => {
+                    db(json.data[0]);
+                    resolve(json.data[0]);
+                }).catch(function (e) {
+                    reject(e)
+                })
+            })
+        },
+    };
+
+    /**
+     * 名言点赞系统主函数
+     * @param {String} event 事件名
+     */
+    _mingyan.star = function (event) {
+        if (!event) event = "getnum";
+        db("event" + event);
+        let loadingHtml = `
+        <!-- 点赞 -->
+        <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('addstar')">&#xe8dc;</i>
+        <span id="star-num">
+        <!-- 加载动画 -->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+          </circle>
+        <!-- https://loading.io/ --></svg>
+        </span>
+        `;
+        // 是否已经点赞 
+        let isAlreadyStar = false;
+
+        swal({
+            title: $("#my_text").text(),
+            text: "加载出错了？刷新试试？",
+            icon: "",
+            button: "关闭"
+        })
+            .then(function () {
+                db("====位置：_mingyan.star->swal()->then()");
+                // 若关掉了弹窗
+                // 为了防止下一次不读取数据库而导致点赞数不同步的问题
+                // 强制下一次读取数据库
+                db("then");
+                _mingyan.starApi.isForceReadDb = true;
+                db("_mingyan.starApi.isForceReadDb：" + _mingyan.starApi.isForceReadDb);
+            });
+
+        $(".swal-text").html(loadingHtml); // 默认显示加载动画
+
+        let alreadyStarData = localStorage.getItem("___mingyan_star_data__") || "";
+        db("alreadyStarData：" + alreadyStarData);
+        if (!alreadyStarData) isAlreadyStar = false;
+        db("isAlreadyStar：" + isAlreadyStar);
+        _mingyan.starApi.getNum()
+            .then(function (res) {
+                db("====位置：_mingyan.star->Api.getNum()");
+                let id = res.id;
+                db("id：" + id)
+                if (alreadyStarData.indexOf(id) != -1) isAlreadyStar = true;
+                db("isAlreadyStar：" + isAlreadyStar);
+                return isAlreadyStar
+            }).then(function (isAlreadyStar) {
+                db("====位置：_mingyan.star->Api.getNum()->then()");
+                // 请求当前名言点赞数量
+                switch (event) {
+                    // 增加点赞
+                    case "addstar":
+                        db("====位置：switch(event)->'addstar'");
+                        _addstar();
+                        break;
+                    // 移除点赞
+                    case "removestar":
+                        db("====位置：switch(event)->'removestar'");
+                        _removestar();
+                        break;
+                    // 获取点赞数
+                    case "getnum":
+                        db("====位置：switch(event)->'getnum'");
+                        _getnum();
+                        break;
+                };
+                // ======================================================
+                // ======================================================
+                /**
+                 * 获取点赞数主函数
+                 */
+                function _getnum() {
+                    db("====位置：_getnum()");
+                    // 弹窗
+                    swal({
+                        title: $("#my_text").text(),
+                        text: "加载出错了？刷新试试？",
+                        icon: "",
+                        button: "关闭"
+                    })
+                        .then(function () {
+                            // 若关掉了弹窗
+                            // 为了防止下一次不读取数据库而导致点赞数不同步的问题
+                            // 强制下一次读取数据库
+                            db("关闭弹窗");
+                            _mingyan.starApi.isForceReadDb = true;
+                            db("_mingyan.starApi.isForceReadDb：" + _mingyan.starApi.isForceReadDb);
+                        })
+                    $(".swal-text").html(loadingHtml); // 默认显示加载动画
+                    if (!isAlreadyStar || _mingyan.starApi.isForceReadDb) {
+                        db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)");
+                        _mingyan.starApi
+                            .getNum()
+                            .then(function (old) {
+                                db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->Api.getNum()");
+                                // 调整动画的位置
+                                $("#star-num").css({
+                                    "position": "relative",
+                                    "transform": "translateY(10px)"
+                                });
+                                // rgba(0,0,0,.65)
+                                if (!isAlreadyStar) {
+                                    db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->Api.getNum()->if(!isAlreadyStar)");
+                                    $("#star-logo").css({
+                                        "color": "rgba(0,0,0,.65)"
+                                    });
+                                    db("_getnum()中的变换颜色");
+                                };
+                                $("#star-num").html(old.num);
+                            })
+                            .catch(function (e) {
+                                console.error(e)
+                            });
+                        // 若是因为要求强制读取数据而触发就改回来
+                        if (_mingyan.starApi.isForceReadDb) {
+                            db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->if(_mingyan.starApi.isForceReadDb)");
+                            _mingyan.starApi.isForceReadDb = false;
+                            _getnum();
+                        }
+                    } else {
+                        db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)else");
+                        // 若已经点赞过：
+                        // 再次点击就变成取消点赞
+                        $("#star-logo").attr("onclick", "_mingyan.star('removestar')");
+                        db("_getnum()中的变换onclick");
+                        // 默认显示当前点赞数
+                        _mingyan.starApi.getNum()
+                            .then(function (res) {
+                                db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)else->Api.getNum()");
+                                let num = res.num;
+                                $("#star-num").html(num);
+                                $("#star-logo").css({
+                                    "color": "red"
+                                });
+                                db("_getnum()中的变换颜色2");
+                            });
+                    };
+                };
+
+                /**
+                 * 点赞主函数
+                 */
+                function _addstar() {
+                    db("====位置：_addstar()");
+                    // 若已经点赞过的名言未包含当前要点赞的名言
+                    // （还没点赞过当前名言）
+                    db(isAlreadyStar);
+                    if (!isAlreadyStar) {
+                        db("====位置：_addstar()->if(!isAlreadyStar)");
+                        $(".swal-text").html(loadingHtml); // 默认显示加载动画
+                        // 点赞
+                        db("_addstar()中的Api.addStar");
+                        _mingyan.starApi
+                            .addStar()
+                            .then(function (addstar_res) {
+                                db("====位置：_addstar()->if(!isAlreadyStar)->Api.addStar()");
+                                // 若有正常返回数据
+                                if (addstar_res) {
+                                    db("====位置：_addstar()->if(!isAlreadyStar)->Api.addStar()->if(addstar_res)");
+                                    db("点赞成功");
+                                    // 点赞的按钮变红
+                                    $("#star-logo").css({
+                                        "color": "red"
+                                    });
+                                    db("_addstar()中的变换颜色");
+                                    let oldNum = addstar_res.num;
+                                    // 将已点赞的名言编号加入
+                                    let odata = localStorage.getItem("___mingyan_star_data__") || "";
+                                    db(addstar_res);
+                                    db(oldNum + 1)
+                                    localStorage.setItem("___mingyan_star_data__", odata + addstar_res["id"] + "，");
+                                    // 显示点赞数加+1
+                                    $("#star-num").html(oldNum + 1);
+                                    localStorage.removeItem("___mingyan_star__");
+                                    // 点赞后更换
+                                    $("#star-logo").attr("onclick", "_mingyan.star('removestar')");
+                                    db("_addstar()中的变换onclick");
+                                };
+                            });
+                    } else {
+                        db("====位置：_addstar()->if(!isAlreadyStar)else");
+                        db("点过赞了");
+                        // 若已经点赞过：
+                        // 再次点击就变成取消点赞
+                        $("#star-logo").attr("onclick", "_mingyan.star('removestar')");
+                        db("_addstar()中的变换onclick2");
+                        // 默认显示当前点赞数
+                        db("_addstar() else 中的Api.getNum");
+                        _mingyan.starApi.getNum()
+                            .then(function (res) {
+                                db("====位置：_addstar()->if(!isAlreadyStar)else->Api.getNum()");
+                                let num = res.num;
+                                $("#star-num").html(num);
+                                $("#star-logo").css({
+                                    "color": "red"
+                                });
+                                db("_addstar()中的变换颜色2")
+                            });
+                        ;
+                    };
+                };
+
+                // ======================================================
+                // 上下镜像翻转[doge]
+                // （好吧，还是改了很多）
+                // ======================================================
+
+                /**
+                 * 取消点赞主函数
+                 */
+                function _removestar() {
+                    db("====位置：_removestar()");
+                    db("====位置：_removestar()->if(!isAlreadyStar)");
+                    $(".swal-text").html(loadingHtml); // 默认显示加载动画
+                    // 点赞
+                    db("_removestar()中的Api.removeStar");
+                    _mingyan.starApi
+                        .removeStar()
+                        .then(function (removestar_res) {
+                            db("====位置：_removestar()->if(!isAlreadyStar)->Api.removeStar()");
+                            // 若有正常返回数据
+                            if (removestar_res) {
+                                db("====位置：_removestar()->if(!isAlreadyStar)->Api.removeStar()->if(removestar_res)");
+                                db("取消点赞成功");
+                                // 点赞的按钮还原颜色
+                                $("#star-logo").css({
+                                    "color": "rgba(0,0,0,.65)"
+                                });
+                                db("_removestar()中的变换颜色");
+                                let oldNum = removestar_res.num;
+                                // 将已点赞的名言编号加入
+                                let odata = localStorage.getItem("___mingyan_star_data__") || "";
+                                db(removestar_res);
+                                db(oldNum)
+                                localStorage.setItem("___mingyan_star_data__", odata.replace(removestar_res["id"] + "，"), "");
+                                // 显示点赞数加-1
+                                $("#star-num").html(oldNum);
+                                localStorage.removeItem("___mingyan_star__");
+                                // 点赞后更换
+                                $("#star-logo").attr("onclick", "_mingyan.star('addstar')");
+                                db("_removestar()中的变换onclick");
+                            };
+                        });
+                };
+            })
+    };
     /**
      * 开放函数
      */
