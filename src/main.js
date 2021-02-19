@@ -1247,7 +1247,7 @@
             "\40\40\40\40\40\40————— 天净沙·梗" +
             "\n", purple, yellow, purple, yellow, purple, yellow, purple, yellow, purple); // 就是这一段颜色做了好久……
         _.get("https://api.github.com/repos/xhemj/mingyan/commits", function (res) {
-            db(`[ERSS名言] 版本：${res[0]["sha"].slice(0, 7)}`)
+            db(`版本：${res[0]["sha"].slice(0, 7)}`)
         }, true);
     };
     _mingyan.console();
@@ -1650,8 +1650,7 @@
                             })
                             .catch(function (e) {
                                 console.error(e)
-                            }); vvvv
-                            ;
+                            }); 
                     };
                 };
 
