@@ -1487,7 +1487,7 @@
                 db("====位置：_mingyan.star->Api.getNum()");
                 let id = res.id;
                 db("id：" + id)
-                if (alreadyStarData.indexOf(id) != -1) isAlreadyStar = true;
+                if (alreadyStarData.indexOf(id + "，") != -1) isAlreadyStar = true;
                 db("isAlreadyStar：" + isAlreadyStar);
                 return isAlreadyStar
             }).then(function (isAlreadyStar) {
