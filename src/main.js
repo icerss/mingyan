@@ -1014,60 +1014,53 @@
             localStorage.setItem("___mingyan_2021_ranking_data__", "__SKIP__")
             return;
         };
+        let id = null;
+        let ip = null;
         _mingyan.rankingApi.getIp() // 先来一个ip看看
             .then(function (ip_data) {
                 db(ip_data.ip);
-                let ip = ip_data.ip;
+                ip = ip_data.ip;
                 // 如果没有存过数据
                 db("新用户");
                 localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 那就存一个吧
-                _mingyan.rankingApi.add("一位不知道名字的访客", ip) // 默认给一个名字
-                    .then(function (add_data) {
-                        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 不知道为什么要再存一遍，但不想删了
-                        let id = add_data.result.res.id; // 留id以便于之后更新名字
-                        _mingyan.rankingApi.getNum()
-                            .then(function (num_data) { // 获取当前排名
-                                let num = num_data["result"]["res1"]["data"][0]["num"];
-                                // 弹窗
-                                swal({
-                                    title: `第${num}个人！！`,
-                                    text: `恭喜你成为2021年第${num}个查看名言的人！！`, // 解决了！！（2021-01-26）
-                                    icon: "success",
-                                    content: {
-                                        element: "input",
-                                        attributes: {
-                                            placeholder: "写个名字记录一下你是谁吧！",
-                                            type: "text"
-                                        }
-                                    },
-                                    closeOnClickOutside: false
-                                })
-                                    .then(name => {
-                                        if (name) { // 之后就是更新名字啦！
-                                            _mingyan.rankingApi.update(id, name)
-                                                .then(function (update_data) {
-                                                    db(update_data);
-                                                })
-                                                // 这么多catch？
-                                                .catch(function (e) {
-                                                    console.error(e)
-                                                });
-                                            location.href = "./";
-                                        };
-                                    })
-                            })
-                            .catch(function (e) {
-                                console.error(e)
-                            });
-                    })
-                    .catch(function (e) {
-                        console.error(e)
-                    });
+                return _mingyan.rankingApi.add("一位不知道名字的访客", ip);
+            }) // 默认给一个名字
+            .then(function (add_data) {
+                localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`);  // 不知道为什么要再存一遍，但不想删了
+                id = add_data.result.res.id; // 留id以便于之后更新名字
+                return _mingyan.rankingApi.getNum()
+            })
+            .then(function (num_data) { // 获取当前排名
+                let num = num_data["result"]["res1"]["data"][0]["num"];
+                // 弹窗
+                return swal({
+                    title: `第${num}个人！！`,
+                    text: `恭喜你成为2021年第${num}个查看名言的人！！`, // 解决了！！（2021-01-26）
+                    icon: "success",
+                    content: {
+                        element: "input",
+                        attributes: {
+                            placeholder: "写个名字记录一下你是谁吧！",
+                            type: "text"
+                        }
+                    },
+                    closeOnClickOutside: false
+                })
+            })
+            .then(function (name) {
+                if (name) { // 之后就是更新名字啦！
+                    return _mingyan.rankingApi.update(id, name)
+                } else {
+                    location.href = "./";
+                }
+            })
+            .then(function (update_data) {
+                db(update_data);
+                location.href = "./";
             })
             .catch(function (e) {
                 console.error(e)
-            });
-
+            })
     };
 
     /**
@@ -1586,6 +1579,9 @@
                                     "color": "red"
                                 });
                                 db("_getnum()中的变换颜色2");
+                            })
+                            .catch(function (e) {
+                                console.error(e)
                             });
                     };
                 };
@@ -1620,7 +1616,7 @@
                                     // 将已点赞的名言编号加入
                                     let odata = localStorage.getItem("___mingyan_star_data__") || "";
                                     db(addstar_res);
-                                    db(oldNum + 1)
+                                    db(oldNum + 1);
                                     localStorage.setItem("___mingyan_star_data__", odata + addstar_res["id"] + "，");
                                     // 显示点赞数加+1
                                     $("#star-num").html(oldNum + 1);
@@ -1629,6 +1625,9 @@
                                     $("#star-logo").attr("onclick", "_mingyan.star('removestar')");
                                     db("_addstar()中的变换onclick");
                                 };
+                            })
+                            .catch(function (e) {
+                                console.error(e)
                             });
                     } else {
                         db("====位置：_addstar()->if(!isAlreadyStar)else");
@@ -1648,8 +1647,11 @@
                                     "color": "red"
                                 });
                                 db("_addstar()中的变换颜色2")
-                            });
-                        ;
+                            })
+                            .catch(function (e) {
+                                console.error(e)
+                            }); vvvv
+                            ;
                     };
                 };
 
@@ -1681,18 +1683,21 @@
                                 });
                                 db("_removestar()中的变换颜色");
                                 let oldNum = removestar_res.num;
-                                // 将已点赞的名言编号加入
+                                // 将已点赞的名言编号移除
                                 let odata = localStorage.getItem("___mingyan_star_data__") || "";
                                 db(removestar_res);
-                                db(oldNum)
-                                localStorage.setItem("___mingyan_star_data__", odata.replace(removestar_res["id"] + "，"), "");
+                                db(oldNum - 1);
+                                localStorage.setItem("___mingyan_star_data__", odata.replace(removestar_res["id"] + "，", ""));
                                 // 显示点赞数加-1
-                                $("#star-num").html(oldNum);
+                                $("#star-num").html(oldNum - 1);
                                 localStorage.removeItem("___mingyan_star__");
                                 // 点赞后更换
                                 $("#star-logo").attr("onclick", "_mingyan.star('addstar')");
                                 db("_removestar()中的变换onclick");
                             };
+                        })
+                        .catch(function (e) {
+                            console.error(e)
                         });
                 };
             })
