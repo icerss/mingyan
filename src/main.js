@@ -1444,6 +1444,20 @@
      */
     _mingyan.star = function (event) {
         if (!event) event = "getnum";
+        // 兼容内测时的数据格式
+        if (localStorage.getItem("___mingyan_star_data__") && localStorage.getItem("___mingyan_star_data__").indexOf("，") != -1) {
+            let oData = localStorage.getItem("___mingyan_star_data__")
+            oData = oData.split("，");
+            db(oData);
+            let nData = "";
+            for (let i = 0; i < oData.length; i++) {
+                if (oData[i]) {
+                    nData += "<" + oData[i] + ">"
+                };
+            };
+            db(nData);
+            localStorage.setItem("___mingyan_star_data__", nData);
+        };
         db("event" + event);
         let loadingHtml = `
         <!-- 点赞 -->
@@ -1477,7 +1491,6 @@
             });
 
         $(".swal-text").html(loadingHtml); // 默认显示加载动画
-
         let alreadyStarData = localStorage.getItem("___mingyan_star_data__") || "";
         db("alreadyStarData：" + alreadyStarData);
         if (!alreadyStarData) isAlreadyStar = false;
@@ -1487,7 +1500,7 @@
                 db("====位置：_mingyan.star->Api.getNum()");
                 let id = res.id;
                 db("id：" + id)
-                if (alreadyStarData.indexOf(id + "，") != -1) isAlreadyStar = true;
+                if (alreadyStarData.indexOf("<" + id + ">") != -1) isAlreadyStar = true;
                 db("isAlreadyStar：" + isAlreadyStar);
                 return isAlreadyStar
             }).then(function (isAlreadyStar) {
@@ -1617,7 +1630,7 @@
                                     let odata = localStorage.getItem("___mingyan_star_data__") || "";
                                     db(addstar_res);
                                     db(oldNum + 1);
-                                    localStorage.setItem("___mingyan_star_data__", odata + addstar_res["id"] + "，");
+                                    localStorage.setItem("___mingyan_star_data__", odata +  "<" + addstar_res["id"] + ">");
                                     // 显示点赞数加+1
                                     $("#star-num").html(oldNum + 1);
                                     localStorage.removeItem("___mingyan_star__");
@@ -1686,7 +1699,7 @@
                                 let odata = localStorage.getItem("___mingyan_star_data__") || "";
                                 db(removestar_res);
                                 db(oldNum - 1);
-                                localStorage.setItem("___mingyan_star_data__", odata.replace(removestar_res["id"] + "，", ""));
+                                localStorage.setItem("___mingyan_star_data__", odata.replace("<" + removestar_res["id"] + ">", ""));
                                 // 显示点赞数加-1
                                 $("#star-num").html(oldNum - 1);
                                 localStorage.removeItem("___mingyan_star__");
