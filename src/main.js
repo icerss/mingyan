@@ -1,13 +1,13 @@
 /*
 * ©2020-2021 xhemj
-* 2021/02/11
+* 2021/02/20
 */
 
 (function () {
     /* 配置 */
     let _mingyan = _mingyan || {};
 
-    _mingyan.version = "2021/02/11";
+    _mingyan.version = "2021/02/20";
     _mingyan.config = {
         ___DEBUG__: true,
         ___date_version___: 202102071808
@@ -1323,7 +1323,7 @@
         pwa.installbuttontext = "安装";
         pwa.cancelbuttontext = "取消";
         pwa.descriptionheader = "描述";
-        pwa.manifestpath = "manifest.webmanifest";
+        pwa.manifestpath = "manifest.webmanifest?t=" + _mingyan.config.___date_version___;
         pwa.explainer = "该应用可以安装在您的PC或移动设备上。这将使该Web应用程序外观和行为与任何其他已安装的应用程序相同。您将在应用程序列表中找到它，并将其固定到主屏幕，开始菜单或任务栏。此安装的Web应用程序还将能够与其他应用程序和您的操作系统安全地进行交互。";
         pwa.iosinstallinfotext = "点击共享按钮，然后点击“添加到主屏幕”";
         if (ua.device == "PC") {
@@ -1515,7 +1515,7 @@
             button: "关闭"
         })
             .then(function () {
-                db("====位置：_mingyan.star->swal()->then()");
+                db("==位置：_mingyan.star->swal()->then()");
                 // 若关掉了弹窗
                 // 为了防止下一次不读取数据库而导致点赞数不同步的问题
                 // 强制下一次读取数据库
@@ -1531,30 +1531,36 @@
         db("isAlreadyStar：" + isAlreadyStar);
         _mingyan.starApi.getNum()
             .then(function (res) {
-                db("====位置：_mingyan.star->Api.getNum()");
+                db("==位置：_mingyan.star->Api.getNum()");
+                db("====getNum1");
                 let id = res.id;
                 db("id：" + id)
                 if (alreadyStarData.indexOf("<" + id + ">") != -1) isAlreadyStar = true;
                 db("isAlreadyStar：" + isAlreadyStar);
-                return isAlreadyStar
-            }).then(function (isAlreadyStar) {
-                db("====位置：_mingyan.star->Api.getNum()->then()");
+                return {
+                    "isAlreadyStar": isAlreadyStar,
+                    "res": res
+                }
+            }).then(function (opt) {
+                db("==位置：_mingyan.star->Api.getNum()->then()");
+                let isAlreadyStar = opt["isAlreadyStar"];
+                let res = opt["res"];
                 // 请求当前名言点赞数量
                 switch (event) {
                     // 增加点赞
                     case "addstar":
-                        db("====位置：switch(event)->'addstar'");
-                        _addstar();
+                        db("==位置：switch(event)->'addstar'");
+                        _addstar(res);
                         break;
                     // 移除点赞
                     case "removestar":
-                        db("====位置：switch(event)->'removestar'");
+                        db("==位置：switch(event)->'removestar'");
                         _removestar();
                         break;
                     // 获取点赞数
                     case "getnum":
-                        db("====位置：switch(event)->'getnum'");
-                        _getnum();
+                        db("==位置：switch(event)->'getnum'");
+                        _getnum(res);
                         break;
                 };
                 // ======================================================
@@ -1562,8 +1568,8 @@
                 /**
                  * 获取点赞数主函数
                  */
-                function _getnum() {
-                    db("====位置：_getnum()");
+                function _getnum(res) {
+                    db("==位置：_getnum()");
                     // 弹窗
                     swal({
                         title: $("#my_text").text(),
@@ -1581,78 +1587,92 @@
                         })
                     $(".swal-text").html(loadingHtml); // 默认显示加载动画
                     if (!isAlreadyStar || _mingyan.starApi.isForceReadDb) {
-                        db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)");
-                        _mingyan.starApi
-                            .getNum()
-                            .then(function (old) {
-                                db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->Api.getNum()");
-                                // 调整动画的位置
-                                $("#star-num").css({
-                                    "position": "relative",
-                                    "transform": "translateY(10px)"
-                                });
-                                // rgba(0,0,0,.65)
-                                if (!isAlreadyStar) {
-                                    db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->Api.getNum()->if(!isAlreadyStar)");
-                                    $("#star-logo").css({
-                                        "color": "rgba(0,0,0,.65)"
-                                    });
-                                    db("_getnum()中的变换颜色");
-                                };
-                                $("#star-num").html(old.num);
-                            })
-                            .catch(function (e) {
-                                console.error(e)
+                        db("==位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)");
+                        // 调整动画的位置
+                        $("#star-num").css({
+                            "position": "relative",
+                            "transform": "translateY(10px)"
+                        });
+                        if (!res) {
+                            _mingyan.starApi.getNum()
+                                .then(function (res1) {
+                                    db("====getNum2");
+                                    res = res1;
+                                })
+                                .catch(function (e) {
+                                    console.error(e)
+                                })
+                        };
+                        // ===
+                        $("#star-num").html(res.num);
+                        // rgba(0,0,0,.65)
+                        if (!isAlreadyStar) {
+                            db("==位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->if(!isAlreadyStar)");
+                            $("#star-logo").css({
+                                "color": "rgba(0,0,0,.65)"
                             });
+                            db("_getnum()中的变换颜色");
+                        } else {
+                            db("==位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->if(!isAlreadyStar)else");
+                            $("#star-logo").css({
+                                "color": "red"
+                            });
+                            db("_getnum()中的变换颜色2");
+                            // 再次点击就变成取消点赞
+                            $("#star-logo").attr("onclick", "_mingyan.star('removestar')");
+                        };
                         // 若是因为要求强制读取数据而触发就改回来
                         if (_mingyan.starApi.isForceReadDb) {
-                            db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->if(_mingyan.starApi.isForceReadDb)");
+                            db("==位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->if(_mingyan.starApi.isForceReadDb)");
                             _mingyan.starApi.isForceReadDb = false;
-                            _getnum();
-                        }
+                            // _getnum();
+                        };
                     } else {
-                        db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)else");
+                        db("==位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)else");
                         // 若已经点赞过：
                         // 再次点击就变成取消点赞
                         $("#star-logo").attr("onclick", "_mingyan.star('removestar')");
                         db("_getnum()中的变换onclick");
+                        let num1 = res["num"] || "";
+                        if (!num1) {
+                            _mingyan.starApi.getNum()
+                                .then(function (res) {
+                                    db("====getNum3");
+                                    num1 = res["num"];
+                                })
+                                .catch(function (e) {
+                                    console.error(e)
+                                })
+                        };
                         // 默认显示当前点赞数
-                        _mingyan.starApi.getNum()
-                            .then(function (res) {
-                                db("====位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)else->Api.getNum()");
-                                let num = res.num;
-                                $("#star-num").html(num);
-                                $("#star-logo").css({
-                                    "color": "red"
-                                });
-                                db("_getnum()中的变换颜色2");
-                            })
-                            .catch(function (e) {
-                                console.error(e)
-                            });
+                        $("#star-num").html(num1);
+                        $("#star-logo").css({
+                            "color": "red"
+                        });
+                        db("_getnum()中的变换颜色2");
                     };
                 };
 
                 /**
                  * 点赞主函数
                  */
-                function _addstar() {
-                    db("====位置：_addstar()");
+                function _addstar(res) {
+                    db("==位置：_addstar()");
                     // 若已经点赞过的名言未包含当前要点赞的名言
                     // （还没点赞过当前名言）
                     db(isAlreadyStar);
                     if (!isAlreadyStar) {
-                        db("====位置：_addstar()->if(!isAlreadyStar)");
+                        db("==位置：_addstar()->if(!isAlreadyStar)");
                         $(".swal-text").html(loadingHtml); // 默认显示加载动画
                         // 点赞
                         db("_addstar()中的Api.addStar");
                         _mingyan.starApi
                             .addStar()
                             .then(function (addstar_res) {
-                                db("====位置：_addstar()->if(!isAlreadyStar)->Api.addStar()");
+                                db("==位置：_addstar()->if(!isAlreadyStar)->Api.addStar()");
                                 // 若有正常返回数据
                                 if (addstar_res) {
-                                    db("====位置：_addstar()->if(!isAlreadyStar)->Api.addStar()->if(addstar_res)");
+                                    db("==位置：_addstar()->if(!isAlreadyStar)->Api.addStar()->if(addstar_res)");
                                     db("点赞成功");
                                     // 点赞的按钮变红
                                     $("#star-logo").css({
@@ -1664,10 +1684,9 @@
                                     let odata = localStorage.getItem("___mingyan_star_data__") || "";
                                     db(addstar_res);
                                     db(oldNum + 1);
-                                    localStorage.setItem("___mingyan_star_data__", odata +  "<" + addstar_res["id"] + ">");
+                                    localStorage.setItem("___mingyan_star_data__", odata + "<" + addstar_res["id"] + ">");
                                     // 显示点赞数加+1
                                     $("#star-num").html(oldNum + 1);
-                                    localStorage.removeItem("___mingyan_star__");
                                     // 点赞后更换
                                     $("#star-logo").attr("onclick", "_mingyan.star('removestar')");
                                     db("_addstar()中的变换onclick");
@@ -1677,7 +1696,7 @@
                                 console.error(e)
                             });
                     } else {
-                        db("====位置：_addstar()->if(!isAlreadyStar)else");
+                        db("==位置：_addstar()->if(!isAlreadyStar)else");
                         db("点过赞了");
                         // 若已经点赞过：
                         // 再次点击就变成取消点赞
@@ -1685,19 +1704,22 @@
                         db("_addstar()中的变换onclick2");
                         // 默认显示当前点赞数
                         db("_addstar() else 中的Api.getNum");
-                        _mingyan.starApi.getNum()
-                            .then(function (res) {
-                                db("====位置：_addstar()->if(!isAlreadyStar)else->Api.getNum()");
-                                let num = res.num;
-                                $("#star-num").html(num);
-                                $("#star-logo").css({
-                                    "color": "red"
-                                });
-                                db("_addstar()中的变换颜色2")
-                            })
-                            .catch(function (e) {
-                                console.error(e)
-                            }); 
+                        let num1 = res["num"] || "";
+                        if (!num1) {
+                            _mingyan.starApi.getNum()
+                                .then(function (res) {
+                                    db("====getNum4");
+                                    num1 = res["num"];
+                                })
+                                .catch(function (e) {
+                                    console.error(e)
+                                })
+                        };
+                        $("#star-num").html(num1);
+                        $("#star-logo").css({
+                            "color": "red"
+                        });
+                        db("_addstar()中的变换颜色2")
                     };
                 };
 
@@ -1710,18 +1732,17 @@
                  * 取消点赞主函数
                  */
                 function _removestar() {
-                    db("====位置：_removestar()");
-                    db("====位置：_removestar()->if(!isAlreadyStar)");
+                    db("==位置：_removestar()");
+                    db("==位置：_removestar()->if(!isAlreadyStar)");
                     $(".swal-text").html(loadingHtml); // 默认显示加载动画
-                    // 点赞
                     db("_removestar()中的Api.removeStar");
                     _mingyan.starApi
                         .removeStar()
                         .then(function (removestar_res) {
-                            db("====位置：_removestar()->if(!isAlreadyStar)->Api.removeStar()");
+                            db("==位置：_removestar()->if(!isAlreadyStar)->Api.removeStar()");
                             // 若有正常返回数据
                             if (removestar_res) {
-                                db("====位置：_removestar()->if(!isAlreadyStar)->Api.removeStar()->if(removestar_res)");
+                                db("==位置：_removestar()->if(!isAlreadyStar)->Api.removeStar()->if(removestar_res)");
                                 db("取消点赞成功");
                                 // 点赞的按钮还原颜色
                                 $("#star-logo").css({
@@ -1736,7 +1757,6 @@
                                 localStorage.setItem("___mingyan_star_data__", odata.replace("<" + removestar_res["id"] + ">", ""));
                                 // 显示点赞数加-1
                                 $("#star-num").html(oldNum - 1);
-                                localStorage.removeItem("___mingyan_star__");
                                 // 点赞后更换
                                 $("#star-logo").attr("onclick", "_mingyan.star('addstar')");
                                 db("_removestar()中的变换onclick");
@@ -1748,7 +1768,7 @@
                 };
             })
     };
-    
+
 
     window._mingyan = _mingyan;
     window.isSupportWebp = isSupportWebp;
