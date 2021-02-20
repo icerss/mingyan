@@ -162,3 +162,11 @@ footer {
 pwa-install::part(openButton) {
 	display: none;
 }
+html::-webkit-scrollbar {
+	width:6px;
+	height:6px
+}
+html::-webkit-scrollbar-thumb {
+	border-radius:6px;
+	background-color:#aaa
+}

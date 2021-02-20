@@ -919,6 +919,7 @@
     _mingyan.rankingApi = {
         // 添加
         add: function (name, ip) {
+            if (!Promise) return;
             return new Promise(function (resolve, reject) {
                 app
                     .callFunction({
@@ -942,6 +943,7 @@
         },
         // 更新呢
         update: function (id, name) {
+            if (!Promise) return;
             return new Promise(function (resolve, reject) {
                 app
                     .callFunction({
@@ -967,6 +969,7 @@
         },
         // 获取IP
         getIp: function () {
+            if (!Promise) return;
             return new Promise(function (resolve, reject) {
                 $.getJSON("https://ip.xhemj.now.sh/api/ip",
                     function (json) {
@@ -982,6 +985,7 @@
         },
         //获取当前排名人数
         getNum: function () {
+            if (!Promise) return;
             return new Promise(function (resolve, reject) {
                 app
                     .callFunction({
@@ -1338,7 +1342,7 @@
      */
 
     // let starApiUrl = "http://localhost:3000/api/";
-    let starApiUrl = "https://mingyan-star-api.xhemj.vercel.app/api/"
+    let starApiUrl = "https://star-api.xhemj.now.sh/api/"
     // 感谢Vercel的服务！！
     // 感谢MongoDB提供免费的数据库！！
 
@@ -1352,6 +1356,7 @@
          * @param {String} my 完整名言
          */
         "getNum": function (my) {
+            if (!Promise) return;
             if (!my) my = $("#name").text() + "：" + $("#my_text").text();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
@@ -1382,6 +1387,7 @@
          * @param {String} my 完整名言
          */
         "addStar": function (my) {
+            if (!Promise) return;
             if (!my) my = $("#name").text() + "：" + $("#my_text").text();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
@@ -1412,6 +1418,7 @@
          * @param {String} my 完整名言
          */
         "removeStar": function (my) {
+            if (!Promise) return;
             if (!my) my = $("#name").text() + "：" + $("#my_text").text();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
@@ -1431,6 +1438,33 @@
                 }).then(res => res.json()).then(json => {
                     db(json.data[0]);
                     resolve(json.data[0]);
+                }).catch(function (e) {
+                    reject(e)
+                })
+            })
+        },
+
+        /**
+         * 获取排行榜
+         */
+        "getRanking": function () {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch(starApiUrl, {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "event": "ranking",
+                        "data": {
+                            "t": new Date().getTime()
+                        }
+                    })
+                }).then(res => res.json()).then(json => {
+                    db(json);
+                    resolve(json);
                 }).catch(function (e) {
                     reject(e)
                 })
@@ -1714,9 +1748,8 @@
                 };
             })
     };
-    /**
-     * 开放函数
-     */
+    
+
     window._mingyan = _mingyan;
     window.isSupportWebp = isSupportWebp;
     window.qs = qs;
@@ -1726,6 +1759,7 @@
     window.log = log;
     window._ = _;
     window._$ = _$;
+
 
     /**
      * 耶！！写完啦！！
@@ -1742,5 +1776,6 @@
      * 感谢看完了这段文字的你。
      *     —— Xhemj 2021-01-01
      */
+
 
 })();
