@@ -237,13 +237,14 @@
     /* 彩蛋系统 */
 
     /* 右下小人 */
+    let isLogoOpacity = false;
     _mingyan.initLogo = function () {
         let iswebp = "png";
-        if (isSupportWebp()) {
-            iswebp = "png/webp"
-        };
+        let special = "";
+        if (isLogoOpacity) special = `style="opacity: 0.5"`;
+        if (isSupportWebp()) iswebp = "png/webp"
         $($footer).append(`<div id="logo"><div>`);
-        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/30/1PZ2sFjUd8EfLT6.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
+        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/30/1PZ2sFjUd8EfLT6.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室" ${special}></img>`);
         if (ua.device != "Mobile") {
             $("#logo").css({
                 "position": "absolute",
@@ -1818,6 +1819,7 @@
             location.pathname = "/"
             _mingyan.hideElement();
             _mingyan.hideMain();
+            isLogoOpacity = true;
             $("#logo").css("opacity", 0.5);
         };
         if (hashName[location.hash] == true) { // 如果在hash保留路径中
@@ -1842,8 +1844,9 @@
                 default:
                     break;
             };
-        } else if (location.hash.split("#").length > 1 && !skipCheckHash) { // 否则就显示名言
-            _mingyan.show(location.hash.split("#")[1])
+        } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d/.test(location.hash)) { // 否则就显示名言
+            _mingyan.show(location.hash.split("#")[1]);
+            isLogoOpacity = false;
         };
     };
     _mingyan.onHashChange();
