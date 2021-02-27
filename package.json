@@ -9,6 +9,7 @@
   },
   "scripts": {
     "gulp": "gulp",
+    "html": "gulp copy",
     "ncc": "ncc build dist/all.min.js -o dist -m"
   },
   "keywords": [

@@ -50,3 +50,4 @@ addheader.displayName = 'addheader'
 task(addheader)
 
 task('default', series(['minifycss', 'minifyjs', 'copyhtml', 'addheader']))
+task('copy', series(['copyhtml']))
