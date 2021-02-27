@@ -1137,15 +1137,21 @@
             <div class="container">
             `;
             let res = data.data;
+            let width = [];
+            if (ua.device == "PC") {
+                width = [2, 8, 2];
+            } else {
+                width = [2, 7, 3];
+            };
             // // db(res);
             for (let i in res) {
                 o += `
         <!-- ${res[i].text} -->
         <div id="star-ranking-item">
           <div class="columns">
-            <div class="column col-2" id="star-ranking-num">${new Number(i) + 1}</div>
-            <div class="column col-8" id="star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
-            <div class="column col-2">
+            <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
+            <div class="column col-${width[1]}" id="star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
+            <div class="column col-${width[2]}">
               <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)">&#xe8dc;</i>
               <span id="star-ranking-thumb-num">
                 ${res[i].num}
@@ -1318,6 +1324,9 @@
                         break;
                     case "#/about":
                         _mingyan.page.about();
+                        break;
+                    case "#/ranking":
+                        _mingyan.starRanking();
                         break;
                 }
             } else if (!/\#\d/.test(hash)) {
