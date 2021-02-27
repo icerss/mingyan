@@ -5,7 +5,7 @@
 
 (function () {
     /* 配置 */
-    let _mingyan = _mingyan || {};
+    let _mingyan = {};
 
     _mingyan.version = "2021/02/20";
     _mingyan.config = {
@@ -33,12 +33,24 @@
     /**
      * 百度统计代码
      */
-    var _hmt = _hmt || [];
+    var _hmt = [];
     (function () {
         let hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
         let s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
+    })();
+
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
     })();
 
     /**
@@ -888,6 +900,7 @@
     let title = "名言 | ERSS";
     let titleTime;
     document.addEventListener("visibilitychange", function () {
+        if (navigator.userAgent.toString().indexOf("bot") != -1 && navigator.userAgent.toString().indexOf("spider") != -1 /* 防止搜索引擎激活 */) return;
         if (document.hidden) {
             document.title = "名言 | 来看名言呀！";
             clearTimeout(titleTime);
@@ -898,8 +911,8 @@
     });
 
     /**
-     * 2021!!!
-     * 排行榜系统
+     * 2021彩蛋!!!
+     * 打卡系统
      * 2020/12/31
      */
     // 初始化tcb
@@ -1768,6 +1781,7 @@
                 };
             })
     };
+
 
 
     window._mingyan = _mingyan;
