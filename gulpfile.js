@@ -6,6 +6,22 @@ const concat = require('gulp-concat')
 const babel = require('gulp-babel')
 const sourcemaps = require('gulp-sourcemaps')
 
+
+const js = function () {
+    return src(['./src/mingyan.js', './src/main.js'])
+        .pipe(concat('all.min.js'))
+        .pipe(sourcemaps.init())
+        .pipe(terser())
+        .pipe(babel({
+            presets: ['@babel/preset-env']
+        }))
+        .pipe(terser())
+        .pipe(sourcemaps.write("."))
+        .pipe(dest('dist'))
+}
+js.displayName = 'minifyjs'
+task(js)
+
 const css = function () {
     return src(['src/*.css'])
         .pipe(minifycss())
@@ -16,45 +32,6 @@ const css = function () {
 }
 css.displayName = 'minifycss'
 task(css);
-
-const js = function () {
-    return src(['src/**/*.js'])
-        .pipe(terser())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(dest('dist'))
-}
-js.displayName = 'minifyjs'
-task(js)
-
-const goconcat = function () {
-    return src(['./dist/mingyan.min.js', './dist/main.min.js'])
-        .pipe(concat('all.min.js'))
-        .pipe(dest('./dist'));
-}
-goconcat.displayName = 'concat'
-task(goconcat);
-
-const gobabel = function () {
-    return src('./dist/all.min.js')
-        .pipe(babel({
-            presets: ['@babel/preset-env']
-        }))
-        .pipe(dest('dist'))
-}
-gobabel.displayName = 'babel'
-task(gobabel);
-
-const minbabeljs = function () {
-    return src('./dist/all.min.js')
-        .pipe(sourcemaps.init())
-        .pipe(terser())
-        .pipe(sourcemaps.write("."))
-        .pipe(dest('dist'))
-}
-minbabeljs.displayName = 'minifybabeljs'
-task(minbabeljs)
 
 const copyhtml = function () {
     return src('./index.html')
@@ -72,4 +49,4 @@ const addheader = function () {
 addheader.displayName = 'addheader'
 task(addheader)
 
-task('default', series(['minifycss', 'minifyjs', 'concat', 'babel', 'minifybabeljs', 'copyhtml', 'addheader']))
+task('default', series(['minifycss', 'minifyjs', 'copyhtml', 'addheader']))

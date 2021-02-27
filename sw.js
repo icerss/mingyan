@@ -1,6 +1,6 @@
 'use strict';
 
-const version = 'xhemj_202101281303';
+const version = 'xhemj_202102271649';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
@@ -10,6 +10,7 @@ const offlineResources = [
 
 const ignoreFetch = [
   /https?:\/\/hm.baidu.com\//,
+  /https?:\/\/api.share.baidu.com\//,
   /https?:\/\/www.google-analytics.com\//,
   /https?:\/\/www.googletagmanager.com\//,
   /https?:\/\/busuanzi.ibruce.info\//,

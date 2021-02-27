@@ -36,7 +36,9 @@
     "gulp-terser": "^2.0.1",
     "gulp-uglify": "^3.0.2",
     "readable-stream": "^3.6.0",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "uglify": "^0.1.5",
+    "uglify-js": "^3.12.8"
   },
   "dependencies": {}
 }

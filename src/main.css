@@ -56,20 +56,9 @@ body {
 	height:55px
 }
 /****/
-
-#header .left {
-	font-size:20px;
-	font-weight:700;
-	color:#9b4dca
-}
-#header .right {
-	font-size:16px
-}
-#header .right a {
-	color:#5755d9;
-	transition:color .3s ease-out;
-	margin-left:15px;
-	font-weight: bold
+.my-title {
+	color: #9b4dca;
+	font-weight: bold;
 }
 footer {
 	position: fixed;
@@ -140,13 +129,14 @@ footer {
 	z-index: 1;
 	text-align: center;
 }
-#md {
+#page {
 	size: 20px;
+	margin-bottom: 50px;
 }
-#showall {
+#search {
 	text-align: center;
 }
-.mypic {
+#pic {
 	max-width: 200px;
 }
 .headroom {
@@ -169,4 +159,7 @@ html::-webkit-scrollbar {
 html::-webkit-scrollbar-thumb {
 	border-radius:6px;
 	background-color:#aaa
+}
+#star-ranking-text {
+	cursor: pointer;
 }
