@@ -596,7 +596,7 @@
                     <a href="javascript:;" onclick="_mingyan.star()" class="label label-rounded label-warning">
                     <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe8dc;</i>点赞</a>
                     </br>
-                    <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(["_trackEvent", "名言", "刷新", "手动" , "点击查看更多名言"]);" >点击</a>查看更多名言</div>`
+                    <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
                 );
                 $("span#mingyan").html(_mingyan.checkPic(name + "：" + my)); // 若有触发图片彩蛋就显示彩蛋
                 let verb = _mingyan.checkText(name + "：" + my);  // 若有触发文字彩蛋就显示彩蛋

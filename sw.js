@@ -11,6 +11,7 @@ const offlineResources = [
 const ignoreFetch = [
   /https?:\/\/hm.baidu.com\//,
   /https?:\/\/api.share.baidu.com\//,
+  /https?:\/\/sp0.baidu.com\//,
   /https?:\/\/www.google-analytics.com\//,
   /https?:\/\/www.googletagmanager.com\//,
   /https?:\/\/busuanzi.ibruce.info\//,
