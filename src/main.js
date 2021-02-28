@@ -607,13 +607,15 @@
                     loadJs("https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js");
                 };
                 let title = "名言 | " + my;
-                document.title = title;
-                let description = name + verb + "：" + my;
-                $("meta[name='description']").attr("content", description);
-                $("meta[property='og:description']").attr("content", description);
-                $("meta[name='og:description']").attr("content", description);
-                $("meta[property='og:title']").attr("content", title);
-                $("meta[name='og:title']").attr("content", title);
+                if (navigator.userAgent.toString().indexOf("bot") == -1 && navigator.userAgent.toString().indexOf("spider") == -1 /* 防止搜索引擎激活 */) {
+                    document.title = title;
+                    let description = name + verb + "：" + my;
+                    $("meta[name='description']").attr("content", description);
+                    $("meta[property='og:description']").attr("content", description);
+                    $("meta[name='og:description']").attr("content", description);
+                    $("meta[property='og:title']").attr("content", title);
+                    $("meta[name='og:title']").attr("content", title);
+                }
                 lazyload(); // 图片懒加载
             } else {
                 return false
