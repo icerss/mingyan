@@ -1,6 +1,7 @@
-node_modules/
 node_modules
 package.json
 package-lock.json
 .vercel
 .env
+.npmrc
+package.json
