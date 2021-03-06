@@ -1,7 +1,7 @@
 <!-- Start more.html -->
-<strong>
+<div data-id="page.more">
     <style>
-        .github-badge {
+        .github-badge[data-id="page.more"] {
             display: inline-block;
             border-radius: 4px;
             text-shadow: none;
@@ -11,92 +11,92 @@
             background-color: #ABBAC3;
             margin-bottom: 5px;
         }
-        .github-badge .badge-subject {
+        .github-badge[data-id="page.more"] .badge-subject[data-id="page.more"] {
             display: inline-block;
             background-color: #4D4D4D;
             padding: 4px 4px 4px 6px;
             border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
         }
-        .github-badge .badge-value {
+        .github-badge[data-id="page.more"] .badge-value[data-id="page.more"] {
             display: inline-block;
             padding: 4px 6px 4px 4px;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
         }
-        .github-badge .bg-brightgreen {
+        .github-badge[data-id="page.more"] .bg-brightgreen[data-id="page.more"] {
             background-color: #4DC820 !important;
         }
-        .github-badge .bg-orange {
+        .github-badge[data-id="page.more"] .bg-orange[data-id="page.more"] {
             background-color: #FFA500 !important;
         }
-        .github-badge .bg-yellow {
+        .github-badge[data-id="page.more"] .bg-yellow[data-id="page.more"] {
             background-color: #D8B024 !important;
         }
-        .github-badge .bg-blueviolet {
+        .github-badge[data-id="page.more"] .bg-blueviolet[data-id="page.more"] {
             background-color: #8833D7 !important;
         }
-        .github-badge .bg-pink {
+        .github-badge[data-id="page.more"] .bg-pink[data-id="page.more"] {
             background-color: #F26BAE !important;
         }
-        .github-badge .bg-red {
+        .github-badge[data-id="page.more"] .bg-red[data-id="page.more"] {
             background-color: #e05d44 !important;
         }
-        .github-badge .bg-blue {
+        .github-badge[data-id="page.more"] .bg-blue[data-id="page.more"] {
             background-color: #007EC6 !important;
         }
-        .github-badge .bg-lightgrey {
+        .github-badge[data-id="page.more"] .bg-lightgrey[data-id="page.more"] {
             background-color: #9F9F9F !important;
         }
-        .github-badge .bg-grey,
-        .github-badge .bg-gray {
+        .github-badge[data-id="page.more"] .bg-grey[data-id="page.more"],
+        .github-badge[data-id="page.more"] .bg-gray[data-id="page.more"] {
             background-color: #555 !important;
         }
-        .github-badge .bg-lightgrey,
-        .github-badge .bg-lightgray {
+        .github-badge[data-id="page.more"] .bg-lightgrey[data-id="page.more"],
+        .github-badge[data-id="page.more"] .bg-lightgray[data-id="page.more"] {
             background-color: #9f9f9f !important;
         }
-        h1 {
+        h1[data-id="page.more"] {
             font-size: 30px
         }
-        h3 {
+        h3[data-id="page.more"] {
             font-size: 20px
         }
     </style>
     <div style="text-align: center" class="mdui-ripple">
-        <h1>更多</h1>
-        <h3><a onclick="_mingyan.showAllMingyan()">全部名言</a></h3>
-        <h3><a onclick="_mingyan.print()">打印名言列表</a></h3>
-        <h3><a onclick="_mingyan.download()">下载名言列表（.txt）</a></h3>
-        <h3><a style="color:#9B4DC9" onclick="location.hash='#/submit'">名言投稿</a></h3>
-        <h3><a style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3>
+        <h1 data-id="page.more">更多</h1>
+        <h3 data-id="page.more"><a onclick="_mingyan.showAllMingyan()">全部名言</a></h3>
+        <h3 data-id="page.more"><a onclick="_mingyan.print()">打印名言列表</a></h3>
+        <h3 data-id="page.more"><a onclick="_mingyan.download()">下载名言列表（.txt）</a></h3>
+        <h3 data-id="page.more"><a style="color:#9B4DC9" onclick="location.hash='#/submit'">名言投稿</a></h3>
+        <h3 data-id="page.more"><a style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3>
     </div>
-</strong>
+</div>
 
 ---
 
-<div id="tcomment"></div>
+<div id="tcomment" data-id="page.more"></div>
 
 ---
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <div style="text-align: center" class="mdui-ripple">
-    <div class="github-badge" title="作者就是我啦！！"><span class="badge-subject">Author</span><span
-            class="badge-value bg-blue">xhemj</span></div>
-    <div class="github-badge" title="速度还可以吧？"><span class="badge-subject">Hosted</span><span
-            class="badge-value bg-red"><span id="host">Github</span></span></div>
-    <div class="github-badge" title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速"><span class="badge-subject">CDN</span><span
-            class="badge-value bg-pink">Jsdelivr & Cloudflare</span></div>
-    <div class="github-badge" title="ERSS~~~"><span class="badge-subject">&copy;</span><span
-            class="badge-value bg-brightgreen">2021 Xhemj</span></div>
+    <div class="github-badge" title="作者就是我啦！！" data-id="page.more"><span class="badge-subject" data-id="page.more">Author</span><span
+            class="badge-value bg-blue" data-id="page.more">xhemj</span></div>
+    <div class="github-badge" title="速度还可以吧？" data-id="page.more"><span class="badge-subject" data-id="page.more">Hosted</span><span
+            class="badge-value bg-red" data-id="page.more"><span id="host">Github</span></span></div>
+    <div class="github-badge" title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速" data-id="page.more"><span class="badge-subject" data-id="page.more">CDN</span><span
+            class="badge-value bg-pink" data-id="page.more">Jsdelivr & Tencent CDN</span></div>
+    <div class="github-badge" title="ERSS~~~" data-id="page.more"><span class="badge-subject" data-id="page.more">&copy;</span><span
+            class="badge-value bg-brightgreen" data-id="page.more">2021 Xhemj</span></div>
     </br>
-    <div class="github-badge" title="多来看看呀！"><span class="badge-subject">PV</span><span
-            class="badge-value bg-yellow"><span id="busuanzi_value_site_pv">999+</span></span></div>
-    <div class="github-badge" title="还是挺多人来的"><span class="badge-subject">UV</span><span
-            class="badge-value bg-yellow"><span id="busuanzi_value_site_uv">999+</span></span></div>
+    <div class="github-badge" title="多来看看呀！" data-id="page.more"><span class="badge-subject" data-id="page.more">PV</span><span
+            class="badge-value bg-yellow" data-id="page.more"><span id="busuanzi_value_site_pv">999+</span></span></div>
+    <div class="github-badge" title="还是挺多人来的" data-id="page.more"><span class="badge-subject" data-id="page.more">UV</span><span
+            class="badge-value bg-yellow" data-id="page.more"><span id="busuanzi_value_site_uv">999+</span></span></div>
     </br>
-    <div class="github-badge" title="会慢慢更新的"><span class="badge-subject">更新时间</span><span
-            class="badge-value bg-lightgrey"><span id="uptime">2020-00-00 00:00:00</span></span></div>
+    <div class="github-badge" title="会慢慢更新的" data-id="page.more"><span class="badge-subject" data-id="page.more">更新时间</span><span
+            class="badge-value bg-lightgrey" data-id="page.more"><span id="uptime">2021-00-00 00:00:00</span></span></div>
     </br>
     <a href="https://icp.gov.moe" target="_blank">萌备 </a><a href="https://icp.gov.moe/?keyword=20200503"
         target="_blank"> 20200503号</a>

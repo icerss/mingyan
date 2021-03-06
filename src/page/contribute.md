@@ -14,6 +14,7 @@
     }
     #form-story[data-id="page.contribute"] {
         background: transparent;
+        border-radius: 5px;
     }
     #submit[data-id="page.contribute"] {
         width: 134px;

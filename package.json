@@ -8,8 +8,10 @@
     "url": "git+https://github.com/xhemj/mingyan.git"
   },
   "scripts": {
-    "gulp": "gulp",
-    "html": "gulp copy",
+    "build:all": "gulp",
+    "build:html": "gulp copy",
+    "lint": "eslint src --fix",
+    "lint:create": "eslint --init",
     "ncc": "ncc build dist/all.min.js -o dist -m"
   },
   "keywords": [
@@ -28,6 +30,7 @@
     "@vercel/ncc": "^0.27.0",
     "babel-preset-es2015": "^6.24.1",
     "core-js": "^3.8.3",
+    "eslint": "^7.21.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
