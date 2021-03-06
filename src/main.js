@@ -137,7 +137,8 @@
         "#/search": true,
         "#/more": true,
         "#/about": true,
-        "#/ranking": true
+        "#/ranking": true,
+        "#/submit": true
     };
     let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
     _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
@@ -738,7 +739,7 @@
      * @param {String} id 要放的元素id
      * @param {String} url Markdown地址
      */
-    function _mdToHtml(id, url) {
+    _mingyan.mdToHtml = function (id, url) {
         $($page).hide();
         $($main).hide();
         $($search).hide();
@@ -763,10 +764,13 @@
      */
     _mingyan.page = {
         "more": function () {
-            return _mdToHtml($page, "./src/md/more.md?t=" + _mingyan.config.___date_version___)
+            return _mingyan.mdToHtml($page, "./src/page/more.md?t=" + _mingyan.config.___date_version___)
         },
         "about": function () {
-            return _mdToHtml($page, "./src/md/about.md?t=" + _mingyan.config.___date_version___)
+            return _mingyan.mdToHtml($page, "./src/page/about.md?t=" + _mingyan.config.___date_version___)
+        },
+        "contribute": function () {
+            return _mingyan.mdToHtml($page, "./src/page/contribute.md?t=" + _mingyan.config.___date_version___)
         }
     };
 
@@ -1842,6 +1846,10 @@
                     _hide();
                     _mingyan.starRanking();
                     $($page).show();
+                    break;
+                case "#/submit":
+                    _hide();
+                    _mingyan.page.contribute();
                     break;
                 default:
                     break;
