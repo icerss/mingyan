@@ -1192,7 +1192,7 @@
 	case "/": // 这边还没废弃
 		$(document).ready(function () {
 			_mingyan.show();
-			// db("s1");
+			db("s1");
 		});
 		if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果是新用户
 			_mingyan.ranking();
@@ -1308,7 +1308,7 @@
 		_mingyan.hideElement();
 		skipCheckHash = false;
 		_mingyan.show();
-		// db("s3");
+		db("s3");
 	};
 
 	/**
@@ -1336,10 +1336,15 @@
 				case "#/ranking":
 					_mingyan.starRanking();
 					break;
+				case "#/submit":
+					_mingyan.page.contribute();
+					break;
+				default:
+					return;
 				}
-			} else if (!/\#\d/.test(hash)) {
-				// 否则默认显示名言（待测试）
-				_mingyan.clearHash();
+			} else {
+				// if (!/\#\d/.test(hash)) _mingyan.clearHash();
+				if (/\#\d/.test(hash)) _mingyan.clearHash();
 			}
 		}
 		// 如果既显示名言又显示搜索界面
@@ -1348,6 +1353,10 @@
 		}
 		// 如果既显示名言又显示更多界面
 		if (isShow($main) && isShow($page)) {
+			checkHash();
+		}
+		// 如果既显示搜索又显示更多界面
+		if (isShow($search) && isShow($page)) {
 			checkHash();
 		}
 		// ……待添加

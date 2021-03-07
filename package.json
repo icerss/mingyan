@@ -12,6 +12,7 @@
     "build:html": "gulp copy",
     "lint": "eslint src --fix",
     "lint:create": "eslint --init",
+    "go": "npm run lint && npm run build:all",
     "ncc": "ncc build dist/all.min.js -o dist -m"
   },
   "keywords": [
