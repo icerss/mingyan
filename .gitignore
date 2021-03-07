@@ -4,4 +4,3 @@ package-lock.json
 .vercel
 .env
 .npmrc
-package.json

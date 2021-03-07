@@ -1,5 +1,5 @@
 {
-  "name": "@xhemj/mingyan",
+  "name": "mingyan",
   "version": "2.2.9",
   "description": "xhemj",
   "main": "dist/all.min.js",
