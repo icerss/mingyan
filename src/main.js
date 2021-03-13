@@ -1663,6 +1663,8 @@
                         }
                         // ===
                         $("#star-num").html(res.num);
+                        // 加载完成后
+                        $("#star-logo").attr("onclick", "_mingyan.star('addstar')");
                         // rgba(0,0,0,.65)
                         if (!isAlreadyStar) {
                             // db("==位置：_getnum()->if(!isAlreadyStar || _mingyan.starApi.isForceReadDb)->if(!isAlreadyStar)");
