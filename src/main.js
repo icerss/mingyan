@@ -1,16 +1,16 @@
 /*
 * ©2020-2021 xhemj
-* 2021/02/20
+* 2021/03/13
 */
 
 (function () {
     /* 配置 */
     let _mingyan = {};
 
-    _mingyan.version = "2021/02/20";
+    _mingyan.version = "2021/03/13";
     _mingyan.config = {
         ___DEBUG__: true,
-        ___date_version___: 202102071808
+        ___date_version___: 202103131544
     };
 
     /**
@@ -239,10 +239,10 @@
     _mingyan.initLogo = function () {
         let iswebp = "png";
         let special = "";
-        if (isLogoOpacity) special = "style=\"opacity: 0.5\"";
+        if (isLogoOpacity && !/\#\d/.test(location.hash)) special = "style=\"opacity: 0.5\"";
         if (isSupportWebp()) iswebp = "png/webp";
-        $($footer).append("<div id=\"logo\"><div>");
-        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/30/1PZ2sFjUd8EfLT6.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室" ${special}></img>`);
+        $($footer).append(`<div id="logo" ${special}><div>`);
+        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/30/1PZ2sFjUd8EfLT6.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
         if (ua.device != "Mobile") {
             $("#logo").css({
                 "position": "absolute",
@@ -467,8 +467,8 @@
      * @param {String} my 名言
      */
     _mingyan.encodeMingyan = function (name, my) {
-    // db(name);
-    // db(my);
+        // db(name);
+        // db(my);
         return md5("1" + md5(encodeURI(name + "||" + my + "ERSS MINGYAN (c) xhemj")));
     };
 
@@ -545,7 +545,7 @@
      * @param {Num} id 名言ID（可不传入）
      */
     _mingyan.show = function (id) {
-    // 加载Fancybox插件
+        // 加载Fancybox插件
         initfancybox();
         // 处理传入的id
         function _id(id) {
@@ -645,7 +645,7 @@
      * 修复手机端名言文字位置
      */
     _mingyan.checkTextForMobie = function () {
-    // 针对手机进行位置调整
+        // 针对手机进行位置调整
         if (ua.device != "Mobile") {
             $($main).css("transform", "translateY(15%)");
         } else {
@@ -671,16 +671,16 @@
      * 刷新名言
      */
     _mingyan.reload = function () {
-    // 已废弃（2021-01-24）
-    // history.pushState({}, "名言 | ERSS", "/");
-    // if (location.hash != "") {
-    //     location.href = "//" + location.hostname + ":" + location.port + location.pathname;
-    // } else if (qs("id") != "" || qs("mail") != "") {
-    //     location.href = "//" + location.hostname + ":" + location.port + location.pathname;
-    // } else {
-    //     _mingyan.show();
-    // };
-    // lazyload();
+        // 已废弃（2021-01-24）
+        // history.pushState({}, "名言 | ERSS", "/");
+        // if (location.hash != "") {
+        //     location.href = "//" + location.hostname + ":" + location.port + location.pathname;
+        // } else if (qs("id") != "" || qs("mail") != "") {
+        //     location.href = "//" + location.hostname + ":" + location.port + location.pathname;
+        // } else {
+        //     _mingyan.show();
+        // };
+        // lazyload();
         if ($("#reload").attr("href")) {
             location.hash = "#" + $("#reload").attr("href").split("#")[1];
         } else {
@@ -711,7 +711,7 @@
      * 为什么叫_mingyan.showAll我也不知道
      */
     _mingyan.showAll = function () {
-    //location.hash = "#/search";
+        //location.hash = "#/search";
         $($page).hide();
         $($main).hide();
         $("input#searchbar").val("");
@@ -779,11 +779,11 @@
         $($page).hide();
         $($main).hide();
         $($search).hide();
-        let out = "";
+        let out = "<div style='line-height: 1.5;'>";
         for (let i in mingyan) {
             out += mingyan[i] + "</br>";
         }
-        out += "</br></br></br></br>";
+        out += "</div>";
         $($page).html(marked(out));
         $($page).fadeIn();
     };
@@ -957,7 +957,7 @@
     login();
     // 基础函数
     _mingyan.rankingApi = {
-    // 添加
+        // 添加
         add: function (name, ip) {
             if (!Promise) return;
             return new Promise(function (resolve, reject) {
@@ -1210,7 +1210,7 @@
         }
         break;
     default:
-    // 也应该是废弃了 2021-01-24
+        // 也应该是废弃了 2021-01-24
         if (location.pathname.split("/")[1].length == 32) {
             let id = _mingyan.decodeMingyan(location.pathname.split("/")[1]);
             let myid = new Number(id);
@@ -1303,6 +1303,7 @@
      * 清除hash路由（回到首页）
      */
     _mingyan.goHome = _mingyan.clearHash = function () {
+        document.title = "名言 | ERSS";
         skipCheckHash = true;
         location.hash = "";
         _mingyan.hideElement();
@@ -1359,7 +1360,7 @@
         if (isShow($search) && isShow($page)) {
             checkHash();
         }
-    // ……待添加
+        // ……待添加
     };
     setInterval(() => {
         _mingyan.checkPage();
@@ -1550,7 +1551,7 @@
         // db("event" + event);
         let loadingHtml = `
         <!-- 点赞 -->
-        <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('addstar')">&#xe8dc;</i>
+        <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('loading')">&#xe8dc;</i>
         <span id="star-num">
         <!-- 加载动画 -->
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -1616,6 +1617,8 @@
                 case "getnum":
                     // db("==位置：switch(event)->'getnum'");
                     _getnum(res);
+                    break;
+                default:
                     break;
                 }
                 // ======================================================
@@ -1836,29 +1839,38 @@
             _mingyan.hideElement();
             _mingyan.hideMain();
             isLogoOpacity = true;
-            $("#logo").css("opacity", 0.5);
+            if (!/\#\d/.test(location.hash)) {
+                $("#logo").css("opacity", 0.5);
+            } else {
+                $("#logo").css("opacity", "");
+            }
         }
         if (hashName[location.hash] == true) { // 如果在hash保留路径中
             switch (location.hash) {
             case "#/about":
                 _hide();
+                document.title = "名言 | 关于";
                 _mingyan.page.about();
                 break;
             case "#/search":
                 _hide();
+                document.title = "名言 | 搜索";
                 _mingyan.showAll();
                 break;
             case "#/more":
                 _hide();
+                document.title = "名言 | 更多";
                 _mingyan.page.more();
                 break;
             case "#/ranking":
                 _hide();
+                document.title = "名言 | 排行榜";
                 _mingyan.starRanking();
                 $($page).show();
                 break;
             case "#/submit":
                 _hide();
+                document.title = "名言 | 名言投稿";
                 _mingyan.page.contribute();
                 break;
             default:
@@ -1872,7 +1884,6 @@
     _mingyan.onHashChange();
     window.addEventListener("hashchange", _mingyan.onHashChange);
 
-
     window._mingyan = _mingyan;
     window.isSupportWebp = isSupportWebp;
     window.qs = qs;
@@ -1883,6 +1894,10 @@
     window._ = _;
     window._$ = _$;
 
+    return {
+        _mingyan,
+        mingyan
+    };
 
     /**
      * 耶！！写完啦！！

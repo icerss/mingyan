@@ -62,14 +62,17 @@
         h3[data-id="page.more"] {
             font-size: 20px
         }
+		a[data-id="page.more"] {
+			line-height: 1.8;
+		}
     </style>
     <div style="text-align: center" class="mdui-ripple">
         <h1 data-id="page.more">更多</h1>
-        <h3 data-id="page.more"><a onclick="_mingyan.showAllMingyan()">全部名言</a></h3>
-        <h3 data-id="page.more"><a onclick="_mingyan.print()">打印名言列表</a></h3>
-        <h3 data-id="page.more"><a onclick="_mingyan.download()">下载名言列表（.txt）</a></h3>
-        <h3 data-id="page.more"><a style="color:#9B4DC9" onclick="location.hash='#/submit'">名言投稿</a></h3>
-        <h3 data-id="page.more"><a style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3>
+        <h3 data-id="page.more"><a data-id="page.more" onclick="_mingyan.showAllMingyan()">全部名言</a></h3>
+        <h3 data-id="page.more"><a data-id="page.more" onclick="_mingyan.print()">打印名言列表</a></h3>
+        <h3 data-id="page.more"><a data-id="page.more" onclick="_mingyan.download()">下载名言列表（.txt）</a></h3>
+        <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/submit'">名言投稿</a></h3>
+        <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3>
     </div>
 </div>
 
@@ -118,15 +121,18 @@
         "127.0.0.1": "本地"
     };
     $("#host").text(domain_list[location.hostname]);
-    twikoo.init({ envId: 'xhemj-0gjckebwf7276129', el: '#tcomment' });
-    function tk() {
-        $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2020 <a href="https://mingyan.js.org">ERSS名言</a></div>`);
-    };
+    twikoo.init({ 
+        envId: 'xhemj-0gjckebwf7276129', 
+        el: '#tcomment' ,
+        onCommentLoaded: function () {
+            $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`);
+            document.querySelector(".el-textarea__inner").style.height = "150px";
+        }
+    });
     $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
         var a = data["updated_at"];
         $("#uptime").text(new Date(a).toLocaleString());
         console.log(new Date(a).toLocaleString());
     });
-    setTimeout(tk, 200);
 </script>
 <!-- End more.html -->

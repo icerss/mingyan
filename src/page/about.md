@@ -1,9 +1,9 @@
 <!-- Start about.html -->
-## ERSS 名言
+# ERSS 名言
 
 [![@ERSS](https://badgen.net/badge/icon/ERSS?icon=bitcoin-lightning&amp;label)](https://github.com/icerss/mingyan)[![@xhemj](https://badgen.net/badge/icon/xhemj/mingyan?icon=github&amp;label)](https://github.com/xhemj)![@tag](https://badgen.net/github/tag/xhemj/mingyan)![@commit](https://badgen.net/github/last-commit/xhemj/mingyan)
 
-#### 快来看看厦门市音乐学校老师和同学们的名言吧！
+## 快来看看厦门市音乐学校老师和同学们的名言吧！
 ---
 **制作**：
 <ul class="mdui-list">
