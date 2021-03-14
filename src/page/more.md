@@ -125,9 +125,14 @@
         envId: 'xhemj-0gjckebwf7276129', 
         el: '#tcomment' ,
         onCommentLoaded: function () {
-            $(".tk-footer").html(`Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`);
+             document.querySelector(".tk-footer").innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`
             document.querySelector(".el-textarea__inner").style.height = "150px";
         }
+    })
+    .then(function () {
+        db('评论加载完成');
+        document.querySelector(".tk-footer").innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`
+        document.querySelector(".el-textarea__inner").style.height = "150px";
     });
     $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
         var a = data["updated_at"];
