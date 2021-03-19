@@ -418,7 +418,7 @@
                     name: "Shape of You",
                     artist: "Ed Sheeran",
                     url: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
-                    cover: "https://i.loli.net/2020/12/19/L1NY8U7nhRjyQMa.jpg",
+                    cover: "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/L1NY8U7nhRjyQMa.jpg",
                     lrc: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc"
                 }]
             });

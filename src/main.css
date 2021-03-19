@@ -21,13 +21,13 @@
 	font-style: normal;
 	font-weight: regular;
 	font-display: swap;
-	src: url('//lib.baomitu.com/fonts/zcool-kuaile/zcool-kuaile-regular.eot'); /* IE9 Compat Modes */
+	src: url('//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.eot'); /* IE9 Compat Modes */
 	src: local('ZCOOL KuaiLe'), local('ZCOOLKuaiLe-Normal'),
-		 url('//lib.baomitu.com/fonts/zcool-kuaile/zcool-kuaile-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-		 url('//lib.baomitu.com/fonts/zcool-kuaile/zcool-kuaile-regular.woff2') format('woff2'), /* Super Modern Browsers */
-		 url('//lib.baomitu.com/fonts/zcool-kuaile/zcool-kuaile-regular.woff') format('woff'), /* Modern Browsers */
-		 url('//lib.baomitu.com/fonts/zcool-kuaile/zcool-kuaile-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-		 url('//lib.baomitu.com/fonts/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe') format('svg'); /* Legacy iOS */
+		 url('//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular-ie.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		 url('//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.woff2') format('woff2'), /* Super Modern Browsers */
+		 url('//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.woff') format('woff'), /* Modern Browsers */
+		 url('//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+		 url('//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe') format('svg'); /* Legacy iOS */
 }
 html {
 	line-height:1.15;
