@@ -1,16 +1,16 @@
 /*
 * ©2020-2021 xhemj
-* 2021/03/13
+* 2021/03/20
 */
 
 (function () {
     /* 配置 */
     let _mingyan = {};
 
-    _mingyan.version = "2021/03/13";
+    _mingyan.version = "2021/03/20";
     _mingyan.config = {
         ___DEBUG__: true,
-        ___date_version___: 202103131544
+        ___date_version___: 202103201143
     };
 
     /**
@@ -18,7 +18,7 @@
      */
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-            navigator.serviceWorker.register("./sw.js?t=202102271649");
+            navigator.serviceWorker.register("./sw.js?t=" + _mingyan.config.___date_version___);
         });
     }
 
@@ -142,6 +142,11 @@
     };
     let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
     _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
+    
+    let apiUrls = {
+        "star": "https://star-api.xhemj.now.sh/api/star",
+        "submit": "https://star-api.xhemj.now.sh/api/contribute"
+    };
 
     /**
      * 初始化
@@ -1398,7 +1403,7 @@
      */
 
     // let starApiUrl = "http://localhost:3000/api/";
-    let starApiUrl = "https://star-api.xhemj.now.sh/api/";
+    let starApiUrl = apiUrls.star;
     // 感谢Vercel的服务！！
     // 感谢MongoDB提供免费的数据库！！
 

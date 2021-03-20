@@ -132,7 +132,9 @@ function shouldAlwaysFetch(request) {
 }
 
 function shouldFetchAndCache(request) {
-  return ~request.headers.get('Accept').indexOf('text/html')
+  try {
+    return ~request.headers.get('Accept').indexOf('text/html')
+  } catch (e) { }
 }
 
 function developmentMode() {
