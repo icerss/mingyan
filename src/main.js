@@ -94,11 +94,11 @@
     /**
      * 界面元素定义
      */
-    let $main = "#main";
-    let $search = "#search";
-    let $page = "#page";
-    let $footer = "footer";
-    let $myInfo = "#info";
+    let $main = ".my--main";
+    let $search = ".my--search";
+    let $page = ".my--page";
+    let $footer = ".my--footer";
+    let $myInfo = ".my--mingyan-info";
 
     /**
      * localStorage 兼容
@@ -142,7 +142,7 @@
     };
     let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
     _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
-    
+
     let apiUrls = {
         "star": "https://star-api.xhemj.now.sh/api/star",
         "submit": "https://star-api.xhemj.now.sh/api/contribute"
@@ -295,13 +295,13 @@
             }
             _mingyan.checkPicForMobie();
             lazyload();
-            return `<div id="my_text" ${special}>${my_out}</div><div id="my_pic">
+            return `<div ${special}>${my_out}</div><div class="my--mingyan-pic">
                             <img src="${_mingyan.lazypic}" data-src="${picBaseUrl}${pic}" data-pic-id=${my_out} id="pic" class="lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
                         </div>`;
             // return my + "<\/br><img src=\"" + _mingyan.lazypic + "\" data-src=\"" + pic + "\" class=\"pic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
             lazyload();
-            return `<div id="my_text" ${special}>${my_out}</div>`;
+            return `<div ${special}>${my_out}</div>`;
         }
     };
     /**
@@ -388,7 +388,7 @@
      * 文字彩蛋
      */
     _mingyan.onMingyanClick = function () {
-        if ($("#mingyan").text().indexOf("绿帽子") != -1) {
+        if ($(".my--mingyan-text").text().indexOf("绿帽子") != -1) {
             swal({
                 title: "Fuck ♂ You ♂",
                 text: "骚骚恪曾经说过：Fuck ♂ You ♂",
@@ -397,7 +397,7 @@
                 closeOnClickOutside: false
             });
         }
-        if ($("#mingyan").text().indexOf("垃圾真好吃") != -1) {
+        if ($(".my--mingyan-text").text().indexOf("垃圾真好吃") != -1) {
             swal({
                 title: "获得成就",
                 text: "最美垃圾人",
@@ -406,7 +406,7 @@
                 closeOnClickOutside: false
             });
         }
-        if ($("#mingyan").text().indexOf("来一起唱啊！！") != -1) {
+        if ($(".my--mingyan-text").text().indexOf("来一起唱啊！！") != -1) {
             swal({
                 title: "获得成就",
                 text: "Shape OF You！",
@@ -416,7 +416,7 @@
             });
             // 音乐惊喜
             let ap = new APlayer({
-                container: document.getElementById("player"),
+                container: document.getElementById("my--player"),
                 fixed: true,
                 lrcType: 3,
                 audio: [{
@@ -501,8 +501,8 @@
      * 分享的主函数
      */
     _mingyan.share = function () {
-        let name = $("#name").text();
-        let my = $("#mingyan").text().replace(/\s*/g, "");
+        let name = $(".my--mingyan-name").text();
+        let my = $(".my--mingyan-text").text().replace(/\s*/g, "");
         swal({
             title: "分享当前名言",
             text: "请手动复制下面的链接，把他发给别人吧",
@@ -588,7 +588,7 @@
                 // db("已选取第" + n + "条名言：" + my);
                 _hmt.push(["_trackEvent", "名言", "查看", "自动", name + "：" + my]);
                 // 查看和分享（已废弃 2021-01-24）
-                $("p#info").html(
+                $($myInfo).html(
                     `<div class="info-text">
                     <!-- 编号 -->
                     <a href="#${n}" class="label label-rounded label-warning">#${n}</a>&nbsp;
@@ -601,12 +601,12 @@
                     </br>
                     <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
                 );
-                $("span#mingyan").html(_mingyan.checkPic(name + "：" + my)); // 若有触发图片彩蛋就显示彩蛋
+                $("span.my--mingyan-text").html(_mingyan.checkPic(name + "：" + my)); // 若有触发图片彩蛋就显示彩蛋
                 let verb = _mingyan.checkText(name + "：" + my);  // 若有触发文字彩蛋就显示彩蛋
-                $("span#name").text(name);
-                $("span#verb").html(verb);
+                $("span.my--mingyan-name").text(name);
+                $("span.my--mingyan-verb").html(verb);
                 $($main).fadeIn();
-                if ($("#mingyan").text().indexOf("来一起唱啊！！") != -1) { // 若有触发音乐彩蛋就加载播放器
+                if ($(".my--mingyan-text").text().indexOf("来一起唱啊！！") != -1) { // 若有触发音乐彩蛋就加载播放器
                     loadJs("https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js");
                 }
                 let title = "名言 | " + my;
@@ -625,7 +625,7 @@
             }
         } catch (err) {
             console.error("名言加载失败");
-            $("#mingyan").text("名言加载失败");
+            $(".my--mingyan-text").text("名言加载失败");
             $($myInfo).html("错误信息：</br>" + err + "</br>建议：<a href=\"javascript:_mingyan.reload()\">点我刷新页面</a>");
             $($main).fadeIn();
             $($myInfo).fadeIn();
@@ -721,7 +721,7 @@
         $($main).hide();
         $("input#searchbar").val("");
         // 搜索框
-        let showall = `<input style="${inputbar_width}" onclick="this.select()" type="search" id="searchbar" placeholder="搜索……" results="5"></input>
+        let showall = `<input style="${inputbar_width}" onclick="this.select()" type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
         </br></br><span class="e"></span>`;
         for (let i in mingyan) {
             // 默认列出全部名言
@@ -1163,7 +1163,7 @@
         <div id="star-ranking-item">
           <div class="columns">
             <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
-            <div class="column col-${width[1]}" id="star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
+            <div class="column col-${width[1]}" id="star-ranking-text" class="my--star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
             <div class="column col-${width[2]}">
               <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)">&#xe8dc;</i>
               <span id="star-ranking-thumb-num">
@@ -1235,7 +1235,7 @@
      * 初始化Headroom.js
      */
     if (Headroom.cutsTheMustard) {
-        let myElement = document.getElementById("header");
+        let myElement = document.getElementById("my--header");
         let headroom = new Headroom(myElement, {
             "offset": 300,
             "tolerance": 5
@@ -1418,7 +1418,7 @@
          */
         "getNum": function (my) {
             if (!Promise) return;
-            if (!my) my = $("#name").text() + "：" + $("#my_text").text();
+            if (!my) my = $(".my--mingyan-name").text() + "：" + $(".my--mingyan-text").text();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     method: "POST",
@@ -1449,7 +1449,7 @@
          */
         "addStar": function (my) {
             if (!Promise) return;
-            if (!my) my = $("#name").text() + "：" + $("#my_text").text();
+            if (!my) my = $(".my--mingyan-name").text() + "：" + $(".my--mingyan-text").text();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     method: "POST",
@@ -1480,7 +1480,7 @@
          */
         "removeStar": function (my) {
             if (!Promise) return;
-            if (!my) my = $("#name").text() + "：" + $("#my_text").text();
+            if (!my) my = $(".my--mingyan-name").text() + "：" + $(".my--mingyan-text").text();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     method: "POST",
@@ -1570,7 +1570,7 @@
         let isAlreadyStar = false;
 
         swal({
-            title: $("#my_text").text(),
+            title: $(".my--mingyan-text").text(),
             text: "加载出错了？刷新试试？",
             icon: "",
             button: "关闭"
@@ -1635,7 +1635,7 @@
                     // db("==位置：_getnum()");
                     // 弹窗
                     swal({
-                        title: $("#my_text").text(),
+                        title: $(".my--mingyan-text").text(),
                         text: "加载出错了？刷新试试？",
                         icon: "",
                         button: "关闭"
