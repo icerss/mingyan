@@ -148,6 +148,10 @@
         "submit": "https://star-api.xhemj.now.sh/api/contribute"
     };
 
+    String.prototype.trim = function () {
+        return this.replace(/(^\s*)|(\s*$)/g, "");
+    };
+
     /**
      * 初始化
      */
@@ -1418,7 +1422,7 @@
          */
         "getNum": function (my) {
             if (!Promise) return;
-            if (!my) my = $(".my--mingyan-name").text() + "：" + $(".my--mingyan-text").text();
+            if (!my) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     method: "POST",
@@ -1449,7 +1453,7 @@
          */
         "addStar": function (my) {
             if (!Promise) return;
-            if (!my) my = $(".my--mingyan-name").text() + "：" + $(".my--mingyan-text").text();
+            if (!my) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     method: "POST",
@@ -1480,7 +1484,7 @@
          */
         "removeStar": function (my) {
             if (!Promise) return;
-            if (!my) my = $(".my--mingyan-name").text() + "：" + $(".my--mingyan-text").text();
+            if (!my) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     method: "POST",
