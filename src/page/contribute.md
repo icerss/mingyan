@@ -11,10 +11,14 @@
     }
     input[data-id="page.contribute"] {
         margin-bottom: 10px;
+        height: 38px;
+        border-radius: 5px;
+        background: transparent;
     }
     #form-story[data-id="page.contribute"] {
         background: transparent;
         border-radius: 5px;
+        height: 150px;
     }
     #submit[data-id="page.contribute"] {
         width: 134px;
@@ -37,7 +41,7 @@
                 <input class="form-input" type="text" id="form-mingyan" placeholder="想投稿什么名言呀？"
                     data-id="page.contribute">
                 <label class="form-label" for="form-story" data-id="page.contribute">名言故事（选填）</label>
-                <textarea class="form-input" id="form-story" placeholder="有机会选入ERSS名言微信公众号哦！" rows="10"
+                <textarea id="form-story" placeholder="有机会选入ERSS名言微信公众号哦！" rows="10"
                     data-id="page.contribute"></textarea>
             </div>
             <button class="btn btn-primary" id="submit" onclick="submit()" data-id="page.contribute">提交</button>
@@ -60,6 +64,7 @@
         };
         //
         if (!my) {
+            $("#form-name").removeClass("is-error");
             $("#form-mingyan").addClass("is-error");
             return
         };
@@ -91,7 +96,7 @@
         //
             swal({
                 title: "名言投稿成功！",
-                text: my,
+                text: "名言：" + my + "\n请等待审核",
                 icon: "success",
                 button: "关闭",
                 closeOnClickOutside: false

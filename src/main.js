@@ -10,7 +10,7 @@
     _mingyan.version = "2021/03/20";
     _mingyan.config = {
         ___DEBUG__: true,
-        ___date_version___: 202103201143
+        ___date_version___: 202103211846
     };
 
     /**
@@ -638,18 +638,6 @@
         }
     };
 
-
-    /**
-     * 修复搜索框长度
-     */
-    let inputbar_width = "";
-    if (ua.device != "Mobile") {
-        inputbar_width = "60%";
-    } else {
-        inputbar_width = "auto";
-        $($main).css("transform", "translateY(30%)");
-    }
-
     /**
      * 修复手机端名言文字位置
      */
@@ -725,7 +713,7 @@
         $($main).hide();
         $("input#searchbar").val("");
         // 搜索框
-        let showall = `<input style="${inputbar_width}" onclick="this.select()" type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
+        let showall = `<input onclick="this.select()" type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
         </br></br><span class="e"></span>`;
         for (let i in mingyan) {
             // 默认列出全部名言
@@ -888,7 +876,7 @@
                     if (now1 == now2) { // 若停止输入
                         $("a#showall_item").each(function () {
                             if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
-                                let reg = "/" + $("input#searchbar").val() + "/g"; // 拼接正规表达式
+                                let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
                                 $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
                                 $(this).show();
                             } else {
