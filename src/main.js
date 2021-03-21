@@ -1201,7 +1201,7 @@
         case "auto_reload":
             // 自动刷新名言
             setInterval(function () {
-                _mingyan.show();
+                _mingyan.reload();
             }, 3000);
             break;
         }
