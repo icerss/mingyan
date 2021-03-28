@@ -184,18 +184,8 @@
         if (_mingyan.config.___DEBUG__) {
             let special1 = "";
             let special2 = "";
-            if (i.toString().split("====").length != 1 && typeof i == "string") {
-                special1 = "%c";
-                special2 = "color: red";
-            }
-            if (typeof i == "string" || typeof i == "number") {
-                log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}${i}`, special2);
-                dn++;
-            } else {
-                log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}`, special2);
-                log(i);
-                dn++;
-            }
+            log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}`,i , special2);
+            dn++;
         }
     }
 
@@ -241,6 +231,48 @@
             return 0;
         }
     }
+
+    /**
+     * 弹窗
+     * @param {Object} opt 选项
+     */
+    function showPop(opt) {
+        let pop_elements = {};
+        opt.time = opt.time || 5000;
+        opt.url = opt.url || "";
+        pop_elements.container = document.createElement("div");
+        pop_elements.container.id = "pop";
+        pop_elements.container.style.cssText = "z-index:10000;";
+        pop_elements.modal = document.createElement("div");
+        pop_elements.modal.style.cssText = "z-index:99999;position:fixed;box-shadow: 0 5px 15px -5px rgba(0,0,0,0.8);display:inline-block;color:black;padding:24px;background-color:white;top:12px;right:12px;border-radius:12px;font-size:18px;transition:all 250ms ease;opacity:0";
+        pop_elements.a = document.createElement("a");
+        pop_elements.a.innerText = opt.url;
+        pop_elements.a.href = opt.url;
+        pop_elements.a.addEventListener("click", (e) => {
+            e.preventDefault();
+        });
+        pop_elements.p = document.createElement("p");
+        pop_elements.p.style.cssText = "padding:0;margin:0;";
+        pop_elements.p.innerHTML = opt.text;
+        pop_elements.modal.appendChild(pop_elements.p);
+        pop_elements.modal.appendChild(pop_elements.a);
+        pop_elements.container.appendChild(pop_elements.modal);
+        let pop_body = document.querySelector("body");
+        pop_body.appendChild(pop_elements.container);
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                pop_elements.modal.style.opacity = 1;
+            });
+        });
+
+        setTimeout(function () {
+            pop_elements.modal.style.opacity = 0;
+            setTimeout(function () {
+                pop_elements.container.remove();
+            }, 260);
+        }, opt.time);
+    }
+
     /* 彩蛋系统 */
 
     /* 右下小人 */
@@ -285,7 +317,7 @@
             my_out = my.split("：")[1] + "：" + my.split("：")[2];
             // db(my_out);
         }
-        let special = "onclick=\"_mingyan.onMingyanClick()\"";
+        let special = "data-event=\"my--text\" onclick=\"_mingyan.onclick(this);\"";
         if (my_out == "解" || mingyanPicUrl[my_out] != undefined) {
             let pic = null;
             if (my_out == "解") {
@@ -389,53 +421,66 @@
     };
 
     /**
-     * 文字彩蛋
+     * 监听点击
      */
-    _mingyan.onMingyanClick = function () {
-        if ($(".my--mingyan-text").text().indexOf("绿帽子") != -1) {
-            swal({
-                title: "Fuck ♂ You ♂",
-                text: "骚骚恪曾经说过：Fuck ♂ You ♂",
-                icon: "",
-                button: "关闭",
-                closeOnClickOutside: false
-            });
+    _mingyan.onclick = function (el) {
+        if (!el) return;
+        let event = el.getAttribute("data-event").replace("my--", "");
+        switch (event) {
+        case "text":
+            _text();
+            return;
         }
-        if ($(".my--mingyan-text").text().indexOf("垃圾真好吃") != -1) {
-            swal({
-                title: "获得成就",
-                text: "最美垃圾人",
-                icon: "success",
-                button: "关闭",
-                closeOnClickOutside: false
-            });
-        }
-        if ($(".my--mingyan-text").text().indexOf("来一起唱啊！！") != -1) {
-            swal({
-                title: "获得成就",
-                text: "Shape OF You！",
-                icon: "success",
-                button: "关闭",
-                closeOnClickOutside: false
-            });
-            // 音乐惊喜
-            let ap = new APlayer({
-                container: document.getElementById("my--player"),
-                fixed: true,
-                lrcType: 3,
-                audio: [{
-                    name: "Shape of You",
-                    artist: "Ed Sheeran",
-                    url: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
-                    cover: "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/L1NY8U7nhRjyQMa.jpg",
-                    lrc: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc"
-                }]
-            });
-            // 调整字幕位置
-            $(".aplayer .aplayer-lrc").css("transform", "translateY(-55px)");
-            ap.play();
+
+        /**
+         * 文字彩蛋
+         */
+        function _text() {
+            let text = $(".my--mingyan-text").text();
+            let alTitle = "";
+            let alText = "";
+            if (text.indexOf("绿帽子") != -1) {
+                alTitle = "Fuck ♂ You ♂";
+                alText = "骚骚恪曾经说过：Fuck ♂ You ♂";
+            }
+            if (text.indexOf("垃圾真好吃") != -1) {
+                alTitle = "获得成就";
+                alText = "最美垃圾人";
+            }
+            if (text.indexOf("来一起唱啊！！") != -1) {
+                alTitle = "获得成就";
+                alText = "Shape OF You！";
+                // 音乐惊喜
+                let ap = new APlayer({
+                    container: document.getElementById("my--player"),
+                    fixed: true,
+                    lrcType: 3,
+                    audio: [{
+                        name: "Shape of You",
+                        artist: "Ed Sheeran",
+                        url: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
+                        cover: "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/L1NY8U7nhRjyQMa.jpg",
+                        lrc: "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc"
+                    }]
+                });
+                // 调整字幕位置
+                $(".aplayer .aplayer-lrc").css("transform", "translateY(-55px)");
+                ap.play();
+            }
+
+            if (alText && alTitle) {
+                swal({
+                    title: alTitle,
+                    text: alText,
+                    icon: "success",
+                    button: "关闭",
+                    closeOnClickOutside: false
+                });
+            }
         }
     };
+
+
 
     /**
      *  文字彩蛋
@@ -1530,6 +1575,18 @@
      * @param {String} event 事件名
      */
     _mingyan.star = function (event) {
+        let loadingHtml = `
+        <!-- 点赞 -->
+        <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('loading')">&#xe8dc;</i>
+        <span id="star-num">
+        <!-- 加载动画 -->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+          </circle>
+        <!-- https://loading.io/ --></svg>
+        </span>
+        `;
         if (!event) event = "getnum";
         // 兼容内测时的数据格式
         if (localStorage.getItem("___mingyan_star_data__") && localStorage.getItem("___mingyan_star_data__").indexOf("，") != -1) {
@@ -1546,18 +1603,7 @@
             localStorage.setItem("___mingyan_star_data__", nData);
         }
         // db("event" + event);
-        let loadingHtml = `
-        <!-- 点赞 -->
-        <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('loading')">&#xe8dc;</i>
-        <span id="star-num">
-        <!-- 加载动画 -->
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-          </circle>
-        <!-- https://loading.io/ --></svg>
-        </span>
-        `;
+        
         // 是否已经点赞 
         let isAlreadyStar = false;
 
@@ -1883,6 +1929,147 @@
     _mingyan.onHashChange();
     window.addEventListener("hashchange", _mingyan.onHashChange);
 
+    _mingyan.specialModeApi = {
+        "isAnswerErr": false,
+        "gettoken": function () {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch("https://api.mingyan.eu.org/api/gettoken", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "key": "xhemj"
+                    })
+                }).then(json => json.json()).then((res) => {
+                    db(res);
+                    if (res.code == 0) resolve(res.data.refreshtoken);
+                    reject(res.msg);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        },
+        "getquestion": function (token) {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch("https://api.mingyan.eu.org/api/getquestion", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "token": token
+                    })
+                }).then(json => json.json()).then((res) => {
+                    db(res);
+                    if (res.code == 0) resolve(res.data);
+                    reject(res.msg);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        },
+        "verify": function (token, question, answer) {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch("https://api.mingyan.eu.org/api/verify", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "token": token,
+                        "q": question,
+                        "a": answer
+                    })
+                }).then(json => json.json()).then((res) => {
+                    db(res);
+                    if (res.code == 0) resolve(res);
+                    reject(res.msg);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        }
+    };
+    _mingyan.specialMode = function () {
+        let loading = `<!-- 加载动画 -->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+          </circle>
+        <!-- https://loading.io/ --></svg>
+        `;
+        swal({
+            title: "问题加载中",
+            text: "回答问题查看更多精彩名言",
+            icon: "info",
+            button: "关闭",
+            closeOnClickOutside: false
+        });
+        $(".swal-text").html(loading);
+        let tk = "";
+        let q = "";
+        _mingyan.specialModeApi.gettoken()
+            .then(function (rftoken) {
+                tk = rftoken;
+                return _mingyan.specialModeApi.getquestion(rftoken);
+            }).then(function (question) {
+                q = question;
+                let text = "回答问题查看更多名言！";
+                if (_mingyan.specialModeApi.isAnswerErr) text = "回答错误或已超时，请重新回答";
+                return swal({
+                    title: question,
+                    text: text,
+                    icon: "info",
+                    button: "提交",
+                    closeOnClickOutside: false,
+                    content: {
+                        element: "input",
+                        attributes: {
+                            placeholder: "请输入答案哦！",
+                            value: "",
+                            type: "text"
+                        }
+                    }
+                });
+            }).then(function (answer) {
+                if (!answer) return (new Promise(()=>{}));
+                swal({
+                    title: "加载中",
+                    text: "回答问题查看更多精彩名言",
+                    icon: "info",
+                    button: "关闭",
+                    closeOnClickOutside: false
+                });
+                $(".swal-text").html(loading);
+                return _mingyan.specialModeApi.verify(tk, q, answer);
+            }).then(function (res) {
+                _mingyan.specialModeApi.isAnswerErr = false;
+                db(res);
+                swal({
+                    title: "哈哈哈",
+                    text: res.info.msg,
+                    icon: "info",
+                    button: "关闭",
+                    closeOnClickOutside: false
+                });
+            }).catch(function (err) {
+                showPop({
+                    "text": err
+                });
+                _mingyan.specialMode();
+                _mingyan.specialModeApi.isAnswerErr = true;
+            });
+    };
+    document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
+
+
     window._mingyan = _mingyan;
     window.isSupportWebp = isSupportWebp;
     window.qs = qs;
@@ -1916,3 +2103,5 @@
 
 
 })();
+
+
