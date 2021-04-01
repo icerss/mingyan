@@ -601,9 +601,9 @@
      * @param {Num} id 名言ID（可不传入）
      */
     _mingyan.show = function (id) {
-        db(mingyan);
-        db(mingyanPicUrl);
-        db(specialVerbList);
+        // db(mingyan);
+        // db(mingyanPicUrl);
+        // db(specialVerbList);
         // 加载Fancybox插件
         initfancybox();
         // 处理传入的id
@@ -2099,12 +2099,44 @@
     //                 specialVerbList[text] = my[i]["verb"];
     //             }
     //         }
-            
+
     //         resolve();
     //     });
     // }
 
     // // document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
+
+
+    let zk_mingyan = localStorage.getItem("zkmy") || "";
+    (function () {
+        let count = 0;
+        if (!zk_mingyan) return;
+        zk_mingyan = zk_mingyan.split("&");
+        // function inArr(arr, str) {
+        //     for (let i in arr) {
+        //         if (arr[i] == str) return true;
+        //     }
+        //     return false;
+        // }
+        window.addEventListener("hashchange", function () {
+            count++;
+            db(count);
+            // let name = $(".my--mingyan-name").text().trim();
+            // let my = $(".my--mingyan-text").text().trim();
+            if (count == 15) {
+                let m = zk_mingyan[randomNumber(0, zk_mingyan.length - 1)];
+                $(".my--mingyan-text").text(m.split("：")[1]);
+                $(".my--mingyan-name").text(m.split("：")[0]);
+                db("中考名言");
+                $(".my--mingyan-text").removeClass("label-secondary");
+                $(".my--mingyan-text").addClass("label-error");
+                count = 0;
+            } else {
+                $(".my--mingyan-text").removeClass("label-error");
+                $(".my--mingyan-text").addClass("label-secondary");
+            }
+        });
+    })();
 
 
     window._mingyan = _mingyan;
