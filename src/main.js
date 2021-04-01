@@ -2127,6 +2127,7 @@
                 let m = zk_mingyan[randomNumber(0, zk_mingyan.length - 1)];
                 $(".my--mingyan-text").text(m.split("：")[1]);
                 $(".my--mingyan-name").text(m.split("：")[0]);
+                $(".my--mingyan-verb").text("也许想要说");
                 db("中考名言");
                 $(".my--mingyan-text").removeClass("label-secondary");
                 $(".my--mingyan-text").addClass("label-error");
