@@ -16,18 +16,31 @@
 *,*:after,*:before {
 	box-sizing:inherit;
 }
+::-webkit-scrollbar-thumb {
+	height: 50px;
+	border: 2px solid #f0f0f0;
+	border-radius: 6px;
+	outline: 2px solid #f0f0f0;
+	outline-offset: -2px;
+	background-color: #bbb
+}
+::-webkit-scrollbar-thumb:hover {
+	height: 50px;
+	background-color: #aaa
+}
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+	cursor: pointer
+}
+::-webkit-scrollbar-track-piece {
+	border-radius: 0;
+	background-color: #f0f0f0
+}
 html {
-	line-height:1.15;
-	-webkit-text-size-adjust:100%;
-	font-size:62.5%;
-}
-html::-webkit-scrollbar {
-	width:6px;
-	height:6px
-}
-html::-webkit-scrollbar-thumb {
-	border-radius:6px;
-	background-color:#aaa
+	line-height: 1.15;
+	-webkit-text-size-adjust: 100%;
+	font-size: 62.5%;
 }
 body {
 	letter-spacing:.01em;
@@ -174,6 +187,12 @@ input[type=search] {
 	align-items:center;
 	height:55px
 }
+.my--mingyan-boy {
+	position: absolute;
+    bottom: 50px;
+    right: 0px;
+    width: 120px;
+}
 .my--main {
 	font-weight: bold;
 	z-index: 1;
@@ -196,6 +215,9 @@ input[type=search] {
 .my--star-ranking-text {
 	cursor: pointer;
 }
+.my--special-mode {
+	background-color: #e3e4e6;
+}
 .my--title {
 	line-height:1px;
 	color: #9b4dca;
@@ -207,4 +229,7 @@ input[type=search] {
 }
 pwa-install::part(openButton) {
 	display: none;
+}
+.aplayer .aplayer-lrc {
+	transform: translateY(-55px)
 }

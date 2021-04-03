@@ -11,11 +11,16 @@ const js = function () {
     return src(['./src/mingyan.js', './src/main.js'])
         .pipe(concat('all.min.js'))
         .pipe(sourcemaps.init())
-        .pipe(terser())
         .pipe(babel({
             presets: ['@babel/preset-env']
         }))
-        .pipe(terser())
+        .pipe(terser({
+            ie8: true,
+            toplevel: true,
+            format: {
+                comments: "some"
+            }
+        }))
         .pipe(sourcemaps.write("."))
         .pipe(dest('dist'))
 }
