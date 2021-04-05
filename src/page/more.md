@@ -71,7 +71,8 @@
         <h3 data-id="page.more"><a data-id="page.more" onclick="_mingyan.showAllMingyan()">全部名言</a></h3>
         <h3 data-id="page.more"><a data-id="page.more" onclick="_mingyan.print()">打印名言列表</a></h3>
         <h3 data-id="page.more"><a data-id="page.more" onclick="_mingyan.download()">下载名言列表（.txt）</a></h3>
-        <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/submit'">名言投稿</a></h3>
+        <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/ranking'">名言排行榜</a></h3>
+                <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/submit'">名言投稿</a></h3>
         <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3>
     </div>
 </div>

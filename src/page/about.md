@@ -5,21 +5,52 @@
 
 ## 快来看看厦门市音乐学校老师和同学们的名言吧！
 ---
-**制作**：
+# 制作
+## 策划：
+
 <ul class="mdui-list">
-  <li class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('xhemj')"><img class="lazyload"
-        src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/cSEzu59fHmlyDqT.png" />
-    </div>
-    <div class="mdui-list-item-content">xhemj</div>
-    <a href="https://space.bilibili.com/226208916"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
-  </li>
   <li class="mdui-list-item mdui-ripple">
     <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('BlackToy')"><img class="lazyload"
         src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg" />
     </div>
-    <div class="mdui-list-item-content">BlackToy</div>
+    <div class="mdui-list-item-content">解恪布TOY</div>
     <a href="https://space.bilibili.com/337073401"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
+  </li>
+</ul>
+
+## 网页：
+
+<ul class="mdui-list">
+  <li class="mdui-list-item mdui-ripple">
+    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('xhemj')"><img class="lazyload"
+        src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/05/Bext3hDK1nrZM7y.png" />
+    </div>
+    <div class="mdui-list-item-content">Xhemj</div>
+    <a href="https://space.bilibili.com/226208916"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
+  </li>
+</ul>
+
+## 美术：
+
+<ul class="mdui-list">
+  <li class="mdui-list-item mdui-ripple">
+    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('BlackToy')"><img class="lazyload"
+        src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg" />
+    </div>
+    <div class="mdui-list-item-content">解恪布TOY</div>
+    <a href="https://space.bilibili.com/337073401"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
+  </li>
+</ul>
+
+## 素材：
+
+<ul class="mdui-list">
+  <li class="mdui-list-item mdui-ripple">
+    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('xhemj')"><img class="lazyload"
+        src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/05/Bext3hDK1nrZM7y.png" />
+    </div>
+    <div class="mdui-list-item-content">Xhemj</div>
+    <a href="https://space.bilibili.com/226208916"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
   </li>
   <li class="mdui-list-item mdui-ripple">
     <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('Oranjezelv')"><img class="lazyload"
@@ -30,9 +61,20 @@
   </li>
 </ul>
 
----
+## 推广：
 
-**特别感谢**：
+<ul class="mdui-list">
+  <li class="mdui-list-item mdui-ripple">
+    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('BlackToy')"><img class="lazyload"
+        src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg" />
+    </div>
+    <div class="mdui-list-item-content">解恪布TOY</div>
+    <a href="https://space.bilibili.com/337073401"><i class="mdui-list-item-icon mdui-icon material-icons">info</i></a>
+  </li>
+</ul>
+
+
+# 特别感谢
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
     <div class="mdui-list-item-content">厦门市音乐学校</div>
