@@ -1189,7 +1189,7 @@
         <div id="star-ranking-item">
           <div class="columns">
             <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
-            <div class="column col-${width[1]}" id="star-ranking-text" class="my--star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
+            <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
             <div class="column col-${width[2]}">
               <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)">&#xe8dc;</i>
               <span id="star-ranking-thumb-num">
@@ -2120,7 +2120,7 @@
     //     }
     // }
 
-    document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
+    // document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
 
     /**
      * 中考加油名言（未公开）
