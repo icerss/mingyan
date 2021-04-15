@@ -568,23 +568,23 @@
     /* 主功能：名言显示 */
     let skipCheckHash = false; // 看是否不检查hash值
 
-    /**
-     * 设置名言显示概率
-     * @param {String} my 要检验的名言
-     * @returns 名言
-     */
-    function _checkMingyan(my) {
-        let chance = {
-            "数学潘哥": "1,2",
-            "其它": "3,4,5,6,7,8,9,0"
-        };
-        let n = randomNumber(0, 9);
-        if (my.split("：")[0] == "数学潘哥") {
-            if (chance["数学潘哥"].indexOf(n) != -1) return my;
-            return _checkMingyan(mingyan[randomNumber(0, mingyan.length - 1)]);
-        }
-        return my;
-    }
+    // /**
+    //  * 设置名言显示概率
+    //  * @param {String} my 要检验的名言
+    //  * @returns 名言
+    //  */
+    // function _checkMingyan(my) {
+    //     let chance = {
+    //         "数学潘哥": "1,2",
+    //         "其它": "3,4,5,6,7,8,9,0"
+    //     };
+    //     let n = randomNumber(0, 9);
+    //     if (my.split("：")[0] == "数学潘哥") {
+    //         if (chance["数学潘哥"].indexOf(n) != -1) return my;
+    //         return _checkMingyan(mingyan[randomNumber(0, mingyan.length - 1)]);
+    //     }
+    //     return my;
+    // }
 
     /* 测试概率脚本
     ```
@@ -635,7 +635,7 @@
                 // db("加载名言列表成功");
                 let n = _id(id);
                 let _my = mingyan[n];
-                _my = _checkMingyan(_my); // 调整名言概率
+                // _my = _checkMingyan(_my); // 调整名言概率
                 if (hashName[location.hash] == true) return; // 若有触发hash路由的地址就返回
                 // hash路由
                 skipCheckHash = true;
