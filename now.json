@@ -1,6 +1,13 @@
 {
     "routes": [
         {
+            "src": "/api/get-ranking-history",
+            "headers": {
+                "cache-control": "max-age=86400"
+            },
+            "dest": "https://icerss.github.io/actions/ranking.json"
+        },
+        {
             "src": "/(.*)",
             "headers": {
                 "cache-control": "max-age=86400"
