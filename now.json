@@ -2,16 +2,14 @@
     "routes": [
         {
             "src": "/api/get-ranking-history",
-            "headers": {
-                "cache-control": "max-age=86400"
-            },
-            "dest": "https://icerss.github.io/actions/ranking.json"
+            "dest": "https://icerss.github.io/data/ranking.json"
+        },
+        {
+            "src": "/api/get-sponsor-list",
+            "dest": "https://icerss.github.io/data/sponsor.json"
         },
         {
             "src": "/(.*)",
-            "headers": {
-                "cache-control": "max-age=86400"
-            },
             "dest": "/$1"
         }
     ]
