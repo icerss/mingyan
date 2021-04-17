@@ -3,7 +3,7 @@
 * 2021/02/07
 */
 
-let mingyan = [ // eslint-disable-line
+let mingyan1 = [ // eslint-disable-line
     //====老王名言====
     "数学老王：你是屁股吗？",
     "数学老王：肾虚都没你这样",
@@ -20,6 +20,10 @@ let mingyan = [ // eslint-disable-line
     "数学老王：请考生进入烤肠（考场）",
     "数学老王：解",
 
+    // 下面加入潘哥名言
+];
+
+let mingyan2 = [ // eslint-disable-line
     //====潘哥名言====
     "数学潘哥：解",
     "数学潘哥：你的眼睛是被屎糊了吗？",
@@ -275,7 +279,8 @@ let mingyan = [ // eslint-disable-line
     "数学潘哥：快毕业了，突然发现抄作业是件很幸福的事哦！",
     "数学潘哥：你们班是动物园吗？",
     "数学潘哥：我被你们骂我很幸福！",
-
+];
+let mingyan3 = [ // eslint-disable-line
     //====俞老师名言====
     "英语老俞：解",
     "英语老俞：不是腿断了，手折了，就是小测不及格了。",
@@ -669,6 +674,12 @@ let mingyan = [ // eslint-disable-line
     "保安：你连里毛都没有",
 ];
 
+// 合并同类相[doge]
+let mingyan = [ // eslint-disable-line
+    ...mingyan1,
+    ...mingyan2,
+    ...mingyan3
+];
 /**
  * 格式：
  * "名言": "图片链接" 
