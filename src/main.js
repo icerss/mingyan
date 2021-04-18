@@ -1,6 +1,6 @@
 /*
 * ©2020-2021 xhemj
-* 2021/03/20
+* 2021/04/18
 */
 
 (async function () {
@@ -8,7 +8,7 @@
     let _mingyan = {};
 
     v = v || ["", "202103211846"]; // eslint-disable-line
-    _mingyan.version = "2021/03/20";
+    _mingyan.version = "2021/04/18";
     _mingyan.config = {
         ___DEBUG__: true,
         ___date_version___: v[1] // eslint-disable-line
@@ -707,7 +707,7 @@
                 $($main).fadeIn();
                 // 等待加载完后再检查名言概率
                 $("#reload").attr("href", "#" + _checkMingyan());
-                
+
                 if ($(".my--mingyan-text").text().indexOf("来一起唱啊！！") != -1) { // 若有触发音乐彩蛋就加载播放器
                     loadJs("https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js");
                 }
