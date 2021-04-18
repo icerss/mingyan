@@ -427,10 +427,10 @@
                 button: "关闭",
             })
                 .then(function () {
-                    $("body").css({"transition":"transform 1s ease 0s", "transform": "rotateY(180deg)"});
+                    $("body").css({ "transition": "transform 1s ease 0s", "transform": "rotateY(180deg)" });
                     faceClickTime = "";
                 });
-            
+
         }
     };
 
@@ -593,32 +593,31 @@
     /* 主功能：名言显示 */
     let skipCheckHash = false; // 看是否不检查hash值
 
-    // /**
-    //  * 设置名言显示概率
-    //  * @param {String} my 要检验的名言
-    //  * @returns 名言
-    //  */
-    // function _checkMingyan(my) {
-    //     let chance = {
-    //         "数学潘哥": "1,2",
-    //         "其它": "3,4,5,6,7,8,9,0"
-    //     };
-    //     let n = randomNumber(0, 9);
-    //     if (my.split("：")[0] == "数学潘哥") {
-    //         if (chance["数学潘哥"].indexOf(n) != -1) return my;
-    //         return _checkMingyan(mingyan[randomNumber(0, mingyan.length - 1)]);
-    //     }
-    //     return my;
-    // }
+    /**
+     * 设置名言显示概率
+     * @returns 名言id
+     */
+    function _checkMingyan() {
+        let otherMingyan = [
+            ...mingyan1,  // eslint-disable-line
+            ...mingyan3  // eslint-disable-line
+        ];
+        let chance = {
+            "数学潘哥": "1,2,3" // 大约13%
+        };
+        let n = randomNumber(0, 19);
+        if (chance["数学潘哥"].indexOf(n) != -1) return _findmingyan(mingyan2[randomNumber(0, mingyan2.length - 1)]);  // eslint-disable-line
+        return _findmingyan(otherMingyan[randomNumber(0, otherMingyan.length - 1)]);
+    }
 
     /* 测试概率脚本
     ```
-    let name = "xhemj"; // 人名
+    let name = "潘哥"; // 人名
     let time = 99999; // 测试次数
 
     let count = 0;
     for (let i = 0; i < time; i ++) {
-       let my = mingyan[randomNumber(0, mingyan.length - 1)]
+       let my = mingyan[_checkMingyan()];
        if (my.indexOf(name) != -1) count++
     };
     db("===========================");
@@ -706,6 +705,9 @@
 
                 $("span.my--mingyan-name").text(name);
                 $($main).fadeIn();
+                // 等待加载完后再检查名言概率
+                $("#reload").attr("href", "#" + _checkMingyan());
+                
                 if ($(".my--mingyan-text").text().indexOf("来一起唱啊！！") != -1) { // 若有触发音乐彩蛋就加载播放器
                     loadJs("https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js");
                 }

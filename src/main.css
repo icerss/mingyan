@@ -205,9 +205,11 @@ input[type=search] {
 .my--page {
 	size: 20px;
 	margin-bottom: 80px;
+	margin-top: 20px;
 }
 .my--search {
 	text-align: center;
+	margin-top: 20px;
 }
 .my--search-bar:focus {
     outline: none;
