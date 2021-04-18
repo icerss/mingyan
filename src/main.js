@@ -1,40 +1,52 @@
 /*
-* ©2020-2021 xhemj
-* 2021/04/18
-*/
+ * ©2020-2021 xhemj
+ * 2021/04/18
+ */
 
 (async function () {
     /* 配置 */
     let _mingyan = {};
 
+    /**
+     * 控制台输出
+     */
+    let dn = 1;
+    function db(i) {
+        let special1 = "";
+        let special2 = "";
+        console.log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}`, i, special2);
+        dn++;
+    }
+
+    let staticMode = false; // eslint-disable-line
+    db("mode", staticMode);
     v = v || ["", "202103211846"]; // eslint-disable-line
     _mingyan.version = "2021/04/18";
     _mingyan.config = {
-        ___DEBUG__: true,
         ___date_version___: v[1] // eslint-disable-line
     };
 
-    /**
-     * log
-     */
-    _mingyan.log = {
-        "log": [],
-        "add": function (log) {
-            return this.log.push(log)
-        },
-        "get": function () {
-            return this.log
-        },
-        "lastLog": function () {
-            return this.log[this.log.length - 2]
-        },
-        "nowLog": function () {
-            return this.log[this.log.length - 1]
-        },
-        "isFromSearch": function () {
-            return (this.lastLog() || this.nowLog()) == "search"
-        }
-    }
+    // /**
+    //  * log
+    //  */
+    // _mingyan.log = {
+    //     "log": [],
+    //     "add": function (log) {
+    //         return this.log.push(log);
+    //     },
+    //     "get": function () {
+    //         return this.log;
+    //     },
+    //     "lastLog": function () {
+    //         return this.log[this.log.length - 2];
+    //     },
+    //     "nowLog": function () {
+    //         return this.log[this.log.length - 1];
+    //     },
+    //     "isFromSearch": function () {
+    //         return (this.lastLog() || this.nowLog()) == "search";
+    //     }
+    // };
 
     /**
      * ServiceWorker
@@ -192,8 +204,8 @@
     _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
 
     let apiUrls = {
-        "star": "https://star-api.xhemj.now.sh/api/star",
-        "submit": "https://star-api.xhemj.now.sh/api/contribute"
+        "star": "https://api.erss.club/api/star",
+        "submit": "https://api.erss.club/api/contribute"
     };
 
     String.prototype.trim = function () {
@@ -221,20 +233,6 @@
         su.src = url;
         let s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(su, s);
-    }
-
-    /**
-     * 控制台输出
-     */
-    let dn = 1;
-    let log = console.log;
-    function db(i) {
-        if (_mingyan.config.___DEBUG__) {
-            let special1 = "";
-            let special2 = "";
-            log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}`, i, special2);
-            dn++;
-        }
     }
 
     /**
@@ -625,9 +623,9 @@
             ...mingyan3  // eslint-disable-line
         ];
         let chance = {
-            "数学潘哥": "1,2,3" // 大约13%
+            "数学潘哥": "1,2,3,4,5,6" // 大约14%
         };
-        let n = randomNumber(0, 19);
+        let n = randomNumber(0, 40);
         if (chance["数学潘哥"].indexOf(n) != -1) return _findmingyan(mingyan2[randomNumber(0, mingyan2.length - 1)]);  // eslint-disable-line
         return _findmingyan(otherMingyan[randomNumber(0, otherMingyan.length - 1)]);
     }
@@ -871,6 +869,62 @@
         $($page).fadeIn();
     };
 
+    /**
+     * 概率脚本
+     */
+    /*
+    ```
+    let sum = [];
+    let teacher = [
+        "数学老王",
+        "英语老俞",
+        "数学潘哥",
+        "语文老朱",
+        "物理刘老师",
+        "物理王老师",
+        "地理吴老师",
+        "地理朱老师",
+        "政治王老师",
+        "化学吴老师",
+        "历史李老师",
+        "美术林老师",
+        "体育吴老师",
+        "体育俞老师",
+        "生物吴老师",
+        "音乐苏老师",
+        "历史杰哥",
+        "恪人",
+        "耳斯恪",
+        "Oranjezelf",
+        "解恪布TOY",
+        "xhemj",
+        "小菊",
+        "小柳DJ",
+        "吹恪",
+        "八班",
+        "保安",
+        "学校",
+    ];
+    for (let i of teacher) {
+        let name = i; // 人名
+        let time = 99999; // 测试次数
+
+        let count = 0;
+        for (let i = 0; i < time; i++) {
+            let my = mingyan[_checkMingyan()];
+            if (my.indexOf(name) != -1) count++
+        };
+        db("===========================");
+        db(`测试次数：${time} 次`)
+        db(`测试人名：${name}`)
+        db(" 命中次数   |   概率（%）");
+        db(`   ${count}    |   ${((count / time) * 100).toFixed(3)}`);
+        db("===========================");
+        sum.push(`${i}：${((count / time) * 100).toFixed(3)} %`);
+    };
+    db(sum);
+    ```
+    */
     /**
      * 统计各位老师有几条名言
      */
@@ -1245,8 +1299,8 @@
         case "/index.html":
         case "/": // 这边还没废弃
             $(document).ready(function () {
-                _mingyan.show();
-                db("s1");
+                if (!staticMode) _mingyan.show();
+                // db("s1");
             });
             if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果是新用户
                 _mingyan.ranking();
@@ -1926,7 +1980,7 @@
                     break;
             }
         } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d/.test(location.hash)) { // 否则就显示名言
-            _mingyan.show(location.hash.split("#")[1]);
+            if (!staticMode) _mingyan.show(location.hash.split("#")[1]);
             isLogoOpacity = false;
         }
     };
@@ -2181,7 +2235,6 @@
     window.randomNumber = randomNumber;
     window.loadJs = loadJs;
     window.db = db;
-    window.log = log;
     window._ = _;
     window._$ = _$;
 
