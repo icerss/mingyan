@@ -15,6 +15,28 @@
     };
 
     /**
+     * log
+     */
+    _mingyan.log = {
+        "log": [],
+        "add": function (log) {
+            return this.log.push(log)
+        },
+        "get": function () {
+            return this.log
+        },
+        "lastLog": function () {
+            return this.log[this.log.length - 2]
+        },
+        "nowLog": function () {
+            return this.log[this.log.length - 1]
+        },
+        "isFromSearch": function () {
+            return (this.lastLog() || this.nowLog()) == "search"
+        }
+    }
+
+    /**
      * ServiceWorker
      */
 
@@ -373,23 +395,23 @@
         // db(reloadTime);
         let title = "获得成就", text;
         switch (reloadTime) {
-        case 10:
-            text = "点击 100 次有惊喜";
-            break;
-        case 100:
-            text = "点击 500 次有惊喜";
-            break;
-        case 500:
-            text = "点击 1000 次有惊喜，\n很大的惊喜哦！";
-            break;
-        case 1000:
-            text = "点击 10000 次有惊喜，\n你都到这一步了，干嘛不看看后面的惊喜呢？";
-            break;
-        case 10000:
-            text = "你好无聊啊……";
-            break;
-        default:
-            text = "";
+            case 10:
+                text = "点击 100 次有惊喜";
+                break;
+            case 100:
+                text = "点击 500 次有惊喜";
+                break;
+            case 500:
+                text = "点击 1000 次有惊喜，\n很大的惊喜哦！";
+                break;
+            case 1000:
+                text = "点击 10000 次有惊喜，\n你都到这一步了，干嘛不看看后面的惊喜呢？";
+                break;
+            case 10000:
+                text = "你好无聊啊……";
+                break;
+            default:
+                text = "";
         }
         // 弹窗
         if (text) {
@@ -441,9 +463,9 @@
         if (!el) return;
         let event = el.getAttribute("data-event").replace("my--", "");
         switch (event) {
-        case "text":
-            _text();
-            return;
+            case "text":
+                _text();
+                return;
         }
 
         /**
@@ -907,25 +929,25 @@
         if ($("#searchbar").is(":focus") || qs("q") != "") { // 若有点击搜索框或有传入?q=
             if ($("input#searchbar").val()) { // 若搜索框内有文字
                 switch ($("input#searchbar").val()) {
-                // 若输入::auto_reload，则进入自动刷新模式
-                case "::auto_reload":
-                    location.href = "./?force_action=auto_reload";
-                    break;
-                default:
-                    let now1 = $("input#searchbar").val();
-                    let now2 = $("input#searchbar").val();
-                    if (now1 == now2) { // 若停止输入
-                        $("a#showall_item").each(function () {
-                            if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
-                                let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
-                                $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
-                                $(this).show();
-                            } else {
-                                $(this).hide();
-                            }
-                        });
-                        $(".e").hide(); // “无结果”隐藏
-                    }
+                    // 若输入::auto_reload，则进入自动刷新模式
+                    case "::auto_reload":
+                        location.href = "./?force_action=auto_reload";
+                        break;
+                    default:
+                        let now1 = $("input#searchbar").val();
+                        let now2 = $("input#searchbar").val();
+                        if (now1 == now2) { // 若停止输入
+                            $("a#showall_item").each(function () {
+                                if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
+                                    let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
+                                    $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
+                                    $(this).show();
+                                } else {
+                                    $(this).hide();
+                                }
+                            });
+                            $(".e").hide(); // “无结果”隐藏
+                        }
                 }
 
             } else {
@@ -1049,8 +1071,8 @@
                         };
                         resolve(res);
                     }).catch(function (e) {
-                    reject(e);
-                });
+                        reject(e);
+                    });
             });
         },
         //获取当前排名人数
@@ -1211,50 +1233,50 @@
      * 旧版historypush路由 已废弃 2021-01-24
      */
     switch (location.pathname) {
-    case "/about":
-        location.hash = "#/about";
-        break;
-    case "/search":
-        location.hash = "#/search";
-        break;
-    case "/more":
-        location.hash = "#/more";
-        break;
-    case "/index.html":
-    case "/": // 这边还没废弃
-        $(document).ready(function () {
-            _mingyan.show();
-            db("s1");
-        });
-        if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果是新用户
-            _mingyan.ranking();
-        }
-        switch (qs("force_action") || qs("do")) {
-        case "clear_save":
-            localStorage.removeItem("___mingyan_2021_ranking_data__");
+        case "/about":
+            location.hash = "#/about";
             break;
-        case "auto_reload":
-            // 自动刷新名言
-            setInterval(function () {
-                _mingyan.reload();
-            }, 3000);
+        case "/search":
+            location.hash = "#/search";
             break;
-        }
-        break;
-    default:
-        // 也应该是废弃了 2021-01-24
-        if (location.pathname.split("/")[1].length == 32) {
-            let id = _mingyan.decodeMingyan(location.pathname.split("/")[1]);
-            let myid = new Number(id);
+        case "/more":
+            location.hash = "#/more";
+            break;
+        case "/index.html":
+        case "/": // 这边还没废弃
             $(document).ready(function () {
-                _mingyan.show(myid.toString());
-                // db("s2");
+                _mingyan.show();
+                db("s1");
             });
-        } else {
-            // 否则返回404
-            clearInterval(search);
-            $(".app").load("./src/_404.html");
-        }
+            if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果是新用户
+                _mingyan.ranking();
+            }
+            switch (qs("force_action") || qs("do")) {
+                case "clear_save":
+                    localStorage.removeItem("___mingyan_2021_ranking_data__");
+                    break;
+                case "auto_reload":
+                    // 自动刷新名言
+                    setInterval(function () {
+                        _mingyan.reload();
+                    }, 3000);
+                    break;
+            }
+            break;
+        default:
+            // 也应该是废弃了 2021-01-24
+            if (location.pathname.split("/")[1].length == 32) {
+                let id = _mingyan.decodeMingyan(location.pathname.split("/")[1]);
+                let myid = new Number(id);
+                $(document).ready(function () {
+                    _mingyan.show(myid.toString());
+                    // db("s2");
+                });
+            } else {
+                // 否则返回404
+                clearInterval(search);
+                $(".app").load("./src/_404.html");
+            }
     }
 
 
@@ -1357,23 +1379,23 @@
             if (hashName[hash]) {
                 // 有的话就按照路由的走
                 switch (hash) {
-                case "#/more":
-                    _mingyan.page.more();
-                    break;
-                case "#/search":
-                    _showAll();
-                    break;
-                case "#/about":
-                    _mingyan.page.about();
-                    break;
-                case "#/ranking":
-                    _mingyan.starRanking();
-                    break;
-                case "#/submit":
-                    _mingyan.page.contribute();
-                    break;
-                default:
-                    return;
+                    case "#/more":
+                        _mingyan.page.more();
+                        break;
+                    case "#/search":
+                        _showAll();
+                        break;
+                    case "#/about":
+                        _mingyan.page.about();
+                        break;
+                    case "#/ranking":
+                        _mingyan.starRanking();
+                        break;
+                    case "#/submit":
+                        _mingyan.page.contribute();
+                        break;
+                    default:
+                        return;
                 }
             } else {
                 // if (!/\#\d/.test(hash)) _mingyan.clearHash();
@@ -1634,23 +1656,23 @@
                 let res = opt["res"];
                 // 请求当前名言点赞数量
                 switch (event) {
-                // 增加点赞
-                case "addstar":
-                    // db("==位置：switch(event)->'addstar'");
-                    _addstar(res);
-                    break;
+                    // 增加点赞
+                    case "addstar":
+                        // db("==位置：switch(event)->'addstar'");
+                        _addstar(res);
+                        break;
                     // 移除点赞
-                case "removestar":
-                    // db("==位置：switch(event)->'removestar'");
-                    _removestar();
-                    break;
+                    case "removestar":
+                        // db("==位置：switch(event)->'removestar'");
+                        _removestar();
+                        break;
                     // 获取点赞数
-                case "getnum":
-                    // db("==位置：switch(event)->'getnum'");
-                    _getnum(res);
-                    break;
-                default:
-                    break;
+                    case "getnum":
+                        // db("==位置：switch(event)->'getnum'");
+                        _getnum(res);
+                        break;
+                    default:
+                        break;
                 }
                 // ======================================================
                 // ======================================================
@@ -1874,34 +1896,34 @@
         }
         if (hashName[location.hash] == true) { // 如果在hash保留路径中
             switch (location.hash) {
-            case "#/about":
-                _hide();
-                document.title = "名言 | 关于";
-                _mingyan.page.about();
-                break;
-            case "#/search":
-                _hide();
-                document.title = "名言 | 搜索";
-                _showAll();
-                break;
-            case "#/more":
-                _hide();
-                document.title = "名言 | 更多";
-                _mingyan.page.more();
-                break;
-            case "#/ranking":
-                _hide();
-                document.title = "名言 | 排行榜";
-                _mingyan.starRanking();
-                $($page).show();
-                break;
-            case "#/submit":
-                _hide();
-                document.title = "名言 | 名言投稿";
-                _mingyan.page.contribute();
-                break;
-            default:
-                break;
+                case "#/about":
+                    _hide();
+                    document.title = "名言 | 关于";
+                    _mingyan.page.about();
+                    break;
+                case "#/search":
+                    _hide();
+                    document.title = "名言 | 搜索";
+                    _showAll();
+                    break;
+                case "#/more":
+                    _hide();
+                    document.title = "名言 | 更多";
+                    _mingyan.page.more();
+                    break;
+                case "#/ranking":
+                    _hide();
+                    document.title = "名言 | 排行榜";
+                    _mingyan.starRanking();
+                    $($page).show();
+                    break;
+                case "#/submit":
+                    _hide();
+                    document.title = "名言 | 名言投稿";
+                    _mingyan.page.contribute();
+                    break;
+                default:
+                    break;
             }
         } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d/.test(location.hash)) { // 否则就显示名言
             _mingyan.show(location.hash.split("#")[1]);
