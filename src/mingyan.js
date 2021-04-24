@@ -582,6 +582,7 @@ let mingyan3 = [ // eslint-disable-line
     "Oranjezelf：实在是太erss了",
     "Oranjezelf：精神科尔多瓦人作死事业专用纸板",
     "Oranjezelf：我们就是如此叛逆，这就是我们的风格！",
+    "Oranjezelf：耳斯名言一周年快乐！——2020.4.30",
 
     //====解恪布TOY====
     "解恪布TOY：IYAMAYA:用心创造惊叹物品",
@@ -610,6 +611,7 @@ let mingyan3 = [ // eslint-disable-line
     "解恪布TOY：不要速度要队形，不要世界要爱情",
     "解恪布TOY：那就凉拌炒鸡蛋",
     "解恪布TOY：单手战神",
+    "解恪布TOY：耳斯名言一周年快乐！——2020.4.30",
 
     //====xhemj====
     "xhemj：ICERSS",
@@ -619,6 +621,7 @@ let mingyan3 = [ // eslint-disable-line
     "xhemj：奥兰治仗……",
     "xhemj：面包",
     "xhemj：还好我考不上高中……",
+    "xhemj：耳斯名言一周年快乐！——2020.4.30",
 
     //====骚骚恪====
     "骚骚恪：悲伤",
@@ -671,7 +674,7 @@ let mingyan3 = [ // eslint-disable-line
     "学校：茶水",
 
     //====保安====
-    "保安：你连里毛都没有",
+    "保安：你连毛都没有",
 ];
 
 // 合并同类相[doge]

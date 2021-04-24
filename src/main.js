@@ -314,7 +314,7 @@
         if (isLogoOpacity && !/\#\d/.test(location.hash)) special = "style=\"opacity: 0.5\"";
         if (isSupportWebp()) iswebp = "png/webp";
         $($footer).append(`<div class="my--mingyan-boy" id="logo" ${special}><div>`);
-        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/01/30/1PZ2sFjUd8EfLT6.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
+        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/24/EJxXqGilNZLCgba.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
         if (ua.device != "Mobile") {
             $("#logo").css({
                 "width": "150px"
@@ -788,16 +788,61 @@
         $($page).hide();
         $($main).hide();
         $("input#searchbar").val("");
+        let loadingHtml = `
+        <!-- 加载动画 -->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(60px);" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+          </circle>
+        <!-- https://loading.io/ --></svg>
+        <h2>搜索加载中……</h2>
+        `;
+        $($search).html(loadingHtml);
         // 搜索框
         let showall = `<input onclick="this.select()" type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
         </br></br><span class="e"></span>`;
+        showall += "<div class=\"search-list\" style=\"display:none;\">";
         for (let i in mingyan) {
-            // 默认列出全部名言
-            showall += `<div><a style="color:black" id="showall_item" class="${i}" href="#${i}" onclick="_mingyan.hideElement()">${mingyan[i]}</a></div>`;
+            showall += `<div class="search-item"><a style="color:black" id="showall_item" class="${i}" href="#${i}" onclick="_mingyan.hideElement()">${mingyan[i]}</a></div>`;
         }
-        showall += "</br></br></br>"; // 加换行比较好看
-        $($search).html(showall);
-        $($search).fadeIn();
+        showall += "</div>";
+        $($search).show();
+        // 每日精选名言
+        let width = [];
+        if (ua.device == "PC") {
+            width = [2, 8, 2];
+        } else {
+            width = [2, 8, 2];
+        }
+        _mingyan.starApi.getHistoryRanking()
+            .then(function (res) {
+                showall += "<div class=\"search-history-list\"><div class=\"search-history-list-tip\" style=\"font-size:30px;\">每日精选名言：</div>";
+                for (let i = 0; i < 15; i++) {
+                    showall += `<div class="columns" style="padding-top:5px;padding-bottom:5px;">
+                    <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
+                    <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="location.hash='#${_findmingyan(res[i].text)}';$('.my--search').hide()">${res[i].text}</div>
+                    <div class="column col-${width[2]}">
+                    <!-- 
+                      <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)"></i>
+                      <span id="star-ranking-thumb-num">
+                        ${res[i].num}
+                      </span>
+                      -->
+                    </div>
+                  </div>`;
+                }
+                showall += "</div>";
+                showall += "</br></br></br>"; // 加换行比较好看
+                $(".search-list").hide();
+                $($search).html(showall);
+                $($search).fadeIn();
+            });
+        setTimeout(() => {
+            $(".search-history-list").hide();
+            $(".search-list").show();
+            $($search).html(showall);
+            $($search).fadeIn();
+        }, 2000);
         $($footer).html(`当前名言数量：${mingyan.length}</br><a class="aline" href="javascript:;" onclick="_mingyan.clearHash()">返回</a>`);
         _mingyan.initLogo();
         $("#searchbar").focus();
@@ -983,6 +1028,9 @@
                     let now1 = $("input#searchbar").val();
                     let now2 = $("input#searchbar").val();
                     if (now1 == now2) { // 若停止输入
+                        // 显示排行榜名言
+                        $(".search-history-list").hide();
+                        $(".search-list").show();
                         $("a#showall_item").each(function () {
                             if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
                                 let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
@@ -995,8 +1043,12 @@
                         $(".e").hide(); // “无结果”隐藏
                     }
                 }
-
             } else {
+                // 调整回来
+                $(".search-list").hide();
+                $(".search-history-list").show();
+
+
                 // 否则把高亮的取消
                 $("a#showall_item").show();
                 $("a#showall_item").each(function () {
@@ -1007,11 +1059,12 @@
         }
         // 若无结果
         if ($($search)[0]["innerText"].match(/^\s*$/) != null) {
-            $(".e").text("无结果");
+
+            if ($(".e").text() != "无结果") $(".e").text("无结果");
             $(".e").show();
         } else {
             // 否则隐藏“无结果”
-            if ($("#searchbar").is(":focus")) {
+            if ($("#searchbar").is(":focus") && $("input#searchbar").val()) {
                 $(".e").hide();
             }
         }
@@ -1482,6 +1535,8 @@
         pwa.iosinstallinfotext = "点击共享按钮，然后点击“添加到主屏幕”";
         if (ua.device == "PC") {
             $("#pwa-install").show();
+        } else {
+            $("#installComponent").remove();
         }
         return pwa;
     };
@@ -1624,6 +1679,22 @@
                 });
             });
         },
+
+        /**
+         * 获取临时排行榜数据
+         */
+        "getHistoryRanking": function () {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch("https://www.erss.club/api/get-ranking-history?_t=" + new Date().getTime())
+                    .then(res => res.json())
+                    .then(json => {
+                        db(json);
+                        if (json.msg == "请求成功") resolve(json.data);
+                        reject(json.msg);
+                    });
+            });
+        }
     };
 
     /**
@@ -2221,6 +2292,14 @@
     })();
 
 
+    // 一周年调大小
+    if (ua.device != "PC") {
+        $(".my--title").css({
+            "font-size": "14px"
+        });
+    }
+
+
     window._mingyan = _mingyan;
     window.isSupportWebp = isSupportWebp;
     window.qs = qs;
@@ -2253,4 +2332,3 @@
 
 
 })();
-

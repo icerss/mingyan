@@ -21,7 +21,8 @@ const ignoreFetch = [
   /https?:\/\/thirdqq.qlogo.cn\//,
   /https?:\/\/lib.baomitu.com\//,
   /https?:\/\/7.dusays.com\//,
-  /https?:\/\/ip.xhemj.now.sh\//
+  /https?:\/\/ip.xhemj.now.sh\//,
+  /erss\.club\/api/
 ];
 
 function onInstall(event) {

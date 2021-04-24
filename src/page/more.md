@@ -102,8 +102,9 @@
     <div class="github-badge" title="会慢慢更新的" data-id="page.more"><span class="badge-subject" data-id="page.more">更新时间</span><span
             class="badge-value bg-lightgrey" data-id="page.more"><span id="uptime">2021-00-00 00:00:00</span></span></div>
     </br>
-    <a href="https://icp.gov.moe" target="_blank">萌备 </a><a href="https://icp.gov.moe/?keyword=20200503"
-        target="_blank"> 20200503号</a>
+    <div style="color: gray;">自 2020年04月30日 以来，ERSS名言已经陪伴你们走过了<span id="times"></span></div>
+    <a href="https://icp.gov.moe" target="_blank" style="color: #d6d9e2;">萌备 </a><a href="https://icp.gov.moe/?keyword=20200503"
+        target="_blank" style="color: #d6d9e2;"> 20200503号</a>
 </div>
 <script>
     var domain_list = {
@@ -140,5 +141,31 @@
         $("#uptime").text(new Date(a).toLocaleString());
         console.log(new Date(a).toLocaleString());
     });
+var now = new Date();
+function createtime() {
+	var grt = new Date("04/30/2020 14:22:33");
+	now.setTime(now.getTime() + 250);
+	days = (now - grt) / 1000 / 60 / 60 / 24;
+	dnum = Math.floor(days);
+	hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+	hnum = Math.floor(hours);
+	if (String(hnum).length == 1) {
+		hnum = "0" + hnum;
+	};
+	minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+	mnum = Math.floor(minutes);
+	if (String(mnum).length == 1) {
+		mnum = "0" + mnum;
+	};
+	seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+	snum = Math.round(seconds);
+	if (String(snum).length == 1) {
+		snum = "0" + snum;
+	};
+	try {
+        document.getElementById("times").innerHTML = dnum + " 天 " + hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    } catch {};
+}
+setInterval(createtime, 250);
 </script>
 <!-- End more.html -->
