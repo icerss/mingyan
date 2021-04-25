@@ -143,7 +143,7 @@
     });
 var now = new Date();
 function createtime() {
-	var grt = new Date("04/30/2020 14:22:33");
+	var grt = new Date("04/30/2020 00:00:00");
 	now.setTime(now.getTime() + 250);
 	days = (now - grt) / 1000 / 60 / 60 / 24;
 	dnum = Math.floor(days);
