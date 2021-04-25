@@ -53,7 +53,7 @@
      */
 
     // 防止sw占用过大
-    let sw_v = "202104100851";
+    let sw_v = "202104251852";
     let sw_local_v = localStorage.getItem("___mingyan_sw_version__") || "";
     let sw_app = "xhemj";
     if ("serviceWorker" in navigator && sw_v != sw_local_v) {
@@ -1133,7 +1133,7 @@
             });
         },
         // 更新呢
-        update: function (id, name) {
+        update: function (id, name, num) {
             if (!Promise) return;
             return new Promise(function (resolve, reject) {
                 app
@@ -1145,6 +1145,7 @@
                             data: {
                                 "name": name
                             },
+                            "num": num
                         }
                     })
                     .then((res) => {
@@ -1211,6 +1212,7 @@
         }
         let id = null;
         let ip = null;
+        let num = null;
         _mingyan.rankingApi.getIp() // 先来一个ip看看
             .then(function (ip_data) {
                 // db(ip_data.ip);
@@ -1226,7 +1228,7 @@
                 return _mingyan.rankingApi.getNum();
             })
             .then(function (num_data) { // 获取当前排名
-                let num = num_data["result"]["res1"]["data"][0]["num"];
+                num = num_data["result"]["res1"]["data"][0]["num"];
                 // 弹窗
                 return swal({
                     title: `第${num}个人！！`,
@@ -1244,7 +1246,7 @@
             })
             .then(function (name) {
                 if (name) { // 之后就是更新名字啦！
-                    return _mingyan.rankingApi.update(id, name);
+                    return _mingyan.rankingApi.update(id, name, num);
                 } else {
                     location.href = "./";
                 }
