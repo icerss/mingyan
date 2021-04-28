@@ -6,18 +6,24 @@
   "background_color": "#fff",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#fff",
+  "theme_color": "#5676dc",
   "icons": [
     {
-      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/128x128.png",
+      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/512x512.png",
       "type": "image/png",
-      "sizes": "128x128",
+      "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/500x500.png",
+      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/256x256.png",
       "type": "image/png",
-      "sizes": "500x500",
+      "sizes": "256x256",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/64x64.png",
+      "type": "image/png",
+      "sizes": "64x64",
       "purpose": "any maskable"
     }
   ]
