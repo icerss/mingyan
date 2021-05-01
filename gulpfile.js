@@ -6,7 +6,7 @@ const concat = require('gulp-concat')
 const babel = require('gulp-babel')
 const sourcemaps = require('gulp-sourcemaps')
 
-
+console.log("==========START==========" + new Date().toLocaleString());
 const js = function () {
     return src(['./src/mingyan.js', './src/main.js'])
         .pipe(concat('all.min.js'))

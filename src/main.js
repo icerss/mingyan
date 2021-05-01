@@ -969,26 +969,23 @@
             case "::auto_reload":
                 location.href = "./?force_action=auto_reload";
                 break;
-            default:
-                let now1 = $("input#searchbar").val();
-                let now2 = $("input#searchbar").val();
-                if (now1 == now2) { // 若停止输入
-                    // 显示排行榜名言
-                    $(".search-history-list").hide();
-                    $(".search-list").show();
-                    try {
-                        $("a#showall_item").each(function () {
-                            if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
-                                let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
-                                $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
-                                $(this).show();
-                            } else {
-                                $(this).hide();
-                            }
-                        });
-                        } catch { } // eslint-disable-line
-                    $(".e").hide(); // “无结果”隐藏
-                }
+            default: {
+                // 显示排行榜名言
+                $(".search-history-list").hide();
+                $(".search-list").show();
+                try {
+                    $("a#showall_item").each(function () {
+                        if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
+                            let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
+                            $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                    } catch { } // eslint-disable-line
+                $(".e").hide(); // “无结果”隐藏
+            }
             }
         } else {
             try {
@@ -999,6 +996,7 @@
                     $(".search-history-list").show();
                 }
 
+                // 若搜索框内没有文字，就把高亮的调回来
                 if (($("a#showall_item").html().indexOf("<span class=\"label label-secondary\">") != -1) && !$("input#searchbar").val()) {
                     // 否则把高亮的取消
                     $("a#showall_item").show();
@@ -1993,7 +1991,11 @@
                 break;
             }
         } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d/.test(location.hash)) { // 否则就显示名言
-            if (!staticMode) _mingyan.show(location.hash.split("#")[1]);
+            if (!staticMode) {
+                _mingyan.show(location.hash.split("#")[1]);
+                let footer = $($footer).html().replace("999+", mingyan.length); // 首页Footer初始化
+                $($footer).html(footer);  // 运用Footer
+            }
             isLogoOpacity = false;
         }
     };
