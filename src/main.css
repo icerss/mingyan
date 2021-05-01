@@ -1,8 +1,8 @@
-/* :root {
+:root {
 	--theme-color: #9b4dca;
 	--theme-blue: #5676dc;
 	--theme-gray: #d6d9e2;
-}; */
+};
 
 /* zcool-kuaile-regular */
 @font-face {
@@ -245,4 +245,30 @@ pwa-install::part(openButton) {
 }
 .aplayer .aplayer-lrc {
 	transform: translateY(-55px)
+}
+
+
+/* 评论区 */
+
+.tk-tag-green {
+    background-color: #5676dc20!important;
+    border: 1px solid #9aaef0!important;
+    border-radius: 3px;
+    color: #5676dc!important;
+}
+
+.tk-content>span>p>img {
+    border-radius: 5px!important;
+}
+
+.tk-extras {
+    color: #d6d9e2!important;
+}
+
+.tk-action-icon svg {
+    fill: #5676dc!important;
+}
+
+.tk-action-count {
+	color: #5676dc!important;
 }

@@ -18,7 +18,7 @@
         dn++;
     }
 
-    let staticMode = false; // eslint-disable-line
+    let staticMode = sm; // eslint-disable-line
     db("mode", staticMode);
     v = v || ["", "202103211846"]; // eslint-disable-line
     _mingyan.version = "2021/04/18";
@@ -263,46 +263,46 @@
         return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
     }
 
-    // /**
-    //  * 弹窗
-    //  * @param {Object} opt 选项
-    //  */
-    // function showPop(opt) {
-    //     let pop_elements = {};
-    //     opt.time = opt.time || 5000;
-    //     opt.url = opt.url || "";
-    //     pop_elements.container = document.createElement("div");
-    //     pop_elements.container.id = "pop";
-    //     pop_elements.container.style.cssText = "z-index:10000;";
-    //     pop_elements.modal = document.createElement("div");
-    //     pop_elements.modal.style.cssText = "z-index:99999;position:fixed;box-shadow: 0 5px 15px -5px rgba(0,0,0,0.8);display:inline-block;color:black;padding:24px;background-color:white;top:12px;right:12px;border-radius:12px;font-size:18px;transition:all 250ms ease;opacity:0";
-    //     pop_elements.a = document.createElement("a");
-    //     pop_elements.a.innerText = opt.url;
-    //     pop_elements.a.href = opt.url;
-    //     pop_elements.a.addEventListener("click", (e) => {
-    //         e.preventDefault();
-    //     });
-    //     pop_elements.p = document.createElement("p");
-    //     pop_elements.p.style.cssText = "padding:0;margin:0;";
-    //     pop_elements.p.innerHTML = opt.text;
-    //     pop_elements.modal.appendChild(pop_elements.p);
-    //     pop_elements.modal.appendChild(pop_elements.a);
-    //     pop_elements.container.appendChild(pop_elements.modal);
-    //     let pop_body = document.querySelector("body");
-    //     pop_body.appendChild(pop_elements.container);
-    //     requestAnimationFrame(function () {
-    //         requestAnimationFrame(function () {
-    //             pop_elements.modal.style.opacity = 1;
-    //         });
-    //     });
+    /**
+     * 弹窗
+     * @param {Object} opt 选项
+     */
+    function showPop(opt) {
+        let pop_elements = {};
+        opt.time = opt.time || 5000;
+        opt.url = opt.url || "";
+        pop_elements.container = document.createElement("div");
+        pop_elements.container.id = "pop";
+        pop_elements.container.style.cssText = "z-index:10000;";
+        pop_elements.modal = document.createElement("div");
+        pop_elements.modal.style.cssText = "z-index:99999;position:fixed;box-shadow: 0 5px 15px -5px rgba(0,0,0,0.8);display:inline-block;color:black;padding:24px;background-color:white;top:12px;right:12px;border-radius:12px;font-size:18px;transition:all 250ms ease;opacity:0";
+        pop_elements.a = document.createElement("a");
+        pop_elements.a.innerText = opt.url;
+        pop_elements.a.href = opt.url;
+        pop_elements.a.addEventListener("click", (e) => {
+            e.preventDefault();
+        });
+        pop_elements.p = document.createElement("p");
+        pop_elements.p.style.cssText = "padding:0;margin:0;";
+        pop_elements.p.innerHTML = opt.text;
+        pop_elements.modal.appendChild(pop_elements.p);
+        pop_elements.modal.appendChild(pop_elements.a);
+        pop_elements.container.appendChild(pop_elements.modal);
+        let pop_body = document.querySelector("body");
+        pop_body.appendChild(pop_elements.container);
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                pop_elements.modal.style.opacity = 1;
+            });
+        });
 
-    //     setTimeout(function () {
-    //         pop_elements.modal.style.opacity = 0;
-    //         setTimeout(function () {
-    //             pop_elements.container.remove();
-    //         }, 260);
-    //     }, opt.time);
-    // }
+        setTimeout(function () {
+            pop_elements.modal.style.opacity = 0;
+            setTimeout(function () {
+                pop_elements.container.remove();
+            }, 260);
+        }, opt.time);
+    }
 
     /* 彩蛋系统 */
 
@@ -641,8 +641,8 @@
     */
 
 
-    // // 隐藏名言
-    // await _writeSpecialMingyan();
+    // 隐藏名言
+    await _writeSpecialMingyan();
 
     /**
      * 名言显示主函数
@@ -1370,7 +1370,7 @@
             let id = _mingyan.decodeMingyan(location.pathname.split("/")[1]);
             let myid = new Number(id);
             $(document).ready(function () {
-                _mingyan.show(myid.toString());
+                if (!staticMode) _mingyan.show(myid.toString());
                 // db("s2");
             });
         } else {
@@ -2052,193 +2052,193 @@
     _mingyan.onHashChange();
     window.addEventListener("hashchange", _mingyan.onHashChange);
 
-    // /**
-    //  * 隐藏名言Api
-    //  */
-    // _mingyan.specialModeApi = {
-    //     "isAnswerErr": false,
-    //     "gettoken": function () {
-    //         if (!Promise) return;
-    //         return new Promise(function (resolve, reject) {
-    //             fetch("https://api.mingyan.eu.org/api/gettoken", {
-    //                 method: "POST",
-    //                 mode: "cors",
-    //                 headers: {
-    //                     "Content-Type": "application/json"
-    //                 },
-    //                 body: JSON.stringify({
-    //                     "key": "xhemj"
-    //                 })
-    //             }).then(json => json.json()).then((res) => {
-    //                 db(res);
-    //                 if (res.code == 0) resolve(res.data.refreshtoken);
-    //                 reject(res.msg);
-    //             }).catch(function (err) {
-    //                 reject(err);
-    //             });
-    //         });
-    //     },
-    //     "getquestion": function (token) {
-    //         if (!Promise) return;
-    //         return new Promise(function (resolve, reject) {
-    //             fetch("https://api.mingyan.eu.org/api/getquestion", {
-    //                 method: "POST",
-    //                 mode: "cors",
-    //                 headers: {
-    //                     "Content-Type": "application/json"
-    //                 },
-    //                 body: JSON.stringify({
-    //                     "token": token
-    //                 })
-    //             }).then(json => json.json()).then((res) => {
-    //                 db(res);
-    //                 if (res.code == 0) resolve(res.data);
-    //                 reject(res.msg);
-    //             }).catch(function (err) {
-    //                 reject(err);
-    //             });
-    //         });
-    //     },
-    //     "verify": function (token, question, answer) {
-    //         if (!Promise) return;
-    //         return new Promise(function (resolve, reject) {
-    //             fetch("https://api.mingyan.eu.org/api/verify", {
-    //                 method: "POST",
-    //                 mode: "cors",
-    //                 headers: {
-    //                     "Content-Type": "application/json"
-    //                 },
-    //                 body: JSON.stringify({
-    //                     "token": token,
-    //                     "q": question,
-    //                     "a": answer
-    //                 })
-    //             }).then(json => json.json()).then((res) => {
-    //                 db(res);
-    //                 if (res.code == 0) resolve(res.info);
-    //                 reject(res.msg);
-    //             }).catch(function (err) {
-    //                 reject(err);
-    //             });
-    //         });
-    //     },
-    //     isSpecialMode: sessionStorage.getItem("___mingyan_is_special_mode__") || false
-    // };
-    // /**
-    //  * 隐藏名言
-    //  */
-    // _mingyan.specialMode = function () {
-    //     let loading = `<!-- 加载动画 -->
-    //     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-    //       <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-    //         <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-    //       </circle>
-    //     <!-- https://loading.io/ --></svg>
-    //     `;
-    //     swal({
-    //         title: "问题加载中",
-    //         text: "回答问题查看更多精彩名言",
-    //         icon: "info",
-    //         button: "关闭",
-    //         closeOnClickOutside: false
-    //     });
-    //     $(".swal-text").html(loading);
-    //     let tk = "";
-    //     let q = "";
-    //     _mingyan.specialModeApi.gettoken()
-    //         .then(function (rftoken) {
-    //             tk = rftoken;
-    //             return _mingyan.specialModeApi.getquestion(rftoken);
-    //         }).then(function (question) {
-    //             q = question;
-    //             let text = "回答问题查看更多名言！";
-    //             if (_mingyan.specialModeApi.isAnswerErr) text = "回答错误或已超时，请重新回答";
-    //             return swal({
-    //                 title: question,
-    //                 text: text,
-    //                 icon: "info",
-    //                 button: "提交",
-    //                 closeOnClickOutside: false,
-    //                 content: {
-    //                     element: "input",
-    //                     attributes: {
-    //                         placeholder: "请输入答案哦！",
-    //                         value: "",
-    //                         type: "text"
-    //                     }
-    //                 }
-    //             });
-    //         }).then(function (answer) {
-    //             if (!answer) return (new Promise(() => { }));
-    //             swal({
-    //                 title: "加载中",
-    //                 text: "回答问题查看更多精彩名言",
-    //                 icon: "info",
-    //                 button: "关闭",
-    //                 closeOnClickOutside: false
-    //             });
-    //             $(".swal-text").html(loading);
-    //             return _mingyan.specialModeApi.verify(tk, q, answer);
-    //         }).then(function (res) {
-    //             // 成功
-    //             _mingyan.specialModeApi.isAnswerErr = false;
-    //             db(res);
-    //             let s_title = res["welcome-title"];
-    //             let s_msg = res["welcome-msg"];
-    //             let s_mingyan = res["S-mingyan"];
-    //             _readSpecialMingyan(s_mingyan);
-    //             swal({
-    //                 title: s_title,
-    //                 text: s_msg,
-    //                 icon: "info",
-    //                 button: "关闭",
-    //             });
-    //             _mingyan.specialModeApi.isSpecialMode = true;
-    //             sessionStorage.setItem("___mingyan_is_special_mode__", true);
-    //         }).catch(function (err) {
-    //             showPop({
-    //                 "text": err
-    //             });
-    //             _mingyan.specialMode();
-    //             _mingyan.specialModeApi.isAnswerErr = true;
-    //         });
-    // };
+    /**
+     * 隐藏名言Api
+     */
+    _mingyan.specialModeApi = {
+        "isAnswerErr": false,
+        "gettoken": function () {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch("https://star-api.erss.club/api/gettoken", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "key": "xhemj"
+                    })
+                }).then(json => json.json()).then((res) => {
+                    db(res);
+                    if (res.code == 0) resolve(res.data.refreshtoken);
+                    reject(res.msg);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        },
+        "getquestion": function (token) {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch("https://star-api.erss.club/api/getquestion", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "token": token
+                    })
+                }).then(json => json.json()).then((res) => {
+                    db(res);
+                    if (res.code == 0) resolve(res.data);
+                    reject(res.msg);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        },
+        "verify": function (token, question, answer) {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch("https://star-api.erss.club/api/verify", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "token": token,
+                        "q": question,
+                        "a": answer
+                    })
+                }).then(json => json.json()).then((res) => {
+                    db(res);
+                    if (res.code == 0) resolve(res.info);
+                    reject(res.msg);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        },
+        isSpecialMode: sessionStorage.getItem("___mingyan_is_special_mode__") || false
+    };
+    /**
+     * 隐藏名言
+     */
+    _mingyan.specialMode = function () {
+        let loading = `<!-- 加载动画 -->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+          </circle>
+        <!-- https://loading.io/ --></svg>
+        `;
+        swal({
+            title: "问题加载中",
+            text: "回答问题查看更多精彩名言",
+            icon: "info",
+            button: "关闭",
+            closeOnClickOutside: false
+        });
+        $(".swal-text").html(loading);
+        let tk = "";
+        let q = "";
+        _mingyan.specialModeApi.gettoken()
+            .then(function (rftoken) {
+                tk = rftoken;
+                return _mingyan.specialModeApi.getquestion(rftoken);
+            }).then(function (question) {
+                q = question;
+                let text = "回答问题查看更多名言！";
+                if (_mingyan.specialModeApi.isAnswerErr) text = "回答错误或已超时，请重新回答";
+                return swal({
+                    title: question,
+                    text: text,
+                    icon: "info",
+                    button: "提交",
+                    closeOnClickOutside: false,
+                    content: {
+                        element: "input",
+                        attributes: {
+                            placeholder: "请输入答案哦！",
+                            value: "",
+                            type: "text"
+                        }
+                    }
+                });
+            }).then(function (answer) {
+                if (!answer) return (new Promise(() => { }));
+                swal({
+                    title: "加载中",
+                    text: "回答问题查看更多精彩名言",
+                    icon: "info",
+                    button: "关闭",
+                    closeOnClickOutside: false
+                });
+                $(".swal-text").html(loading);
+                return _mingyan.specialModeApi.verify(tk, q, answer);
+            }).then(function (res) {
+                // 成功
+                _mingyan.specialModeApi.isAnswerErr = false;
+                db(res);
+                let s_title = res["welcome-title"];
+                let s_msg = res["welcome-msg"];
+                let s_mingyan = res["S-mingyan"];
+                _readSpecialMingyan(s_mingyan);
+                swal({
+                    title: s_title,
+                    text: s_msg,
+                    icon: "info",
+                    button: "关闭",
+                });
+                _mingyan.specialModeApi.isSpecialMode = true;
+                sessionStorage.setItem("___mingyan_is_special_mode__", true);
+            }).catch(function (err) {
+                showPop({
+                    "text": err
+                });
+                _mingyan.specialMode();
+                _mingyan.specialModeApi.isAnswerErr = true;
+            });
+    };
 
-    // /**
-    //  * 隐藏名言：储存名言
-    //  */
-    // function _readSpecialMingyan(my) {
-    //     if (!my) return;
-    //     mingyan = mingyan || [];
-    //     mingyanPicUrl = mingyanPicUrl || {};
-    //     specialVerbList = specialVerbList || {};
-    //     sessionStorage.setItem("___mingyan_special_data__", JSON.stringify(my));
-    //     location.reload();
-    // }
+    /**
+     * 隐藏名言：储存名言
+     */
+    function _readSpecialMingyan(my) {
+        if (!my) return;
+        mingyan = mingyan || [];
+        mingyanPicUrl = mingyanPicUrl || {};
+        specialVerbList = specialVerbList || {};
+        sessionStorage.setItem("___mingyan_special_data__", JSON.stringify(my));
+        location.reload();
+    }
 
-    // /**
-    //  * 隐藏名言：展示名言
-    //  */
-    // function _writeSpecialMingyan(my) {
-    //     if (!sessionStorage.getItem("___mingyan_special_data__")) return (new Promise(function (resolve) { resolve(); }));
-    //     if (!sessionStorage.getItem("___mingyan_is_special_mode__")) return (new Promise(function (resolve) { resolve(); }));
-    //     db("specialmode");
-    //     return new Promise(function (resolve) {
-    //         my = my || JSON.parse(sessionStorage.getItem("___mingyan_special_data__"));
-    //         if (my.length) {
-    //             for (let i = 0; i < my.length; i++) {
-    //                 let text = my[i]["text"].split("：")[1];
-    //                 mingyan.push(my[i]["text"]);
-    //                 mingyanPicUrl[text] = my[i]["pic"];
-    //                 specialVerbList[text] = my[i]["verb"];
-    //             }
-    //             $(".my--header").addClass("my--special-mode");
-    //             $($footer).addClass("my--special-mode");
-    //         }
+    /**
+     * 隐藏名言：展示名言
+     */
+    function _writeSpecialMingyan(my) {
+        if (!sessionStorage.getItem("___mingyan_special_data__")) return (new Promise(function (resolve) { resolve(); }));
+        if (!sessionStorage.getItem("___mingyan_is_special_mode__")) return (new Promise(function (resolve) { resolve(); }));
+        db("specialmode");
+        return new Promise(function (resolve) {
+            my = my || JSON.parse(sessionStorage.getItem("___mingyan_special_data__"));
+            if (my.length) {
+                for (let i = 0; i < my.length; i++) {
+                    let text = my[i]["text"].split("：")[1];
+                    mingyan.push(my[i]["text"]);
+                    mingyanPicUrl[text] = my[i]["pic"];
+                    specialVerbList[text] = my[i]["verb"];
+                }
+                $(".my--header").addClass("my--special-mode");
+                $($footer).addClass("my--special-mode");
+            }
 
-    //         resolve();
-    //     });
-    // }
+            resolve();
+        });
+    }
 
     // /**
     //  * 隐藏名言：是否是隐藏名言
@@ -2256,7 +2256,7 @@
     //     }
     // }
 
-    // document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
+    document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
 
     /**
      * 中考加油名言（未公开）
@@ -2329,6 +2329,10 @@
     try {
         setInterval(createtime, 250);
     } catch { } // eslint-disable-line
+
+    $(document).ready(function() {
+        staticMode = false;
+    });
 
 
     window._mingyan = _mingyan;

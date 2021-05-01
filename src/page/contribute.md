@@ -32,14 +32,16 @@
             <div class="form-group" data-id="page.contribute">
                 <h1 data-id="page.contribute">名言投稿</h1>
                 <label class="form-label" for="form-name" data-id="page.contribute">昵称</label>
-                <input class="form-input" type="text" id="form-name" placeholder="请输入昵称" data-id="page.contribute">
+                <input class="form-input" type="text" id="form-name" placeholder="请输入昵称" data-id="page.contribute" required >
                 <label class="form-label" for="form-school" data-id="page.contribute">学校（选填）</label>
                 <input class="form-input" type="text" id="form-school" placeholder="选填" data-id="page.contribute">
                 <label class="form-label" for="form-class" data-id="page.contribute">班级（选填）</label>
                 <input class="form-input" type="text" id="form-class" placeholder="选填" data-id="page.contribute">
+                <label class="form-label" for="form-mail" data-id="page.contribute">邮箱（选填）</label>
+                <input class="form-input" type="mail" pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$" id="form-mail" placeholder="选填，若您的名言被入选，我们将会第一时间联系您" data-id="page.contribute">
                 <label class="form-label" for="form-mingyan" data-id="page.contribute">名言</label>
-                <input class="form-input" type="text" id="form-mingyan" placeholder="想投稿什么名言呀？"
-                    data-id="page.contribute">
+                <input class="form-input" type="text" id="form-mingyan" placeholder="格式：老师名 + 名言"
+                    data-id="page.contribute" required >
                 <label class="form-label" for="form-story" data-id="page.contribute">名言故事（选填）</label>
                 <textarea id="form-story" placeholder="有机会选入ERSS名言微信公众号哦！" rows="10"
                     data-id="page.contribute"></textarea>
@@ -57,6 +59,7 @@
         let classname = $("#form-class").val();
         let my = $("#form-mingyan").val();
         let story = $("#form-story").val();
+        let mail = $("#form-mail").val();
         //
         if (!name) {
             $("#form-name").addClass("is-error");
@@ -87,6 +90,7 @@
                     "story": story,
                     "class": classname,
                     "school": school,
+                    "mail": mail,
                     "t": new Date().getTime()
                 }
             })
