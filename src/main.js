@@ -26,27 +26,24 @@
         ___date_version___: v[1] // eslint-disable-line
     };
 
-    // /**
-    //  * log
-    //  */
-    // _mingyan.log = {
-    //     "log": [],
-    //     "add": function (log) {
-    //         return this.log.push(log);
-    //     },
-    //     "get": function () {
-    //         return this.log;
-    //     },
-    //     "lastLog": function () {
-    //         return this.log[this.log.length - 2];
-    //     },
-    //     "nowLog": function () {
-    //         return this.log[this.log.length - 1];
-    //     },
-    //     "isFromSearch": function () {
-    //         return (this.lastLog() || this.nowLog()) == "search";
-    //     }
-    // };
+    /**
+     * log
+     */
+    _mingyan.log = {
+        "log": [],
+        "add": function (log) {
+            return this.log.push(log);
+        },
+        "get": function () {
+            return this.log;
+        },
+        "lastLog": function () {
+            return this.log[this.log.length - 2];
+        },
+        "nowLog": function () {
+            return this.log[this.log.length - 1];
+        }
+    };
 
     /**
      * ServiceWorker
@@ -313,7 +310,7 @@
         let special = "";
         if (isLogoOpacity && !/\#\d/.test(location.hash)) special = "style=\"opacity: 0.5\"";
         if (isSupportWebp()) iswebp = "png/webp";
-        $($footer).append(`<div class="my--mingyan-boy" id="logo" ${special}><div>`);
+        $($footer).append(`<div class="my--mingyan-boy" id="logo" ${special} onclick="_mingyan.specialMode()"><div>`);
         $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/24/EJxXqGilNZLCgba.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
         if (ua.device != "Mobile") {
             $("#logo").css({
@@ -325,7 +322,6 @@
             });
         }
     };
-    _mingyan.initLogo();
 
     /* 图片彩蛋 */
     /**
@@ -356,8 +352,8 @@
             }
             lazyload();
             return `<div ${special}>${my_out}</div><div class="my--mingyan-pic">
-                            <img src="${_mingyan.lazypic}" data-src="${picBaseUrl}${pic}" data-pic-id=${my_out} id="pic" class="lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
-                        </div>`;
+                        <img src="${_mingyan.lazypic}" data-src="${picBaseUrl}${pic}" data-pic-id=${my_out} id="pic" class="lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
+                    </div>`;
             // return my + "<\/br><img src=\"" + _mingyan.lazypic + "\" data-src=\"" + pic + "\" class=\"pic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
             lazyload();
@@ -591,8 +587,8 @@
             }
         });
         $(".swal-content__input").attr("value", location.protocol + "//" + location.host + "/" + _mingyan.encodeMingyan(name, my)); // 显示分享链接
-        $(".swal-content__input").attr("onclick", "this.select()");
-        $(".swal-content__input").select();
+        // $(".swal-content__input").attr("onclick", "this.select()");
+        // $(".swal-content__input").select();
     };
 
 
@@ -626,7 +622,7 @@
     ```
     let name = "潘哥"; // 人名
     let time = 99999; // 测试次数
-
+    
     let count = 0;
     for (let i = 0; i < time; i ++) {
        let my = mingyan[_checkMingyan()];
@@ -694,16 +690,16 @@
                 // 查看和分享（已废弃 2021-01-24）
                 $($myInfo).html(
                     `<div class="info-text">
-                    <!-- 编号 -->
-                    <a href="#${n}" class="label label-rounded label-warning">#${n}</a>&nbsp;
-                    <!-- 分享
-                    <a href="javascript:;" onclick="_mingyan.share()" class="label label-rounded label-warning">
-                    <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe80d;</i>分享</a> -->
-                    <!-- 点赞 -->
-                    <a href="javascript:;" onclick="_mingyan.star()" class="label label-rounded label-warning">
-                    <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe8dc;</i>点赞</a>
-                    </br>
-                    <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
+                <!-- 编号 -->
+                <a href="#${n}" class="label label-rounded label-warning">#${n}</a>&nbsp;
+                <!-- 分享
+                <a href="javascript:;" onclick="_mingyan.share()" class="label label-rounded label-warning">
+                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe80d;</i>分享</a> -->
+                <!-- 点赞 -->
+                <a href="javascript:;" onclick="_mingyan.star()" class="label label-rounded label-warning">
+                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe8dc;</i>点赞</a>
+                </br>
+                <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
                 );
                 /**
                  * 图片彩蛋
@@ -789,18 +785,18 @@
         $($main).hide();
         $("input#searchbar").val("");
         let loadingHtml = `
-        <!-- 加载动画 -->
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(60px);" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-          </circle>
-        <!-- https://loading.io/ --></svg>
-        <h2>搜索加载中……</h2>
-        `;
+    <!-- 加载动画 -->
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(60px);" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+      <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+      </circle>
+    <!-- https://loading.io/ --></svg>
+    <h2>搜索加载中……</h2>
+    `;
         $($search).html(loadingHtml);
         // 搜索框
-        let showall = `<input onclick="this.select()" type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
-        </br></br><span class="e"></span>`;
+        let showall = `<input type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
+    </br></br><span class="e"></span>`;
         showall += "<div class=\"search-list\" style=\"display:none;\">";
         for (let i in mingyan) {
             showall += `<div class="search-item"><a style="color:black" id="showall_item" class="${i}" href="#${i}" onclick="_mingyan.hideElement()">${mingyan[i]}</a></div>`;
@@ -819,17 +815,17 @@
                 showall += "<div class=\"search-history-list\"><div class=\"search-history-list-tip\" style=\"font-size:30px;\">每日精选名言：</div>";
                 for (let i = 0; i < 15; i++) {
                     showall += `<div class="columns" style="padding-top:5px;padding-bottom:5px;">
-                    <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
-                    <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="location.hash='#${_findmingyan(res[i].text)}';$('.my--search').hide()">${res[i].text}</div>
-                    <div class="column col-${width[2]}">
-                    <!-- 
-                      <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)"></i>
-                      <span id="star-ranking-thumb-num">
-                        ${res[i].num}
-                      </span>
-                      -->
-                    </div>
-                  </div>`;
+                <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
+                <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="location.hash='#${_findmingyan(res[i].text)}';$('.my--search').hide()">${res[i].text}</div>
+                <div class="column col-${width[2]}">
+                <!-- 
+                  <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)"></i>
+                  <span id="star-ranking-thumb-num">
+                    ${res[i].num}
+                  </span>
+                  -->
+                </div>
+              </div>`;
                 }
                 showall += "</div>";
                 showall += "</br></br></br>"; // 加换行比较好看
@@ -945,7 +941,7 @@
     for (let i of teacher) {
         let name = i; // 人名
         let time = 99999; // 测试次数
-
+    
         let count = 0;
         for (let i = 0; i < time; i++) {
             let my = mingyan[_checkMingyan()];
@@ -962,75 +958,25 @@
     db(sum);
     ```
     */
-    /**
-     * 统计各位老师有几条名言
-     */
-    _mingyan.tongji = function () {
-        $($page).hide();
-        $($main).hide();
-        $($search).hide();
-        let o = "";
-        for (let i in mingyan) {
-            let a1 = "";
-            let a2 = "";
-            try {
-                a1 = mingyan[i].split("：")[0];
-                a2 = mingyan[i + 1].split("：")[0];
-            } catch (e) {
-                console.error(e);
-            }
-            // db(a1 + "-" + a2);
-            if (a1 == a2) {
-                o += a1;
-            } else {
-                o += a2;
-            }
-        }
-        // db(out);
-        let count = [ // 匹配写了好久
-            "数学老王：" + o.match(/老王/g).length,
-            "英语老俞：" + o.match(/老俞/g).length,
-            "数学潘哥：" + o.match(/潘哥/g).length,
-            "语文老朱：" + o.match(/老朱/g).length,
-            "物理刘老师：" + o.match(/物理刘老师/g).length,
-            "物理王老师：" + o.match(/物理王老师/g).length,
-            "地理吴老师：" + o.match(/地理吴老师/g).length,
-            "地理朱老师：" + o.match(/地理朱老师/g).length,
-            "政治王老师：" + o.match(/政治王老师/g).length,
-            "化学吴老师：" + o.match(/化学吴老师/g).length,
-            "历史李老师：" + o.match(/历史李老师/g).length,
-            "美术林老师：" + o.match(/美术林老师/g).length,
-            "体育吴老师：" + o.match(/体育吴老师/g).length,
-            "体育俞老师：" + o.match(/体育俞老师/g).length,
-            "生物吴老师：" + o.match(/生物吴老师/g).length
-        ];
-        //window.count = count;
-        // db(count);
-        let out = "";
-        out += count.join(" 句</br>") + " 句</br></br></br></br>";
-        $($page).html(marked(out));
-        $($page).fadeIn();
-    };
-
 
     /**
      * 搜索主函数
      */
     function _search() {
-        if ($("#searchbar").is(":focus") || qs("q") != "") { // 若有点击搜索框或有传入?q=
-            if ($("input#searchbar").val()) { // 若搜索框内有文字
-                switch ($("input#searchbar").val()) {
-                // 若输入::auto_reload，则进入自动刷新模式
-                case "::auto_reload":
-                    location.href = "./?force_action=auto_reload";
-                    break;
-                default:
-                    let now1 = $("input#searchbar").val();
-                    let now2 = $("input#searchbar").val();
-                    if (now1 == now2) { // 若停止输入
-                        // 显示排行榜名言
-                        $(".search-history-list").hide();
-                        $(".search-list").show();
+        if (($("#searchbar").is(":focus") || qs("q") != "") && $("input#searchbar").val()) { // 若有点击搜索框或有传入?q=
+            switch ($("input#searchbar").val()) {
+            // 若输入::auto_reload，则进入自动刷新模式
+            case "::auto_reload":
+                location.href = "./?force_action=auto_reload";
+                break;
+            default:
+                let now1 = $("input#searchbar").val();
+                let now2 = $("input#searchbar").val();
+                if (now1 == now2) { // 若停止输入
+                    // 显示排行榜名言
+                    $(".search-history-list").hide();
+                    $(".search-list").show();
+                    try {
                         $("a#showall_item").each(function () {
                             if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
                                 let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
@@ -1040,22 +986,29 @@
                                 $(this).hide();
                             }
                         });
-                        $(".e").hide(); // “无结果”隐藏
-                    }
+                        } catch { } // eslint-disable-line
+                    $(".e").hide(); // “无结果”隐藏
                 }
-            } else {
-                // 调整回来
-                $(".search-list").hide();
-                $(".search-history-list").show();
-
-
-                // 否则把高亮的取消
-                $("a#showall_item").show();
-                $("a#showall_item").each(function () {
-                    $(this).html($(this).html().replace("<span class=\"label label-secondary\">", ""));
-                    $(this).html($(this).html().replace("</span>", ""));
-                });
             }
+        } else {
+            try {
+                // 若搜索框内有文字，则不显示精选名言
+                if (!$("input#searchbar").val()) {
+                    // 调整回来
+                    $(".search-list").hide();
+                    $(".search-history-list").show();
+                }
+
+                if (($("a#showall_item").html().indexOf("<span class=\"label label-secondary\">") != -1) && !$("input#searchbar").val()) {
+                    // 否则把高亮的取消
+                    $("a#showall_item").show();
+                    $("a#showall_item").each(function () {
+                        $(this).html($(this).html().replace("<span class=\"label label-secondary\">", ""));
+                        $(this).html($(this).html().replace("</span>", ""));
+                    });
+                }
+
+            } catch { } // eslint-disable-line
         }
         // 若无结果
         if ($($search)[0]["innerText"].match(/^\s*$/) != null) {
@@ -1094,18 +1047,16 @@
      * 2020/12/31
      */
     // 初始化tcb
-    const app = cloudbase.init({
-        env: "xhemj-0gjckebwf7276129"
-    });
+    let app = null;
     // 匿名登录
-    const auth = app.auth();
+    let auth = null;
     async function login() {
         await auth.anonymousAuthProvider().signIn();
-        const loginState = await auth.getLoginState();
+        let loginState = await auth.getLoginState();
         // db("登陆成功");
         db(loginState);
     }
-    login();
+
     // 基础函数
     _mingyan.rankingApi = {
         // 添加
@@ -1296,9 +1247,9 @@
         $($page).fadeIn();
         _mingyan.starApi.getRanking().then(function (data) {
             let o = `
-            <h1 style="text-align: center;">排行榜</h1>
-            <div class="container">
-            `;
+        <h1 style="text-align: center;">排行榜</h1>
+        <div class="container">
+        `;
             let res = data.data;
             let width = [];
             if (ua.device == "PC") {
@@ -1309,20 +1260,20 @@
             // // db(res);
             for (let i in res) {
                 o += `
-        <!-- ${res[i].text} -->
-        <div id="star-ranking-item">
-          <div class="columns">
-            <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
-            <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
-            <div class="column col-${width[2]}">
-              <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)">&#xe8dc;</i>
-              <span id="star-ranking-thumb-num">
-                ${res[i].num}
-              </span>
-            </div>
-          </div>
+    <!-- ${res[i].text} -->
+    <div id="star-ranking-item">
+      <div class="columns">
+        <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
+        <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="_mingyan.rankingOnclick(this)">${res[i].text}</div>
+        <div class="column col-${width[2]}">
+          <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)">&#xe8dc;</i>
+          <span id="star-ranking-thumb-num">
+            ${res[i].num}
+          </span>
         </div>
-        `;
+      </div>
+    </div>
+    `;
             }
             o += "</div></br></br></br>";
             $($page).html(o);
@@ -1384,20 +1335,14 @@
     /**
      * 初始化Headroom.js
      */
+    let headroom = null;
     if (Headroom.cutsTheMustard) {
         let myElement = document.getElementById("my--header");
-        let headroom = new Headroom(myElement, {
+        headroom = new Headroom(myElement, {
             "offset": 300,
             "tolerance": 5
         });
-        headroom.init();
     }
-
-    // 图片懒加载
-    lazyload();
-    // 不知道为什么有时候会加载失败
-    // 那就写个循环吧
-    setInterval(lazyload, 1000);
 
     /**
      * 初始化fancybox的函数
@@ -1451,8 +1396,6 @@
             db(`版本：${res[0]["sha"].slice(0, 7)}`);
         }, true);
     }
-    _console();
-
 
     /**
      * 清除hash路由（回到首页）
@@ -1463,7 +1406,10 @@
         location.hash = "";
         _mingyan.hideElement();
         skipCheckHash = false;
-        _mingyan.show();
+        function isShow(el) {
+            return !$(el).is(":hidden");
+        }
+        if (isShow($search) || isShow($page) || !isShow($main)) _mingyan.show();
         // db("s3");
     };
 
@@ -1500,7 +1446,10 @@
                 }
             } else {
                 // if (!/\#\d/.test(hash)) _mingyan.clearHash();
-                if (/\#\d/.test(hash)) _mingyan.clearHash();
+                if (/(\#\d)|()/.test(hash)) {
+                    _mingyan.clearHash();
+                    _mingyan.hideElement();
+                }
             }
         }
         // 如果既显示名言又显示搜索界面
@@ -1517,7 +1466,6 @@
         }
         // ……待添加
     }
-    setInterval(_checkPage, 1000); // 500ms会出现闪现的Bug，好像调到1000ms就比较刚好……
 
     /**
      * PWA应用安装按钮
@@ -1705,17 +1653,17 @@
      */
     _mingyan.star = function (event) {
         let loadingHtml = `
-        <!-- 点赞 -->
-        <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('loading')">&#xe8dc;</i>
-        <span class="my--star-num">
-        <!-- 加载动画 -->
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-          </circle>
-        <!-- https://loading.io/ --></svg>
-        </span>
-        `;
+    <!-- 点赞 -->
+    <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('loading')">&#xe8dc;</i>
+    <span class="my--star-num">
+    <!-- 加载动画 -->
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+      <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+      </circle>
+    <!-- https://loading.io/ --></svg>
+    </span>
+    `;
         if (!event) event = "getnum";
         // 兼容内测时的数据格式
         if (localStorage.getItem("___mingyan_star_data__") && localStorage.getItem("___mingyan_star_data__").indexOf("，") != -1) {
@@ -2129,12 +2077,12 @@
      */
     _mingyan.specialMode = function () {
         let loading = `<!-- 加载动画 -->
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-          <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-          </circle>
-        <!-- https://loading.io/ --></svg>
-        `;
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+      <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+      </circle>
+    <!-- https://loading.io/ --></svg>
+    `;
         swal({
             title: "问题加载中",
             text: "回答问题查看更多精彩名言",
@@ -2330,10 +2278,26 @@
         setInterval(createtime, 250);
     } catch { } // eslint-disable-line
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         staticMode = false;
     });
 
+    /**
+     * 初始化
+     */
+    _mingyan.init = function () {
+        _mingyan.initLogo();
+        app = cloudbase.init({ env: "xhemj-0gjckebwf7276129" });
+        auth = app.auth();
+        login(); // 云开发
+        headroom.init();
+        setInterval(lazyload, 1000);
+        _initfancybox();
+        _console();
+        setInterval(_checkPage);
+    };
+
+    $(document).ready(_mingyan.init);
 
     window._mingyan = _mingyan;
     window.isSupportWebp = isSupportWebp;
