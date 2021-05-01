@@ -1489,7 +1489,11 @@
         return pwa;
     };
     $(document).ready(function () {
-        _mingyan.installPwa();
+        if (!staticMode) {
+            _mingyan.installPwa();
+        } else {
+            $("#installComponent").remove();
+        }
     });
 
 
