@@ -705,6 +705,12 @@
                  * 图片彩蛋
                  */
                 $("span.my--mingyan-text").html(_checkPic(name + "：" + my)); // 若有触发图片彩蛋就显示彩蛋
+                // 根据名言长度调整图片位置
+                $(".my--mingyan-pic").css({
+                    "min-width": 28 * my.split("").length  - 50, // 每个字大概28px
+                    "margin-left": "25px",
+                    "margin-right": "25px"
+                });
                 /**
                  * 文字彩蛋
                  */
@@ -1424,7 +1430,7 @@
     /**
      * 还原footer
      */
-    _mingyan.backFooter = function() {
+    _mingyan.backFooter = function () {
         $($footer).html(`<div id="footer">当前名言数量：${mingyan.length}<br><a class="my-el-a" href="#/submit" onclick="_hmt.push(['_trackEvent', '名言', '投稿', '手动' , '投稿']);">投稿</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="#/search" onclick="_hmt.push(['_trackEvent', '名言', '搜索', '手动' , '搜索']);">搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="https://jq.qq.com/?_wv=1027&amp;k=jKy2qW7R" onclick="_hmt.push(['_trackEvent', '名言', '交流群', '手动' , '交流群']);">交流群</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="#/more" onclick="_hmt.push(['_trackEvent', '名言', '更多', '手动' , '更多']);">更多</a>
         </div>`);
     };

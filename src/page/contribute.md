@@ -1,31 +1,5 @@
 <!-- Start contribute.html -->
 
-<style>
-    h1[data-id="page.contribute"] {
-        font-size: 30px;
-        text-align: center;
-    }
-    label[data-id="page.contribute"] {
-        font-size: 15px;
-        font-weight: 100;
-    }
-    input[data-id="page.contribute"] {
-        margin-bottom: 10px;
-        height: 38px;
-        border-radius: 5px;
-        background: transparent;
-    }
-    #form-story[data-id="page.contribute"] {
-        background: transparent;
-        border-radius: 5px;
-        height: 150px;
-    }
-    #submit[data-id="page.contribute"] {
-        width: 134px;
-        height: 36px;
-        border-radius: 5px;
-    }
-</style>
 <div id="contribute-form" class="container" data-id="page.contribute">
     <div class="columns" data-id="page.contribute">
         <div class="column col-12" data-id="page.contribute">
