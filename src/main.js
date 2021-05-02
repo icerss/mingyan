@@ -187,7 +187,8 @@
         "#/more": true,
         "#/about": true,
         "#/ranking": true,
-        "#/submit": true
+        "#/submit": true,
+        "#/faq": true
     };
     let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
     _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
@@ -897,7 +898,10 @@
         },
         "contribute": function () {
             return _mdToHtml($page, "./src/page/contribute.md?t=" + _mingyan.config.___date_version___);
-        }
+        },
+        "faq": function () {
+            return _mdToHtml($page, "./src/page/faq.md?t=" + _mingyan.config.___date_version___);
+        },
     };
 
 
@@ -2008,6 +2012,11 @@
                 document.title = "ERSS名言 · 名言投稿";
                 _mingyan.page.contribute();
                 break;
+            case "#/faq":
+                _hide();
+                document.title = "ERSS名言 · faq";
+                _mingyan.page.faq();
+                break;
             default:
                 break;
             }
@@ -2227,7 +2236,7 @@
     //     }
     // }
 
-    document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
+    // document.querySelector("#logo").addEventListener("click", _mingyan.specialMode);
 
     /**
      * 中考加油名言（未公开）
