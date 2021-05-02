@@ -783,7 +783,7 @@
         //location.hash = "#/search";
         $($page).hide();
         $($main).hide();
-        $("input#searchbar").val("");
+        // $("input#searchbar").val("");
         let loadingHtml = `
     <!-- 加载动画 -->
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(60px);" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -796,7 +796,8 @@
         $($search).html(loadingHtml);
         // 搜索框
         let showall = `<input type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
-    </br></br><span class="e"></span>`;
+        </br></br>
+        <span class="e"></span>`;
         showall += "<div class=\"search-list\" style=\"display:none;\">";
         for (let i in mingyan) {
             showall += `<div class="search-item"><a style="color:black" id="showall_item" class="${i}" href="#${i}" onclick="_mingyan.hideElement()">${mingyan[i]}</a></div>`;
@@ -816,7 +817,7 @@
                 for (let i = 0; i < 15; i++) {
                     showall += `<div class="columns" style="padding-top:5px;padding-bottom:5px;">
                 <div class="column col-${width[0]}" id="star-ranking-num">${new Number(i) + 1}</div>
-                <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="location.hash='#${_findmingyan(res[i].text)}';$('.my--search').hide()">${res[i].text}</div>
+                <div class="column col-${width[1]} my--star-ranking-text" id="star-ranking-text" onclick="location.hash='#${_findmingyan(res[i].text)}';_mingyan.backFooter();$('.my--search').hide()">${res[i].text}</div>
                 <div class="column col-${width[2]}">
                 <!-- 
                   <i class="mdui-icon material-icons" id="star-ranking-thumb" style="color: rgba(0,0,0,0.64)"></i>
@@ -832,12 +833,20 @@
                 $(".search-list").hide();
                 $($search).html(showall);
                 $($search).fadeIn();
+            })
+            .catch(function () {
+                $(".search-history-list").hide();
+                $(".search-list").show();
+                $($search).html(showall);
+                $($search).fadeIn();
             });
         setTimeout(() => {
-            $(".search-history-list").hide();
-            $(".search-list").show();
-            $($search).html(showall);
-            $($search).fadeIn();
+            if (!$(".search-history-list").html()) {
+                $(".search-history-list").hide();
+                $(".search-list").show();
+                $($search).html(showall);
+                $($search).fadeIn();
+            }
         }, 2000);
         $($footer).html(`当前名言数量：${mingyan.length}</br><a class="aline" href="javascript:;" onclick="_mingyan.clearHash()">返回</a>`);
         _mingyan.initLogo();
@@ -1227,6 +1236,7 @@
      */
     _mingyan.rankingOnclick = function (el) {
         location.hash = "#" + _findmingyan(el.innerText);
+        _mingyan.backFooter();
         $($page).hide();
     };
 
@@ -1409,6 +1419,14 @@
         }
         if (isShow($search) || isShow($page) || !isShow($main)) _mingyan.show();
         // db("s3");
+    };
+
+    /**
+     * 还原footer
+     */
+    _mingyan.backFooter = function() {
+        $($footer).html(`<div id="footer">当前名言数量：${mingyan.length}<br><a class="my-el-a" href="#/submit" onclick="_hmt.push(['_trackEvent', '名言', '投稿', '手动' , '投稿']);">投稿</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="#/search" onclick="_hmt.push(['_trackEvent', '名言', '搜索', '手动' , '搜索']);">搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="https://jq.qq.com/?_wv=1027&amp;k=jKy2qW7R" onclick="_hmt.push(['_trackEvent', '名言', '交流群', '手动' , '交流群']);">交流群</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="#/more" onclick="_hmt.push(['_trackEvent', '名言', '更多', '手动' , '更多']);">更多</a>
+        </div>`);
     };
 
     /**

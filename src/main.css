@@ -240,6 +240,15 @@ input[type=search] {
 	position: relative;
     transform: translateY(10px);
 }
+.my--header-logo>img {
+	display: block!important;
+    height: 45px;
+    width: auto;
+}
+.my--search-bar {
+	display: block!important;
+}
+
 pwa-install::part(openButton) {
 	display: none;
 }
