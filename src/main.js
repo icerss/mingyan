@@ -751,9 +751,9 @@
      */
     _mingyan.reload = function () {
         if ($("#reload").attr("href")) {
-            location.hash = "#" + $("#reload").attr("href").split("#")[1];
+            location.href = "/#" + $("#reload").attr("href").split("#")[1];
         } else {
-            location.hash = "#" + randomNumber(0, mingyan.length - 1);
+            location.href = "/#" + randomNumber(0, mingyan.length - 1);
         }
     };
 
@@ -1488,13 +1488,6 @@
         }
         return pwa;
     };
-    $(document).ready(function () {
-        if (!staticMode) {
-            _mingyan.installPwa();
-        } else {
-            $("#installComponent").remove();
-        }
-    });
 
 
     /**
@@ -2292,6 +2285,11 @@
      * 初始化
      */
     _mingyan.init = function () {
+        if (staticMode) {
+            $("#installComponent").remove();
+        } else {
+            _mingyan.installPwa();
+        }
         _mingyan.initLogo();
         app = cloudbase.init({ env: "xhemj-0gjckebwf7276129" });
         auth = app.auth();
