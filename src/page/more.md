@@ -10,6 +10,11 @@
         <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3>
     </div>
 </div>
+<!-- 
+<div class="my--sponsor mdui-ripple">
+    <img class="banner" src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/03/lnUX9FrvT8ockbY.png" alt="鼓励我们" onclick="location.hash = '#/sponsor'"/>
+</div>
+-->
 
 ---
 

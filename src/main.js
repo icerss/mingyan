@@ -146,7 +146,7 @@
     let $main = ".my--main";
     let $search = ".my--search";
     let $page = ".my--page";
-    let $footer = ".my--footer";
+    let $footer = ".my--footer-html";
     let $myInfo = ".my--mingyan-info";
 
     /**
@@ -188,7 +188,8 @@
         "#/about": true,
         "#/ranking": true,
         "#/submit": true,
-        "#/faq": true
+        "#/faq": true,
+        "#/sponsor": true
     };
     let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
     _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
@@ -305,23 +306,21 @@
     /* 彩蛋系统 */
 
     /* 右下小人 */
-    let isLogoOpacity = false;
     _mingyan.initLogo = function () {
-        let iswebp = "png";
-        let special = "";
-        if (isLogoOpacity && !/\#\d/.test(location.hash)) special = "style=\"opacity: 0.5\"";
-        if (isSupportWebp()) iswebp = "png/webp";
-        $($footer).append(`<div class="my--mingyan-boy" id="logo" ${special} onclick="_mingyan.specialMode()"><div>`);
-        $("#logo").html(`<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/24/EJxXqGilNZLCgba.${iswebp}" alt="IYAMAYA工作室" title="IYAMAYA工作室"></img>`);
-        if (ua.device != "Mobile") {
-            $("#logo").css({
-                "width": "150px"
-            });
+        if (!/\#\d/.test(location.hash)) {
+            $(".my--mingyan-boy").css({ "opacity": 0.5 });
         } else {
-            $("#logo").css({
-                "width": "120px"
+            $(".my--mingyan-boy").css({ "opacity": 1 });
+        }
+        if (ua.device != "Mobile") {
+            $(".my--mingyan-boy").css({
+                "width": "150px",
+                "height": "260px"
             });
         }
+        $(".my--mingyan-boy").css({
+            "display": "block"
+        });
     };
 
     /* 图片彩蛋 */
@@ -331,14 +330,7 @@
      */
     function _checkPic(my) {
         let name = my.split("：")[0];
-        let my_out = null;
-        if (my.split("：").length == 2) {
-            my_out = my.split("：")[1];
-            // db(my_out);
-        } else if (my.split("：").length == 3) {
-            my_out = my.split("：")[1] + "：" + my.split("：")[2];
-            // db(my_out);
-        }
+        let my_out = my.split("：")[1] + (my.split("：")[2] ? "：" : "") + (my.split("：")[2] || "");
         let special = "data-event=\"my--text\" onclick=\"_mingyan.onclick(this);\"";
         if (my_out == "解" || mingyanPicUrl[my_out] != undefined) {
             let pic = null;
@@ -353,7 +345,7 @@
             }
             lazyload();
             return `<div ${special}>${my_out}</div><div class="my--mingyan-pic">
-                        <img src="${_mingyan.lazypic}" data-src="${picBaseUrl}${pic}" data-pic-id=${my_out} id="pic" class="lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
+                        <img src="${_mingyan.lazypic}" alt="${my}" title="${my}" data-src="${picBaseUrl}${pic}" data-pic-id=${my_out} id="pic" class="lazyload mdui-hoverable mdui-img-rounded fancybox" data-fancybox-group="ERSS_mingyan_pic"></img>
                     </div>`;
             // return my + "<\/br><img src=\"" + _mingyan.lazypic + "\" data-src=\"" + pic + "\" class=\"pic lazyload mdui-hoverable mdui-img-rounded fancybox\" data-fancybox-group=\"ERSS_mingyan_pic\"" + special + "><\/img>"
         } else {
@@ -555,15 +547,13 @@
     _mingyan.decodeMingyan = function (id) {
         for (let i in mingyan) {
             let name = mingyan[i].split("：")[0];
-            db(name);
+            // db(name);
             let my = mingyan[i].split("：")[1];
-            db(my);
+            // db(my);
             if (id == _mingyan.encodeMingyan(name, my)) {
                 // db("encode:" + id);
                 // db(i);
                 return i;
-            } else {
-                db("no");
             }
         }
     };
@@ -619,25 +609,6 @@
         return _findmingyan(otherMingyan[randomNumber(0, otherMingyan.length - 1)]);
     }
 
-    /* 测试概率脚本
-    ```
-    let name = "潘哥"; // 人名
-    let time = 99999; // 测试次数
-    
-    let count = 0;
-    for (let i = 0; i < time; i ++) {
-       let my = mingyan[_checkMingyan()];
-       if (my.indexOf(name) != -1) count++
-    };
-    db("===========================");
-    db(`测试次数：${time} 次`)
-    db(" 命中次数   |   概率（%）");
-    db(`   ${count}    |   ${((count / time) * 100).toFixed(3)}`);
-    db("===========================");
-    ```
-    */
-
-
     // 隐藏名言
     await _writeSpecialMingyan();
 
@@ -678,14 +649,7 @@
                 localStorage.setItem("___mingyan_id__", n);
                 let name = _my.split("：")[0];
                 // db(name);
-                let my = null;
-                if (_my.split("：").length == 2) {
-                    my = _my.split("：")[1];
-                    // db(my);
-                } else if (_my.split("：").length == 3) { // 防止名言中有“：”
-                    my = _my.split("：")[1] + "：" + _my.split("：")[2];
-                    // db(my);
-                }
+                let my = _my.split("：")[1] + (_my.split("：")[2] ? "：" : "") + (_my.split("：")[2] || "");
                 // db("已选取第" + n + "条名言：" + my);
                 _hmt.push(["_trackEvent", "名言", "查看", "自动", name + "：" + my]);
                 // 查看和分享（已废弃 2021-01-24）
@@ -707,11 +671,19 @@
                  */
                 $("span.my--mingyan-text").html(_checkPic(name + "：" + my)); // 若有触发图片彩蛋就显示彩蛋
                 // 根据名言长度调整图片位置
-                $(".my--mingyan-pic").css({
-                    "min-width": 28 * my.split("").length  - 50, // 每个字大概28px
-                    "margin-left": "25px",
-                    "margin-right": "25px"
-                });
+                if (ua.device == "PC") {
+                    $(".my--mingyan-pic").css({
+                        "min-width": 28 * my.split("").length - 50, // 每个字大概28px
+                        "margin-left": "25px",
+                        "margin-right": "25px"
+                    });
+                } else {
+                    $(".my--mingyan-pic").css({
+                        "min-width": 28 * my.split("").length - 50, // 每个字大概28px
+                        "margin-left": "5px",
+                        "margin-right": "5px"
+                    });
+                }
                 /**
                  * 文字彩蛋
                  */
@@ -902,6 +874,9 @@
         "faq": function () {
             return _mdToHtml($page, "./src/page/faq.md?t=" + _mingyan.config.___date_version___);
         },
+        "sponsor": function () {
+            return _mdToHtml($page, "./src/page/sponsor.md?t=" + _mingyan.config.___date_version___);
+        }
     };
 
 
@@ -1298,6 +1273,110 @@
         });
     };
 
+    /**
+     * 是否存在某一项
+     * @param {*} val 值
+     */
+    Array.prototype.indexOf = function (val) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == val) return i;
+        }
+        return -1;
+    };
+
+    /**
+     * 删除某一项
+     * @param {*} val 值
+     */
+    Array.prototype.remove = function (val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+        return this;
+    };
+
+    /**
+     * 随机展示名言的预随机列表
+     */
+    _mingyan._randomList = {
+        "list": [], // 储存名言id
+        "data": {
+            _my1: mingyan1, // eslint-disable-line
+            _my2: mingyan2, // eslint-disable-line
+            _my3: mingyan3, // eslint-disable-line
+            _otherMingyan: [
+                ...mingyan1, // eslint-disable-line
+                ...mingyan3 // eslint-disable-line
+            ]
+        },
+        "chance": {
+            "数学潘哥": "1,2,3,4,5,6" // 大约14%
+        },
+        "done": false,
+        "nowListId": 0,
+        "checkProb": function () {
+            let prob = randomNumber(0, 40);
+            if (this.chance["数学潘哥"].indexOf(prob) != -1) {
+                let n = randomNumber(0, this.data._my2.length - 1);
+                let my = this.data._my2[n];
+                this.data._my2.remove(my);
+                return my;
+            }
+            let n = randomNumber(0, this.data._otherMingyan.length - 1);
+            let my = this.data._otherMingyan[n];
+            this.data._otherMingyan.remove(my);
+            return my;
+        },
+        "getNext": function () {
+            if (this.nowListId > this.list.length - 5) {
+                this.init();
+            }
+            this.nowListId++;
+            let o = this.list[this.nowListId];
+            if (!o) {
+                this.nowListId++;
+                return this.getNext();
+            }
+            return this.list[this.nowListId];
+        },
+        "getPrev": function () {
+            this.nowListId = (this.nowListId-- == 0 ? 0 : this.nowListId--);
+            return this.list[this.nowListId];
+        },
+        "init": function () {
+            this.list = [];
+            this.nowListId = 0;
+            this.data = {
+                _my1: mingyan1, // eslint-disable-line
+                _my2: mingyan2, // eslint-disable-line
+                _my3: mingyan3, // eslint-disable-line
+                _otherMingyan: [
+                    ...mingyan1, // eslint-disable-line
+                    ...mingyan3 // eslint-disable-line
+                ]
+            };
+            for (let i = 0; i < 100; i++) {
+                this.list.push(this.checkProb());
+            }
+            if (this.list.length == 300) this.done = true;
+            return this.list;
+        }
+    };
+    _mingyan._randomList.init();
+
+    /**
+     * 自动刷新模式
+     */
+    function _autoReload() {
+        let wait = 3000;
+        setInterval(() => {
+            let my = _mingyan._randomList.getNext();
+            let id = _findmingyan(my);
+            location.hash = "#" + id;
+        }, wait);
+    }
+
 
     /**
      * 旧版historypush路由 已废弃 2021-01-24
@@ -1318,18 +1397,13 @@
             if (!staticMode) _mingyan.show();
             // db("s1");
         });
-        if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果是新用户
-            _mingyan.ranking();
-        }
         switch (qs("force_action") || qs("do")) {
         case "clear_save":
             localStorage.removeItem("___mingyan_2021_ranking_data__");
             break;
         case "auto_reload":
             // 自动刷新名言
-            setInterval(function () {
-                _mingyan.reload();
-            }, 3000);
+            _autoReload();
             break;
         }
         break;
@@ -1420,10 +1494,11 @@
      */
     _mingyan.clearHash = function () {
         document.title = "ERSS名言 · ERSS";
-        skipCheckHash = true;
-        location.hash = "";
-        _mingyan.hideElement();
         skipCheckHash = false;
+        location.hash = localStorage.getItem("___mingyan_id__") || "";
+        location.reload();
+        _mingyan.hideElement();
+        _mingyan.initLogo();
         function isShow(el) {
             return !$(el).is(":hidden");
         }
@@ -1435,6 +1510,8 @@
      * 还原footer
      */
     _mingyan.backFooter = function () {
+        document.title = "ERSS名言 · ERSS";
+        _mingyan.initLogo();
         $($footer).html(`<div id="footer">当前名言数量：${mingyan.length}<br><a class="my-el-a" href="#/submit" onclick="_hmt.push(['_trackEvent', '名言', '投稿', '手动' , '投稿']);">投稿</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="#/search" onclick="_hmt.push(['_trackEvent', '名言', '搜索', '手动' , '搜索']);">搜索</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="https://jq.qq.com/?_wv=1027&amp;k=jKy2qW7R" onclick="_hmt.push(['_trackEvent', '名言', '交流群', '手动' , '交流群']);">交流群</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="my-el-a" href="#/more" onclick="_hmt.push(['_trackEvent', '名言', '更多', '手动' , '更多']);">更多</a>
         </div>`);
     };
@@ -1977,7 +2054,6 @@
             location.pathname = "/";
             _mingyan.hideElement();
             _hideMain();
-            isLogoOpacity = true;
             if (!/\#\d/.test(location.hash)) {
                 $("#logo").css("opacity", 0.5);
             } else {
@@ -2014,19 +2090,23 @@
                 break;
             case "#/faq":
                 _hide();
-                document.title = "ERSS名言 · faq";
+                document.title = "ERSS名言 · FAQ";
                 _mingyan.page.faq();
+                break;
+            case "#/sponsor":
+                _hide();
+                document.title = "ERSS名言 · 鼓励我们";
+                _mingyan.page.sponsor();
                 break;
             default:
                 break;
             }
-        } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d/.test(location.hash)) { // 否则就显示名言
+        } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d|/.test(location.hash)) { // 否则就显示名言
             if (!staticMode) {
-                _mingyan.show(location.hash.split("#")[1]);
+                _mingyan.show((location.hash.split("#")[1] || null));
                 let footer = $($footer).html().replace("999+", mingyan.length); // 首页Footer初始化
                 $($footer).html(footer);  // 运用Footer
             }
-            isLogoOpacity = false;
         }
     };
     _mingyan.onHashChange();
@@ -2318,6 +2398,9 @@
      * 初始化
      */
     _mingyan.init = function () {
+        if (qs("force_action") == "2020" || !localStorage.getItem("___mingyan_2021_ranking_data__")) { // 如果是新用户
+            _mingyan.ranking();
+        }
         if (staticMode) {
             $("#installComponent").remove();
         } else {
