@@ -5,10 +5,10 @@
 	</h1>
 	<div class="qrcode">
 		<!-- -->
-		<img src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/04/1zfBCJSGmbKcs9e.png" alt="赞赏二维码"
+		<img src="./src/loading.svg" alt="赞赏二维码"
 			data-fancybox-group="ERSS_mingyan_pic"
 			data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/04/1zfBCJSGmbKcs9e.png"
-			class="mdui-hoverable fancybox" onload="fancybox()" />
+			class="mdui-hoverable fancybox lazyload" onload="lazyload();fancybox()" />
 		<!-- -->
 		<p class="qrcode-text">
 			点击图片可以放大
@@ -19,7 +19,8 @@
 	<div class="sponsor-table">加载中……</div>
 	<!-- -->
 	<script>
-		function fancybox() { $(".fancybox").fancybox({ buttons: ["zoom", "share", "slideShow", "fullScreen", "download", "close"], lang: "zh-cn", i18n: { "zh-cn": { CLOSE: "关闭", NEXT: "下一张", PREV: "前一张", ERROR: "图片加载失败， <br/> 请稍后再试。", FULL_SCREEN: "全屏", THUMBS: "略缩图", DOWNLOAD: "下载", SHARE: "分享", ZOOM: "缩放" } } }); }
+		function fancybox() { $(".fancybox").fancybox({ buttons: ["zoom", "share", "slideShow", "fullScreen", "download", "close"], lang: "zh-cn", i18n: { "zh-cn": { CLOSE: "关闭", NEXT: "下一张", PREV: "前一张", ERROR: "图片加载失败， <br/> 请稍后再试。", FULL_SCREEN: "全屏", THUMBS: "略缩图", DOWNLOAD: "下载", SHARE: "分享", ZOOM: "缩放" } } }); };
+		lazyload();
 		(async function () {
 			await fetch("https://www.erss.club/api/get-sponsor-list?t=_" + new Date().getTime())
 				.then(r => r.json())

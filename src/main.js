@@ -1,6 +1,6 @@
 /*
  * ©2020-2021 xhemj
- * 2021/04/18
+ * 2021/05/14
  */
 
 (async function () {
@@ -18,10 +18,11 @@
         dn++;
     }
 
+
     let staticMode = sm; // eslint-disable-line
     db("mode", staticMode);
     v = v || ["", "202103211846"]; // eslint-disable-line
-    _mingyan.version = "2021/04/18";
+    _mingyan.version = "2021/05/14";
     _mingyan.config = {
         ___date_version___: v[1] // eslint-disable-line
     };
@@ -78,7 +79,6 @@
             navigator.serviceWorker.register("./sw.js?t=" + _mingyan.config.___date_version___);
         });
     }
-
     /**
      * 加载耗时
      */
@@ -1106,7 +1106,7 @@
         getIp: function () {
             if (!Promise) return;
             return new Promise(function (resolve, reject) {
-                $.getJSON("https://ip.xhemj.now.sh/api/ip",
+                $.getJSON("https://ip-api.erss.club/api/ip",
                     function (json) {
                         // db("获取成功");
                         let res = {
@@ -1252,6 +1252,7 @@
             }
             // // db(res);
             for (let i in res) {
+                if (!res[i].text) continue;
                 o += `
     <!-- ${res[i].text} -->
     <div id="star-ranking-item">

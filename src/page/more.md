@@ -10,11 +10,14 @@
         <h3 data-id="page.more"><a data-id="page.more" style="color:#9B4DC9" onclick="location.hash='#/about'">关于</a></h3>
     </div>
 </div>
-<!-- 
+
+---
+
+<!-- -->
 <div class="my--sponsor mdui-ripple">
     <img class="banner" src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/03/lnUX9FrvT8ockbY.png" alt="鼓励我们" onclick="location.hash = '#/sponsor'"/>
 </div>
--->
+<!-- -->
 
 ---
 
@@ -23,6 +26,11 @@
 ---
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div style="text-align: center" >
+<div style="color: gray;">自 2020年04月30日 以来，ERSS名言已经陪伴你们走过了<span id="more-times"></span></div>
+<a href="https://icp.gov.moe" target="_blank" style="color: #d6d9e2;">萌备 </a><a href="https://icp.gov.moe/?keyword=20200503" target="_blank" style="color: #d6d9e2;"> 20200503号</a>
+</div>
+<!-- 
 <div style="text-align: center" class="mdui-ripple">
     <div class="github-badge" title="作者就是我啦！！" data-id="page.more"><span class="badge-subject" data-id="page.more">Author</span><span
             class="badge-value bg-blue" data-id="page.more">xhemj</span></div>
@@ -41,12 +49,9 @@
     <div class="github-badge" title="会慢慢更新的" data-id="page.more"><span class="badge-subject" data-id="page.more">更新时间</span><span
             class="badge-value bg-lightgrey" data-id="page.more"><span id="uptime">2021-00-00 00:00:00</span></span></div>
     </br>
-    <div style="color: gray;">自 2020年04月30日 以来，ERSS名言已经陪伴你们走过了<span id="more-times"></span></div>
-    <a href="https://icp.gov.moe" target="_blank" style="color: #d6d9e2;">萌备 </a><a href="https://icp.gov.moe/?keyword=20200503"
-        target="_blank" style="color: #d6d9e2;"> 20200503号</a>
-</div>
+</div> -->
 <script>
-    var domain_list = {
+    /* var domain_list = {
         "i.xhemj.eu.org": "Cloudflare & 阿里云香港oss",
         "www.xhemj.eu.org": "阿里云香港OSS",
         "xhemj.eu.org": "阿里云香港OSS",
@@ -60,8 +65,8 @@
         "xhemj.github.io": "Github Pages",
         "www.erss.club": "Vercel",
         "127.0.0.1": "本地"
-    };
-    $("#host").text(domain_list[location.hostname]);
+    };*/
+    // $("#host").text(domain_list[location.hostname]);
     twikoo.init({ 
         envId: 'xhemj-0gjckebwf7276129', 
         el: '#tcomment' ,
