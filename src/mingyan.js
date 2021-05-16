@@ -664,7 +664,6 @@ let mingyan3 = [ // eslint-disable-line
     "小菊：两个傻逼",
     "小菊：小菊快跑",
     "小菊：非常近，很快就到了",
-    // fx 图片 五缘湾到中山路
 
     //====八班====
     "八班：来看王雷吧",
@@ -736,7 +735,8 @@ let mingyanPicUrl = { // eslint-disable-line
     "天外来J": "/2021/01/24/bXc6UHY4JtGWTQn.jpg",
     "跑面节": "/2021/01/24/PnvmZFb96yzsLYK.jpg",
     "面包": "/2021/01/24/ulS3M2oRcmyNQqZ.jpg",
-    "小菊快跑": "/2021/03/30/4XhOQvIlUCzgkPd.jpg"
+    "小菊快跑": "/2021/03/30/4XhOQvIlUCzgkPd.jpg",
+    "非常近，很快就到了": "/2021/05/16/NTpS7jGxJnwiodt.png"
 };
 /**
  * 格式：

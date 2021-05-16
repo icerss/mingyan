@@ -655,14 +655,17 @@
                 // 查看和分享（已废弃 2021-01-24）
                 $($myInfo).html(
                     `<div class="info-text">
-                <!-- 编号 -->
-                <a href="#${n}" class="label label-rounded label-warning">#${n}</a>&nbsp;
+                <!-- 音校馆 -->
+                <a class="label label-rounded label-warning theme-bg blue">
+                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe80c;</i>&nbsp;
+                音校馆</a>&nbsp;
                 <!-- 分享
                 <a href="javascript:;" onclick="_mingyan.share()" class="label label-rounded label-warning">
                 <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe80d;</i>分享</a> -->
                 <!-- 点赞 -->
                 <a href="javascript:;" onclick="_mingyan.star()" class="label label-rounded label-warning">
-                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe8dc;</i>点赞</a>
+                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe8dc;</i>&nbsp;
+                点赞</a>
                 </br>
                 <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
                 );
