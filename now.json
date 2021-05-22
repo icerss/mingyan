@@ -1,32 +1,47 @@
 {
-    "routes": [
-        {
-            "src": "/api/get-ranking-history",
-            "dest": "https://icerss.github.io/data/ranking.json"
-        },
-        {
-            "src": "/api/get-sponsor-list",
-            "dest": "https://icerss.github.io/data/sponsor.json"
-        },
-        {
-            "src": "/more(.*)",
-            "dest": "/$1#/more"
-        },
-        {
-            "src": "/about(.*)",
-            "dest": "/$1#/about"
-        },
-        {
-            "src": "/ranking(.*)",
-            "dest": "/$1#/ranking"
-        },
-        {
-            "src": "/search(.*)",
-            "dest": "/$1#/search"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/$1"
-        }
-    ]
+	"headers": [{
+		"source": "/api/(.*)",
+		"headers": [{
+				"key": "Access-Control-Allow-Credentials",
+				"value": "true"
+			},
+			{
+				"key": "Access-Control-Allow-Origin",
+				"value": "*"
+			},
+			{
+				"key": "Access-Control-Allow-Methods",
+				"value": "GET"
+			}
+		]
+	}],
+	"routes": [{
+			"src": "/api/get-ranking-history",
+			"dest": "https://icerss.github.io/data/ranking.json"
+		},
+		{
+			"src": "/api/get-sponsor-list",
+			"dest": "https://icerss.github.io/data/sponsor.json"
+		},
+		{
+			"src": "/more(.*)",
+			"dest": "/$1#/more"
+		},
+		{
+			"src": "/about(.*)",
+			"dest": "/$1#/about"
+		},
+		{
+			"src": "/ranking(.*)",
+			"dest": "/$1#/ranking"
+		},
+		{
+			"src": "/search(.*)",
+			"dest": "/$1#/search"
+		},
+		{
+			"src": "/(.*)",
+			"dest": "/$1"
+		}
+	]
 }
