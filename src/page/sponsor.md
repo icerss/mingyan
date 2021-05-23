@@ -22,7 +22,7 @@
 		function fancybox() { $(".fancybox").fancybox({ buttons: ["zoom", "share", "slideShow", "fullScreen", "download", "close"], lang: "zh-cn", i18n: { "zh-cn": { CLOSE: "关闭", NEXT: "下一张", PREV: "前一张", ERROR: "图片加载失败， <br/> 请稍后再试。", FULL_SCREEN: "全屏", THUMBS: "略缩图", DOWNLOAD: "下载", SHARE: "分享", ZOOM: "缩放" } } }); };
 		lazyload();
 		(async function () {
-			await fetch("https://www.erss.club/api/get-sponsor-list?t=_" + new Date().getTime())
+			await fetch("./api/get-sponsor-list?t=_" + new Date().getTime())
 				.then(r => r.json())
 				.then(function (res) {
 					let table = `
