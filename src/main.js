@@ -1473,7 +1473,7 @@ let { $main, $search, $page, $footer, $myInfo, hashName, picBaseUrl, apiUrls, ua
         "getHistoryRanking": function () {
             if (!Promise) return;
             return new Promise(function (resolve, reject) {
-                fetch("https://www.erss.club/api/get-ranking-history?_t=" + new Date().getTime())
+                fetch("./api/get-ranking-history?_t=" + new Date().getTime())
                     .then(res => res.json())
                     .then(json => {
                         db(json);

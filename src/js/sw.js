@@ -4,7 +4,7 @@ module.exports = (async function () {
      */
 
     // 防止sw占用过大
-    let sw_v = "202104251852";
+    let sw_v = "202105232055";
     let sw_local_v = localStorage.getItem("___mingyan_sw_version__") || "";
     let sw_app = "xhemj";
     if ("serviceWorker" in navigator && sw_v != sw_local_v) {
