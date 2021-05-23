@@ -3,22 +3,19 @@
  * 2021/05/14
  */
 
+import "./main.css";
+require("./js/sw");
+let { _hmt } = require("./js/tongji");
+let { mingyan, mingyan1, mingyan2, mingyan3, mingyanPicUrl, solvePicUrl, specialVerbList } = require("./mingyan");
+let { loadJs, isSupportWebp, randomNumber, showPop, qs } = require("./js/tools");
+let { htmlTemp } = require("./js/templete");
+let { db } = require("./js/log");
+let { $main, $search, $page, $footer, $myInfo, hashName, picBaseUrl, apiUrls, ua, faceClickTime, footer } = require("./js/init");
+
+
 (async function () {
     /* 配置 */
     let _mingyan = {};
-
-    /**
-     * 控制台输出
-     */
-    let dn = 1;
-    function db(i) {
-        let special1 = "";
-        let special2 = "";
-        console.log(`[ERSS名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}`, i, special2);
-        dn++;
-    }
-
-
     let staticMode = sm; // eslint-disable-line
     db("mode", staticMode);
     v = v || ["", "202103211846"]; // eslint-disable-line
@@ -46,262 +43,8 @@
         }
     };
 
-    /**
-     * ServiceWorker
-     */
-
-    // 防止sw占用过大
-    let sw_v = "202104251852";
-    let sw_local_v = localStorage.getItem("___mingyan_sw_version__") || "";
-    let sw_app = "xhemj";
-    if ("serviceWorker" in navigator && sw_v != sw_local_v) {
-        await caches.keys().then((cacheNames) => {
-            return Promise.all(cacheNames
-                .filter((cacheName) => {
-                    return cacheName.startsWith(sw_app);
-                })
-                .map((cacheName) => {
-                    return caches.delete(cacheName);
-                }));
-        });
-        await navigator.serviceWorker.getRegistration().then((registration) => {
-            if (registration) {
-                registration.unregister().then(() => {
-                    localStorage.setItem("___mingyan_sw_version__", sw_v);
-                    location.reload();
-                });
-            }
-        });
-    }
-
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-            navigator.serviceWorker.register("./sw.js?t=" + _mingyan.config.___date_version___);
-        });
-    }
-    /**
-     * 加载耗时
-     */
-    window.onload = function () {
-        let loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-        db("Page load time is " + loadTime + "ms");
-    };
-
-    /**
-     * 百度统计代码
-     */
-    var _hmt = [];
-    (function () {
-        let hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
-        let s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-
-    (function () {
-        var bp = document.createElement("script");
-        var curProtocol = window.location.protocol.split(":")[0];
-        if (curProtocol === "https") {
-            bp.src = "https://zz.bdstatic.com/linksubmit/push.js";
-        } else {
-            bp.src = "http://push.zhanzhang.baidu.com/push.js";
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-
-    /**
-     * 基础函数（测试）
-     */
-    let _ = {};
-    let _$ = function (el) {
-        return document.querySelector(el);
-    };
-    (function (_) {
-        _.get = function (url, callback, isJson) {
-            let request = new XMLHttpRequest();
-            request.open("GET", url, true);
-
-            request.onload = function () {
-                if (this.status >= 200 && this.status < 400) {
-                    let data = this.response;
-                    if (isJson) {
-                        data = JSON.parse(data);
-                    }
-                    callback(data);
-                }
-            };
-
-            request.onerror = function () {
-                console.error("Error");
-            };
-
-            request.send();
-        };
-    })(_);
-
-    /**
-     * 界面元素定义
-     */
-    let $main = ".my--main";
-    let $search = ".my--search";
-    let $page = ".my--page";
-    let $footer = ".my--footer-html";
-    let $myInfo = ".my--mingyan-info";
-
-    /**
-     * localStorage 兼容
-     */
-    if (!window.localStorage) {
-        window.localStorage = {
-            getItem: function (sKey) {
-                if (!sKey || !this.hasOwnProperty(sKey)) { return null; }
-                return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
-            },
-            key: function (nKeyId) {
-                return unescape(document.cookie.replace(/\s*\=(?:.(?!;))*$/, "").split(/\s*\=(?:[^;](?!;))*[^;]?;\s*/)[nKeyId]);
-            },
-            setItem: function (sKey, sValue) {
-                if (!sKey) { return; }
-                document.cookie = escape(sKey) + "=" + escape(sValue) + "; expires=Tue, 19 Jan 2038 00:00:00 GMT; path=/";
-                this.length = document.cookie.match(/\=/g).length;
-            },
-            length: 0,
-            removeItem: function (sKey) {
-                if (!sKey || !this.hasOwnProperty(sKey)) { return; }
-                document.cookie = escape(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-                this.length--;
-            },
-            hasOwnProperty: function (sKey) {
-                return (new RegExp("(?:^|;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
-            }
-        };
-        window.localStorage.length = (document.cookie.match(/\=/g) || window.localStorage).length;
-    }
-
-
-    /* 常量 */
-    // Hash路由保留地址
-    let hashName = {
-        "#/search": true,
-        "#/more": true,
-        "#/about": true,
-        "#/ranking": true,
-        "#/submit": true,
-        "#/faq": true,
-        "#/sponsor": true
-    };
-    let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
     _mingyan.lazypic = "./src/loading.svg"; // 懒加载图片地址
 
-    let apiUrls = {
-        "star": "https://api.erss.club/api/star",
-        "submit": "https://api.erss.club/api/contribute"
-    };
-
-    String.prototype.trim = function () {
-        return this.replace(/(^\s*)|(\s*$)/g, "");
-    };
-
-    /**
-     * 初始化
-     */
-    let ua = new Browser(); // Broswer.js初始化
-    let footer = $($footer).html().replace("999+", mingyan.length); // 首页Footer初始化
-    let faceClickTime = ""; // 初始化头像彩蛋点击数
-    if (location.hash == "" && hashName[location.hash] != true /* 排除保留的hash路由地址 */) $($page).hide();   // 隐藏文字区域
-    $($search).hide();  // 隐藏搜索区域
-    $($footer).html(footer);  // 运用Footer
-    $("h1").fontFlex(30, 50, 70); // fontFlex初始化
-    $("h3").fontFlex(30, 50, 70);
-
-
-    /**
-     * 动态加载JS
-     */
-    function loadJs(url) {
-        let su = document.createElement("script");
-        su.src = url;
-        let s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(su, s);
-    }
-
-    /**
-     * 检测是否支持Webp
-     */
-    function isSupportWebp() {
-        try {
-            return document.createElement("canvas").toDataURL("image/webp", 0.5).indexOf("data:image/webp") === 0;
-        } catch (err) {
-            return false;
-        }
-    }
-
-    /**
-     * 获取url参数
-     * @param {String} qs 要获取的参数名
-     */
-    function qs(qs) {
-        let s = location.href;
-        s = s.replace("?", "?&").split("&");
-        let re = "";
-        for (let i = 1; i < s.length; i++) {
-            if (s[i].indexOf(qs + "=") == 0) {
-                re = s[i].replace(qs + "=", "");
-            }
-        }
-        return re;
-    }
-
-    /**
-     * 生成随机整数
-     * @param {Num} minNum 最小值
-     * @param {Num} maxNum 最大值
-     */
-    function randomNumber(minNum, maxNum) {
-        return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-    }
-
-    /**
-     * 弹窗
-     * @param {Object} opt 选项
-     */
-    function showPop(opt) {
-        let pop_elements = {};
-        opt.time = opt.time || 5000;
-        opt.url = opt.url || "";
-        pop_elements.container = document.createElement("div");
-        pop_elements.container.id = "pop";
-        pop_elements.container.style.cssText = "z-index:10000;";
-        pop_elements.modal = document.createElement("div");
-        pop_elements.modal.style.cssText = "z-index:99999;position:fixed;box-shadow: 0 5px 15px -5px rgba(0,0,0,0.8);display:inline-block;color:black;padding:24px;background-color:white;top:12px;right:12px;border-radius:12px;font-size:18px;transition:all 250ms ease;opacity:0";
-        pop_elements.a = document.createElement("a");
-        pop_elements.a.innerText = opt.url;
-        pop_elements.a.href = opt.url;
-        pop_elements.a.addEventListener("click", (e) => {
-            e.preventDefault();
-        });
-        pop_elements.p = document.createElement("p");
-        pop_elements.p.style.cssText = "padding:0;margin:0;";
-        pop_elements.p.innerHTML = opt.text;
-        pop_elements.modal.appendChild(pop_elements.p);
-        pop_elements.modal.appendChild(pop_elements.a);
-        pop_elements.container.appendChild(pop_elements.modal);
-        let pop_body = document.querySelector("body");
-        pop_body.appendChild(pop_elements.container);
-        requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                pop_elements.modal.style.opacity = 1;
-            });
-        });
-
-        setTimeout(function () {
-            pop_elements.modal.style.opacity = 0;
-            setTimeout(function () {
-                pop_elements.container.remove();
-            }, 260);
-        }, opt.time);
-    }
 
     /* 彩蛋系统 */
 
@@ -374,23 +117,23 @@
         // db(reloadTime);
         let title = "获得成就", text;
         switch (reloadTime) {
-        case 10:
-            text = "点击 100 次有惊喜";
-            break;
-        case 100:
-            text = "点击 500 次有惊喜";
-            break;
-        case 500:
-            text = "点击 1000 次有惊喜，\n很大的惊喜哦！";
-            break;
-        case 1000:
-            text = "点击 10000 次有惊喜，\n你都到这一步了，干嘛不看看后面的惊喜呢？";
-            break;
-        case 10000:
-            text = "你好无聊啊……";
-            break;
-        default:
-            text = "";
+            case 10:
+                text = "点击 100 次有惊喜";
+                break;
+            case 100:
+                text = "点击 500 次有惊喜";
+                break;
+            case 500:
+                text = "点击 1000 次有惊喜，\n很大的惊喜哦！";
+                break;
+            case 1000:
+                text = "点击 10000 次有惊喜，\n你都到这一步了，干嘛不看看后面的惊喜呢？";
+                break;
+            case 10000:
+                text = "你好无聊啊……";
+                break;
+            default:
+                text = "";
         }
         // 弹窗
         if (text) {
@@ -442,9 +185,9 @@
         if (!el) return;
         let event = el.getAttribute("data-event").replace("my--", "");
         switch (event) {
-        case "text":
-            _text();
-            return;
+            case "text":
+                _text();
+                return;
         }
 
         /**
@@ -620,8 +363,15 @@
         // db(mingyan);
         // db(mingyanPicUrl);
         // db(specialVerbList);
+
         // 加载Fancybox插件
         _initfancybox();
+
+        // 延迟获取名言信息
+        setTimeout(() => {
+            _mingyan.loadMyType();
+        }, 1);
+
         // 处理传入的id
         function _id(id) {
             if (id) return id;
@@ -653,22 +403,7 @@
                 // db("已选取第" + n + "条名言：" + my);
                 _hmt.push(["_trackEvent", "名言", "查看", "自动", name + "：" + my]);
                 // 查看和分享（已废弃 2021-01-24）
-                $($myInfo).html(
-                    `<div class="info-text">
-                <!-- 音校馆 -->
-                <a class="label label-rounded label-warning theme-bg blue">
-                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe80c;</i>&nbsp;
-                音校馆</a>&nbsp;
-                <!-- 分享
-                <a href="javascript:;" onclick="_mingyan.share()" class="label label-rounded label-warning">
-                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe80d;</i>分享</a> -->
-                <!-- 点赞 -->
-                <a href="javascript:;" onclick="_mingyan.star()" class="label label-rounded label-warning">
-                <i class="mdui-icon material-icons" style="font-size: 15px;">&#xe8dc;</i>&nbsp;
-                点赞</a>
-                </br>
-                <a style="color:#9B4DC9" id="reload" href="#${randomNumber(0, mingyan.length - 1)}" onclick="_mingyan.addReloadTime();_hmt.push(['_trackEvent', '名言', '刷新', '手动' , '点击查看更多名言']);" >点击</a>查看更多名言</div>`
-                );
+                $($myInfo).html(htmlTemp.MY_INFO);
                 /**
                  * 图片彩蛋
                  */
@@ -766,15 +501,8 @@
         $($page).hide();
         $($main).hide();
         // $("input#searchbar").val("");
-        let loadingHtml = `
-    <!-- 加载动画 -->
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(60px);" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-      <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-      </circle>
-    <!-- https://loading.io/ --></svg>
-    <h2>搜索加载中……</h2>
-    `;
+        let loadingHtml = htmlTemp.BIG_LOADING_SVG;
+        loadingHtml += "<h2>搜索加载中……</h2>";
         $($search).html(loadingHtml);
         // 搜索框
         let showall = `<input type="search" id="searchbar" class="my--search-bar" placeholder="搜索……" results="5"></input>
@@ -846,19 +574,22 @@
         $($main).hide();
         $($search).hide();
         $(id).html("<strong>" + "<div style=\"text-align: center\" class=\"mdui-ripple\"><style>h1{font-size:30px}</style><h1>加载中……</h1></div></strong></br></br></br></br>");
-        _.get(url, function (data) { // 获取文件
-            marked.setOptions({
-                breaks: true
+        fetch(url)
+            .then(res => res.text())
+            .then(function (data) {
+                marked.setOptions({
+                    breaks: true
+                });
+                let html = marked(data); // 使用mark.js转换
+                html = html.replace(/<a /g, "<a target=\"_blank\" rel=\"nofollow ugc\" "); // 外链新页面打开
+                $(id).html("<strong>" + html + "</strong></br></br></br></br>");  // 加换行比较好看
+                $(id).fadeIn();
             });
-            let html = marked(data); // 使用mark.js转换
-            html = html.replace(/<a /g, "<a target=\"_blank\" "); // 外链新页面打开
-            $(id).html("<strong>" + html + "</strong></br></br></br></br>");  // 加换行比较好看
-            $(id).fadeIn();
-        });
         $($footer).html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" href=javascript:; onclick=\"_mingyan.clearHash()\">返回<\/a>"); // 更改footer
         _mingyan.initLogo();
         $($page).fadeIn();
     }
+
 
 
     /**
@@ -962,27 +693,27 @@
     function _search() {
         if (($("#searchbar").is(":focus") || qs("q") != "") && $("input#searchbar").val()) { // 若有点击搜索框或有传入?q=
             switch ($("input#searchbar").val()) {
-            // 若输入::auto_reload，则进入自动刷新模式
-            case "::auto_reload":
-                location.href = "./?force_action=auto_reload";
-                break;
-            default: {
-                // 显示排行榜名言
-                $(".search-history-list").hide();
-                $(".search-list").show();
-                try {
-                    $("a#showall_item").each(function () {
-                        if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
-                            let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
-                            $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    });
+                // 若输入::auto_reload，则进入自动刷新模式
+                case "::auto_reload":
+                    location.href = "./?force_action=auto_reload";
+                    break;
+                default: {
+                    // 显示排行榜名言
+                    $(".search-history-list").hide();
+                    $(".search-list").show();
+                    try {
+                        $("a#showall_item").each(function () {
+                            if ($(this).text().indexOf($("input#searchbar").val()) != -1) {
+                                let reg = "/" + $("input#searchbar").val() + "/gi"; // 拼接正规表达式
+                                $(this).html($(this).text().replace(eval(reg), `<span class="label label-secondary">${$("input#searchbar").val()}</span>`)); // 关键词加颜色凸显
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
                     } catch { } // eslint-disable-line
-                $(".e").hide(); // “无结果”隐藏
-            }
+                    $(".e").hide(); // “无结果”隐藏
+                }
             }
         } else {
             try {
@@ -1117,8 +848,8 @@
                         };
                         resolve(res);
                     }).catch(function (e) {
-                    reject(e);
-                });
+                        reject(e);
+                    });
             });
         },
         //获取当前排名人数
@@ -1386,45 +1117,45 @@
      * 旧版historypush路由 已废弃 2021-01-24
      */
     switch (location.pathname) {
-    case "/about":
-        location.hash = "#/about";
-        break;
-    case "/search":
-        location.hash = "#/search";
-        break;
-    case "/more":
-        location.hash = "#/more";
-        break;
-    case "/index.html":
-    case "/": // 这边还没废弃
-        $(document).ready(function () {
-            if (!staticMode) _mingyan.show();
-            // db("s1");
-        });
-        switch (qs("force_action") || qs("do")) {
-        case "clear_save":
-            localStorage.removeItem("___mingyan_2021_ranking_data__");
+        case "/about":
+            location.hash = "#/about";
             break;
-        case "auto_reload":
-            // 自动刷新名言
-            _autoReload();
+        case "/search":
+            location.hash = "#/search";
             break;
-        }
-        break;
-    default:
-        // 也应该是废弃了 2021-01-24
-        if (location.pathname.split("/")[1].length == 32) {
-            let id = _mingyan.decodeMingyan(location.pathname.split("/")[1]);
-            let myid = new Number(id);
+        case "/more":
+            location.hash = "#/more";
+            break;
+        case "/index.html":
+        case "/": // 这边还没废弃
             $(document).ready(function () {
-                if (!staticMode) _mingyan.show(myid.toString());
-                // db("s2");
+                if (!staticMode) _mingyan.show();
+                // db("s1");
             });
-        } else {
-            // 否则返回404
-            clearInterval(search);
-            $(".app").load("./src/_404.html");
-        }
+            switch (qs("force_action") || qs("do")) {
+                case "clear_save":
+                    localStorage.removeItem("___mingyan_2021_ranking_data__");
+                    break;
+                case "auto_reload":
+                    // 自动刷新名言
+                    _autoReload();
+                    break;
+            }
+            break;
+        default:
+            // 也应该是废弃了 2021-01-24
+            if (location.pathname.split("/")[1].length == 32) {
+                let id = _mingyan.decodeMingyan(location.pathname.split("/")[1]);
+                let myid = new Number(id);
+                $(document).ready(function () {
+                    if (!staticMode) _mingyan.show(myid.toString());
+                    // db("s2");
+                });
+            } else {
+                // 否则返回404
+                clearInterval(search);
+                $(".app").load("./src/_404.html");
+            }
     }
 
 
@@ -1488,9 +1219,11 @@
             "  抠出一根面条。\n" +
             "      ————— 天净沙·梗" +
             "\n", purple, yellow, purple, yellow, purple, yellow, purple, yellow, purple); // 就是这一段颜色做了好久……
-        _.get("https://api.github.com/repos/xhemj/mingyan/commits", function (res) {
-            db(`版本：${res[0]["sha"].slice(0, 7)}`);
-        }, true);
+        fetch("https://api.github.com/repos/xhemj/mingyan/commits")
+            .then(r => r.json())
+            .then(function (res) {
+                db(`版本：${res[0]["sha"].slice(0, 7)}`);
+            });
     }
 
     /**
@@ -1533,23 +1266,23 @@
             if (hashName[hash]) {
                 // 有的话就按照路由的走
                 switch (hash) {
-                case "#/more":
-                    _mingyan.page.more();
-                    break;
-                case "#/search":
-                    _showAll();
-                    break;
-                case "#/about":
-                    _mingyan.page.about();
-                    break;
-                case "#/ranking":
-                    _mingyan.starRanking();
-                    break;
-                case "#/submit":
-                    _mingyan.page.contribute();
-                    break;
-                default:
-                    return;
+                    case "#/more":
+                        _mingyan.page.more();
+                        break;
+                    case "#/search":
+                        _showAll();
+                        break;
+                    case "#/about":
+                        _mingyan.page.about();
+                        break;
+                    case "#/ranking":
+                        _mingyan.starRanking();
+                        break;
+                    case "#/submit":
+                        _mingyan.page.contribute();
+                        break;
+                    default:
+                        return;
                 }
             } else {
                 // if (!/\#\d/.test(hash)) _mingyan.clearHash();
@@ -1760,12 +1493,7 @@
     <!-- 点赞 -->
     <i class="mdui-icon material-icons" id="star-logo" style="cursor: pointer;" onclick="_mingyan.star('loading')">&#xe8dc;</i>
     <span class="my--star-num">
-    <!-- 加载动画 -->
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-      <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-      </circle>
-    <!-- https://loading.io/ --></svg>
+    ${htmlTemp.SMAILL_LOADING_SVG}
     </span>
     `;
         if (!event) event = "getnum";
@@ -1827,23 +1555,23 @@
                 let res = opt["res"];
                 // 请求当前名言点赞数量
                 switch (event) {
-                // 增加点赞
-                case "addstar":
-                    // db("==位置：switch(event)->'addstar'");
-                    _addstar(res);
-                    break;
+                    // 增加点赞
+                    case "addstar":
+                        // db("==位置：switch(event)->'addstar'");
+                        _addstar(res);
+                        break;
                     // 移除点赞
-                case "removestar":
-                    // db("==位置：switch(event)->'removestar'");
-                    _removestar();
-                    break;
+                    case "removestar":
+                        // db("==位置：switch(event)->'removestar'");
+                        _removestar();
+                        break;
                     // 获取点赞数
-                case "getnum":
-                    // db("==位置：switch(event)->'getnum'");
-                    _getnum(res);
-                    break;
-                default:
-                    break;
+                    case "getnum":
+                        // db("==位置：switch(event)->'getnum'");
+                        _getnum(res);
+                        break;
+                    default:
+                        break;
                 }
                 // ======================================================
                 // ======================================================
@@ -2066,44 +1794,44 @@
         }
         if (hashName[location.hash] == true) { // 如果在hash保留路径中
             switch (location.hash) {
-            case "#/about":
-                _hide();
-                document.title = "ERSS名言 · 关于";
-                _mingyan.page.about();
-                break;
-            case "#/search":
-                _hide();
-                document.title = "ERSS名言 · 搜索";
-                _showAll();
-                break;
-            case "#/more":
-                _hide();
-                document.title = "ERSS名言 · 更多";
-                _mingyan.page.more();
-                break;
-            case "#/ranking":
-                _hide();
-                document.title = "ERSS名言 · 排行榜";
-                _mingyan.starRanking();
-                $($page).show();
-                break;
-            case "#/submit":
-                _hide();
-                document.title = "ERSS名言 · 名言投稿";
-                _mingyan.page.contribute();
-                break;
-            case "#/faq":
-                _hide();
-                document.title = "ERSS名言 · FAQ";
-                _mingyan.page.faq();
-                break;
-            case "#/sponsor":
-                _hide();
-                document.title = "ERSS名言 · 鼓励我们";
-                _mingyan.page.sponsor();
-                break;
-            default:
-                break;
+                case "#/about":
+                    _hide();
+                    document.title = "ERSS名言 · 关于";
+                    _mingyan.page.about();
+                    break;
+                case "#/search":
+                    _hide();
+                    document.title = "ERSS名言 · 搜索";
+                    _showAll();
+                    break;
+                case "#/more":
+                    _hide();
+                    document.title = "ERSS名言 · 更多";
+                    _mingyan.page.more();
+                    break;
+                case "#/ranking":
+                    _hide();
+                    document.title = "ERSS名言 · 排行榜";
+                    _mingyan.starRanking();
+                    $($page).show();
+                    break;
+                case "#/submit":
+                    _hide();
+                    document.title = "ERSS名言 · 名言投稿";
+                    _mingyan.page.contribute();
+                    break;
+                case "#/faq":
+                    _hide();
+                    document.title = "ERSS名言 · FAQ";
+                    _mingyan.page.faq();
+                    break;
+                case "#/sponsor":
+                    _hide();
+                    document.title = "ERSS名言 · 鼓励我们";
+                    _mingyan.page.sponsor();
+                    break;
+                default:
+                    break;
             }
         } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d|/.test(location.hash)) { // 否则就显示名言
             if (!staticMode) {
@@ -2192,13 +1920,7 @@
      * 隐藏名言
      */
     _mingyan.specialMode = function () {
-        let loading = `<!-- 加载动画 -->
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(10px);" width="15px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-      <circle cx="50" cy="50" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="0.75s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-      </circle>
-    <!-- https://loading.io/ --></svg>
-    `;
+        let loading = htmlTemp.SMAILL_LOADING_SVG;
         swal({
             title: "问题加载中",
             text: "回答问题查看更多精彩名言",
@@ -2399,6 +2121,86 @@
     });
 
     /**
+     * 显示名言来源Api
+     */
+    _mingyan.showFromApi = {
+        getinfo: function () {
+            if (!Promise) return;
+            return new Promise(function (resolve, reject) {
+                fetch(apiUrls.showfrom, {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "mingyan": $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim(),
+                        "t": new Date().getTime()
+                    })
+                }).then(res => res.json()).then(json => {
+                    db(json);
+                    resolve(json);
+                }).catch(function (e) {
+                    reject(e);
+                });
+            });
+        }
+    };
+
+    let showFromData = "";
+    /**
+     * 获取名言来源主函数
+     */
+    _mingyan.loadMyType = function () {
+        db("触发loadMyType");
+        $(".my--showfrom").attr("onclick", "");
+        showFromData = "";
+        _mingyan.showFromApi.getinfo()
+            .then(function (info) {
+                showFromData = info.data;
+                db("showFromData", showFromData);
+                let submit_type = showFromData.from.type;
+                if (showFromData.from.submit_school == "厦门市音乐学校") submit_type = "音校馆";
+                $(".my--showfrom").attr("onclick", "_mingyan.showMyType()");
+                $(".my--showfrom-text").text(submit_type);
+            })
+    };
+
+    /**
+     * 显示名言来源主函数
+     */
+    _mingyan.showMyType = function (res) {
+        if (!showFromData && !res) {
+            showFromData = "";
+            _mingyan.showFromApi.getinfo()
+                .then(function (info) {
+                    showFromData = info.data;
+                    db("showFromData", showFromData);
+                    return _mingyan.showMyType(info.data);
+                })
+        } else {
+            let fetchData = res || showFromData;
+            let name = fetchData.from.submit_name || "耳斯名言团队";
+            let conefrom = fetchData.from.submit_school || "地球";
+            swal({
+                title: "",
+                text: `提供者：${name}\n出自：${conefrom}`,
+                icon: "https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png",
+                button: "关闭"
+            });
+            $(".swal-icon.swal-icon--custom>img").css({
+                "max-width": "150px"
+            });
+            $(".swal-text").css({
+                "font-size": "26px",
+                "text-align": "center"
+            });
+        }
+
+    }
+
+
+    /**
      * 初始化
      */
     _mingyan.init = function () {
@@ -2423,14 +2225,13 @@
 
     $(document).ready(_mingyan.init);
 
+    window.mingyan = mingyan;
     window._mingyan = _mingyan;
     window.isSupportWebp = isSupportWebp;
     window.qs = qs;
     window.randomNumber = randomNumber;
     window.loadJs = loadJs;
     window.db = db;
-    window._ = _;
-    window._$ = _$;
 
     return {
         _mingyan,

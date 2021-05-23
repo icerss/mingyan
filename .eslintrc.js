@@ -1,10 +1,17 @@
 module.exports = {
 	"env": {
 		"browser": true,
-		"es2021": true
+		"es2021": true,
+		"browser": true,
+		"jquery": true,
+		"es6": true,
+		"node": true,
+		"commonjs": true,
+		"amd": true
 	},
 	"extends": "eslint:recommended",
 	"parserOptions": {
+		"sourceType": "module",
 		"ecmaVersion": 12
 	},
 	"rules": {
@@ -45,10 +52,5 @@ module.exports = {
 		"Headroom": true,
 		"dataLayer": true,
 		"APlayer": true
-	},
-	"env": {
-		"browser": true,
-		"jquery": true,
-		"es6": true
-	},
+	}
 };

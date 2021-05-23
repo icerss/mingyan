@@ -355,6 +355,10 @@ pwa-install::part(openButton) {
 	color: #5676dc !important;
 }
 
+.tk-extras {
+    display: none !important;
+}
+
 /* page.more */
 
 .github-badge[data-id="page.more"] {
@@ -522,5 +526,5 @@ img[data-id="page.faq"], [data-id="page.faq"] > img, [data-id="page.faq"] > * > 
 
 .icon.my--header-logo {
 	background: transparent center/contain no-repeat;
-    background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/02/Xh7jDNl6kzG4neP.png");
+    background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png");
 }

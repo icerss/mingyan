@@ -688,11 +688,28 @@ let mingyan3 = [ // eslint-disable-line
     "保安：你连毛都没有",
 ];
 
+let submitMingyan = [
+    "英语贾老师：可拉倒吧你",
+    "音乐学校的一位老师：同学们都是有梦想的人! 那就……继续睡吧！",
+    "杰哥：做几何题想不出来时作辅助线",
+    "英语邱老师：我不会夸人，我只会损人",
+    "生物李老师：这次考试，你们死的比“鸡↑——”还惨。",
+    "数学王某：哎一比一(A1B1）",
+    "头号班主任阿黄er：年龄差是不会改变的，就像你们现在13岁，而我永远比你们大五岁。",
+    "化学丘老师：囔囔囔囔什么囔",
+    "数学苗老师：构建呐！构建！你不构建怎么做数学题",
+    "杨老师：猪头们，你们是不是傻啊！",
+    "数学李老师 我教了一群煞笔",
+    "张老师：你脑子有猫饼啊",
+    "胡浮萍老师：烤肠纪律一定要知道，这是烤肠，这是烤肠一定要知道烤肠"
+]
+
 // 合并同类相[doge]
 let mingyan = [ // eslint-disable-line
     ...mingyan1,
     ...mingyan2,
-    ...mingyan3
+    ...mingyan3,
+    ...submitMingyan
 ];
 /**
  * 格式：
@@ -765,4 +782,15 @@ let solvePicUrl = { // eslint-disable-line
     "数学潘哥": "/2020/11/01/iTkIWzwKaL92otl.jpg",
     "语文老朱": "/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
     "英语老俞": "/2020/11/01/lURnTwHouGbM8B7.jpg"
+};
+
+module.exports = {
+    mingyan,
+    mingyan1,
+    mingyan2,
+    mingyan3,
+    submitMingyan,
+    mingyanPicUrl,
+    solvePicUrl,
+    specialVerbList
 };
