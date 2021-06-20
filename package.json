@@ -12,7 +12,7 @@
     "wp:dll": "webpack --config build/webpack.dll.config.js",
     "copyhtml": "node build/copyHtml.js",
     "lint": "eslint src --fix",
-    "all": "webpack --config build/run-webpack-nopolyfill && webpack --config build/run-webpack-polyfill && node build/copyHtml"
+    "all": "webpack --config build/run-webpack-nopolyfill.js && webpack --config build/run-webpack-polyfill.js && node build/copyHtml"
   },
   "keywords": [
     "xhemj",
@@ -35,15 +35,28 @@
     "css-loader": "^5.2.5",
     "cssnano": "^5.0.4",
     "eslint": "^7.21.0",
+    "html2canvas": "^1.0.0-rc.7",
     "mini-css-extract-plugin": "^1.6.0",
     "optimize-css-assets-webpack-plugin": "^6.0.0",
     "style-loader": "^2.0.0",
+    "uuid": "^8.3.2",
     "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2",
     "webpack-parallel-uglify-plugin": "^2.0.0",
     "whatwg-fetch": "^3.6.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fancyapps/fancybox": "^3.5.7",
+    "jquery": "^3.6.0",
+    "lazyload": "^2.0.0-rc.2",
+    "marked": "^2.0.7",
+    "mdui": "^1.0.2",
+    "notyf": "^3.10.0",
+    "sweetalert": "^2.1.2",
+    "twikoo": "^1.2.0",
+    "uuid": "^8.3.2"
+  },
   "browserslist": [
     "last 1 version",
     "> 1%",

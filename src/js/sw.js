@@ -1,4 +1,6 @@
-module.exports = (async function () {
+import { ___date_version___ } from "./feat/config";
+
+export default (async function () {
     /**
      * ServiceWorker
      */
@@ -29,7 +31,7 @@ module.exports = (async function () {
 
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-            navigator.serviceWorker.register("./sw.js?t=" + _mingyan.config.___date_version___); // eslint-disable-line
+            navigator.serviceWorker.register("./sw.js?t=" + ___date_version___); // eslint-disable-line
         });
     }
 })();

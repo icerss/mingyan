@@ -20,10 +20,11 @@ if (isPolyfill) {
 module.exports = {
     mode: isDev ? "development" : "production",
     entry: _entry,
-	target: "browserslist",
+    target: "browserslist",
     output: {
         filename: `all.min.js`,
-        path: path.resolve(__dirname, "../dist")
+        path: path.resolve(__dirname, "../dist"),
+		libraryTarget: "umd"
     },
     module: {
         rules: [
@@ -61,12 +62,19 @@ module.exports = {
         //     context: __dirname,
         //     manifest: require('./polyfill-manifest.json')
         // }),
-        new OptimizeCssAssetsPlugin()
+        new OptimizeCssAssetsPlugin({
+			canPrint: false
+		})
     ],
-	optimization: {
-		sideEffects: false,
-		usedExports: true,
-		chunkIds: "deterministic",
-		moduleIds: "deterministic"
-	}
+    optimization: {
+        sideEffects: false,
+        usedExports: true,
+        chunkIds: "deterministic",
+        moduleIds: "deterministic"
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000,
+      },
 }

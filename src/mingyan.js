@@ -3,7 +3,7 @@
 * 2021/02/07
 */
 
-let mingyan1 = [ // eslint-disable-line
+export let mingyan1 = [ // eslint-disable-line
     //====老王名言====
     "数学老王：你是屁股吗？",
     "数学老王：肾虚都没你这样",
@@ -23,7 +23,7 @@ let mingyan1 = [ // eslint-disable-line
     // 下面加入潘哥名言
 ];
 
-let mingyan2 = [ // eslint-disable-line
+export let mingyan2 = [ // eslint-disable-line
     //====潘哥名言====
     "数学潘哥：解",
     "数学潘哥：你的眼睛是被屎糊了吗？",
@@ -285,7 +285,7 @@ let mingyan2 = [ // eslint-disable-line
     "数学潘哥：你写作业是在澡堂里面写的吗？",
     "数学潘哥：天下爱情分久必合，合久必分",
 ];
-let mingyan3 = [ // eslint-disable-line
+export let mingyan3 = [ // eslint-disable-line
     //====俞老师名言====
     "英语老俞：解",
     "英语老俞：不是腿断了，手折了，就是小测不及格了。",
@@ -688,7 +688,7 @@ let mingyan3 = [ // eslint-disable-line
     "保安：你连毛都没有",
 ];
 
-let submitMingyan = [
+export let submitMingyan = [
     "英语贾老师：可拉倒吧你",
     "音乐学校的一位老师：同学们都是有梦想的人! 那就……继续睡吧！",
     "杰哥：做几何题想不出来时作辅助线",
@@ -702,10 +702,10 @@ let submitMingyan = [
     "数学李老师 我教了一群煞笔",
     "张老师：你脑子有猫饼啊",
     "胡浮萍老师：烤肠纪律一定要知道，这是烤肠，这是烤肠一定要知道烤肠"
-]
+];
 
 // 合并同类相[doge]
-let mingyan = [ // eslint-disable-line
+export let mingyan = [ // eslint-disable-line
     ...mingyan1,
     ...mingyan2,
     ...mingyan3,
@@ -715,7 +715,7 @@ let mingyan = [ // eslint-disable-line
  * 格式：
  * "名言": "图片链接" 
  */
-let mingyanPicUrl = { // eslint-disable-line
+ export let mingyanPicUrl = { // eslint-disable-line
     "虾扯蛋": "/2020/10/16/TQ3i5EH2wD9KF6d.jpg",
     //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
     //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
@@ -759,7 +759,7 @@ let mingyanPicUrl = { // eslint-disable-line
  * 格式：
  * "名言": "动词"
  */
-let specialVerbList = { // eslint-disable-line
+ export let specialVerbList = { // eslint-disable-line
     "松鼠": "的课本上</br>曾经出现过",
     "来看王雷吧": "曾经在语文课上说过",
     "零食杜绝": "曾经出现过",
@@ -777,20 +777,9 @@ let specialVerbList = { // eslint-disable-line
  * 格式：
  * "名字": "图片链接"
  */
-let solvePicUrl = { // eslint-disable-line
+ export let solvePicUrl = { // eslint-disable-line
     "数学老王": "/2020/11/01/KPVwxYQXM2fLODN.jpg",
     "数学潘哥": "/2020/11/01/iTkIWzwKaL92otl.jpg",
     "语文老朱": "/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
     "英语老俞": "/2020/11/01/lURnTwHouGbM8B7.jpg"
-};
-
-module.exports = {
-    mingyan,
-    mingyan1,
-    mingyan2,
-    mingyan3,
-    submitMingyan,
-    mingyanPicUrl,
-    solvePicUrl,
-    specialVerbList
 };

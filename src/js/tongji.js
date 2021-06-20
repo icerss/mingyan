@@ -22,4 +22,5 @@ let _hmt = [];
         s.parentNode.insertBefore(bp, s);
     })();
 })();
-module.exports._hmt = _hmt;
+
+export { _hmt };

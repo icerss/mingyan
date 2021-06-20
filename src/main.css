@@ -528,3 +528,15 @@ img[data-id="page.faq"], [data-id="page.faq"] > img, [data-id="page.faq"] > * > 
 	background: transparent center/contain no-repeat;
     background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png");
 }
+
+/* 其它 */
+
+.swal-overlay {
+	z-index: 10 !important;
+}
+
+.notyf__message {
+	font-size: 17px !important;
+	font-family: "Roboto" !important;
+	margin: 0 !important;
+}

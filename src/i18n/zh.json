@@ -1,0 +1,75 @@
+{
+    
+    "main.ONCE_SAID": "曾经说过：",
+    "main.CLICK": "点击",
+    "main.SEE_MORE": "查看更多名言",
+
+    "star.LOVE": "点赞",
+
+    "swal.CLOSE": "关闭",
+
+    "footer.CURRENT_MINGYAN_NUMBER": "当前名言数量：",
+    "footer.SUBMIT": "投稿",
+    "footer.SEARCH": "搜索",
+    "footer.QQ_QROUP": "交流群",
+    "footer.MORE": "更多",
+    "footer.BACK": "返回",
+
+    "header.LOGO": "ERSS名言",
+    "header.SEARCH": "搜索",
+    "header.RELOAD": "刷新",
+    "header.RANKING": "名言排行榜",
+    "header.INSTALL_APP": "安装应用",
+    "header.MORE": "更多",
+
+    "ranking.LOADING": "加载中……",
+
+    "info.FROM_MUSIC_SCHOOL": "音校馆",
+    "info.FROM_WORLD": "世界馆",
+
+    "page.LOADING": "加载中……",
+    "page.more.ABOUT": "关于",
+    "page.more.RANKING": "名言排行榜",
+    "page.more.SUBMIT": "名言投稿",
+    "page.more.DOWNLOAD_MINGYAN_LIST": "下载名言列表（.txt）",
+
+    "page.about.TITLE": "ERSS 名言",
+    "page.about.MADE": "制作",
+    "page.about.PLAN": "策划",
+    "page.about.WEBSITE": "网页",
+    "page.about.ART": "美术",
+    "page.about.SPREAD": "推广",
+    "page.about.SPECIAL_THANKS": "特别感谢",
+    "page.about.CONTACT": "联系",
+    "page.about.ON_GITHUB": "托管于Github：",
+    
+    "page.about.special_thanks.MUSIC_SCHOOL": "厦门市音乐学校",
+    "page.about.special_thanks.XIAMEN_UNIVERSITY_CANTEEN": "厦大食堂",
+    "page.about.special_thanks.ERSS_KENESE": "ERSS 恪人族",
+    "page.about.special_thanks.IYAMAYA_STUDIO": "IYAMAYA 工作室",
+    "page.about.special_thanks.MRS_YU": "英语俞老师",
+    "page.about.special_thanks.CLASSMATES_IN_MUSIC_SCHOOL": "厦门市音乐学校的全体老师和同学们",
+
+    "page.about.contact.QQ_QROUP": "QQ交流群",
+    "page.about.contact.XHEMJ": "xhemj",
+
+    "page.about.extra_link.WHAT_IS_ERSS_SAYING": "耳斯名言是啥？",
+    "page.about.extra_link.HOW_TO_USE_ERSS_SAYING": "如何玩转耳斯名言？",
+    
+    "page.search.LOADING_SEARCH": "搜索加载中……",
+    "page.search.DAILY_FEATURED_SAYING": "每日精选名言：",
+
+    "submit.LOADING": "加载中……",
+    "submit.NAME": "昵称",
+    "submit.SCHOOL": "学校（选填）",
+    "submit.CLASS": "班级（选填）",
+    "submit.MAIL": "邮箱（选填）",
+    "submit.SAYING": "名言",
+    "submit.STORY": "名言故事（选填）",
+    "submit.OPTIONAL": "选填",
+    "submit.placeholder.PLEASE_ENTER_NAME": "请输入昵称",
+    "submit.placeholder.MAIL_ALERT": "选填，若您的名言被入选，我们将会第一时间联系您",
+    "submit.placeholder.SAYING_FORMAT": "格式：老师名 + 名言",
+    "submit.placeholder.ERSS_SAYING_WECHAT": "有机会选入ERSS名言微信公众号哦！"
+
+}

@@ -1,7 +1,7 @@
 /**
  * 动态加载JS
  */
-function loadJs(url) {
+export function loadJs(url) {
     let su = document.createElement("script");
     su.src = url;
     let s = document.getElementsByTagName("script")[0];
@@ -11,7 +11,7 @@ function loadJs(url) {
 /**
  * 检测是否支持Webp
  */
-function isSupportWebp() {
+export function isSupportWebp() {
     try {
         return document.createElement("canvas").toDataURL("image/webp", 0.5).indexOf("data:image/webp") === 0;
     } catch (err) {
@@ -23,7 +23,7 @@ function isSupportWebp() {
  * 获取url参数
  * @param {String} qs 要获取的参数名
  */
-function qs(qs) {
+export function qs(qs) {
     let s = location.href;
     s = s.replace("?", "?&").split("&");
     let re = "";
@@ -40,7 +40,7 @@ function qs(qs) {
  * @param {Num} minNum 最小值
  * @param {Num} maxNum 最大值
  */
-function randomNumber(minNum, maxNum) {
+export function randomNumber(minNum, maxNum) {
     return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
 }
 
@@ -48,7 +48,7 @@ function randomNumber(minNum, maxNum) {
  * 弹窗
  * @param {Object} opt 选项
  */
-function showPop(opt) {
+export function showPop(opt) {
     let pop_elements = {};
     opt.time = opt.time || 5000;
     opt.url = opt.url || "";
@@ -85,10 +85,94 @@ function showPop(opt) {
     }, opt.time);
 }
 
-module.exports = {
-    loadJs,
-    isSupportWebp,
-    randomNumber,
-    showPop,
-    qs
+/**
+ * 元素是否显示
+ */
+export let isShow = function (el) {
+    return !$(el).is(":hidden");
 };
+
+/**
+ * 节流
+ */
+export let throttle = function (func, delay) {
+    let prev = Date.now();
+    return function () {
+        let context = this;
+        let args = arguments;
+        let now = Date.now();
+        if (now - prev >= delay) {
+            func.apply(context, args);
+            prev = Date.now();
+        }
+    };
+};
+
+import { v4 as uuidv4 } from "uuid";
+
+/**
+ * 获取 UID
+ * @returns MY_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ */
+export let getUid = function () {
+    if (localStorage.getItem("MY_TOKEN")) return localStorage.getItem("MY_TOKEN");
+    let tk = "MY_" + uuidv4().replace(/-/g, "").toLocaleUpperCase();
+    localStorage.setItem("MY_TOKEN", tk);
+    return tk;
+};
+
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
+
+let notyf = new Notyf({
+    ripple: false,
+    position: {
+        x: "right",
+        y: "top"
+    },
+    types: [
+        {
+            type: "warning",
+            background: "orange"
+        },
+        {
+            type: "error",
+            background: "indianred",
+            dismissible: true
+        },
+        {
+            type: "info",
+            background: "#5676dc",
+            icon: false
+        }
+    ]
+});
+
+/**
+ * Notyf 弹窗
+ */
+export let NotyfAlert = {
+    su: function (text) {
+        return notyf.success(text);
+    },
+    warn: function (text) {
+        return notyf.open({
+            type: "warning",
+            message: text
+        });
+    },
+    err: function (text) {
+        return notyf.open({
+            type: "error",
+            message: text
+        });
+    },
+    info: function (text) {
+        return notyf.open({
+            type: "info",
+            message: text
+        });
+    }
+};
+
+window["NotyfAlert"] = NotyfAlert;

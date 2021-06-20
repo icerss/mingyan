@@ -1,5 +1,5 @@
-let { mingyan } = require("../mingyan");
-let { db } = require("./log");
+import { mingyan } from "../mingyan";
+import { db } from "./log";
 
 /**
  * 加载耗时
@@ -10,17 +10,29 @@ window.onload = function () {
 };
 
 /**
+ * 新旧数据格式替换
+ */
+let reloadTime = 0;
+if (localStorage.getItem("reload-time")) {
+    localStorage.setItem("___mingyan_reload_time__", localStorage.getItem("reload-time"));
+    localStorage.removeItem("reload-time");
+}
+if (localStorage.getItem("___mingyan_reload_time__")) {
+    reloadTime = localStorage.getItem("___mingyan_reload_time__");
+}
+
+/**
  * 界面元素定义
  */
-let $main = ".my--main";
-let $search = ".my--search";
-let $page = ".my--page";
-let $footer = ".my--footer-html";
-let $myInfo = ".my--mingyan-info";
+export let $main = ".my--main";
+export let $search = ".my--search";
+export let $page = ".my--page";
+export let $footer = ".my--footer-html";
+export let $myInfo = ".my--mingyan-info";
 
 /* 常量 */
 // Hash路由保留地址
-let hashName = {
+export let hashName = {
     "#/search": true,
     "#/more": true,
     "#/about": true,
@@ -29,12 +41,14 @@ let hashName = {
     "#/faq": true,
     "#/sponsor": true
 };
-let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
+export let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
 
-let apiUrls = {
+export let apiUrls = {
     "star": "https://api.erss.club/api/star",
+    "star_v2": "https://api.erss.club/api/v2/star",
     "submit": "https://api.erss.club/api/contribute",
-    "showfrom": "https://api.erss.club/api/info"
+    "showfrom": "https://api.erss.club/api/info",
+    "ip": "https://ip-api.erss.club/api/ip"
 };
 
 String.prototype.trim = function () {
@@ -44,25 +58,33 @@ String.prototype.trim = function () {
 /**
  * 初始化
  */
-let ua = new Browser(); // Broswer.js初始化
-let footer = $($footer).html().replace("999+", mingyan.length); // 首页Footer初始化
-let faceClickTime = ""; // 初始化头像彩蛋点击数
+export let ua = new Browser(); // Broswer.js初始化
+export let footer = $($footer).html().replace("999+", mingyan.length); // 首页Footer初始化
 if (location.hash == "" && hashName[location.hash] != true /* 排除保留的hash路由地址 */) $($page).hide();   // 隐藏文字区域
 $($search).hide();  // 隐藏搜索区域
 $($footer).html(footer);  // 运用Footer
 $("h1").fontFlex(30, 50, 70); // fontFlex初始化
 $("h3").fontFlex(30, 50, 70);
 
-module.exports = {
-    $main,
-    $search,
-    $page,
-    $footer,
-    $myInfo,
-    hashName,
-    picBaseUrl,
-    apiUrls,
-    ua,
-    faceClickTime,
-    footer
+export let lazypic = "./src/loading.svg"; // 懒加载图片地址
+
+/**
+ * 初始化Headroom.js
+ */
+let headroom = null;
+if (Headroom.cutsTheMustard) {
+    let myElement = document.getElementById("my--header");
+    headroom = new Headroom(myElement, {
+        "offset": 300,
+        "tolerance": 5
+    });
+}
+export { headroom };
+
+export let normalPostHeader = {
+    method: "POST",
+    mode: "cors",
+    headers: {
+        "Content-Type": "application/json"
+    }
 };

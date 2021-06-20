@@ -8,7 +8,7 @@
 
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-avatar"><img class="lazyload"
+    <div class="mdui-list-item-avatar my--avatar "><img class="lazyload"
         src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/Tp9Q5qaP8A1cG2C.jpg" />
     </div>
     <div class="mdui-list-item-content">IYAMAYA菌屋工作室</div>
@@ -20,7 +20,7 @@
 
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('BlackToy')"><img class="lazyload"
+    <div class="mdui-list-item-avatar my--avatar " data-id="BlackToy"><img class="lazyload"
         src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg" />
     </div>
     <div class="mdui-list-item-content">解恪布TOY</div>
@@ -32,7 +32,7 @@
 
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('xhemj')"><img class="lazyload"
+    <div class="mdui-list-item-avatar my--avatar " data-id="xhemj"><img class="lazyload"
         src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/05/Bext3hDK1nrZM7y.png" />
     </div>
     <div class="mdui-list-item-content">Xhemj</div>
@@ -44,7 +44,7 @@
 
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('BlackToy')"><img class="lazyload"
+    <div class="mdui-list-item-avatar my--avatar " data-id="BlackToy"><img class="lazyload"
         src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg" />
     </div>
     <div class="mdui-list-item-content">解恪布TOY</div>
@@ -57,14 +57,14 @@
 
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('BlackToy')"><img class="lazyload"
+    <div class="mdui-list-item-avatar my--avatar " data-id="BlackToy"><img class="lazyload"
         src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg" />
     </div>
     <div class="mdui-list-item-content">解恪布TOY</div>
     <a href="https://space.bilibili.com/337073401"><i class="mdui-list-item-icon mdui-icon material-icons">&#xe88e;</i></a>
   </li>
   <li class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-avatar" onclick="_mingyan.checkFaceClickTime('Oranjezelv')"><img class="lazyload"
+    <div class="mdui-list-item-avatar my--avatar " data-id="Oranjezelv"><img class="lazyload"
         src="./src/loading.svg" data-src="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/ejgOW7QY8MFmDU5.jpg" />
     </div>
     <div class="mdui-list-item-content">Oranjezelf</div>
