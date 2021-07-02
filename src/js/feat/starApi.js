@@ -132,7 +132,37 @@ export let MY_starApi = {
                     reject(json.msg);
                 });
         });
-    }
+    },
+
+    /**
+     * 兼容 V1 数据格式
+     * @param {String} my 完整名言
+     */
+     "update": function (my, id) {
+        if (!Promise) return;
+        if (!my && !id) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
+        let _find = {};
+        if (id && my) _find = { MY_text: my };
+        if (id && !my) _find = { MY_ID: id };
+        if (!id && my) _find = { MY_text: my };
+        return new Promise(function (resolve, reject) {
+            fetch(starApiUrl, {
+                ...normalPostHeader,
+                body: JSON.stringify({
+                    "event": "update",
+                    "data": {
+                        ..._find,
+                        MY_token: getUid(),
+                        t: new Date().getTime()
+                    }
+                })
+            }).then(res => res.json()).then(json => {
+                resolve(json);
+            }).catch(function (e) {
+                reject(e);
+            });
+        });
+    },
 };
 
-window["MY_starApi"] = MY_starApi;
+// window["MY_starApi"] = MY_starApi;

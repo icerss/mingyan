@@ -1,3 +1,4 @@
+import { db } from "../log";
 import { randomNumber } from "../tools";
 
 /**

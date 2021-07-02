@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require("webpack");
+const packagejson = require("../package.json");
 
 // ========== //
 let isDev = false;
@@ -24,7 +25,7 @@ module.exports = {
     output: {
         filename: `all.min.js`,
         path: path.resolve(__dirname, "../dist"),
-		libraryTarget: "umd"
+        libraryTarget: "umd"
     },
     module: {
         rules: [
@@ -49,6 +50,10 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     "css-loader"
                 ]
+            },
+            {
+                test: /\.md$/,
+                use: 'raw-loader',
             }
         ]
     },
@@ -63,8 +68,8 @@ module.exports = {
         //     manifest: require('./polyfill-manifest.json')
         // }),
         new OptimizeCssAssetsPlugin({
-			canPrint: false
-		})
+            canPrint: false
+        })
     ],
     optimization: {
         sideEffects: false,
@@ -72,9 +77,5 @@ module.exports = {
         chunkIds: "deterministic",
         moduleIds: "deterministic"
     },
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
-        port: 9000,
-      },
+    devtool: "source-map"
 }

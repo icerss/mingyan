@@ -1,4 +1,16 @@
 /**
+ * 新旧数据格式替换
+ */
+let reloadTime = 0;
+if (localStorage.getItem("reload-time")) {
+    localStorage.setItem("___mingyan_reload_time__", localStorage.getItem("reload-time"));
+    localStorage.removeItem("reload-time");
+}
+if (localStorage.getItem("___mingyan_reload_time__")) {
+    reloadTime = localStorage.getItem("___mingyan_reload_time__");
+}
+
+/**
  * 刷新彩蛋
  */
 export let MY_addReloadTime = function () {
@@ -36,9 +48,9 @@ export let MY_addReloadTime = function () {
     }
 };
 
-$(document).on("click", "#reload_buttom", function() {
+$(document).on("click", "#reload_buttom", function () {
     MY_addReloadTime();
 });
-$(document).on("click", "reload", function() {
+$(document).on("click", "reload", function () {
     MY_addReloadTime();
 });

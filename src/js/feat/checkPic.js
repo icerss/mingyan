@@ -1,7 +1,6 @@
 import { mingyanPicUrl, solvePicUrl } from "../../mingyan";
 import { lazypic, picBaseUrl } from "../init";
 import { isSupportWebp } from "../tools";
-import { MY_checkText } from "./checkText";
 
 /**
  * 图片彩蛋

@@ -11,6 +11,7 @@ import "./js/feat/search";
 import "./js/feat/star";
 import "./js/feat/checkFaceClickTime";
 import "./js/feat/reloadMingyan";
+import "./js/feat/createSiteTime";
 import { MY_show } from "./js/feat/show";
 import { getUid, qs } from "./js/tools";
 import { _hmt } from "./js/tongji";
@@ -20,15 +21,16 @@ import { MY_console } from "./js/feat/mingyanConsole";
 import { MY_testPage } from "./js/feat/testPage";
 import { MY_installPwa } from "./js/feat/installPWA";
 import { MY_ranking } from "./js/feat/ranking";
-import { MY_writeSpecialMingyan } from "./js/feat/specialMode";
+// import { MY_writeSpecialMingyan } from "./js/feat/specialMode";
 import { headroom } from "./js/init";
 import { MY_star_format } from "./js/feat/star";
 
 (async function () {
     window["v"] = window["v"] || ["", "202103211846"]; // eslint-disable-line
+    window["_hmt"] = window["_hmt"] || _hmt;
 
-    // 隐藏名言
-    await MY_writeSpecialMingyan();
+    // // 隐藏名言
+    // await MY_writeSpecialMingyan();
 
     /**
      * 初始化

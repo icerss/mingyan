@@ -4,6 +4,8 @@ import { MY_backFooter } from "./backFooter";
 import { MY_findmingyan } from "./findMingyan";
 import { MY_starApi } from "./starApi";
 
+window["skipCheckHash"] = window["skipCheckHash"] || false;
+
 /**
  * 名言点赞排行榜
  */
@@ -16,9 +18,9 @@ window["rankingOnclick"] = function (el) {
 if (ua.device == "PC") $("#ranking-btn").show();
 
 export let MY_starRanking = function () {
-    skipCheckHash = true;
+    window["skipCheckHash"] = true;
     location.hash = "#/ranking";
-    skipCheckHash = false;
+    window["skipCheckHash"] = false;
 
     $($main).hide();
     $($search).hide();

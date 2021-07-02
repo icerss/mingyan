@@ -67,7 +67,7 @@ export let MY_onHashChange = function () {
         default:
             break;
         }
-    } else if (location.hash.split("#").length > 1 && !skipCheckHash && /\#\d|/.test(location.hash)) { // 否则就显示名言
+    } else if (location.hash.split("#").length > 1 && !window["skipCheckHash"] && /\#\d|/.test(location.hash)) { // 否则就显示名言
         MY_show((location.hash.split("#")[1] || null));
         let footer = $($footer).html().replace("999+", mingyan.length); // 首页Footer初始化
         $($footer).html(footer);  // 运用Footer

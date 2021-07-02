@@ -44,7 +44,6 @@ export default (function () {
             });
         } else {
             // 否则返回404
-            clearInterval(search);
             location.href = "./";
         }
     }

@@ -715,7 +715,7 @@ export let mingyan = [ // eslint-disable-line
  * 格式：
  * "名言": "图片链接" 
  */
- export let mingyanPicUrl = { // eslint-disable-line
+export let mingyanPicUrl = { // eslint-disable-line
     "虾扯蛋": "/2020/10/16/TQ3i5EH2wD9KF6d.jpg",
     //https://xhemj.coding.net/api/share/download/5642985d-4d3d-40e8-8196-686744cb84f8
     //https://ae01.alicdn.com/kf/U4cc17e6537ff4e0ea028b59088da67aeJ.jpg
@@ -759,7 +759,7 @@ export let mingyan = [ // eslint-disable-line
  * 格式：
  * "名言": "动词"
  */
- export let specialVerbList = { // eslint-disable-line
+export let specialVerbList = { // eslint-disable-line
     "松鼠": "的课本上</br>曾经出现过",
     "来看王雷吧": "曾经在语文课上说过",
     "零食杜绝": "曾经出现过",
@@ -777,9 +777,35 @@ export let mingyan = [ // eslint-disable-line
  * 格式：
  * "名字": "图片链接"
  */
- export let solvePicUrl = { // eslint-disable-line
+export let solvePicUrl = { // eslint-disable-line
     "数学老王": "/2020/11/01/KPVwxYQXM2fLODN.jpg",
     "数学潘哥": "/2020/11/01/iTkIWzwKaL92otl.jpg",
     "语文老朱": "/2020/11/01/xvUdlJW8XG1zbeZ.jpg",
     "英语老俞": "/2020/11/01/lURnTwHouGbM8B7.jpg"
 };
+
+export let mingyanSpecialEvent = {
+    "swal": {
+        "绿帽子": {
+            "title": "Fuck ♂ You ♂",
+            "text": "骚骚恪曾经说过：Fuck ♂ You ♂"
+        },
+        "垃圾真好吃": {
+            "title": "获得成就",
+            "text": "最美垃圾人"
+        },
+        "来一起唱啊！！": {
+            "title": "获得成就",
+            "text": "Shape OF You！"
+        },
+    },
+    "music": {
+        "来一起唱啊！！": {
+            "name": "Shape of You",
+            "artist": "Ed Sheeran",
+            "url": "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
+            "cover": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/L1NY8U7nhRjyQMa.jpg",
+            "lrc": "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc"
+        }
+    }
+}

@@ -58,7 +58,7 @@ let eventListenerList = {
     ".my--sponsor": actonType.ACTION_CLICK_SPONSOR_BANNER
 };
 
-document.addEventListener("click", function (event) {
+document.addEventListener("click", function () {
     throttle(recordAction(actonType.ACTION_CLICK_SCREEN),1000);
 });
 
@@ -67,5 +67,5 @@ for (let selector in eventListenerList) {
         $(document).on("click", selector, function() {
             throttle(recordAction(eventListenerList[selector]), 1000);
         });
-    } catch {}
+    } catch {} // eslint-disable-line
 }

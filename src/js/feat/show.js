@@ -29,14 +29,13 @@ export let MY_show = function (id) {
         MY_loadMyType();
     }, 1);
 
-    // 处理传入的id
-    function _id(id) {
+    let _id = function (id) {
         if (id) return id;
         if (qs("id") != "") return qs("id"); // 如果有传入?id=xx就用传入的ID
         if (location.hash != "" && hashName[location.hash] != true /* 排除保留的hash路由地址 */) return location.hash.replace("#", "");
         if (localStorage.getItem("___mingyan_id__")) return localStorage.getItem("___mingyan_id__"); // 如果有储存上一次看到哪一条就用这个id
         return randomNumber(0, mingyan.length - 1); // 否则就随机生成
-    }
+    };
 
     try {
         // 先隐藏其它元素
@@ -49,9 +48,9 @@ export let MY_show = function (id) {
             // _my = _checkMingyan(_my); // 调整名言概率
             if (hashName[location.hash]) return; // 若有触发hash路由的地址就返回
             // hash路由
-            skipCheckHash = true;
+            window["skipCheckHash"] = true;
             location.hash = "#" + n;
-            skipCheckHash = false; // 再调回来
+            window["skipCheckHash"] = false; // 再调回来
             // 储存看到哪一条下一次继续
             localStorage.setItem("___mingyan_id__", n);
             let name = _my.split("：")[0];

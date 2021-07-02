@@ -9,17 +9,6 @@ window.onload = function () {
     db("Page load time is " + loadTime + "ms");
 };
 
-/**
- * 新旧数据格式替换
- */
-let reloadTime = 0;
-if (localStorage.getItem("reload-time")) {
-    localStorage.setItem("___mingyan_reload_time__", localStorage.getItem("reload-time"));
-    localStorage.removeItem("reload-time");
-}
-if (localStorage.getItem("___mingyan_reload_time__")) {
-    reloadTime = localStorage.getItem("___mingyan_reload_time__");
-}
 
 /**
  * 界面元素定义

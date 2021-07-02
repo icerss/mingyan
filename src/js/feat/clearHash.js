@@ -10,7 +10,7 @@ window["skipCheckHash"] = window["skipCheckHash"] || false;
  */
 export let MY_clearHash = function () {
     document.title = "ERSS名言 · ERSS";
-    skipCheckHash = false;
+    window["skipCheckHash"] = false;
     location.hash = localStorage.getItem("___mingyan_id__") || "";
     location.reload();
     MY_hideElement();

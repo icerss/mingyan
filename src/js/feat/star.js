@@ -104,7 +104,7 @@ export let MY_star_format = function () {
         oldData = oldData.replace(/></g, "|").replace(/<|>/g, "").split("|");
 
         for (let id of oldData) {
-            MY_starApi.addStar(null, id).then(function (res) {
+            MY_starApi.update(null, id).then(function () {
                 localStorage.setItem("___mingyan_star_data__", (localStorage.getItem("___mingyan_star_data__").replace("<" + id + ">", "") || ""));
                 db("[starApi v2] 数据更新成功！");
             });
