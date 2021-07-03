@@ -3,6 +3,15 @@ import { $page, $main, $search, $footer } from "../init";
 import { MY_initLogo as _initLogo } from "./initLogo";
 import { ___date_version___ } from "./config";
 
+import ABOUT_MD from "../../page/about.md";
+
+let fileList = [
+    "mode.md"
+];
+let isInFile = function (str) {
+    return fileList.some(name => str.includes(name))
+};
+
 /**
  * Markdown转成网页
  * @param {String} id 要放的元素id
@@ -13,17 +22,28 @@ let _mdToHtml = function (id, url) {
     $($main).hide();
     $($search).hide();
     $(id).html("<strong>" + "<div style=\"text-align: center\" class=\"mdui-ripple\"><style>h1{font-size:30px}</style><h1>加载中……</h1></div></strong></br></br></br></br>");
-    fetch(url)
-        .then(res => res.text())
-        .then(function (data) {
-            marked.setOptions({
-                breaks: true
+    marked.setOptions({
+        breaks: true
+    });
+
+    let rawFile;
+
+    if (isInFile(url)) {
+        if (url.indexOf("more.md") != -1) rawFile = ABOUT_MD;
+    } else {
+        fetch(url)
+            .then(res => res.text())
+            .then(function (data) {
+                rawFile = data
             });
-            let html = marked(data); // 使用marked.js转换
-            html = html.replace(/<a /g, "<a target=\"_blank\" rel=\"nofollow ugc\" "); // 外链新页面打开
-            $(id).html("<strong>" + html + "</strong></br></br></br></br>");  // 加换行比较好看
-            $(id).fadeIn();
-        });
+    };
+    
+
+
+    let html = marked(rawFile); // 使用marked.js转换
+    html = html.replace(/<a /g, "<a target=\"_blank\" rel=\"nofollow ugc\" "); // 外链新页面打开
+    $(id).html("<strong>" + html + "</strong></br></br></br></br>");  // 加换行比较好看
+    $(id).fadeIn();
     $($footer).html("当前名言数量：" + mingyan.length + "</br><a class=\"aline\" id=\"clearhash_btn\" href=javascript:;>返回<\/a>"); // 更改footer
     _initLogo();
     $($page).fadeIn();

@@ -46,6 +46,7 @@ export function randomNumber(minNum, maxNum) {
 
 /**
  * 弹窗
+ * @deprecated 已更换为 Notyf
  * @param {Object} opt 选项
  */
 export function showPop(opt) {
@@ -125,11 +126,13 @@ import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 
 let notyf = new Notyf({
-    ripple: false,
     position: {
         x: "right",
         y: "top"
     },
+    duration: 1500,
+    dismissible: true,
+    ripple: false,
     types: [
         {
             type: "warning",
@@ -137,8 +140,7 @@ let notyf = new Notyf({
         },
         {
             type: "error",
-            background: "indianred",
-            dismissible: true
+            background: "indianred"
         },
         {
             type: "info",
@@ -174,5 +176,3 @@ export let NotyfAlert = {
         });
     }
 };
-
-window["NotyfAlert"] = NotyfAlert;

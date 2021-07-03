@@ -21,10 +21,13 @@ export let MY_star = function () {
     swal({
         title: $(".my--mingyan-text").text(),
         text: "加载出错了？刷新试试？",
-        icon: "",
+        icon: "https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png",
         button: "关闭"
     }).then(function () {
         starEvent = "addstar";
+    });
+    $(".swal-icon.swal-icon--custom>img").css({
+        "max-width": "150px"
     });
     $("#star-logo").css({ "color": "#000000A3" });
     $(".swal-text").html(loadingHtml); // 默认显示加载动画
@@ -116,7 +119,6 @@ export let MY_star_format = function () {
 
 $(document).on("click", ".my--star-btn", function () {
     throttle(MY_star(), 1000);
-
 });
 
 $(document).on("click", "#star-logo", function () {

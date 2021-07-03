@@ -145,6 +145,7 @@ function developmentMode() {
   return __DEVELOPMENT__ || __DEBUG__
 }
 log("Hello from ServiceWorker land!", version);
+self.skipWaiting();
 self.addEventListener('install', onInstall);
 self.addEventListener('fetch', onFetch);
 self.addEventListener("activate", onActivate);

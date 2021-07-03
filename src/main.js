@@ -13,7 +13,7 @@ import "./js/feat/checkFaceClickTime";
 import "./js/feat/reloadMingyan";
 import "./js/feat/createSiteTime";
 import { MY_show } from "./js/feat/show";
-import { getUid, qs } from "./js/tools";
+import { getUid, NotyfAlert, qs } from "./js/tools";
 import { _hmt } from "./js/tongji";
 import { MY_initfancybox } from "./js/feat/initFancybox";
 import { MY_initLogo } from "./js/feat/initLogo";
@@ -24,6 +24,8 @@ import { MY_ranking } from "./js/feat/ranking";
 // import { MY_writeSpecialMingyan } from "./js/feat/specialMode";
 import { headroom } from "./js/init";
 import { MY_star_format } from "./js/feat/star";
+import { db } from "./js/log";
+import { mingyan } from "./mingyan";
 
 (async function () {
     window["v"] = window["v"] || ["", "202103211846"]; // eslint-disable-line
@@ -44,16 +46,19 @@ import { MY_star_format } from "./js/feat/star";
         MY_initLogo();
         headroom.init();
         function Animation() {
-            lazyload();
             MY_testPage();
             requestAnimationFrame(Animation);
-
-        }
+        };
+        lazyload();
         requestAnimationFrame(Animation);
         MY_initfancybox();
         MY_console();
         getUid();
         MY_star_format();
+
+        window["db"] = db;
+        window["mingyan"] = mingyan;
+        window["NotyfAlert"] = NotyfAlert;
     };
 
     $(document).ready(MY_init);

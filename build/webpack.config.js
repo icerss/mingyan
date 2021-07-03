@@ -2,17 +2,19 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
-const packagejson = require("../package.json");
+const version = require("../.github/version.json");
 
 // ========== //
 let isDev = false;
 let isPolyfill = false;
 // ========== //
 
-let _entry = [
-    path.resolve(__dirname, "../src/main.js")
-];
+let _entry = {
+    "all": path.resolve(__dirname, "../src/main.js"),
+    "serviceworker": path.resolve(__dirname, "../src/js/sw-v2.js")
+};
 if (isPolyfill) {
     _entry[1] = _entry[0];
     _entry[0] = "@babel/polyfill"
@@ -23,7 +25,7 @@ module.exports = {
     entry: _entry,
     target: "browserslist",
     output: {
-        filename: `all.min.js`,
+        filename: `[name].min.js`,
         path: path.resolve(__dirname, "../dist"),
         libraryTarget: "umd"
     },
@@ -77,5 +79,5 @@ module.exports = {
         chunkIds: "deterministic",
         moduleIds: "deterministic"
     },
-    devtool: "source-map"
+    // devtool: "source-map"
 }

@@ -10,7 +10,7 @@
   "scripts": {
     "wp:build": "webpack --config build/webpack.config.js",
     "wp:dll": "webpack --config build/webpack.dll.config.js",
-    "copyhtml": "node build/copyHtml.js",
+    "copy": "node build/copy-plugin.js",
     "lint": "eslint src --fix",
     "all": "webpack --config build/run-webpack-nopolyfill.js && webpack --config build/run-webpack-polyfill.js && node build/copyHtml"
   },
@@ -32,6 +32,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.5",
     "cssnano": "^5.0.4",
     "eslint": "^7.21.0",
@@ -55,7 +56,11 @@
     "mdui": "^1.0.2",
     "notyf": "^3.10.0",
     "sweetalert": "^2.1.2",
-    "twikoo": "^1.2.0"
+    "twikoo": "^1.2.0",
+    "workbox-cacheable-response": "^6.1.5",
+    "workbox-expiration": "^6.1.5",
+    "workbox-routing": "^6.1.5",
+    "workbox-strategies": "^6.1.5"
   },
   "browserslist": [
     "last 1 version",

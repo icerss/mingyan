@@ -4,7 +4,7 @@
 [![@ERSS](https://badgen.net/badge/icon/ERSS?icon=bitcoin-lightning&amp;label)](https://github.com/icerss/mingyan)[![@xhemj](https://badgen.net/badge/icon/xhemj/mingyan?icon=github&amp;label)](https://github.com/xhemj)![@tag](https://badgen.net/github/tag/xhemj/mingyan)![@commit](https://badgen.net/github/last-commit/xhemj/mingyan)
 
 ---
-# 制作
+# 制作：
 
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
@@ -76,7 +76,7 @@
 <h1 style="text-align:center;font-size:22px;"><a onclick="location.hash='#/faq'" class="theme-text blue" style="text-decoration:underline;cursor:pointer;" rel="nofollow">如何玩转耳斯名言？</a></h1>
 
 
-# 特别感谢
+# 特别感谢：
 <ul class="mdui-list">
   <li class="mdui-list-item mdui-ripple">
     <div class="mdui-list-item-content">厦门市音乐学校</div>

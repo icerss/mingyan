@@ -540,3 +540,7 @@ img[data-id="page.faq"], [data-id="page.faq"] > img, [data-id="page.faq"] > * > 
 	font-family: "Roboto" !important;
 	margin: 0 !important;
 }
+
+.notyf {
+	opacity: 0.8 !important;
+}
