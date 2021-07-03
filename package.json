@@ -10,9 +10,9 @@
   "scripts": {
     "wp:build": "webpack --config build/webpack.config.js",
     "wp:dll": "webpack --config build/webpack.dll.config.js",
+    "wp:polyfill": "webpack --config build/run-webpack-polyfill.js",
     "copy": "node build/copy-plugin.js",
-    "lint": "eslint src --fix",
-    "all": "webpack --config build/run-webpack-nopolyfill.js && webpack --config build/run-webpack-polyfill.js && node build/copyHtml"
+    "lint": "eslint src --fix"
   },
   "keywords": [
     "xhemj",
