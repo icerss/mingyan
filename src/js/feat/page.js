@@ -49,3 +49,109 @@ export let MY_page = {
         return _mdToHtml($page, "./src/page/sponsor.md?t=" + ___date_version___);
     }
 };
+
+/**
+ * 更多页面
+ */
+export let MY_page_more = function () {
+    twikoo.init({
+        envId: 'xhemj-0gjckebwf7276129',
+        el: '#tcomment',
+        onCommentLoaded: function () {
+            document.querySelector(".tk-footer").innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`
+            document.querySelector(".el-textarea__inner").style.height = "150px";
+        }
+    })
+        .then(function () {
+            db('评论加载完成');
+            document.querySelector(".tk-footer").innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`
+            document.querySelector(".el-textarea__inner").style.height = "150px";
+        });
+    $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
+        var a = data["updated_at"];
+        $("#uptime").text(new Date(a).toLocaleString());
+        console.log(new Date(a).toLocaleString());
+    });
+    if (fetch) fetch("https://hit-count.erss.club/?_my_cache_=no")
+        .then(j => j.json())
+        .then(res => {
+            $("#hit-count").html(res.data.count)
+        })
+};
+import { apiUrls } from "../init";
+
+/**
+ * 投稿页面
+ */
+export let MY_page_submit = function () {
+    // let apiUrl = "http://localhost:3000/api/contribute";
+    let apiUrl = apiUrls.submit;
+    let name = $("#form-name").val();
+    let school = $("#form-school").val();
+    let classname = $("#form-class").val();
+    let my = $("#form-mingyan").val();
+    let story = $("#form-story").val();
+    let mail = $("#form-mail").val();
+    //
+    if (!name) {
+        $("#form-name").addClass("is-error");
+        return
+    };
+    //
+    if (!my) {
+        $("#form-name").removeClass("is-error");
+        $("#form-mingyan").addClass("is-error");
+        return
+    };
+    //
+    $("#form-name").removeClass("is-error");
+    $("#form-mingyan").removeClass("is-error");
+    $("#submit").addClass("loading");
+    //
+    fetch(apiUrl, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "event": "mingyan-contribute",
+            "data": {
+                "my": my,
+                "name": name,
+                "story": story,
+                "class": classname,
+                "school": school,
+                "mail": mail,
+                "t": new Date().getTime()
+            }
+        })
+    }).then(res => {
+        console.log(res);
+        $("#submit").removeClass("loading");
+        //
+        swal({
+            title: "名言投稿成功！",
+            text: "名言：" + my + "\n请等待审核",
+            icon: "success",
+            button: "关闭",
+            closeOnClickOutside: false
+        })
+            .then(function () {
+                location.href = "./?from=mingyan-contribute";
+            })
+    }).catch(function (e) {
+        console.error(e);
+        $("#submit").removeClass("loading");
+        swal({
+            title: "名言投稿失败！",
+            text: "建议稍后再试",
+            icon: "error",
+            button: "关闭",
+            closeOnClickOutside: false
+        });
+    })
+};
+
+window["MY_page_submit"] = MY_page_submit;
+window["MY_page_more"] = MY_page_more;

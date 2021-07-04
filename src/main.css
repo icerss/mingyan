@@ -544,3 +544,7 @@ img[data-id="page.faq"], [data-id="page.faq"] > img, [data-id="page.faq"] > * > 
 .notyf {
 	opacity: 0.8 !important;
 }
+
+.grecaptcha-badge { 
+	display: none!important;
+}

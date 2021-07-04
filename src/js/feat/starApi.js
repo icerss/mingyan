@@ -6,7 +6,8 @@
 
 import { apiUrls, normalPostHeader } from "../init";
 import { db } from "../log";
-import { getUid } from "../tools";
+import { getUid, NotyfAlert } from "../tools";
+import { getCaptcha } from "./loadCaptcha";
 
 let starApiUrl = apiUrls.star_v2;
 // starApiUrl = "http://localhost:3000/api/v2/star";
@@ -44,56 +45,71 @@ export let MY_starApi = {
      * 点赞
      * @param {String} my 完整名言
      */
-    "addStar": function (my, id) {
+    "addStar": async function (my, id) {
         if (!Promise) return;
         if (!my && !id) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
         let _find = {};
         if (id && my) _find = { MY_text: my };
         if (id && !my) _find = { MY_ID: id };
         if (!id && my) _find = { MY_text: my };
-        return new Promise(function (resolve, reject) {
-            fetch(starApiUrl, {
-                ...normalPostHeader,
-                body: JSON.stringify({
-                    "event": "addstar",
-                    "data": {
-                        ..._find,
-                        MY_token: getUid(),
-                        t: new Date().getTime()
-                    }
-                })
-            }).then(res => res.json()).then(json => {
-                resolve(json);
-            }).catch(function (e) {
-                reject(e);
+        // 接入recaptcha 验证
+        try {
+            let recaptcha_token = await getCaptcha();
+            return new Promise(function (resolve, reject) {
+                fetch(starApiUrl, {
+                    ...normalPostHeader,
+                    body: JSON.stringify({
+                        "event": "addstar",
+                        "data": {
+                            ..._find,
+                            MY_token: getUid(),
+                            re_token: recaptcha_token,
+                            t: new Date().getTime()
+                        }
+                    })
+                }).then(res => res.json()).then(json => {
+                    resolve(json);
+                }).catch(function (e) {
+                    reject(e);
+                });
             });
-        });
+        } catch (e) {
+            NotyfAlert.err("点赞失败：" + e);
+        }
     },
 
     /**
      * 取消点赞
      * @param {String} my 完整名言
      */
-    "removeStar": function (my) {
+    "removeStar": async function (my) {
         if (!Promise) return;
         if (!my) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
-        return new Promise(function (resolve, reject) {
-            fetch(starApiUrl, {
-                ...normalPostHeader,
-                body: JSON.stringify({
-                    "event": "removestar",
-                    "data": {
-                        MY_text: my,
-                        MY_token: getUid(),
-                        t: new Date().getTime()
-                    }
-                })
-            }).then(res => res.json()).then(json => {
-                resolve(json);
-            }).catch(function (e) {
-                reject(e);
+        // 接入recaptcha 验证
+        try {
+            let recaptcha_token = await getCaptcha();
+            return new Promise(function (resolve, reject) {
+                fetch(starApiUrl, {
+                    ...normalPostHeader,
+                    body: JSON.stringify({
+                        "event": "removestar",
+                        "data": {
+                            MY_text: my,
+                            MY_token: getUid(),
+                            re_token: recaptcha_token,
+                            t: new Date().getTime()
+                        }
+                    })
+                }).then(res => res.json()).then(json => {
+                    resolve(json);
+                }).catch(function (e) {
+                    reject(e);
+                });
             });
-        });
+        } catch (e) {
+            NotyfAlert.err("点赞失败：" + e);
+        }
+
     },
 
     /**
@@ -138,7 +154,7 @@ export let MY_starApi = {
      * 兼容 V1 数据格式
      * @param {String} my 完整名言
      */
-     "update": function (my, id) {
+    "update": function (my, id) {
         if (!Promise) return;
         if (!my && !id) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
         let _find = {};

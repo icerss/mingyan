@@ -1,6 +1,6 @@
 /*
  * ©2020-2021 xhemj
- * 2021/05/14
+ * 2021/07/04
  */
 
 import "./main.css";
@@ -12,6 +12,8 @@ import "./js/feat/star";
 import "./js/feat/checkFaceClickTime";
 import "./js/feat/reloadMingyan";
 import "./js/feat/createSiteTime";
+import "./js/feat/page";
+import "./js/feat/loadCaptcha";
 import { MY_show } from "./js/feat/show";
 import { getUid, NotyfAlert, qs } from "./js/tools";
 import { _hmt } from "./js/tongji";
@@ -26,6 +28,7 @@ import { headroom } from "./js/init";
 import { MY_star_format } from "./js/feat/star";
 import { db } from "./js/log";
 import { mingyan } from "./mingyan";
+
 
 (async function () {
     window["v"] = window["v"] || ["", "202103211846"]; // eslint-disable-line

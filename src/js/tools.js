@@ -1,9 +1,14 @@
 /**
  * 动态加载JS
  */
-export function loadJs(url) {
+export function loadJs(url, opt) {
     let su = document.createElement("script");
     su.src = url;
+    if (opt) {
+        for (let key in opt) {
+            su[key] = opt[key]
+        };
+    };
     let s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(su, s);
 }
@@ -140,7 +145,8 @@ let notyf = new Notyf({
         },
         {
             type: "error",
-            background: "indianred"
+            background: "indianred",
+            duration: 2000,
         },
         {
             type: "info",

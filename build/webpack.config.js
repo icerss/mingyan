@@ -13,7 +13,8 @@ let isPolyfill = false;
 
 let _entry = {
     "all": path.resolve(__dirname, "../src/main.js"),
-    "serviceworker": path.resolve(__dirname, "../src/js/sw-v2.js")
+    "serviceworker": path.resolve(__dirname, "../src/js/sw-v2.js"),
+    // "vendor": path.resolve(__dirname, "../src/js/vendor.js"),
 };
 if (isPolyfill) {
     _entry[1] = _entry[0];

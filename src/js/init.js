@@ -77,3 +77,5 @@ export let normalPostHeader = {
         "Content-Type": "application/json"
     }
 };
+
+export let reCaptchaKey = "6LdOb_gaAAAAAAIQpvSd_6a5yjeneoVlvM159zwH";

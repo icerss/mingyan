@@ -45,28 +45,6 @@
     </br>
 </div>
 <script>
-    twikoo.init({ 
-        envId: 'xhemj-0gjckebwf7276129', 
-        el: '#tcomment' ,
-        onCommentLoaded: function () {
-             document.querySelector(".tk-footer").innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`
-            document.querySelector(".el-textarea__inner").style.height = "150px";
-        }
-    })
-    .then(function () {
-        db('评论加载完成');
-        document.querySelector(".tk-footer").innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://mingyan.js.org">ERSS名言</a></div>`
-        document.querySelector(".el-textarea__inner").style.height = "150px";
-    });
-    $.get("https://api.github.com/repos/xhemj/mingyan", function (data) {
-        var a = data["updated_at"];
-        $("#uptime").text(new Date(a).toLocaleString());
-        console.log(new Date(a).toLocaleString());
-    });
-    if (fetch) fetch("https://hit-count.erss.club/?_my_cache_=no")
-.then(j=>j.json())
-.then(res => {
-    $("#hit-count").html(res.data.count)
-})
+window.MY_page_more();
 </script>
 <!-- End more.html -->
