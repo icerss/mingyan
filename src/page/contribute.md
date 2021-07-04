@@ -27,7 +27,7 @@
 <script>
     function submit() {
         // let apiUrl = "http://localhost:3000/api/contribute";
-        let apiUrl = "https://star-api.xhemj.now.sh/api/contribute";
+        let apiUrl = "https://api.erss.club/api/contribute";
         let name = $("#form-name").val();
         let school = $("#form-school").val();
         let classname = $("#form-class").val();
