@@ -26,7 +26,7 @@ export let getCaptcha = function () {
         window.grecaptcha.execute(reCaptchaKey, { action: 'addstar' }).then(function (tk) {
             // db("[点赞系统 v2.1] 人机验证成功");
             setTimeout(() => {
-                $($(".notyf__message:contains(正在进行人机验证)")[0]).text("人机验证成功！")
+                $($(".notyf__message:contains(正在进行人机验证)")[0]).text("人机验证成功！");
             }, randomNumber(300, 500));
             resolve(tk);
         })

@@ -301,13 +301,6 @@ input[type=search] {
 	border-radius: 5px;
 }
 
-pwa-install::part(openButton) {
-	display: none;
-}
-
-.aplayer .aplayer-lrc {
-	transform: translateY(-55px)
-}
 /* 主题颜色 */
 
 .theme.fit, .theme-bg.fit, .theme-text.fit {
@@ -512,6 +505,10 @@ img[data-id="page.faq"], [data-id="page.faq"] > img, [data-id="page.faq"] > * > 
 	padding: 1rem .8rem;
 }
 
+.my--star-btn, .my--showfrom {
+	user-select: none;
+}
+
 /* 图片区 */
 
 .icon.my--name-wave {
@@ -545,17 +542,37 @@ img[data-id="page.faq"], [data-id="page.faq"] > img, [data-id="page.faq"] > * > 
 	opacity: 0.8 !important;
 }
 
+.notyf {
+	padding-top: 20px !important;
+	padding-right: 20px !important;
+	padding-bottom: 0 !important;
+	padding-left: 20px !important;
+}
+
+.notyf__toast {
+	border-radius: 5px !important;
+}
+
+.notyf__toast--upper {
+	margin-bottom: 10px !important;
+}
+
 .grecaptcha-badge { 
 	display: none!important;
+}
+
+pwa-install::part(openButton) {
+	display: none;
+}
+
+.aplayer .aplayer-lrc {
+	transform: translateY(-55px)
 }
 
 /* 兼容手机 */
 @media only screen and (max-width: 480px) {
 	.notyf {
-    	padding-top: 5px !important;
-    	padding-right: 0 !important;
-    	padding-bottom: 0 !important;
-    	padding-left: 20px !important;
+		padding-top: 0px !important;
 	}
 
 	.my--mingyan-boy {

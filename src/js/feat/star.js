@@ -18,6 +18,10 @@ let turnGray = function () {
     $("#star-logo").css({ "color": "#000000A3" });
 };
 
+window.addEventListener("hashchange", function () {
+    starEvent = "addstar";
+});
+
 /**
  * 名言点赞系统主函数
  * @version 2.1

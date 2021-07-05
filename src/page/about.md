@@ -112,9 +112,9 @@
 <li class="mdui-list-item mdui-ripple">
   <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple-400">&#xe88e;</i>
   <div class="mdui-list-item-content">
-    <div class="mdui-list-item-title">xhemj</div>
-    <div class="mdui-list-item-text">xhemj@erss.club</div>
-  </div><a href="mailto:xhemj@erss.club"><i class="mdui-list-item-icon mdui-icon material-icons">&#xe88e;</i></a>
+    <div class="mdui-list-item-title">反馈邮箱</div>
+    <div class="mdui-list-item-text">feedback@erssmy.com</div>
+  </div><a href="mailto:feedback@erssmy.com"><i class="mdui-list-item-icon mdui-icon material-icons">&#xe88e;</i></a>
 </li>
 
 
