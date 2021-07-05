@@ -1,5 +1,4 @@
 import { MY_showFromApi } from "./showFromApi";
-import { db } from "../log";
 
 let showFromData = "";
 let isReady = false;
@@ -8,12 +7,12 @@ let isReady = false;
  * 获取名言来源主函数
  */
 export let MY_loadMyType = function () {
-    db("触发loadMyType");
+    // db("触发loadMyType");
     showFromData = "";
     MY_showFromApi.getinfo()
         .then(function (info) {
             showFromData = info.data;
-            db("showFromData", showFromData);
+            // db("showFromData", showFromData);
             let submit_type = showFromData.from.type;
             if (showFromData.from.submit_school == "厦门市音乐学校") submit_type = "音校馆";
             $(".my--showfrom-text").text(submit_type);
@@ -31,7 +30,6 @@ export let MY_showMyType = function (res) {
         MY_showFromApi.getinfo()
             .then(function (info) {
                 showFromData = info.data;
-                db(showFromData);
                 return MY_showMyType(info.data);
             });
     } else {

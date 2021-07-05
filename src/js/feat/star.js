@@ -5,6 +5,10 @@ import { MY_starApi } from "./starApi";
 
 let starEvent = "addstar";
 
+let isSwalShow = function () {
+    return $(".swal-overlay--show-modal").length === 1
+};
+
 /**
  * 名言点赞系统主函数 v2.0
  * @since 2021/06/20
@@ -18,69 +22,71 @@ export let MY_star = function () {
     </span>
     `;
 
-    swal({
-        title: $(".my--mingyan-text").text(),
-        text: "加载出错了？刷新试试？",
-        icon: "https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png",
-        button: "关闭"
-    }).then(function () {
-        starEvent = "addstar";
-    });
+    if (!isSwalShow()) {
+        swal({
+            title: $(".my--mingyan-text").text(),
+            text: "加载出错了？刷新试试？",
+            icon: "https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png",
+            button: "关闭"
+        }).then(function () {
+            starEvent = "addstar";
+        });
+    };
     $(".swal-icon.swal-icon--custom>img").css({
         "max-width": "150px"
     });
     $("#star-logo").css({ "color": "#000000A3" });
     $(".swal-text").html(loadingHtml); // 默认显示加载动画
     switch (starEvent) {
-    case "addstar": {
-        $("#star-logo").css({ "color": "#000000A3" });
-        MY_starApi.addStar().then(function (addStar_res) {
-            let statusCode = addStar_res.code;
-            if (statusCode != 0) {
-                NotyfAlert.err(addStar_res.msg);
-                $(".my--star-num").html(addStar_res.data.starNum);
-                if (addStar_res.data.isStar) {
-                    $("#star-logo").css({ "color": "red" });
-                    starEvent = "removestar";
+        case "addstar": {
+            $("#star-logo").css({ "color": "#000000A3" });
+            MY_starApi.addStar().then(function (addStar_res) {
+                let statusCode = addStar_res.code;
+                if (statusCode != 0) {
+                    NotyfAlert.err(addStar_res.msg);
+                    $(".my--star-num").html(addStar_res.data.starNum);
+                    if (addStar_res.data.isStar) {
+                        $("#star-logo").css({ "color": "red" });
+                        starEvent = "removestar";
+                    }
+                } else {
+                    NotyfAlert.su(addStar_res.msg);
+                    $(".my--star-num").html(addStar_res.data.starNum);
+                    if (addStar_res.data.isStar) {
+                        $("#star-logo").css({ "color": "red" });
+                        starEvent = "removestar";
+                    }
                 }
-            } else {
-                NotyfAlert.su(addStar_res.msg);
-                $(".my--star-num").html(addStar_res.data.starNum);
-                if (addStar_res.data.isStar) {
-                    $("#star-logo").css({ "color": "red" });
-                    starEvent = "removestar";
-                }
-            }
-        }).catch(function (err) {
-            NotyfAlert.err("错误：\n" + err);
-        });
-    }
-        break;
+            }).catch(function (err) {
+                NotyfAlert.err("错误：\n" + err);
+            });
+        }
+            break;
 
-    case "removestar": {
-        $("#star-logo").css({ "color": "#000000A3" });
-        MY_starApi.removeStar().then(function (addStar_res) {
-            let statusCode = addStar_res.code;
-            if (statusCode != 0) {
-                NotyfAlert.err(addStar_res.msg);
-                $(".my--star-num").html(addStar_res.data.starNum);
-                if (!addStar_res.data.isStar) {
-                    $("#star-logo").css({ "color": "#000000A3" });
-                    starEvent = "addstar";
+        case "removestar": {
+            $("#star-logo").css({ "color": "#000000A3" });
+            MY_starApi.removeStar().then(function (addStar_res) {
+                let statusCode = addStar_res.code;
+                if (statusCode != 0) {
+                    NotyfAlert.err(addStar_res.msg);
+                    $(".my--star-num").html(addStar_res.data.starNum);
+                    if (!addStar_res.data.isStar) {
+                        $("#star-logo").css({ "color": "#000000A3" });
+                        starEvent = "addstar";
+                    }
+                } else {
+                    NotyfAlert.su(addStar_res.msg);
+                    $(".my--star-num").html(addStar_res.data.starNum);
+                    if (!addStar_res.data.isStar) {
+                        $("#star-logo").css({ "color": "#000000A3" });
+                        starEvent = "addstar";
+                    }
                 }
-            } else {
-                NotyfAlert.su(addStar_res.msg);
-                $(".my--star-num").html(addStar_res.data.starNum);
-                if (!addStar_res.data.isStar) {
-                    $("#star-logo").css({ "color": "#000000A3" });
-                    starEvent = "addstar";
-                }
-            }
-        }).catch(function (err) {
-            NotyfAlert.err("错误：\n" + err);
-        });
-    }
-        break;
+            }).catch(function (err) {
+                NotyfAlert.err("错误：\n" + err);
+            });
+        }
+            break;
 
     }
 };

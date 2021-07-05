@@ -13,6 +13,9 @@ let grecaptchaready = function () {
 };
 window["grecaptchaready"] = grecaptchaready;
 
+/**
+ * 获取 reCaptcha
+ */
 export let getCaptcha = function () {
     return new Promise(function (resolve, reject) {
         if (!isAlready) {
