@@ -8,12 +8,12 @@ export let MY_initLogo = function () {
     } else {
         $(".my--mingyan-boy").css({ "opacity": 1 });
     }
-    if (ua.device != "Mobile") {
-        $(".my--mingyan-boy").css({
-            "width": "150px",
-            "height": "260px"
-        });
-    }
+    // if (ua.device != "Mobile") {
+    //     $(".my--mingyan-boy").css({
+    //         "width": "150px",
+    //         "height": "260px"
+    //     });
+    // }
     $(".my--mingyan-boy").css({
         "display": "block"
     });

@@ -1,7 +1,7 @@
 import { mingyan } from "../../mingyan";
 import { $footer, $main, $page, $search, ua } from "../init";
 import { htmlTemp } from "../templete";
-import { randomNumber } from "../tools";
+import { deviceIsPhone, randomNumber } from "../tools";
 import { MY_clearHash } from "./clearHash";
 import { MY_findmingyan } from "./findMingyan";
 import { MY_initLogo } from "./initLogo";
@@ -33,7 +33,7 @@ export let MY_showAll = function () {
     $($search).show();
     // 每日精选名言
     let width = [];
-    if (ua.device == "PC") {
+    if (!deviceIsPhone()) {
         width = [2, 8, 2];
     } else {
         width = [2, 8, 2];

@@ -3,7 +3,7 @@ import { $main, $myInfo, $page, hashName, ua } from "../init";
 import { db } from "../log";
 import { htmlTemp } from "../templete";
 import { _hmt } from "../tongji";
-import { randomNumber, qs, loadJs } from "../tools";
+import { randomNumber, qs, loadJs, deviceIsPhone } from "../tools";
 import { MY_checkConj } from "./checkConj";
 import { MY_checkPic } from "./checkPic";
 import { checkProbability } from "./checkProbability";
@@ -65,7 +65,7 @@ export let MY_show = function (id) {
              */
             $("span.my--mingyan-text").html(MY_checkPic(name + "：" + my)); // 若有触发图片彩蛋就显示彩蛋
             // 根据名言长度调整图片位置
-            if (ua.device == "PC") {
+            if (!deviceIsPhone()) {
                 $(".my--mingyan-pic").css({
                     "min-width": 28 * my.split("").length - 50, // 每个字大概28px
                     "margin-left": "25px",

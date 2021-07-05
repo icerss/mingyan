@@ -152,6 +152,12 @@ let notyf = new Notyf({
             type: "info",
             background: "#5676dc",
             icon: false
+        },
+        {
+            type: "test",
+            background: "#5676dc",
+            icon: false,
+            duration: 999999999
         }
     ]
 });
@@ -180,5 +186,18 @@ export let NotyfAlert = {
             type: "info",
             message: text
         });
+    },
+    test: function(text) {
+        return notyf.open({
+            type: "test",
+            message: text
+        });
     }
+};
+
+/**
+ * 看是不是手机（测试中……）
+ */
+export let deviceIsPhone = function () {
+    return window.innerWidth <= 480
 };

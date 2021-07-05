@@ -1,5 +1,6 @@
 import { mingyan } from "../../mingyan";
 import { $footer, $main, $page, $search, ua } from "../init";
+import { deviceIsPhone } from "../tools";
 import { MY_backFooter } from "./backFooter";
 import { MY_findmingyan } from "./findMingyan";
 import { MY_starApi } from "./starApi";
@@ -14,8 +15,6 @@ window["rankingOnclick"] = function (el) {
     MY_backFooter();
     $($page).hide();
 };
-
-if (ua.device == "PC") $("#ranking-btn").show();
 
 export let MY_starRanking = function () {
     window["skipCheckHash"] = true;
@@ -35,7 +34,7 @@ export let MY_starRanking = function () {
     `;
         let res = data.data;
         let width = [];
-        if (ua.device == "PC") {
+        if (!deviceIsPhone()) {
             width = [2, 8, 2];
         } else {
             width = [2, 7, 3];

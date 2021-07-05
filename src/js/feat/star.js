@@ -1,3 +1,4 @@
+import { MingyanLOGO } from "../init";
 import { db } from "../log";
 import { htmlTemp } from "../templete";
 import { NotyfAlert, throttle } from "../tools";
@@ -9,8 +10,17 @@ let isSwalShow = function () {
     return $(".swal-overlay--show-modal").length === 1
 };
 
+let turnRed = function () {
+    $("#star-logo").css({ "color": "red" });
+};
+
+let turnGray = function () {
+    $("#star-logo").css({ "color": "#000000A3" });
+};
+
 /**
- * 名言点赞系统主函数 v2.0
+ * 名言点赞系统主函数
+ * @version 2.1
  * @since 2021/06/20
  */
 export let MY_star = function () {
@@ -26,7 +36,7 @@ export let MY_star = function () {
         swal({
             title: $(".my--mingyan-text").text(),
             text: "加载出错了？刷新试试？",
-            icon: "https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png",
+            icon: MingyanLOGO,
             button: "关闭"
         }).then(function () {
             starEvent = "addstar";
@@ -35,25 +45,25 @@ export let MY_star = function () {
     $(".swal-icon.swal-icon--custom>img").css({
         "max-width": "150px"
     });
-    $("#star-logo").css({ "color": "#000000A3" });
+    turnGray();
     $(".swal-text").html(loadingHtml); // 默认显示加载动画
     switch (starEvent) {
         case "addstar": {
-            $("#star-logo").css({ "color": "#000000A3" });
+            turnGray();
             MY_starApi.addStar().then(function (addStar_res) {
                 let statusCode = addStar_res.code;
                 if (statusCode != 0) {
                     NotyfAlert.err(addStar_res.msg);
                     $(".my--star-num").html(addStar_res.data.starNum);
                     if (addStar_res.data.isStar) {
-                        $("#star-logo").css({ "color": "red" });
+                        turnRed();
                         starEvent = "removestar";
                     }
                 } else {
                     NotyfAlert.su(addStar_res.msg);
                     $(".my--star-num").html(addStar_res.data.starNum);
                     if (addStar_res.data.isStar) {
-                        $("#star-logo").css({ "color": "red" });
+                        turnRed();
                         starEvent = "removestar";
                     }
                 }
@@ -64,21 +74,21 @@ export let MY_star = function () {
             break;
 
         case "removestar": {
-            $("#star-logo").css({ "color": "#000000A3" });
+            turnGray();
             MY_starApi.removeStar().then(function (addStar_res) {
                 let statusCode = addStar_res.code;
                 if (statusCode != 0) {
                     NotyfAlert.err(addStar_res.msg);
                     $(".my--star-num").html(addStar_res.data.starNum);
                     if (!addStar_res.data.isStar) {
-                        $("#star-logo").css({ "color": "#000000A3" });
+                        turnGray();
                         starEvent = "addstar";
                     }
                 } else {
                     NotyfAlert.su(addStar_res.msg);
                     $(".my--star-num").html(addStar_res.data.starNum);
                     if (!addStar_res.data.isStar) {
-                        $("#star-logo").css({ "color": "#000000A3" });
+                        turnGray();
                         starEvent = "addstar";
                     }
                 }
@@ -115,7 +125,7 @@ export let MY_star_format = function () {
         for (let id of oldData) {
             MY_starApi.update(null, id).then(function () {
                 localStorage.setItem("___mingyan_star_data__", (localStorage.getItem("___mingyan_star_data__").replace("<" + id + ">", "") || ""));
-                db("[starApi v2] 数据更新成功！");
+                db("数据更新成功！");
             });
         }
     }

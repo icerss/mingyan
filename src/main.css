@@ -231,8 +231,8 @@ input[type=search] {
 	position: absolute;
     right: 0px;
     bottom: 55px;
-    width: 120px;
-    height: 207px;
+    width: 150px;
+    height: 260px;
 }
 
 .my--main {
@@ -547,4 +547,31 @@ img[data-id="page.faq"], [data-id="page.faq"] > img, [data-id="page.faq"] > * > 
 
 .grecaptcha-badge { 
 	display: none!important;
+}
+
+/* 兼容手机 */
+@media only screen and (max-width: 480px) {
+	.notyf {
+    	padding-top: 5px !important;
+    	padding-right: 0 !important;
+    	padding-bottom: 0 !important;
+    	padding-left: 20px !important;
+	}
+
+	.my--mingyan-boy {
+		height: 207px;
+		width: 120px;
+	}
+
+	#ranking-btn {
+		display: none;
+	}
+
+	#pwa-install {
+		display: none;
+	}
+
+	pwa-install, #installComponent {
+		display: none;
+	}
 }

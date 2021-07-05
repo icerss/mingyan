@@ -1,3 +1,4 @@
+import { MingyanLOGO } from "../init";
 import { MY_showFromApi } from "./showFromApi";
 
 let showFromData = "";
@@ -39,7 +40,7 @@ export let MY_showMyType = function (res) {
         swal({
             title: "",
             text: `提供者：${name}\n出自：${conefrom}`,
-            icon: "https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png",
+            icon: MingyanLOGO,
             button: "关闭"
         });
         $(".swal-icon.swal-icon--custom>img").css({
