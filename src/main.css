@@ -569,7 +569,12 @@ pwa-install::part(openButton) {
 	transform: translateY(-55px)
 }
 
+.fancybox-image {
+	border-radius: 5px;
+}
+
 /* 兼容手机 */
+
 @media only screen and (max-width: 480px) {
 	.notyf {
 		padding-top: 0px !important;

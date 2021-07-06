@@ -6,3 +6,4 @@ package-lock.json
 npmrc
 status.html
 test
+./build/auto/*

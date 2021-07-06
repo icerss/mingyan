@@ -7,7 +7,7 @@
 import { apiUrls, normalPostHeader } from "../init";
 import { db } from "../log";
 import { getUid, NotyfAlert } from "../tools";
-import { getCaptcha } from "./loadCaptcha";
+import { loadCaptcha } from "./loadCaptcha";
 
 let starApiUrl = apiUrls.star_v2;
 // starApiUrl = "http://localhost:3000/api/v2/star";
@@ -54,7 +54,7 @@ export let MY_starApi = {
         if (!id && my) _find = { MY_text: my };
         // 接入recaptcha 验证
         try {
-            let recaptcha_token = await getCaptcha();
+            let recaptcha_token = await loadCaptcha();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     ...normalPostHeader,
@@ -87,7 +87,7 @@ export let MY_starApi = {
         if (!my) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
         // 接入recaptcha 验证
         try {
-            let recaptcha_token = await getCaptcha();
+            let recaptcha_token = await loadCaptcha();
             return new Promise(function (resolve, reject) {
                 fetch(starApiUrl, {
                     ...normalPostHeader,

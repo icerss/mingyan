@@ -19,6 +19,7 @@ export let mingyan1 = [ // eslint-disable-line
     "数学老王：蓝色的黑体字",
     "数学老王：请考生进入烤肠（考场）",
     "数学老王：解",
+    "数学老王：aaaaaaaaaaaaaaaa",
     /* @数学老王!! */
 
     // 下面加入潘哥名言
@@ -285,6 +286,7 @@ export let mingyan2 = [ // eslint-disable-line
     "数学潘哥：老公的家庭地位不如一条狗",
     "数学潘哥：你写作业是在澡堂里面写的吗？",
     "数学潘哥：天下爱情分久必合，合久必分",
+    "数学潘哥：这是测试名言哦！",
     /* @数学潘哥!! */
 
 ];
@@ -723,7 +725,9 @@ export let mingyan3 = [ // eslint-disable-line
     //====保安====
     "保安：你连毛都没有",
 
-    /* @其它名言!! */
+    //====啊啊啊啊====
+    "啊啊啊啊：测试测试",
+    /* @啊啊啊啊!! */
 ];
 
 export let submitMingyan = [
