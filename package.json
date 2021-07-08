@@ -10,7 +10,6 @@
   "scripts": {
     "wp:build": "webpack --config build/webpack.config.js",
     "wp:dll": "webpack --config build/webpack.dll.config.js",
-    "wp:polyfill": "webpack --config build/run-webpack-polyfill.js",
     "copy": "node build/copy-plugin.js",
     "lint": "eslint src --fix"
   },

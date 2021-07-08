@@ -1,10 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
-const version = require("../.github/version.json");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 // ========== //
 let isDev = false;
@@ -13,7 +10,12 @@ let isPolyfill = false;
 
 let _entry = {
     "all": path.resolve(__dirname, "../src/main.js"),
-    "serviceworker": path.resolve(__dirname, "../src/js/sw-v2.js"),
+    // "serviceworker": path.resolve(__dirname, "../src/js/sw-v2.js"),
+    "all.polyfill": [
+        "@babel/polyfill",
+        "whatwg-fetch",
+        path.resolve(__dirname, "../src/main.js")
+    ]
     // "vendor": path.resolve(__dirname, "../src/js/vendor.js"),
 };
 if (isPolyfill) {
@@ -28,7 +30,7 @@ module.exports = {
     output: {
         filename: `[name].min.js`,
         path: path.resolve(__dirname, "../dist"),
-        libraryTarget: "umd"
+        libraryTarget: "umd",
     },
     module: {
         rules: [
@@ -56,19 +58,19 @@ module.exports = {
             },
             {
                 test: /\.md$/,
-                use: 'raw-loader',
+                use: "raw-loader",
             }
         ]
     },
     plugins: [
-        // new CleanWebpackPlugin(),
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: "[name].min.css",
             chunkFilename: "[id].css",
         }),
         // new webpack.DllReferencePlugin({
         //     context: __dirname,
-        //     manifest: require('./polyfill-manifest.json')
+        //     manifest: require("./polyfill-manifest.json")
         // }),
         new OptimizeCssAssetsPlugin({
             canPrint: false
@@ -78,7 +80,7 @@ module.exports = {
         sideEffects: false,
         usedExports: true,
         chunkIds: "deterministic",
-        moduleIds: "deterministic"
+        moduleIds: "deterministic",
     },
-    // devtool: "source-map"
+    devtool: "nosources-source-map"
 }
