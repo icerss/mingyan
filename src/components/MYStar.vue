@@ -170,10 +170,6 @@ export default {
   margin-bottom: 10px !important;
 }
 
-.grecaptcha-badge {
-  display: none !important;
-}
-
 @media only screen and (max-width: 480px) {
   .notyf {
     padding-top: 0px !important;

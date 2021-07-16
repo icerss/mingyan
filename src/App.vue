@@ -314,4 +314,9 @@ img {
 #incidents-report-title {
   font-size: 25px;
 }
+
+.grecaptcha-badge {
+  display: none !important;
+  visibility: hidden !important;
+}
 </style>

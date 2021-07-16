@@ -2,60 +2,38 @@
   <div class="my--header" id="my--header">
     <a-row class="container">
       <a-col :span="2">
-        <router-link
-          to="/more"
-          id="el-a"
-          class="mdui-btn mdui-btn-icon"
-          mdui-tooltip="{content: '更多'}"
-          title="更多"
-        >
+        <router-link to="/more" id="el-a" title="更多">
           <Tooltip tip="更多">
             <div class="header-icon"><a-icon type="more" /></div>
           </Tooltip>
         </router-link>
       </a-col>
       <a href="./">
-        <span class="mdui-typo-title my--title" title="ERSS名言">
+        <span class="my--title" title="ERSS名言">
           <i class="icon my--header-logo"></i>
         </span>
       </a>
       <a-col :span="16"></a-col>
       <a-col :span="2">
-        <router-link
-          to="/search"
-          id="el-a"
-          class="mdui-btn mdui-btn-icon"
-          mdui-tooltip="{content: '搜索'}"
-          title="搜索"
-        >
+        <router-link to="/search" id="el-a" title="搜索">
           <Tooltip tip="搜索">
             <div class="header-icon"><a-icon type="search" /></div>
           </Tooltip>
         </router-link>
       </a-col>
       <a-col :span="2">
-        <a
-          id="reload_buttom el-a"
-          class="mdui-btn mdui-btn-icon"
-          mdui-tooltip="{content: '刷新'}"
-          title="刷新"
-          @click="reload"
-        >
+        <a id="reload_buttom el-a" title="刷新" @click="reload">
           <Tooltip tip="刷新">
             <div class="header-icon icon-reload"><a-icon type="reload" /></div>
           </Tooltip>
         </a>
       </a-col>
       <a-col :span="2">
-        <router-link
-          to="ranking"
-          id="ranking-btn el-a"
-          class="mdui-btn mdui-btn-icon"
-          mdui-tooltip="{content: '名言排行榜'}"
-          title="排行榜"
-        >
+        <router-link to="ranking" id="ranking-btn el-a" title="排行榜">
           <Tooltip tip="排行榜">
-            <div class="header-icon"><a-icon type="line-chart" /></div>
+            <div class="header-icon">
+              <i class="mdui-icon material-icons">&#xe24b;</i>
+            </div>
           </Tooltip>
         </router-link>
       </a-col>
@@ -191,6 +169,10 @@ export default {
   line-height: 24px;
   -webkit-transform: translate(-12px, -12px);
   transform: translate(-12px, -12px);
+}
+
+.header-icon > .mdui-icon {
+  font-size: 26px;
 }
 </style>
 
