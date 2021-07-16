@@ -1,16 +1,31 @@
 /**
  * 动态加载JS
  */
-export function loadJs(url, opt) {
-    let su = document.createElement("script");
-    su.src = url;
-    if (opt) {
-        for (let key in opt) {
-            su[key] = opt[key]
-        };
-    };
-    let s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(su, s);
+export function loadJs(src, opt) {
+    return new Promise(function (resolve) {
+        var script = document.createElement("script"),
+            head = document.getElementsByTagName("head")[0];
+        script.type = "text/javascript";
+        script.src = src;
+        if (opt) {
+            for (let key in opt) {
+                script[key] = opt[key]
+            }
+        }
+        if (script.addEventListener) {
+            script.addEventListener("load", function () {
+                resolve();
+            }, false);
+        } else if (script.attachEvent) {
+            script.attachEvent("onreadystatechange", function () {
+                var target = window.event.srcElement;
+                if (target.readyState == "loaded") {
+                    resolve();
+                }
+            });
+        }
+        head.appendChild(script);
+    })
 }
 
 /**
@@ -66,7 +81,7 @@ export function showPop(opt) {
     pop_elements.a = document.createElement("a");
     pop_elements.a.innerText = opt.url;
     pop_elements.a.href = opt.url;
-    pop_elements.a.addEventListener("click", (e) => {
+    pop_elements.a.addEventListener("click", function (e) {
         e.preventDefault();
     });
     pop_elements.p = document.createElement("p");
@@ -95,23 +110,11 @@ export function showPop(opt) {
  * 元素是否显示
  */
 export let isShow = function (el) {
-    return !$(el).is(":hidden");
-};
-
-/**
- * 节流
- */
-export let throttle = function (func, delay) {
-    let prev = Date.now();
-    return function () {
-        let context = this;
-        let args = arguments;
-        let now = Date.now();
-        if (now - prev >= delay) {
-            func.apply(context, args);
-            prev = Date.now();
-        }
-    };
+    try {
+        return document.querySelector(el).style === "none" || document.querySelector(el).style.visibility === "hidden"
+    } catch {
+        return false
+    }
 };
 
 import { v4 as uuidv4 } from "uuid";
@@ -130,7 +133,7 @@ export let getUid = function () {
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 
-let notyf = new Notyf({
+export let notyf = new Notyf({
     position: {
         x: "right",
         y: "top"
@@ -158,6 +161,12 @@ let notyf = new Notyf({
             background: "#5676dc",
             icon: false,
             duration: 999999999
+        },
+        {
+            type: "incidents",
+            background: "#5676dc",
+            icon: false,
+            duration: 15000
         }
     ]
 });
@@ -187,7 +196,7 @@ export let NotyfAlert = {
             message: text
         });
     },
-    test: function(text) {
+    test: function (text) {
         return notyf.open({
             type: "test",
             message: text
@@ -201,3 +210,83 @@ export let NotyfAlert = {
 export let deviceIsPhone = function () {
     return window.innerWidth <= 480
 };
+
+export let kv = {
+    get(name) {
+        return localStorage.getItem(name) || null
+    },
+    put(name, value = "") {
+        return localStorage.setItem(name, value)
+    }
+};
+
+export let kvName = {
+    mingyanId: "___mingyan_id__"
+}
+
+export let fadeIn = function (el) {
+    document.querySelector(el).classList.add("fadeIn");
+    setTimeout(function () {
+        document.querySelector(el).style.display = "";
+        document.querySelector(el).classList.remove("fadeIn");
+    }, 500);
+};
+
+export let fadeOut = function (el) {
+    document.querySelector(el).classList.add("fadeOut");
+    setTimeout(function () {
+        document.querySelector(el).style.display = "none";
+        document.querySelector(el).classList.remove("fadeOut");
+    }, 500);
+};
+
+/**
+ * 控制台输出
+ */
+function _log() {
+    let dn = 1;
+    return function (...str) {
+        let special1 = "";
+        let special2 = "";
+        console.log(`[耳斯名言]${new Date().getHours()}:${new Date().getMinutes()} #${dn} -> ${special1}`, ...str, special2);
+        dn++;
+    }
+}
+export let log = _log();
+window["log"] = log;
+
+export let addClickEvent = function (el, callback) {
+    try {
+        document.addEventListener("click", function (event) {
+            let path = event.path;
+            for (let item of path) {
+                let classname, id;
+                try {
+                    classname = ("." + (item.className || "").replaceAll(" ", " .")).split(" ");
+                    id = ("#" + (item.id || "").replaceAll(" ", " #")).split(" ");
+                } catch { } // eslint-disable-line
+                if (!classname && !id) return;
+                classname.map(e => {
+                    if (el === e) {
+                        (typeof callback === "function") && callback(event);
+                    }
+                });
+                id.map(e => {
+                    if (el === e) {
+                        (typeof callback === "function") && callback(event);
+                    }
+                });
+
+            }
+        })
+    } catch { } // eslint-disable-line
+};
+
+export let SaveAs = function (data, type, name) {
+    var link = document.createElement("a");
+    var exportName = name ? name : 'data';
+    var url = 'data:text/' + type + ';charset=utf-8,\uFEFF' + encodeURI(data);
+    link.href = url;
+    link.download = exportName + "." + type;
+    link.click();
+}

@@ -5,7 +5,8 @@
  */
 
 import { apiUrls } from "../init";
-import { db } from "../log";
+import { log } from "../tools";
+import cloudbase from "@cloudbase/js-sdk";
 
 // 初始化tcb
 let app = null;
@@ -14,8 +15,8 @@ let auth = null;
 async function login() {
     await auth.anonymousAuthProvider().signIn();
     let loginState = await auth.getLoginState();
-    // db("登陆成功");
-    db(loginState);
+    // log("登陆成功");
+    log(loginState);
 }
 app = cloudbase.init({ env: "xhemj-0gjckebwf7276129" });
 auth = app.auth();
@@ -38,8 +39,8 @@ export let MY_rankingApi = {
                     }
                 })
                 .then((res) => {
-                    // db("添加成功");
-                    // db(res);
+                    // log("添加成功");
+                    // log(res);
                     resolve(res);
                 })
                 .catch(function (e) {
@@ -64,8 +65,8 @@ export let MY_rankingApi = {
                     }
                 })
                 .then((res) => {
-                    // db("获取成功");
-                    // db(res);
+                    // log("获取成功");
+                    // log(res);
                     resolve(res);
                 })
                 .catch(function (e) {
@@ -78,16 +79,16 @@ export let MY_rankingApi = {
     getIp: function () {
         if (!Promise) return;
         return new Promise(function (resolve, reject) {
-            $.getJSON(apiUrls.ip,
-                function (json) {
-                    // db("获取成功");
+            fetch(apiUrls.ip).then(r => r.json())
+                .then(function (json) {
+                    // log("获取成功");
                     let res = {
                         "ip": json.ip
                     };
-                    resolve(res);
+                    resolve(res)
                 }).catch(function (e) {
-                reject(e);
-            });
+                    reject(e);
+                })
         });
     },
     //获取当前排名人数
@@ -102,8 +103,8 @@ export let MY_rankingApi = {
                     }
                 })
                 .then((res) => {
-                    // db("获取成功");
-                    // db(res);
+                    // log("获取成功");
+                    // log(res);
                     resolve(res);
                 })
                 .catch(function (e) {

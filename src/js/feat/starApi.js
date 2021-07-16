@@ -5,12 +5,11 @@
  */
 
 import { apiUrls, normalPostHeader } from "../init";
-import { db } from "../log";
-import { getUid, NotyfAlert } from "../tools";
+import { getUid, NotyfAlert, log } from "../tools";
 import { loadCaptcha } from "./loadCaptcha";
 
 let starApiUrl = apiUrls.star_v2;
-// starApiUrl = "http://localhost:3000/api/v2/star";
+//  starApiUrl = "http://localhost:3000/api/v2/star";
 // 感谢Vercel的服务！！
 // 感谢MongoDB提供免费的数据库！！
 
@@ -21,7 +20,7 @@ export let MY_starApi = {
      */
     "getNum": function (my) {
         if (!Promise) return;
-        if (!my) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
+        if (!my) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
         return new Promise(function (resolve, reject) {
             fetch(starApiUrl, {
                 ...normalPostHeader,
@@ -47,7 +46,7 @@ export let MY_starApi = {
      */
     "addStar": async function (my, id) {
         if (!Promise) return;
-        if (!my && !id) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
+        if (!my && !id) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
         let _find = {};
         if (id && my) _find = { MY_text: my };
         if (id && !my) _find = { MY_ID: id };
@@ -84,7 +83,7 @@ export let MY_starApi = {
      */
     "removeStar": async function (my) {
         if (!Promise) return;
-        if (!my) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
+        if (!my) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
         // 接入recaptcha 验证
         try {
             let recaptcha_token = await loadCaptcha();
@@ -140,10 +139,10 @@ export let MY_starApi = {
     "getHistoryRanking": function () {
         if (!Promise) return;
         return new Promise(function (resolve, reject) {
-            fetch("./api/get-ranking-history?_t=" + new Date().getTime())
+            fetch("https://www.erssmy.com/api/get-ranking-history?_t=" + new Date().getTime())
                 .then(res => res.json())
                 .then(json => {
-                    db(json);
+                    log(json);
                     if (json.msg == "请求成功") resolve(json.data);
                     reject(json.msg);
                 });
@@ -156,7 +155,7 @@ export let MY_starApi = {
      */
     "update": function (my, id) {
         if (!Promise) return;
-        if (!my && !id) my = $(".my--mingyan-name").text().trim() + "：" + $(".my--mingyan-text").text().trim();
+        if (!my && !id) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
         let _find = {};
         if (id && my) _find = { MY_text: my };
         if (id && !my) _find = { MY_ID: id };
@@ -181,4 +180,4 @@ export let MY_starApi = {
     },
 };
 
-// window["MY_starApi"] = MY_starApi;
+ // window["MY_starApi"] = MY_starApi;

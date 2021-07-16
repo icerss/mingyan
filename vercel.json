@@ -1,0 +1,20 @@
+{
+    "routes": [
+        {
+			"src": "/api/get-ranking-history",
+			"dest": "https://icerss.github.io/data/ranking.json"
+		},
+		{
+			"src": "/api/get-sponsor-list",
+			"dest": "https://icerss.github.io/data/sponsor.json"
+		},
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/(.*)",
+            "status": 404,
+            "dest": "/index.html"
+        }
+    ]
+}
