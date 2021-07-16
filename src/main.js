@@ -46,7 +46,22 @@ Vue.use(VueLazyload, {
   loading: "assets/loading.svg"
 })
 
+let aegisUin = {};
+if (localStorage.getItem("MY_TOKEN")) aegisUin = { uin: localStorage.getItem("MY_TOKEN") };
+export const aegis = new Aegis({ // eslint-disable-line
+  id: "jYr96KM75PZJAq3LvV",
+  ...aegisUin,
+  reportApiSpeed: true,
+  reportAssetSpeed: true,
+  spa: true,
+  version: "3.0.0"
+});
+
 Vue.config.productionTip = false
+Vue.config.errorHandler = function(err, vm, info) {
+  console.log(`Error: ${err.toString()}\nInfo: ${info}`);
+  aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
+};
 
 new Vue({
   router,
@@ -65,9 +80,9 @@ let _hmt = []; // eslint-disable-line
   var bp = document.createElement("script");
   var curProtocol = window.location.protocol.split(":")[0];
   if (curProtocol === "https") {
-      bp.src = "https://zz.bdstatic.com/linksubmit/push.js";
+    bp.src = "https://zz.bdstatic.com/linksubmit/push.js";
   } else {
-      bp.src = "http://push.zhanzhang.baidu.com/push.js";
+    bp.src = "http://push.zhanzhang.baidu.com/push.js";
   }
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(bp, s);
