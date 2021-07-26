@@ -58,8 +58,8 @@ export const aegis = new Aegis({ // eslint-disable-line
 
 Vue.config.productionTip = false
 Vue.config.errorHandler = function (err, vm, info) {
-  console.log(`Error: ${err.toString()}\nInfo: ${info}`);
   aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
+  console.error(`Error: ${err.toString()}\nInfo: ${info}`);
 };
 
 let _hmt = [];

@@ -8,8 +8,7 @@
 <script>
 import MYHeader from "./components/MYHeader.vue";
 import { log, qs } from "./js/tools";
-import { MY_ranking } from "./js/feat/ranking";
-// import MYFooter from "./components/MYFooter.vue";
+import "./js/feat/ranking";
 
 export default {
   name: "App",
@@ -32,18 +31,15 @@ export default {
       let hash = window.location.hash;
       if (/#\d/.test(hash)) window.location.href = "./" + hash;
     });
-    this.ranking();
-  },
-  methods: {
-    ranking() {
+    window.doRanking = function () {
       if (
         qs("force_action") == "2020" ||
         !localStorage.getItem("___mingyan_2021_ranking_data__")
       ) {
         // 如果是新用户
-        MY_ranking();
+        window.MY_ranking();
       }
-    },
+    };
   },
 };
 </script>
