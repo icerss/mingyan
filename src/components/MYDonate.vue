@@ -4,7 +4,7 @@
       <h1>鼓励我们</h1>
       <div class="qrcode">
         <FancyImage
-          src="https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/04/1zfBCJSGmbKcs9e.png"
+          src="https://cdn.erssmy.com/image/2021/05/04/1zfBCJSGmbKcs9e.png"
           title="鼓励我们"
           className="qr-img"
         />

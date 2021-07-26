@@ -7,7 +7,7 @@ loadJs("https://recaptcha.net/recaptcha/api.js?onload=grecaptchaready&render=6Ld
 });
 let isAlready = false;
 let grecaptchaready = function () {
-    log("[点赞系统 v2.1] 人机验证加载成功！");
+    log("人机验证加载成功！");
     isAlready = true;
 };
 window["grecaptchaready"] = grecaptchaready;

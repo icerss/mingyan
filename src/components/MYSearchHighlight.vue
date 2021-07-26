@@ -14,7 +14,7 @@ export default {
       let reg = new RegExp(this.searchText, "ig");
       return this.text.replace(
         reg,
-        `<span class="label label-secondary" :data-text="${this.text}">` +
+        `<span class="label label-secondary" data-text="${this.text}">` +
           this.searchText +
           `</span>`
       );

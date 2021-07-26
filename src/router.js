@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Router from "vue-router";
+import VueRouter from "vue-router";
 
 const MYMain = () => import(/* webpackChunkName: "main" */ "@/views/MYMain.vue");
 const MYSearch = () => import(/* webpackChunkName: "search" */ "@/views/MYSearch.vue");
@@ -10,7 +10,7 @@ const MYDonate = () => import(/* webpackChunkName: "page" */ "@/components/MYDon
 const MYRanking = () => import(/* webpackChunkName: "action-page" */ "@/components/MYRanking.vue");
 const MYSubmit = () => import(/* webpackChunkName: "action-page" */ "@/components/MYSubmit.vue");
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
 let routes = [
     { path: "/", name: "main", component: MYMain, alias: "/@*" },
@@ -25,7 +25,7 @@ let routes = [
     { path: "*", redirect: "/" },
 ];
 
-let router = new Router({
+let router = new VueRouter({
     mode: "hash",
     base: process.env.BASE_URL,
     routes: routes

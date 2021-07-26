@@ -49,6 +49,7 @@ export let MY_ranking = function () {
         })
         .then(function (name) {
             if (name) { // 之后就是更新名字啦！
+                localStorage.setItem("___mingyan_2021_ranking_name__", name);
                 return MY_rankingApi.update(id, name, num);
             } else {
                 location.href = "./";

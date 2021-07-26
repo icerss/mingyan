@@ -23,7 +23,7 @@
           <img
             class="banner"
             v-lazy="
-              'https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/03/lnUX9FrvT8ockbY.png'
+              'https://cdn.erssmy.com/image/2021/05/03/lnUX9FrvT8ockbY.png'
             "
             alt="鼓励我们"
           />

@@ -12,8 +12,8 @@
 
 <script>
 import FancyImage from "./FancyImage.vue";
-import { mingyanPicUrl } from "../js/mingyan";
-import { deviceIsPhone, isSupportWebp } from "../js/tools";
+import { mingyanPicUrl, solvePicUrl } from "../js/mingyan";
+import { deviceIsPhone } from "../js/tools";
 import { picBaseUrl } from "../js/init";
 
 export default {
@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       mingyanPicUrl: mingyanPicUrl,
+      solvePicUrl: solvePicUrl,
       imgClassName: "",
       styleMinWidth: 0,
     };
@@ -50,11 +51,9 @@ export default {
       );
     },
     imgSrc() {
-      return (
-        picBaseUrl +
-        this.mingyanPicUrl[this.text] +
-        (isSupportWebp() ? "/webp" : "")
-      );
+      if (this.rawMingyan.split("：")[1] === "解")
+        return picBaseUrl + this.solvePicUrl[this.rawMingyan.split("：")[0]];
+      return picBaseUrl + this.mingyanPicUrl[this.text];
     },
   },
 };

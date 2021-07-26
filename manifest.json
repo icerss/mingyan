@@ -9,19 +9,19 @@
   "theme_color": "#5676dc",
   "icons": [
     {
-      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/512x512.png",
+      "src": "https://cdn.erssmy.com/image/static/mingyan-js-org/new-logo/v2/512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/256x256.png",
+      "src": "https://cdn.erssmy.com/image/static/mingyan-js-org/new-logo/v2/256x256.png",
       "type": "image/png",
       "sizes": "256x256",
       "purpose": "any maskable"
     },
     {
-      "src": "https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/64x64.png",
+      "src": "https://cdn.erssmy.com/image/static/mingyan-js-org/new-logo/v2/64x64.png",
       "type": "image/png",
       "sizes": "64x64",
       "purpose": "any maskable"

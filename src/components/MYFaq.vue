@@ -14,19 +14,19 @@
 
 ## Q：如何刷新名言？/ 怎么看不到别的名言了？
 ## A：仔细看哦，在每条名言的下方都可以点击刷新哦
-![](https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/02/bDscHVdMeUj9Zmn.png)
+![](https://cdn.erssmy.com/image/2021/05/02/bDscHVdMeUj9Zmn.png)
 
 ---
 
 ## Q：我找到了刷新的地方，但字也太小了吧！/ 拜托，刷新字那么小怎么看？
 ## A：没关系，我们的开发人员最 ~~体贴人了哦(不是)~~ ，右上角有一个大大的按钮哦
-![](https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/02/RFcjmBOUzKYCdq7.png)
+![](https://cdn.erssmy.com/image/2021/05/02/RFcjmBOUzKYCdq7.png)
 
 ---
 
 ## Q：如何搜索名言？/ 怎么看我想看的名言？/ 有什么推荐看的名言吗？
 ## A：右上角那么大的一个搜索嘞！
-![](https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/02/n6qhzDQOefLUybV.png)
+![](https://cdn.erssmy.com/image/2021/05/02/n6qhzDQOefLUybV.png)
 
 ---
 
@@ -54,19 +54,19 @@
 
 ## Q：妈妈我想评论！/ 为什么找不到在哪里留言？/ 有没有评论区？
 ## A：有的有的，点击左上角的`更多`进入更多页面就可以留言啦！
-![](https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/02/8cOp1oRtgKqCsMk.png)
+![](https://cdn.erssmy.com/image/2021/05/02/8cOp1oRtgKqCsMk.png)
 
 ---
 
 ## Q：头像咋搞的？好炫酷 / 如何更换评论区头像？
 ## A：别急！评论区的头像用了[Gravatar](https://cn.gravatar.com/)的头像，要换头像的可以去那里注册个账号换头像就好啦。再不会的就百度去搜搜吧
-![](https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/02/qoUKulr1j9mdJQA.png)
+![](https://cdn.erssmy.com/image/2021/05/02/qoUKulr1j9mdJQA.png)
 
 ---
 
 ## Q：为什么上不了Gravatar？/ 为什么按照你的方法还是进不去换头像的网站？
 ## A：呃，这个……你可能需要下面这一样东西来辅助你上这个网……又或者你可以直接使用你发评论的邮箱发有你的头像的邮件给我（[xhemj@erss.club](mailto:xhemj@erss.club)）。
-![](https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/02/2yNOgC1WihkcaXl.png)
+![](https://cdn.erssmy.com/image/2021/05/02/2yNOgC1WihkcaXl.png)
 
 ---
 
@@ -101,7 +101,7 @@
 
 ## Q：LOGO真好看！谁画的？
 ## A：~~确实好看！~~ LOGO是`解恪布TOY`画的呀。
-![](https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png)
+![](https://cdn.erssmy.com/image/2021/05/23/ldzxMt9PYQ3LNyU.png)
 
 ---
 

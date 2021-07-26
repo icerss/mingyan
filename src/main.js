@@ -1,5 +1,6 @@
 import Vue from "vue";
 import router from "./router";
+// import i18n from "./i18n/i18n";
 import App from "./App.vue";
 import VueLazyload from "vue-lazyload";
 /* ant design */
@@ -28,7 +29,6 @@ import "ant-design-vue/lib/avatar/style";
 import "ant-design-vue/lib/spin/style";
 import "ant-design-vue/lib/popover/style";
 
-
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Table);
@@ -41,10 +41,9 @@ Vue.use(List);
 Vue.use(Avatar);
 Vue.use(Spin);
 Vue.use(Popover);
-
 Vue.use(VueLazyload, {
   loading: "assets/loading.svg"
-})
+});
 
 let aegisUin = {};
 if (localStorage.getItem("MY_TOKEN")) aegisUin = { uin: localStorage.getItem("MY_TOKEN") };
@@ -58,23 +57,19 @@ export const aegis = new Aegis({ // eslint-disable-line
 });
 
 Vue.config.productionTip = false
-Vue.config.errorHandler = function(err, vm, info) {
+Vue.config.errorHandler = function (err, vm, info) {
   console.log(`Error: ${err.toString()}\nInfo: ${info}`);
   aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
 };
 
-new Vue({
-  router,
-  render: h => h(App),
-}).$mount("#app");
-
-let _hmt = []; // eslint-disable-line
+let _hmt = [];
 (function () {
   let hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
   let s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
+window._hmt = _hmt;
 
 (function () {
   var bp = document.createElement("script");
@@ -87,3 +82,9 @@ let _hmt = []; // eslint-disable-line
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(bp, s);
 })();
+
+new Vue({
+  router,
+  // i18n,
+  render: h => h(App),
+}).$mount("#app");

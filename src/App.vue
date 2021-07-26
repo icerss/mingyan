@@ -7,7 +7,7 @@
 
 <script>
 import MYHeader from "./components/MYHeader.vue";
-import { qs } from "./js/tools";
+import { log, qs } from "./js/tools";
 import { MY_ranking } from "./js/feat/ranking";
 // import MYFooter from "./components/MYFooter.vue";
 
@@ -21,11 +21,13 @@ export default {
   },
   watch: {
     "$route.path"(val) {
-      console.log(val);
+      log(val);
     },
   },
   mounted() {
     document.title = "ERSS名言 · ERSS";
+    document.querySelector("#loading-mask").style.display = "none";
+    document.querySelector("#loading-mask").remove();
     window.addEventListener("hashchange", function () {
       let hash = window.location.hash;
       if (/#\d/.test(hash)) window.location.href = "./" + hash;
@@ -158,7 +160,7 @@ body {
   padding-right: 10%;
   position: relative;
   font-family: "ZCOOL KuaiLe";
-  background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/27/fRuFkxBg4edS2Qh.png");
+  background-image: url("https://cdn.erssmy.com/image/2020/12/27/fRuFkxBg4edS2Qh.png");
   color: #303742 !important;
   margin-bottom: 120px;
 }

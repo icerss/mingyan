@@ -4,14 +4,17 @@
       <h3 class="my--mingyan-show">
         <span class="my--mingyan-name icon my--name-wave label">
           {{ teacher }} </span
-        ><span class="my--mingyan-verb">曾经说过</span>：
+        ><span class="my--mingyan-conj" v-html="mingyanConj"></span>：
       </h3>
       <h1>
         <span class="my--mingyan-text label label-secondary">
           <span class="my--mingyan-raw">
             {{ text }}
           </span>
-          <MYImage :rawMingyan="rawMingyan" v-if="mingyanPicUrl[text]" />
+          <MYImage
+            :rawMingyan="rawMingyan"
+            v-if="text === '解' || mingyanPicUrl[text]"
+          />
         </span>
       </h1>
       <div class="my--mingyan-info info-text">
@@ -45,6 +48,7 @@ import {
   formatMingyan,
   genNextId,
   mingyanPicUrl,
+  specialConjList,
 } from "../js/mingyan";
 import { fadeIn } from "../js/tools";
 import router from "../router";
@@ -67,11 +71,22 @@ export default {
       starEvent: "addstar",
     };
   },
-
+  watch: {
+    "$route.path"() {
+      this.showMingyan(getNowId());
+    },
+  },
   mounted() {
     this.showMingyan(getNowId());
     MY_incidents();
     // if (location.pathname !== "/") location.pathname = "/";
+  },
+  computed: {
+    mingyanConj() {
+      return specialConjList[this.text]
+        ? specialConjList[this.text]
+        : "曾经说过";
+    },
   },
   methods: {
     showMingyan(id) {

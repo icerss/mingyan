@@ -31,7 +31,7 @@ export let hashName = {
     "#/faq": true,
     "#/sponsor": true
 };
-export let picBaseUrl = "https://s-sh-1943-pic1.oss.dogecdn.com"; // 图片cdn链接
+export let picBaseUrl = "https://cdn.erssmy.com/image"; // 图片cdn链接
 
 export let apiUrls = {
     "star": "https://api.erss.club/api/star",
@@ -56,4 +56,4 @@ export let normalPostHeader = {
 };
 
 export let reCaptchaKey = "6LdOb_gaAAAAAAIQpvSd_6a5yjeneoVlvM159zwH";
-export let MingyanLOGO = "https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png";
+export let MingyanLOGO = "https://cdn.erssmy.com/image/2021/05/23/ldzxMt9PYQ3LNyU.png";

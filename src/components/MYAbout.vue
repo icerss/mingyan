@@ -8,7 +8,7 @@
       <h1>制作人员</h1>
       <ListItem
         href="https://www.iymy.top/"
-        imgSrc="https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/Tp9Q5qaP8A1cG2C.jpg"
+        imgSrc="https://cdn.erssmy.com/image/2021/05/23/Tp9Q5qaP8A1cG2C.jpg"
       >
         <h3>IYAMAYA菌屋工作室</h3>
       </ListItem>
@@ -16,7 +16,7 @@
       <h2>策划：</h2>
       <ListItem
         href="https://space.bilibili.com/337073401"
-        imgSrc="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg"
+        imgSrc="https://cdn.erssmy.com/image/2020/11/01/pzaTck9KuqJdHyv.jpg"
         @click="addClickTime('1')"
       >
         <h3>解恪布TOY</h3>
@@ -25,7 +25,7 @@
       <h2>网页：</h2>
       <ListItem
         href="https://space.bilibili.com/226208916"
-        imgSrc="https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/05/Bext3hDK1nrZM7y.png"
+        imgSrc="https://cdn.erssmy.com/image/2021/04/05/Bext3hDK1nrZM7y.png"
         @click="addClickTime('2')"
       >
         <h3>Xhemj</h3>
@@ -34,7 +34,7 @@
       <h2>美术：</h2>
       <ListItem
         href="https://space.bilibili.com/337073401"
-        imgSrc="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg"
+        imgSrc="https://cdn.erssmy.com/image/2020/11/01/pzaTck9KuqJdHyv.jpg"
         @click="addClickTime('1')"
       >
         <h3>解恪布TOY</h3>
@@ -43,14 +43,14 @@
       <h2>推广：</h2>
       <ListItem
         href="https://space.bilibili.com/337073401"
-        imgSrc="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/pzaTck9KuqJdHyv.jpg"
+        imgSrc="https://cdn.erssmy.com/image/2020/11/01/pzaTck9KuqJdHyv.jpg"
         @click="addClickTime('1')"
       >
         <h3>解恪布TOY</h3>
       </ListItem>
       <ListItem
         href="https://space.bilibili.com/368095014"
-        imgSrc="https://s-sh-1943-pic1.oss.dogecdn.com/2020/11/01/ejgOW7QY8MFmDU5.jpg"
+        imgSrc="https://cdn.erssmy.com/image/2020/11/01/ejgOW7QY8MFmDU5.jpg"
         @click="addClickTime('3')"
       >
         <h3>Oranjezelf</h3>

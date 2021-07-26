@@ -6,8 +6,10 @@
   <link rel="preconnect" href="//cdn.jsdelivr.net" />
   <link rel="preconnect" href="//log.erss.club" />
   <link rel="preconnect" href="//s-sh-1943-pic1.oss.dogecdn.com" />
+  <link rel="preconnect" href="//cdn.erssmy.com" />
   <link rel="prefetch" href="./assets/loading.svg" />
   <link rel="prefetch" href="//api.erss.club/prefetch" />
+  <link rel="manifest" href="manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="ERSS名言">
@@ -32,16 +34,26 @@
 </head>
 
 <body>
+  <div id="loading-mask" style="display:none;text-align:center;padding:50px 0;font-size:18px;color:#303742">
+    快了快了，耳斯名言马上就加载好了~<br />ψ(｀∇´)ψ
+    <script>document.querySelector("#loading-mask").style.display = "block";</script>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@2.1.3/marked.min.js"></script>
-  <div id="app"></div>
-  <noscript>唔ヾ(≧▽≦*)o 你需要启用 Javascript 才能来看名言哦！</noscript>
+  <div id="app">
+    <noscript>
+      <div id="loading-mask" style="display:block;text-align:center;padding:50px 0;font-size:18px;color:#303742">
+        唔ヾ(≧▽≦*)o 你需要启用 Javascript 才能来看名言哦！
+      </div>
+    </noscript>
+  </div>
   <!-- built files will be auto injected -->
   <script async defer src="https://log.erss.club/web.js?v=2.4.1" data-ackee-server="https://log.erss.club"
     data-ackee-domain-id="0e584eea-a8cf-42e2-8602-2d62bb782b4c" data-ackee-opts='{ "detailed": true }'></script>
   <script>
     (async function () {
-      let sw_v = "202107151802";
+      let sw_v = "202107261240";
       let sw_local_v = localStorage.getItem("___mingyan_sw_version__") || "";
       if ("serviceWorker" in navigator && sw_v != sw_local_v && localStorage.getItem("___mingyan_2021_ranking_data__")) {
         await caches.keys().then((cacheNames) => {

@@ -114,7 +114,7 @@ export default {
 
 .icon.my--header-logo {
   background: transparent center/contain no-repeat;
-  background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2021/05/23/ldzxMt9PYQ3LNyU.png");
+  background-image: url("https://cdn.erssmy.com/image/2021/05/23/ldzxMt9PYQ3LNyU.png");
 }
 
 @media only screen and (max-width: 480px) {

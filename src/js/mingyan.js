@@ -806,7 +806,7 @@ export let mingyanPicUrl = { // eslint-disable-line
  * 格式：
  * "名言": "动词"
  */
-export let specialVerbList = { // eslint-disable-line
+export let specialConjList = { // eslint-disable-line
     "松鼠": "的课本上</br>曾经出现过",
     "来看王雷吧": "曾经在语文课上说过",
     "零食杜绝": "曾经出现过",
@@ -851,9 +851,9 @@ export let mingyanSpecialEvent = {
         "来一起唱啊！！": {
             "name": "Shape of You",
             "artist": "Ed Sheeran",
-            "url": "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
-            "cover": "https://s-sh-1943-pic1.oss.dogecdn.com/2020/12/19/L1NY8U7nhRjyQMa.jpg",
-            "lrc": "https://s-sh-1943-pic1.oss.dogecdn.com/static%2Fmingyan-js-org%2FShape%20of%20You.lrc"
+            "url": "https://cdn.erssmy.com/image/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
+            "cover": "https://cdn.erssmy.com/image/2020/12/19/L1NY8U7nhRjyQMa.jpg",
+            "lrc": "https://cdn.erssmy.com/image/static%2Fmingyan-js-org%2FShape%20of%20You.lrc"
         }
     }
 }

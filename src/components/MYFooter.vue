@@ -57,7 +57,21 @@ export default {
   data() {
     return {
       length: mingyan.length,
-      wordsList: ["欢迎来看耳斯名言！！"],
+      wordsList: [
+        `欢迎${
+          localStorage.getItem("___mingyan_2021_ranking_name__")
+            ? localStorage.getItem("___mingyan_2021_ranking_name__")
+            : ""
+        }来到耳斯名言`,
+        "耳斯，名言专家",
+        "你喜欢的名言都在耳斯名言！",
+        "随时随地，发现新名言",
+        "有学校就有耳斯名言",
+        "今年放假不上网，上网就看耳斯名言",
+        "我们不生产名言，我们只是校园师生名言的搬运工",
+        "JUST 名言 IT",
+        "世上本没有名言，说的次数多了，便成了名言",
+      ],
       words: "",
     };
   },
@@ -124,7 +138,7 @@ export default {
 
 .icon.my--mingyan-boy {
   background: transparent center/contain no-repeat;
-  background-image: url("https://s-sh-1943-pic1.oss.dogecdn.com/2021/04/24/EJxXqGilNZLCgba.png");
+  background-image: url("https://cdn.erssmy.com/image/2021/07/26/PFZNGAmpovXHk6B.png");
 }
 
 @media only screen and (max-width: 480px) {
