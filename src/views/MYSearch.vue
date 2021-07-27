@@ -12,26 +12,24 @@
       />
       <div class="search-list" v-if="listMode === 'search'">
         <div class="search-item" v-for="item of displayMingyan" :key="item">
-          <a
+          <router-link
             class="showall-item"
-            @click="historyItemClick($event)"
-            :data-text="item"
-            v-if="isStarInput"
+            v-if="isStartInput"
+            :to="'/@' + findMingyan(item)"
           >
             <MYSearchHighlight
               :searchText="inputValue"
               :text="item"
               v-if="item"
             />
-          </a>
-          <a
+          </router-link>
+          <router-link
             class="showall-item"
-            @click="historyItemClick($event)"
-            :data-text="item"
+            :to="'/@' + findMingyan(item)"
             v-else
           >
             {{ item }}
-          </a>
+          </router-link>
         </div>
       </div>
       <div class="search-history-list" v-if="listMode === 'ranking'">
@@ -46,23 +44,21 @@
             class="search-history-item"
             v-for="(item, index) of historyDataList"
             :key="item.text"
-            @click="historyItemClick($event)"
           >
-            <a-row :data-text="item.text">
-              <a-col
-                :span="historyListWidth[0]"
-                id="star-ranking-num"
-                :data-text="item.text"
-              >
-                {{ new Number(index) + 1 }}
+            <a-row>
+              <a-col :span="historyListWidth[0]" id="star-ranking-num">
+                <router-link :to="'/@' + findMingyan(item.text)">
+                  {{ new Number(index) + 1 }}
+                </router-link>
               </a-col>
               <a-col
                 :span="historyListWidth[1]"
                 class="my--star-ranking-text"
                 id="star-ranking-text"
-                :data-text="item.text"
               >
-                {{ item.text }}
+                <router-link :to="'/@' + findMingyan(item.text)">
+                  {{ item.text }}
+                </router-link>
               </a-col>
             </a-row>
           </div>
@@ -79,7 +75,6 @@ import { mingyan } from "../js/mingyan";
 import MYFooter from "../components/MYFooter.vue";
 import MYSearchHighlight from "../components/MYSearchHighlight.vue";
 import { MY_starApi } from "../js/feat/starApi";
-import router from "../router";
 
 export default {
   name: "MYSearch",
@@ -91,7 +86,7 @@ export default {
     return {
       loadingSvg: `<!-- 加载动画 --><svg xmlns="http://www.w3.org/2000/svg"xmlns:xlink="http://www.w3.org/1999/xlink"style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(60px);"width="30px"height="30px"viewBox="0 0 100 100"preserveAspectRatio="xMidYMid"><circle cx="50"cy="50"fill="none"stroke="rgba(0,0,0,.65)"stroke-width="10"r="35"stroke-dasharray="164.93361431346415 56.97787143782138"><animateTransform attributeName="transform"type="rotate"repeatCount="indefinite"dur="0.75s"values="0 50 50;360 50 50"keyTimes="0;1"></animateTransform></circle><!-- https://loading.io/ --></svg>`,
       mingyan: mingyan,
-      isStarInput: false,
+      isStartInput: false,
       inputValue: "",
       isLoadHitsory: false,
       isLoading: true,
@@ -137,7 +132,7 @@ export default {
     },
     displayMingyan() {
       let root = this;
-      if (!this.isStarInput) {
+      if (!this.isStartInput) {
         let o = [];
         for (let i = 0; i < this.displayLength; i++) {
           o.push(mingyan[i]);
@@ -179,10 +174,10 @@ export default {
     },
     handleSearch() {
       if (!this.inputValue) {
-        this.isStarInput = false;
+        this.isStartInput = false;
         this.resultLength = 0;
       } else {
-        this.isStarInput = true;
+        this.isStartInput = true;
       }
       //console.log(this.inputValue);
     },
@@ -209,10 +204,9 @@ export default {
       return 0;
     },
 
-    historyItemClick(event) {
-      let text = event.path[0].getAttribute("data-text");
-      router.push("/@" + this.findMingyan(text));
-    },
+    // historyItemClick(event) {
+    //   let text = event.path[0].getAttribute("data-text");
+    // },
   },
 };
 </script>
@@ -250,11 +244,11 @@ export default {
   line-height: 1.8;
   text-decoration: none;
   font-weight: normal;
-  color: black;
+  color: #303742;
 }
 
 .showall-item {
-  color: black;
+  color: #303742;
 }
 
 .search-history-item,
@@ -273,9 +267,14 @@ export default {
 }
 
 .search-history-item {
+  color: #303742;
   padding: 3px;
   font-size: 15px;
   text-align: center;
+}
+
+a {
+  color: #303742;
 }
 
 .history-loading-mask {

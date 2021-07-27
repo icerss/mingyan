@@ -93,6 +93,7 @@ export default {
 .mdui-icon {
   display: inline-block;
   text-align: center;
+  user-select: none;
 }
 
 .mdui-icon,

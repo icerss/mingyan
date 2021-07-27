@@ -16,6 +16,7 @@ import List from "ant-design-vue/lib/list";
 import Avatar from "ant-design-vue/lib/avatar";
 import Spin from "ant-design-vue/lib/spin";
 import Popover from "ant-design-vue/lib/popover";
+import Comment from "ant-design-vue/lib/comment";
 import "ant-design-vue/lib/row/style";
 import "ant-design-vue/lib/col/style";
 import "ant-design-vue/lib/table/style";
@@ -28,6 +29,7 @@ import "ant-design-vue/lib/list/style";
 import "ant-design-vue/lib/avatar/style";
 import "ant-design-vue/lib/spin/style";
 import "ant-design-vue/lib/popover/style";
+import "ant-design-vue/lib/comment/style";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -41,6 +43,7 @@ Vue.use(List);
 Vue.use(Avatar);
 Vue.use(Spin);
 Vue.use(Popover);
+Vue.use(Comment);
 Vue.use(VueLazyload, {
   loading: "assets/loading.svg"
 });

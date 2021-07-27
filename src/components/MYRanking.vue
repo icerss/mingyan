@@ -8,40 +8,40 @@
           </div></strong
         ><br />
       </div>
-      <div
-        class="my--ranking-finish-loading"
-        @click="historyItemClick($event)"
-        v-else
-      >
-        <h1 style="text-align: center" data-text="数学老王：你是屁股吗？">
-          排行榜
-        </h1>
+      <div class="my--ranking-finish-loading" v-else>
+        <h1 style="text-align: center">排行榜</h1>
         <a-row
           class="my--ranking-item"
           v-for="(item, index) of rankingData"
           :key="index + item"
         >
-          <a-col :span="width[0]" id="star-ranking-num" :data-text="item.text">
-            {{ new Number(index) + 1 }}
+          <a-col :span="width[0]" id="star-ranking-num">
+            <router-link :to="'/@' + findMingyan(item.text)">
+              {{ new Number(index) + 1 }}
+            </router-link>
           </a-col>
           <a-col
             :span="width[1]"
             class="my--star-ranking-text"
             id="star-ranking-text"
-            :data-text="item.text"
           >
-            {{ item.text }}
+            <router-link :to="'/@' + findMingyan(item.text)">
+              {{ item.text }}
+            </router-link>
           </a-col>
-          <a-col :span="width[2]" :data-text="item.text">
-            <i
-              class="mdui-icon material-icons"
-              id="star-ranking-thumb"
-              style="color: rgba(0, 0, 0, 0.64)"
-              :data-text="item.text"
-              >&#xe8dc;</i
-            >
-            <span id="star-ranking-thumb-num" :data-text="item.text">
-              {{ item.num }}
+          <a-col :span="width[2]">
+            <router-link :to="'/@' + findMingyan(item.text)">
+              <i
+                class="mdui-icon material-icons"
+                id="star-ranking-thumb"
+                style="color: rgba(0, 0, 0, 0.64)"
+                >&#xe8dc;</i
+              >
+            </router-link>
+            <span id="star-ranking-thumb-num">
+              <router-link :to="'/@' + findMingyan(item.text)">
+                {{ item.num }}
+              </router-link>
             </span>
           </a-col>
         </a-row>
@@ -56,7 +56,6 @@ import MYFooter from "./MYFooter.vue";
 import { MY_starApi } from "../js/feat/starApi";
 import { deviceIsPhone, fadeIn } from "../js/tools";
 import { mingyan } from "../js/mingyan";
-import router from "../router";
 
 export default {
   name: "MYRanking",
@@ -98,11 +97,6 @@ export default {
       }
       return 0;
     },
-
-    historyItemClick(event) {
-      let text = event.path[0].getAttribute("data-text");
-      router.push("/@" + this.findMingyan(text));
-    },
   },
 };
 </script>
@@ -123,5 +117,9 @@ export default {
 
 .my--star-ranking-text {
   text-align: center;
+}
+
+a {
+  color: #303742;
 }
 </style>

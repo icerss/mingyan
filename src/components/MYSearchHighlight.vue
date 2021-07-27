@@ -1,5 +1,5 @@
 <template>
-  <span class="search-highlight" v-html="handleSearch" :data-text="text"></span>
+  <span class="search-highlight" v-html="handleSearch"></span>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
       let reg = new RegExp(this.searchText, "ig");
       return this.text.replace(
         reg,
-        `<span class="label label-secondary" data-text="${this.text}">` +
+        `<span class="label label-secondary">` +
           this.searchText +
           `</span>`
       );
