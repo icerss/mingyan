@@ -36,7 +36,7 @@ export default {
       let root = this;
       if (!root.showFromData) {
         root.showFromData = "";
-        MY_showFromApi.getinfo(root.mingyan).then(function (info) {
+        MY_showFromApi.getinfo(root.mingyan).then(function(info) {
           root.showFromData = info.data;
           return root.showInfo();
         });
@@ -59,7 +59,7 @@ export default {
     },
     loadType() {
       let root = this;
-      MY_showFromApi.getinfo(root.mingyan).then(function (info) {
+      MY_showFromApi.getinfo(root.mingyan).then(function(info) {
         root.showFromData = info.data;
         // db("showFromData", showFromData);
         let submit_type = root.showFromData.from.type;

@@ -85,7 +85,7 @@ export default {
   methods: {
     getRankingData() {
       let root = this;
-      MY_starApi.getRanking().then(function (res) {
+      MY_starApi.getRanking().then(function(res) {
         root.rankingData = res.data;
         root.isFinishLoading = true;
       });

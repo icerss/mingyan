@@ -14,9 +14,7 @@ export default {
       let reg = new RegExp(this.searchText, "ig");
       return this.text.replace(
         reg,
-        `<span class="label label-secondary">` +
-          this.searchText +
-          `</span>`
+        `<span class="label label-secondary">` + this.searchText + `</span>`
       );
     },
   },

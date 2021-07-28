@@ -17,7 +17,6 @@
           <router-link to="/about">关于</router-link>
         </h3>
       </div>
-      <!-- -->
       <router-link to="/donate">
         <div class="my--sponsor">
           <img
@@ -29,7 +28,6 @@
           />
         </div>
       </router-link>
-      <!-- -->
 
       <hr />
 
@@ -145,8 +143,7 @@ export default {
     downloadMingyan() {
       let time = new Date().toLocaleString();
       SaveAs(
-        `耳斯名言列表（下载时间：${time}）\n==========\n` + 
-        mingyan.join("\n"),
+        `耳斯名言列表（下载时间：${time}）\n==========\n` + mingyan.join("\n"),
         "txt",
         `耳斯名言列表（下载时间：${time}）`
       );
@@ -157,14 +154,14 @@ export default {
 
     let root = this;
     loadJs("https://cdn.jsdelivr.net/npm/twikoo@1.4.1/dist/twikoo.min.js").then(
-      function () {
+      function() {
         twikoo // eslint-disable-line
           .init({
             envId: "xhemj-0gjckebwf7276129",
             el: "#tcomment",
             path: "/",
           })
-          .then(function () {
+          .then(function() {
             try {
               document.querySelector(
                 ".tk-footer"
@@ -177,7 +174,7 @@ export default {
     );
     fetch("https://api.github.com/repos/xhemj/mingyan")
       .then((r) => r.json())
-      .then(function (data) {
+      .then(function(data) {
         var a = data["updated_at"];
         root.uptime = new Date(a).toLocaleString();
       });
@@ -186,7 +183,7 @@ export default {
       .then((res) => {
         root.hitCount = res.data.count;
       });
-    setInterval(function () {
+    setInterval(function() {
       root.sitetime = root.siteTime();
     }, 250);
   },

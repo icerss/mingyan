@@ -14,170 +14,203 @@ let starApiUrl = apiUrls.star_v2;
 // 感谢MongoDB提供免费的数据库！！
 
 export let MY_starApi = {
-    /**
-     * 获取当前点赞数
-     * @param {String} my 完整名言
-     */
-    "getNum": function (my) {
-        if (!Promise) return;
-        if (!my) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
-        return new Promise(function (resolve, reject) {
-            fetch(starApiUrl, {
-                ...normalPostHeader,
-                body: JSON.stringify({
-                    "event": "getnum",
-                    "data": {
-                        MY_text: my,
-                        MY_token: getUid(),
-                        t: new Date().getTime()
-                    }
-                })
-            }).then(res => res.json()).then(json => {
-                resolve(json);
-            }).catch(function (e) {
-                reject(e);
-            });
+  /**
+   * 获取当前点赞数
+   * @param {String} my 完整名言
+   */
+  getNum: function(my) {
+    if (!Promise) return;
+    if (!my)
+      my =
+        document.querySelector(".my--mingyan-name").innerText.trim() +
+        "：" +
+        document.querySelector(".my--mingyan-text").innerText.trim();
+    return new Promise(function(resolve, reject) {
+      fetch(starApiUrl, {
+        ...normalPostHeader,
+        body: JSON.stringify({
+          event: "getnum",
+          data: {
+            MY_text: my,
+            MY_token: getUid(),
+            t: new Date().getTime(),
+          },
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          resolve(json);
+        })
+        .catch(function(e) {
+          reject(e);
         });
-    },
+    });
+  },
 
-    /**
-     * 点赞
-     * @param {String} my 完整名言
-     */
-    "addStar": async function (my, id) {
-        if (!Promise) return;
-        if (!my && !id) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
-        let _find = {};
-        if (id && my) _find = { MY_text: my };
-        if (id && !my) _find = { MY_ID: id };
-        if (!id && my) _find = { MY_text: my };
-        // 接入recaptcha 验证
-        try {
-            let recaptcha_token = await loadCaptcha();
-            return new Promise(function (resolve, reject) {
-                fetch(starApiUrl, {
-                    ...normalPostHeader,
-                    body: JSON.stringify({
-                        "event": "addstar",
-                        "data": {
-                            ..._find,
-                            MY_token: getUid(),
-                            re_token: recaptcha_token,
-                            t: new Date().getTime()
-                        }
-                    })
-                }).then(res => res.json()).then(json => {
-                    resolve(json);
-                }).catch(function (e) {
-                    reject(e);
-                });
-            });
-        } catch (e) {
-            NotyfAlert.err("点赞失败：" + e);
-        }
-    },
+  /**
+   * 点赞
+   * @param {String} my 完整名言
+   */
+  addStar: async function(my, id) {
+    if (!Promise) return;
+    if (!my && !id)
+      my =
+        document.querySelector(".my--mingyan-name").innerText.trim() +
+        "：" +
+        document.querySelector(".my--mingyan-text").innerText.trim();
+    let _find = {};
+    if (id && my) _find = { MY_text: my };
+    if (id && !my) _find = { MY_ID: id };
+    if (!id && my) _find = { MY_text: my };
+    // 接入recaptcha 验证
+    try {
+      let recaptcha_token = await loadCaptcha();
+      return new Promise(function(resolve, reject) {
+        fetch(starApiUrl, {
+          ...normalPostHeader,
+          body: JSON.stringify({
+            event: "addstar",
+            data: {
+              ..._find,
+              MY_token: getUid(),
+              re_token: recaptcha_token,
+              t: new Date().getTime(),
+            },
+          }),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            resolve(json);
+          })
+          .catch(function(e) {
+            reject(e);
+          });
+      });
+    } catch (e) {
+      NotyfAlert.err("点赞失败：" + e);
+    }
+  },
 
-    /**
-     * 取消点赞
-     * @param {String} my 完整名言
-     */
-    "removeStar": async function (my) {
-        if (!Promise) return;
-        if (!my) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
-        // 接入recaptcha 验证
-        try {
-            let recaptcha_token = await loadCaptcha();
-            return new Promise(function (resolve, reject) {
-                fetch(starApiUrl, {
-                    ...normalPostHeader,
-                    body: JSON.stringify({
-                        "event": "removestar",
-                        "data": {
-                            MY_text: my,
-                            MY_token: getUid(),
-                            re_token: recaptcha_token,
-                            t: new Date().getTime()
-                        }
-                    })
-                }).then(res => res.json()).then(json => {
-                    resolve(json);
-                }).catch(function (e) {
-                    reject(e);
-                });
-            });
-        } catch (e) {
-            NotyfAlert.err("点赞失败：" + e);
-        }
+  /**
+   * 取消点赞
+   * @param {String} my 完整名言
+   */
+  removeStar: async function(my) {
+    if (!Promise) return;
+    if (!my)
+      my =
+        document.querySelector(".my--mingyan-name").innerText.trim() +
+        "：" +
+        document.querySelector(".my--mingyan-text").innerText.trim();
+    // 接入recaptcha 验证
+    try {
+      let recaptcha_token = await loadCaptcha();
+      return new Promise(function(resolve, reject) {
+        fetch(starApiUrl, {
+          ...normalPostHeader,
+          body: JSON.stringify({
+            event: "removestar",
+            data: {
+              MY_text: my,
+              MY_token: getUid(),
+              re_token: recaptcha_token,
+              t: new Date().getTime(),
+            },
+          }),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            resolve(json);
+          })
+          .catch(function(e) {
+            reject(e);
+          });
+      });
+    } catch (e) {
+      NotyfAlert.err("点赞失败：" + e);
+    }
+  },
 
-    },
-
-    /**
-     * 获取排行榜
-     */
-    "getRanking": function () {
-        if (!Promise) return;
-        return new Promise(function (resolve, reject) {
-            fetch(starApiUrl, {
-                ...normalPostHeader,
-                body: JSON.stringify({
-                    "event": "ranking",
-                    "data": {
-                        "t": new Date().getTime()
-                    }
-                })
-            }).then(res => res.json()).then(json => {
-                resolve(json);
-            }).catch(function (e) {
-                reject(e);
-            });
+  /**
+   * 获取排行榜
+   */
+  getRanking: function() {
+    if (!Promise) return;
+    return new Promise(function(resolve, reject) {
+      fetch(starApiUrl, {
+        ...normalPostHeader,
+        body: JSON.stringify({
+          event: "ranking",
+          data: {
+            t: new Date().getTime(),
+          },
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          resolve(json);
+        })
+        .catch(function(e) {
+          reject(e);
         });
-    },
+    });
+  },
 
-    /**
-     * 获取临时排行榜数据
-     */
-    "getHistoryRanking": function () {
-        if (!Promise) return;
-        return new Promise(function (resolve, reject) {
-            fetch("https://www.erssmy.com/api/get-ranking-history?_t=" + new Date().getTime())
-                .then(res => res.json())
-                .then(json => {
-                    log(json);
-                    if (json.msg == "请求成功") resolve(json.data);
-                    reject(json.msg);
-                });
+  /**
+   * 获取临时排行榜数据
+   */
+  getHistoryRanking: function() {
+    if (!Promise) return;
+    return new Promise(function(resolve, reject) {
+      fetch(
+        "https://www.erssmy.com/api/get-ranking-history?_t=" +
+          new Date().getTime()
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          log(json);
+          if (json.msg == "请求成功") resolve(json.data);
+          reject(json.msg);
         });
-    },
+    });
+  },
 
-    /**
-     * 兼容 V1 数据格式
-     * @param {String} my 完整名言
-     */
-    "update": function (my, id) {
-        if (!Promise) return;
-        if (!my && !id) my = (document.querySelector(".my--mingyan-name").innerText).trim() + "：" + (document.querySelector(".my--mingyan-text").innerText).trim();
-        let _find = {};
-        if (id && my) _find = { MY_text: my };
-        if (id && !my) _find = { MY_ID: id };
-        if (!id && my) _find = { MY_text: my };
-        return new Promise(function (resolve, reject) {
-            fetch(starApiUrl, {
-                ...normalPostHeader,
-                body: JSON.stringify({
-                    "event": "update",
-                    "data": {
-                        ..._find,
-                        MY_token: getUid(),
-                        t: new Date().getTime()
-                    }
-                })
-            }).then(res => res.json()).then(json => {
-                resolve(json);
-            }).catch(function (e) {
-                reject(e);
-            });
+  /**
+   * 兼容 V1 数据格式
+   * @param {String} my 完整名言
+   */
+  update: function(my, id) {
+    if (!Promise) return;
+    if (!my && !id)
+      my =
+        document.querySelector(".my--mingyan-name").innerText.trim() +
+        "：" +
+        document.querySelector(".my--mingyan-text").innerText.trim();
+    let _find = {};
+    if (id && my) _find = { MY_text: my };
+    if (id && !my) _find = { MY_ID: id };
+    if (!id && my) _find = { MY_text: my };
+    return new Promise(function(resolve, reject) {
+      fetch(starApiUrl, {
+        ...normalPostHeader,
+        body: JSON.stringify({
+          event: "update",
+          data: {
+            ..._find,
+            MY_token: getUid(),
+            t: new Date().getTime(),
+          },
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          resolve(json);
+        })
+        .catch(function(e) {
+          reject(e);
         });
-    },
+    });
+  },
 };
 
- // window["MY_starApi"] = MY_starApi;
+// window["MY_starApi"] = MY_starApi;

@@ -17,6 +17,8 @@ import Avatar from "ant-design-vue/lib/avatar";
 import Spin from "ant-design-vue/lib/spin";
 import Popover from "ant-design-vue/lib/popover";
 import Comment from "ant-design-vue/lib/comment";
+import Divider from "ant-design-vue/lib/divider";
+import Pagination from "ant-design-vue/lib/pagination";
 import "ant-design-vue/lib/row/style";
 import "ant-design-vue/lib/col/style";
 import "ant-design-vue/lib/table/style";
@@ -30,6 +32,8 @@ import "ant-design-vue/lib/avatar/style";
 import "ant-design-vue/lib/spin/style";
 import "ant-design-vue/lib/popover/style";
 import "ant-design-vue/lib/comment/style";
+import "ant-design-vue/lib/divider/style";
+import "ant-design-vue/lib/pagination/style";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -44,29 +48,34 @@ Vue.use(Avatar);
 Vue.use(Spin);
 Vue.use(Popover);
 Vue.use(Comment);
+Vue.use(Divider);
+Vue.use(Pagination);
 Vue.use(VueLazyload, {
-  loading: "assets/loading.svg"
+  loading: "assets/loading.svg",
 });
 
 let aegisUin = {};
-if (localStorage.getItem("MY_TOKEN")) aegisUin = { uin: localStorage.getItem("MY_TOKEN") };
-export const aegis = new Aegis({ // eslint-disable-line
+if (localStorage.getItem("MY_TOKEN"))
+  aegisUin = { uin: localStorage.getItem("MY_TOKEN") };
+let Aegis = window.Aegis;
+export const aegis = new Aegis({
+  // eslint-disable-line
   id: "jYr96KM75PZJAq3LvV",
   ...aegisUin,
   reportApiSpeed: true,
   reportAssetSpeed: true,
   spa: true,
-  version: "3.0.0"
+  version: "3.0.0",
 });
 
-Vue.config.productionTip = false
-Vue.config.errorHandler = function (err, vm, info) {
+Vue.config.productionTip = false;
+Vue.config.errorHandler = function(err, vm, info) {
   aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
   console.error(`Error: ${err.toString()}\nInfo: ${info}`);
 };
 
 let _hmt = [];
-(function () {
+(function() {
   let hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
   let s = document.getElementsByTagName("script")[0];
@@ -74,7 +83,7 @@ let _hmt = [];
 })();
 window._hmt = _hmt;
 
-(function () {
+(function() {
   var bp = document.createElement("script");
   var curProtocol = window.location.protocol.split(":")[0];
   if (curProtocol === "https") {
@@ -89,5 +98,5 @@ window._hmt = _hmt;
 new Vue({
   router,
   // i18n,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount("#app");

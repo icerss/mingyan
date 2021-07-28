@@ -10,7 +10,7 @@
         />
         <p class="qrcode-text">点击图片可以放大</p>
       </div>
-      <!-- -->
+
       <div class="sponsor-table">
         <span class="sponsor-table-loading" v-if="!isFinishLoading"
           >加载中……</span
@@ -23,7 +23,6 @@
           ></a-table>
         </div>
       </div>
-      <!-- -->
     </div>
     <MYFooter mode="back" />
   </div>
@@ -78,7 +77,7 @@ export default {
       "https://www.erssmy.com/api/get-sponsor-list?t=_" + new Date().getTime()
     )
       .then((r) => r.json())
-      .then(function (res) {
+      .then(function(res) {
         root.handleData(res);
       });
   },

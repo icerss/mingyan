@@ -126,7 +126,7 @@ export default {
   },
   computed: {
     displayDataList() {
-      return this.displayMingyan.filter(function (item, index) {
+      return this.displayMingyan.filter(function(item, index) {
         index < this.displayLength;
       });
     },
@@ -139,7 +139,7 @@ export default {
         }
         return o;
       } else {
-        let data = this.mingyan.filter(function (item) {
+        let data = this.mingyan.filter(function(item) {
           if (
             item
               .toLocaleLowerCase()
@@ -184,7 +184,7 @@ export default {
 
     getHistoryRanking() {
       let root = this;
-      MY_starApi.getHistoryRanking().then(function (res) {
+      MY_starApi.getHistoryRanking().then(function(res) {
         let data = [];
         for (let i = 0; i < 15; i++) {
           data.push(res[i]);
@@ -192,7 +192,7 @@ export default {
         root.historyDataList = data;
         root.isLoading = false;
       });
-      setTimeout(function () {
+      setTimeout(function() {
         if (!root.historyDataList === []) root.isLoading = false;
       }, 2000);
     },

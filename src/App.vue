@@ -15,9 +15,6 @@ export default {
   components: {
     MYHeader,
   },
-  data() {
-    return {};
-  },
   watch: {
     "$route.path"(val) {
       log(val);
@@ -27,11 +24,11 @@ export default {
     document.title = "ERSS名言 · ERSS";
     document.querySelector("#loading-mask").style.display = "none";
     document.querySelector("#loading-mask").remove();
-    window.addEventListener("hashchange", function () {
+    window.addEventListener("hashchange", function() {
       let hash = window.location.hash;
       if (/#\d/.test(hash)) window.location.href = "./" + hash;
     });
-    window.doRanking = function () {
+    window.doRanking = function() {
       if (
         qs("force_action") == "2020" ||
         !localStorage.getItem("___mingyan_2021_ranking_data__")
@@ -160,6 +157,7 @@ body {
   background-image: url("https://cdn.erssmy.com/image/2020/12/27/fRuFkxBg4edS2Qh.png");
   color: #303742 !important;
   margin-bottom: 120px;
+  transition: padding 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 #app {

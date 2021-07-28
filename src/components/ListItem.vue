@@ -2,7 +2,7 @@
   <a-list item-layout="horizontal">
     <a-list-item>
       <a-list-item-meta :description="description">
-        <h3 slot="title" :class="{'my--list-title': !description}">
+        <h3 slot="title" :class="{ 'my--list-title': !description }">
           <a :href="href" target="_blank" rel="nofollow ugc">
             <slot></slot>
           </a>

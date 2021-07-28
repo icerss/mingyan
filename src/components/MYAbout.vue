@@ -159,7 +159,7 @@ export default {
           text: "[]~(￣▽￣)~*]",
           icon: "info",
           button: "关闭",
-        }).then(function () {
+        }).then(function() {
           document.querySelector("body").style.transition =
             "transform 1s ease 0s";
           document.querySelector("body").style.transform = "rotateY(180deg)";

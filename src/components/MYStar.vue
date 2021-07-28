@@ -35,7 +35,7 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("hashchange", function () {
+    window.addEventListener("hashchange", function() {
       this.starEvent = "addstar";
     });
     addClickEvent("#star-logo", this.doStar);
@@ -84,7 +84,7 @@ export default {
       let root = this;
       root.turnGray();
       MY_starApi.addStar()
-        .then(function (addStar_res) {
+        .then(function(addStar_res) {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
             NotyfAlert.err(addStar_res.msg);
@@ -104,7 +104,7 @@ export default {
             }
           }
         })
-        .catch(function (err) {
+        .catch(function(err) {
           NotyfAlert.err("错误：\n" + err);
         });
     },
@@ -112,7 +112,7 @@ export default {
       let root = this;
       root.turnGray();
       MY_starApi.removeStar()
-        .then(function (addStar_res) {
+        .then(function(addStar_res) {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
             NotyfAlert.err(addStar_res.msg);
@@ -132,7 +132,7 @@ export default {
             }
           }
         })
-        .catch(function (err) {
+        .catch(function(err) {
           NotyfAlert.err("错误：\n" + err);
         });
     },
@@ -177,7 +177,7 @@ export default {
 }
 </style>
 
-<style  scoped>
+<style scoped>
 .my--star-btn {
   cursor: pointer;
 }

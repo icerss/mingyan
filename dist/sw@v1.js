@@ -25,6 +25,7 @@ const ignoreFetch = [
     /gstatic.cn\/recaptcha/,
     /^[\/]$/,
     /https?:\/\/aegis.qq.com\//,
+    /https?:\/\/sdn.geekzu.org\//,
 ];
 
 function onInstall(event) {

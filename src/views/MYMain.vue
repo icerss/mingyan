@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+    <MYComment :rawMingyan="rawMingyan" />
     <MYFooter />
   </div>
 </template>
@@ -53,6 +54,8 @@ import {
 import { fadeIn } from "../js/tools";
 import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
+const MYComment = () =>
+  import(/* webpackChunkName: "comment" */ "../components/MYComment.vue");
 
 export default {
   name: "MYMain",
@@ -61,6 +64,7 @@ export default {
     MYInfo,
     MYFooter,
     MYImage,
+    MYComment,
   },
   data() {
     return {
