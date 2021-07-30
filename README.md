@@ -1,32 +1,13 @@
 <div style="text-align:center">
 
-![mingyan.png](https://i.loli.net/2020/12/06/jJvHc62dTaBXxRL.png)
+![mingyan.png](https://i.loli.net/2021/05/23/ldzxMt9PYQ3LNyU.png)
 
-# ERSS 名言
+# 耳斯名言
 
-[![@ERSS](https://badgen.net/badge/icon/ERSS?icon=bitcoin-lightning&amp;label)](https://github.com/icerss/mingyan) [![@xhemj](https://badgen.net/badge/icon/xhemj/mingyan?icon=github&amp;label)](https://github.com/xhemj) ![@tag](https://badgen.net/github/tag/xhemj/mingyan) ![@commit](https://badgen.net/github/last-commit/xhemj/mingyan)
+[![@ERSS](https://badgen.net/badge/icon/ERSS?icon=bitcoin-lightning&label)](https://github.com/icerss/mingyan) [![@xhemj](https://badgen.net/badge/icon/xhemj/mingyan?icon=github&label)](https://github.com/xhemj) ![@tag](https://badgen.net/github/tag/xhemj/mingyan) ![@commit](https://badgen.net/github/last-commit/xhemj/mingyan)
 
 ### 快来看看大家的名言吧！
-[https://mingyan.js.org](https://mingyan.js.org)
 
-</div>
-
-### ✨ 制作：
-- xhemj
-- BlackToy
-- Oranjezelv
-
-### ⚡️ 特别感谢：
-- 厦门市音乐学校
-- 厦大食堂
-- ERSS 恪人族
-- IYAMAYA 工作室
-- 厦门市音乐学校的全体老师和同学们
-
-
-
-<div style="text-align:center">
-
-![](https://img.shields.io/badge/BY%20XHEMJ%20-11111.svg?style=for-the-badge&labelColor=000000&logoWidth=20)
+[https://www.erssmy.com/](https://s.erssmy.com/40m3)
 
 </div>

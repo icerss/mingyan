@@ -203,7 +203,9 @@ export default {
   computed: {
     avatarImg() {
       return this.mail
-        ? `https://cdn.erssmy.com/gravatar/${md5(this.mail)}?d=identicon`
+        ? `https://cdn.erssmy.com/gravatar/${md5(
+            this.mail
+          )}?d=identicon&_my_cache_=no`
         : "";
     },
   },
