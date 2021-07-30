@@ -12,13 +12,13 @@
         >&nbsp;&nbsp;|&nbsp;&nbsp;
         <router-link class="my-el-a" to="/more">更多</router-link>
       </div>
-      <PopoverItem :content="words">
+      <!-- <PopoverItem :content="words">
         <i
           class="icon my--mingyan-boy"
           @mouseenter="handleWords"
           @click="handleWords"
         ></i>
-      </PopoverItem>
+      </PopoverItem> -->
     </div>
     <div class="my--footer-back" v-else-if="mode === 'back'">
       <div class="my--footer-html">
@@ -28,14 +28,14 @@
           >
         </div>
       </div>
-      <PopoverItem :content="words">
+      <!-- <PopoverItem :content="words">
         <i
           class="icon my--mingyan-boy"
           @mouseenter="handleWords"
           @click="handleWords"
           style="opacity: 0.5"
         ></i>
-      </PopoverItem>
+      </PopoverItem> -->
     </div>
   </footer>
 </template>
@@ -44,7 +44,7 @@
 import { mingyan } from "../js/mingyan";
 import { randomNumber } from "../js/tools";
 import router from "../router";
-import PopoverItem from "./PopoverItem.vue";
+// import PopoverItem from "./PopoverItem.vue";
 
 export default {
   name: "MYFooter",
@@ -52,7 +52,7 @@ export default {
     mode: String,
   },
   components: {
-    PopoverItem,
+    // PopoverItem,
   },
   data() {
     return {

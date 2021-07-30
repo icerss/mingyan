@@ -29,55 +29,51 @@
             ><a-icon type="user"
           /></a-avatar>
           <div slot="content">
-            <a-form-item>
-              <a-row class="comment-detail">
-                <div class="comment-detail-input">
-                  <a-input v-model="name" placeholder="昵称" required>
-                    <a-icon
-                      slot="prefix"
-                      type="user"
-                      style="color: rgba(0, 0, 0, 0.25)"
-                    />
-                  </a-input>
-                </div>
-                <div class="comment-detail-input">
-                  <a-input v-model="mail" placeholder="邮箱" required>
-                    <a-icon
-                      slot="prefix"
-                      type="mail"
-                      style="color: rgba(0, 0, 0, 0.25)"
-                    />
-                  </a-input>
-                </div>
-              </a-row>
-              <div class="comment-detail-textarea">
-                <a-textarea
-                  :style="'height:' + textarea_height"
-                  :value="comment_input"
-                  @mousemove="textarea_height = '72px'"
-                  @mouseleave="onTextareaMouseLeave"
-                  @change="handleChange"
-                  @keyup.enter.prevent="sendComment"
-                  placeholder="发一条友善的评论~~"
-                />
+            <a-row class="comment-detail">
+              <div class="comment-detail-input">
+                <a-input v-model="name" placeholder="昵称" required>
+                  <a-icon
+                    slot="prefix"
+                    type="user"
+                    style="color: rgba(0, 0, 0, 0.25)"
+                  />
+                </a-input>
               </div>
-            </a-form-item>
-            <a-form-item>
-              <a-button
-                html-type="submit"
-                type="primary"
-                class="comment-submit-btn"
-                :loading="submitting"
-                @click="sendComment"
-              >
-                发送评论
-              </a-button>
-            </a-form-item>
+              <div class="comment-detail-input">
+                <a-input v-model="mail" placeholder="邮箱" required>
+                  <a-icon
+                    slot="prefix"
+                    type="mail"
+                    style="color: rgba(0, 0, 0, 0.25)"
+                  />
+                </a-input>
+              </div>
+            </a-row>
+            <div class="comment-detail-textarea">
+              <a-textarea
+                :style="'height:' + textarea_height"
+                :value="comment_input"
+                @mousemove="onTextareaMouseMove"
+                @mouseleave="onTextareaMouseLeave"
+                @change="handleChange"
+                @keyup.enter.prevent="sendComment"
+                placeholder="发一条友善的评论~~"
+              />
+            </div>
+            <a-button
+              html-type="submit"
+              type="primary"
+              class="comment-submit-btn"
+              :loading="submitting"
+              @click="sendComment"
+            >
+              {{ sendBtnText }}
+            </a-button>
           </div>
         </a-comment>
       </div>
       <a-divider v-if="!isOpenInput" class="comment-open-tip">
-        <span @click="isOpenInput = true"
+        <span @click="isOpenInput = true" class="comment-click-to-send"
           >{{ comments.length === 0 ? "暂无评论，" : "" }}点我发送评论</span
         >
       </a-divider>
@@ -154,6 +150,7 @@ export default {
           .mail || "",
       comment_input: "",
       textarea_height: "36px",
+      sendBtnText: "取消评论",
     };
   },
   mounted() {
@@ -206,7 +203,7 @@ export default {
   computed: {
     avatarImg() {
       return this.mail
-        ? `https://sdn.geekzu.org/avatar/${md5(this.mail)}?d=identicon`
+        ? `https://cdn.erssmy.com/gravatar/${md5(this.mail)}?d=identicon`
         : "";
     },
   },
@@ -223,7 +220,7 @@ export default {
               author: item.nick,
               avatar: item.avatar
                 ? item.avatar
-                : `https://sdn.geekzu.org/avatar/${item.mail_md5}?d=identicon`,
+                : `https://cdn.erssmy.com/gravatar/${item.mail_md5}?d=identicon&_my_cache_=no`,
               content: item.comment,
               datetime: dayjs(item.created).fromNow(),
             });
@@ -238,41 +235,45 @@ export default {
     },
     sendComment() {
       let root = this;
-      if (!this.comment_input || !this.name || !this.mail) {
-        NotyfAlert.err("你还没输入内容呢！");
-        return;
-      }
-      this.submitting = true;
-      let comment_input = this.comment_input;
-      MY_commentApi.addComment({
-        mingyan: this.rawMingyan,
-        avatar: "",
-        comment: comment_input,
-        nick: this.name,
-        mail: this.mail,
-      })
-        .then(function(res) {
-          log("评论成功", res);
-          root.submitting = false;
-          root.comment_input = "";
-          root.comments = [
-            {
-              author: root.name,
-              avatar: `https://sdn.geekzu.org/avatar/${md5(
-                root.mail
-              )}?d=identicon`,
-              content: comment_input,
-              datetime: dayjs(new Date().getTime()).fromNow(),
-            },
-            ...root.comments,
-          ];
-          root.displayCommentPage = 1;
-          root.handleDisplayComment();
-          NotyfAlert.su("评论成功！");
+      if (this.sendBtnText === "发送评论") {
+        if (!this.comment_input || !this.name || !this.mail) {
+          NotyfAlert.err("你还没输入内容呢！");
+          return;
+        }
+        this.submitting = true;
+        let comment_input = this.comment_input;
+        MY_commentApi.addComment({
+          mingyan: this.rawMingyan,
+          avatar: "",
+          comment: comment_input,
+          nick: this.name,
+          mail: this.mail,
         })
-        .catch(function(err) {
-          NotyfAlert.err("评论失败：\n" + err);
-        });
+          .then(function(res) {
+            log("评论成功", res);
+            root.submitting = false;
+            root.comment_input = "";
+            root.comments = [
+              {
+                author: root.name,
+                avatar: `https://sdn.geekzu.org/avatar/${md5(
+                  root.mail
+                )}?d=identicon&_my_cache_=no`,
+                content: comment_input,
+                datetime: dayjs(new Date().getTime()).fromNow(),
+              },
+              ...root.comments,
+            ];
+            root.displayCommentPage = 1;
+            root.handleDisplayComment();
+            NotyfAlert.su("评论成功！");
+          })
+          .catch(function(err) {
+            NotyfAlert.err("评论失败：\n" + err);
+          });
+      } else {
+        this.isOpenInput = false;
+      }
     },
     handleDisplayComment() {
       let displayLength = (this.displayCommentPage - 1) * 5 + 5;
@@ -293,9 +294,15 @@ export default {
     onTextareaMouseLeave() {
       if (this.isStartInput && this.comment_input) {
         this.textarea_height = "72px";
+        this.sendBtnText = "发送评论";
       } else {
         this.textarea_height = "36px";
+        this.sendBtnText = "取消评论";
       }
+    },
+    onTextareaMouseMove() {
+      this.textarea_height = "72px";
+      this.sendBtnText = "发送评论";
     },
     onPaginationChange(page) {
       this.displayCommentPage = page;
@@ -341,6 +348,10 @@ export default {
 .comment-pagination {
   text-align: center;
 }
+
+.comment-click-to-send {
+  cursor: pointer;
+}
 </style>
 <style>
 .comment-open-tip > .ant-divider-inner-text {
@@ -365,5 +376,9 @@ export default {
 
 .comment-pagination > .ant-pagination > li.ant-pagination-item-active {
   background: #fff;
+}
+
+.ant-comment-avatar {
+  cursor: auto;
 }
 </style>

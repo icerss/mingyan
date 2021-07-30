@@ -3,37 +3,22 @@ import router from "./router";
 // import i18n from "./i18n/i18n";
 import App from "./App.vue";
 import VueLazyload from "vue-lazyload";
-/* ant design */
-import Row from "ant-design-vue/lib/row";
-import Col from "ant-design-vue/lib/col";
-import Table from "ant-design-vue/lib/table";
-import FormModel from "ant-design-vue/lib/form-model";
-import Input from "ant-design-vue/lib/input";
-import Button from "ant-design-vue/lib/button";
-import Icon from "ant-design-vue/lib/icon";
-import Tooltip from "ant-design-vue/lib/tooltip";
-import List from "ant-design-vue/lib/list";
-import Avatar from "ant-design-vue/lib/avatar";
-import Spin from "ant-design-vue/lib/spin";
-import Popover from "ant-design-vue/lib/popover";
-import Comment from "ant-design-vue/lib/comment";
-import Divider from "ant-design-vue/lib/divider";
-import Pagination from "ant-design-vue/lib/pagination";
-import "ant-design-vue/lib/row/style";
-import "ant-design-vue/lib/col/style";
-import "ant-design-vue/lib/table/style";
-import "ant-design-vue/lib/form-model/style";
-import "ant-design-vue/lib/input/style";
-import "ant-design-vue/lib/button/style";
-import "ant-design-vue/lib/icon/style";
-import "ant-design-vue/lib/tooltip/style";
-import "ant-design-vue/lib/list/style";
-import "ant-design-vue/lib/avatar/style";
-import "ant-design-vue/lib/spin/style";
-import "ant-design-vue/lib/popover/style";
-import "ant-design-vue/lib/comment/style";
-import "ant-design-vue/lib/divider/style";
-import "ant-design-vue/lib/pagination/style";
+import {
+  Row,
+  Col,
+  Table,
+  FormModel,
+  Input,
+  Button,
+  Icon,
+  Tooltip,
+  List,
+  Avatar,
+  // Popover,
+  Comment,
+  Divider,
+  Pagination,
+} from "ant-design-vue";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -45,8 +30,7 @@ Vue.use(Icon);
 Vue.use(Tooltip);
 Vue.use(List);
 Vue.use(Avatar);
-Vue.use(Spin);
-Vue.use(Popover);
+// Vue.use(Popover);
 Vue.use(Comment);
 Vue.use(Divider);
 Vue.use(Pagination);
@@ -100,3 +84,19 @@ new Vue({
   // i18n,
   render: (h) => h(App),
 }).$mount("#app");
+
+/**
+ * 耶！！写完啦！！
+ * 从2020-04-30 到  现在，
+ * 这个网最初只是我们几个人开玩笑着说一说，
+ * 谁知道真的能成功呢？
+ * 还是要感谢一下的：
+ * 感谢英语俞老师给了我们这个灵感，
+ * 感谢数学潘老师给我们提供了那么多搞笑的名言，
+ * 感谢Oranjezelf和骚骚恪提供的已经失传的数学老王的名言，
+ * 感谢BlackToy画的背景图片和其它素材，
+ * 感谢2018级8班的所有同学，
+ * 感谢Xhemj做了这个网站，
+ * 感谢看完了这段文字的你。
+ *     —— Xhemj 2021-01-01
+ */
