@@ -31,7 +31,12 @@
           <div slot="content">
             <a-row class="comment-detail">
               <div class="comment-detail-input">
-                <a-input v-model="name" placeholder="昵称" required>
+                <a-input
+                  v-model="name"
+                  placeholder="昵称"
+                  required
+                  autocomplete="on"
+                >
                   <a-icon
                     slot="prefix"
                     type="user"
@@ -40,7 +45,12 @@
                 </a-input>
               </div>
               <div class="comment-detail-input">
-                <a-input v-model="mail" placeholder="邮箱" required>
+                <a-input
+                  v-model="mail"
+                  placeholder="邮箱"
+                  required
+                  autocomplete="on"
+                >
                   <a-icon
                     slot="prefix"
                     type="mail"
@@ -148,6 +158,7 @@ export default {
       comment_input: "",
       textarea_height: "36px",
       sendBtnText: "取消评论",
+      isQQmail: false,
     };
   },
   mounted() {
@@ -201,6 +212,7 @@ export default {
           .then((r) => r.json())
           .then(function(res) {
             root.mailAvatar = res.data;
+            root.isQQmail = true;
           })
           .catch(function() {
             root.mailAvatar = root.mail
@@ -208,6 +220,7 @@ export default {
                   root.mail
                 )}?d=identicon&_my_cache_=no`
               : "";
+            root.isQQmail = false;
           });
       } else {
         root.mailAvatar = root.mail
@@ -215,6 +228,7 @@ export default {
               root.mail
             )}?d=identicon&_my_cache_=no`
           : "";
+        root.isQQmail = false;
       }
     },
     getComment() {
@@ -253,7 +267,7 @@ export default {
         let comment_input = this.comment_input;
         MY_commentApi.addComment({
           mingyan: this.rawMingyan,
-          avatar: "",
+          avatar: root.isQQmail ? root.mailAvatar : "",
           comment: comment_input,
           nick: this.name,
           mail: this.mail,
@@ -265,9 +279,9 @@ export default {
             root.comments = [
               {
                 author: root.name,
-                avatar: `https://cdn.erssmy.com/gravatar/${md5(
-                  root.mail
-                )}?d=identicon&_my_cache_=no`,
+                avatar: root.isQQmail
+                  ? root.mailAvatar
+                  : `https://cdn.erssmy.com/gravatar/${root.mail_md5}?d=identicon&_my_cache_=no`,
                 content: comment_input,
                 datetime: dayjs(new Date().getTime()).fromNow(),
               },
