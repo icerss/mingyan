@@ -51,7 +51,7 @@ import {
   mingyanPicUrl,
   specialConjList,
 } from "../js/mingyan";
-import { fadeIn } from "../js/tools";
+import { fadeIn, kv, kvName } from "../js/tools";
 import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
 const MYComment = () =>
@@ -97,6 +97,7 @@ export default {
       this.rawMingyan = mingyan[id];
       this.teacher = formatMingyan(id).teacher;
       this.text = formatMingyan(id).text;
+      kv.put(kvName.mingyanId, id);
       fadeIn(".my--main");
     },
 

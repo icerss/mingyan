@@ -25,7 +25,7 @@
           />
         </div>
         <a-comment class="my--comment-show" v-if="isOpenInput">
-          <a-avatar slot="avatar" :src="avatarImg" alt="Han Solo"
+          <a-avatar slot="avatar" :src="mailAvatar" alt="Han Solo"
             ><a-icon type="user"
           /></a-avatar>
           <div slot="content">
@@ -57,7 +57,7 @@
                 @mouseleave="onTextareaMouseLeave"
                 @change="handleChange"
                 @keyup.enter.prevent="sendComment"
-                placeholder="发一条友善的评论~~"
+                placeholder="发一条友善的评论~~在邮箱处输入QQ邮箱可自动填充QQ头像"
               />
             </div>
             <a-button
@@ -123,7 +123,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/zh-cn";
 import md5 from "md5";
-import { log, NotyfAlert } from "../js/tools";
+import { kv, log, NotyfAlert } from "../js/tools";
 import { MY_commentApi } from "../js/feat/commentApi";
 
 export default {
@@ -142,12 +142,9 @@ export default {
       isLoadData: false,
       isBoyHide: false,
       md5: md5,
-      name:
-        JSON.parse(localStorage.getItem("___mingyan_comment_user_") || "{}")
-          .name || "",
-      mail:
-        JSON.parse(localStorage.getItem("___mingyan_comment_user_") || "{}")
-          .mail || "",
+      name: JSON.parse(kv.get("___mingyan_comment_user_") || "{}").name || "",
+      mail: JSON.parse(kv.get("___mingyan_comment_user_") || "{}").mail || "",
+      mailAvatar: "",
       comment_input: "",
       textarea_height: "36px",
       sendBtnText: "取消评论",
@@ -166,20 +163,17 @@ export default {
       // if (this.isBoyHide) fadeIn(".my--mingyan-boy");
     },
     mail() {
-      let d = JSON.parse(
-        localStorage.getItem("___mingyan_comment_user_") || "{}"
-      );
+      this.handleMailAvatar();
+      let d = JSON.parse(kv.get("___mingyan_comment_user_") || "{}");
       if (d === {}) d = { name: "", mail: "" };
       d.mail = this.mail;
-      localStorage.setItem("___mingyan_comment_user_", JSON.stringify(d));
+      kv.put("___mingyan_comment_user_", JSON.stringify(d));
     },
     name() {
-      let d = JSON.parse(
-        localStorage.getItem("___mingyan_comment_user_") || "{}"
-      );
+      let d = JSON.parse(kv.get("___mingyan_comment_user_") || "{}");
       if (d === {}) d = { name: "", mail: "" };
       d.name = this.name;
-      localStorage.setItem("___mingyan_comment_user_", JSON.stringify(d));
+      kv.put("___mingyan_comment_user_", JSON.stringify(d));
     },
     comment_input() {
       if (this.comment_input) {
@@ -191,25 +185,38 @@ export default {
       }
     },
     isOpenInput() {
-      // if (this.isOpenInput) {
-      //   fadeOut(".my--mingyan-boy");
-      //   this.isBoyHide = true;
-      // } else {
-      //   fadeIn(".my--mingyan-boy");
-      //   this.isBoyHide = false;
-      // }
-    },
-  },
-  computed: {
-    avatarImg() {
-      return this.mail
-        ? `https://cdn.erssmy.com/gravatar/${md5(
-            this.mail
-          )}?d=identicon&_my_cache_=no`
-        : "";
+      this.handleMailAvatar();
     },
   },
   methods: {
+    handleMailAvatar() {
+      let mail = this.mail;
+      let root = this;
+      // 若为 QQ 邮箱
+      if (/^[1-9][0-9]{4,10}@qq.com$/i.test(mail)) {
+        let qqNum = mail.replace("@qq.com", "");
+        fetch(
+          `https://cdn.erssmy.com/qqface/${qqNum}?_my_cache_=no&t=_${new Date().getTime()}`
+        )
+          .then((r) => r.json())
+          .then(function(res) {
+            root.mailAvatar = res.data;
+          })
+          .catch(function() {
+            root.mailAvatar = root.mail
+              ? `https://cdn.erssmy.com/gravatar/${md5(
+                  root.mail
+                )}?d=identicon&_my_cache_=no`
+              : "";
+          });
+      } else {
+        root.mailAvatar = root.mail
+          ? `https://cdn.erssmy.com/gravatar/${md5(
+              root.mail
+            )}?d=identicon&_my_cache_=no`
+          : "";
+      }
+    },
     getComment() {
       let root = this;
       this.isLoadData = false;
@@ -258,7 +265,7 @@ export default {
             root.comments = [
               {
                 author: root.name,
-                avatar: `https://sdn.geekzu.org/avatar/${md5(
+                avatar: `https://cdn.erssmy.com/gravatar/${md5(
                   root.mail
                 )}?d=identicon&_my_cache_=no`,
                 content: comment_input,

@@ -21,7 +21,7 @@ const MYSubmit = () =>
 Vue.use(VueRouter);
 
 export let routes = [
-  { path: "/", name: "main", component: MYMain, alias: "/@*" },
+  { path: "/", alias: "/@*", name: "main", component: MYMain },
   { path: "/search", name: "search", component: MYSearch },
   { path: "/more", name: "more", component: MYMore },
   { path: "/about", name: "about", component: MYAbout },
@@ -34,7 +34,7 @@ export let routes = [
 ];
 
 let router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes: routes,
 });

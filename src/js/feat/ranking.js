@@ -1,5 +1,5 @@
 import { MY_rankingApi } from "./rankingApi";
-import { qs } from "../tools";
+import { kv, qs } from "../tools";
 import swal from "sweetalert";
 
 /**
@@ -14,9 +14,9 @@ MY_rankingApi.then(function(rankingApi) {
         -1 /* 防止搜索引擎激活 */
     )
       return;
-    if (localStorage.getItem("___mingyan_2021_ranking_data__")) return;
+    if (kv.get("___mingyan_2021_ranking_data__")) return;
     if (qs("force_action") == "skip_ranking" || qs("do") == "sr") {
-      localStorage.setItem("___mingyan_2021_ranking_data__", "__SKIP__");
+      kv.put("___mingyan_2021_ranking_data__", "__SKIP__");
       return;
     }
     let id = null;
@@ -29,11 +29,11 @@ MY_rankingApi.then(function(rankingApi) {
         ip = ip_data.ip;
         // 如果没有存过数据
         // db("新用户");
-        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`); // 那就存一个吧
+        kv.put("___mingyan_2021_ranking_data__", `__${ip}__`); // 那就存一个吧
         return rankingApi.add("一位不知道名字的访客", ip);
       }) // 默认给一个名字
       .then(function(add_data) {
-        localStorage.setItem("___mingyan_2021_ranking_data__", `__${ip}__`); // 不知道为什么要再存一遍，但不想删了
+        kv.put("___mingyan_2021_ranking_data__", `__${ip}__`); // 不知道为什么要再存一遍，但不想删了
         id = add_data.result.res.id; // 留id以便于之后更新名字
         return rankingApi.getNum();
       })
@@ -58,7 +58,7 @@ MY_rankingApi.then(function(rankingApi) {
       .then(function(name) {
         if (name) {
           // 之后就是更新名字啦！
-          localStorage.setItem("___mingyan_2021_ranking_name__", name);
+          kv.put("___mingyan_2021_ranking_name__", name);
           return rankingApi.update(id, name, num);
         } else {
           location.href = "./";

@@ -1,5 +1,5 @@
 import Vue from "vue";
-import router, { routes } from "./router";
+import router from "./router";
 // import i18n from "./i18n/i18n";
 import App from "./App.vue";
 import VueLazyload from "vue-lazyload";
@@ -19,6 +19,7 @@ import {
   Divider,
   Pagination,
 } from "ant-design-vue";
+import { kv } from "./js/tools";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -39,8 +40,7 @@ Vue.use(VueLazyload, {
 });
 
 let aegisUin = {};
-if (localStorage.getItem("MY_TOKEN"))
-  aegisUin = { uin: localStorage.getItem("MY_TOKEN") };
+if (kv.get("MY_TOKEN")) aegisUin = { uin: kv.get("MY_TOKEN") };
 let Aegis = window.Aegis;
 export const aegis = new Aegis({
   // eslint-disable-line
@@ -85,17 +85,17 @@ new Vue({
   render: (h) => h(App),
 }).$mount("#app");
 
-// router 兼容旧版
-function handleHash() {
-  let hash = location.hash.split("#")[1] || "";
-  for (let item of routes) {
-    if ((item.path === hash && hash !== "*") || /\/@*/.test(hash)) {
-      location.href = location.origin + hash;
-    }
-  }
-}
-handleHash();
-window.addEventListener("hashchange", handleHash);
+// // router 兼容旧版
+// function handleHash() {
+//   let hash = location.hash.split("#")[1] || "";
+//   for (let item of routes) {
+//     if ((item.path === hash && hash !== "*") || /\/@*/.test(hash)) {
+//       location.href = location.origin + hash;
+//     }
+//   }
+// }
+// handleHash();
+// window.addEventListener("hashchange", handleHash);
 
 /**
  * 耶！！写完啦！！

@@ -7,7 +7,7 @@
 
 <script>
 import MYHeader from "./components/MYHeader.vue";
-import { log, qs } from "./js/tools";
+import { kv, log, qs } from "./js/tools";
 import "./js/feat/ranking";
 
 export default {
@@ -31,7 +31,7 @@ export default {
     window.doRanking = function() {
       if (
         qs("force_action") == "2020" ||
-        !localStorage.getItem("___mingyan_2021_ranking_data__")
+        !kv.get("___mingyan_2021_ranking_data__")
       ) {
         // 如果是新用户
         window.MY_ranking();

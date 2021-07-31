@@ -137,13 +137,13 @@ import { v4 as uuidv4 } from "uuid";
  * @returns MY_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  */
 export let getUid = function() {
-  if (localStorage.getItem("MY_TOKEN")) return localStorage.getItem("MY_TOKEN");
+  if (kv.get("MY_TOKEN")) return kv.get("MY_TOKEN");
   let tk =
     "MY_" +
     uuidv4()
       .replace(/-/g, "")
       .toLocaleUpperCase();
-  localStorage.setItem("MY_TOKEN", tk);
+  kv.put("MY_TOKEN", tk);
   return tk;
 };
 
