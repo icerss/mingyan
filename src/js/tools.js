@@ -74,49 +74,6 @@ export function randomNumber(minNum, maxNum) {
 }
 
 /**
- * 弹窗
- * @deprecated 已更换为 Notyf
- * @param {Object} opt 选项
- */
-export function showPop(opt) {
-  let pop_elements = {};
-  opt.time = opt.time || 5000;
-  opt.url = opt.url || "";
-  pop_elements.container = document.createElement("div");
-  pop_elements.container.id = "pop";
-  pop_elements.container.style.cssText = "z-index:10000;";
-  pop_elements.modal = document.createElement("div");
-  pop_elements.modal.style.cssText =
-    "z-index:99999;position:fixed;box-shadow: 0 5px 15px -5px rgba(0,0,0,0.8);display:inline-block;color:black;padding:24px;background-color:white;top:12px;right:12px;border-radius:12px;font-size:18px;transition:all 250ms ease;opacity:0";
-  pop_elements.a = document.createElement("a");
-  pop_elements.a.innerText = opt.url;
-  pop_elements.a.href = opt.url;
-  pop_elements.a.addEventListener("click", function(e) {
-    e.preventDefault();
-  });
-  pop_elements.p = document.createElement("p");
-  pop_elements.p.style.cssText = "padding:0;margin:0;";
-  pop_elements.p.innerHTML = opt.text;
-  pop_elements.modal.appendChild(pop_elements.p);
-  pop_elements.modal.appendChild(pop_elements.a);
-  pop_elements.container.appendChild(pop_elements.modal);
-  let pop_body = document.querySelector("body");
-  pop_body.appendChild(pop_elements.container);
-  requestAnimationFrame(function() {
-    requestAnimationFrame(function() {
-      pop_elements.modal.style.opacity = 1;
-    });
-  });
-
-  setTimeout(function() {
-    pop_elements.modal.style.opacity = 0;
-    setTimeout(function() {
-      pop_elements.container.remove();
-    }, 260);
-  }, opt.time);
-}
-
-/**
  * 元素是否显示
  */
 export let isShow = function(el) {
@@ -180,7 +137,7 @@ export let notyf = new Notyf({
       duration: 999999999,
     },
     {
-      type: "incidents",
+      type: "15s",
       background: "#5676dc",
       icon: false,
       duration: 15000,

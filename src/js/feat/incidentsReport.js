@@ -32,7 +32,7 @@ export let MY_incidents = function() {
 </ul>
 </div>`;
         notyf.open({
-          type: "incidents",
+          type: "15s",
           message: html,
         });
       }

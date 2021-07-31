@@ -164,6 +164,7 @@ export default {
   mounted() {
     dayjs.extend(relativeTime);
     dayjs.locale("zh-cn");
+    this.mail_md5 = md5(this.mail);
     this.getComment();
   },
   watch: {
@@ -178,6 +179,7 @@ export default {
       let d = JSON.parse(kv.get("___mingyan_comment_user_") || "{}");
       if (d === {}) d = { name: "", mail: "" };
       d.mail = this.mail;
+      this.mail_md5 = md5(this.mail);
       kv.put("___mingyan_comment_user_", JSON.stringify(d));
     },
     name() {
@@ -293,6 +295,7 @@ export default {
           })
           .catch(function(err) {
             NotyfAlert.err("评论失败：\n" + err);
+            this.submitting = false;
           });
       } else {
         this.isOpenInput = false;
