@@ -1,6 +1,9 @@
 import { apiUrls, normalPostHeader } from "../init";
-import { kv, notyf } from "../tools";
+import { kv, log } from "../tools";
 
+/**
+ * 自动更新缓存
+ */
 export function MY_getUpdate() {
   fetch(apiUrls.update, {
     ...normalPostHeader,
@@ -32,12 +35,13 @@ export function MY_getUpdate() {
               .then((registration) => {
                 if (registration) {
                   registration.unregister().then(() => {
-                    if (localHash) {
-                      notyf.open({
-                        type: "15s",
-                        message: "检测到网站更新啦！刷新网页来查看最新版本~~",
-                      });
-                    }
+                    // if (localHash) {
+                    //   notyf.open({
+                    //     type: "15s",
+                    //     message: "检测到网站更新啦！刷新网页来查看最新版本~~",
+                    //   });
+                    // }
+                    log("已更新缓存");
                     kv.put("sha_version", fetchHash);
                   });
                 }
