@@ -1,3 +1,14 @@
+/**
+ * 大型 polyfill 引用区 ~~
+ */
+(() => import(/* webpackChunkName: "babel-polyfill" */ "babel-polyfill"))();
+if (!fetch)
+  window["fetch"] = () =>
+    import(/* webpackChunkName: "fetch-polyfill" */ "whatwg-fetch");
+if (!Promise)
+  window["Promise"] = () =>
+    import(/* webpackChunkName: "promise-polyfill" */ "promise-polyfill");
+
 import Vue from "vue";
 import router from "./router";
 // import i18n from "./i18n/i18n";
