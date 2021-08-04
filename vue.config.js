@@ -1,6 +1,6 @@
 const path = require("path");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+//   .BundleAnalyzerPlugin;
 const webpack = require("webpack");
 const version = require("./.github/version.json").version;
 const dayjs = require("dayjs");
@@ -23,7 +23,7 @@ module.exports = {
         ),
       },
     },
-    plugins: [new BundleAnalyzerPlugin()],
+    // plugins: [new BundleAnalyzerPlugin()],
   },
   chainWebpack: (config) => {
     config

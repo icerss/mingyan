@@ -1,15 +1,23 @@
-// import { mingyan } from "./mingyan";
-import { log } from "./tools";
-
 /**
- * 加载耗时
+ * 名言主配置
  */
-window.onload = function() {
-  let loadTime =
-    window.performance.timing.domContentLoadedEventEnd -
-    window.performance.timing.navigationStart;
-  log("Page load time is " + loadTime + "ms");
+let defaultCfg = {
+  isSpecifyMingyanId: true,
+  specifyId: 23,
+  isAutoShowMingyan: true,
+  isInsertBaidu: true,
+  isInsertAegis: true,
+  isShowError: true,
+  isDebugLog: true,
 };
+window["my_cfg"] = window["my_cfg"] || {};
+for (let key in defaultCfg) {
+  if (!window["my_cfg"][key]) window["my_cfg"][key] = defaultCfg[key];
+}
+export function getConfig(key) {
+  console.log("getConfig：", { key, value: window["my_cfg"][key] });
+  return window["my_cfg"][key] || undefined;
+}
 
 /**
  * 界面元素定义
@@ -31,6 +39,8 @@ export let apiUrls = {
   showfrom: "https://api.erss.club/api/info",
   ip: "https://api.erss.club/api/ip",
   update: "https://api.erss.club/api/getupdate",
+  ranking_history: "https://api.erss.club/api/get-ranking-history",
+  donate_list: "https://api.erss.club/api/get-donate-info",
 };
 
 String.prototype.trim = function() {

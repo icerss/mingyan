@@ -54,6 +54,7 @@ import {
 import { fadeIn, kv, kvName } from "../js/tools";
 import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
+import { getConfig } from "../js/init";
 const MYComment = () =>
   import(/* webpackChunkName: "comment" */ "../components/MYComment.vue");
 
@@ -73,6 +74,7 @@ export default {
       text: "名言找不到咯！！o(*￣▽￣*)ブ",
       rawMingyan: mingyan[getNowId()],
       starEvent: "addstar",
+      isFirstTime: true,
     };
   },
   watch: {
@@ -94,6 +96,10 @@ export default {
   },
   methods: {
     showMingyan(id) {
+      if (this.isFirstTime && !getConfig("isAutoShowMingyan")) {
+        this.isFirstTime = false;
+        return;
+      }
       this.rawMingyan = mingyan[id];
       this.teacher = formatMingyan(id).teacher;
       this.text = formatMingyan(id).text;

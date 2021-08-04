@@ -1,3 +1,6 @@
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
+
 /**
  * 动态加载JS
  */
@@ -88,6 +91,7 @@ export let isShow = function(el) {
 };
 
 import { v4 as uuidv4 } from "uuid";
+import { getConfig } from "./init";
 
 /**
  * 获取 UID
@@ -103,9 +107,6 @@ export let getUid = function() {
   kv.put("MY_TOKEN", tk);
   return tk;
 };
-
-import { Notyf } from "notyf";
-import "notyf/notyf.min.css";
 
 export let notyf = new Notyf({
   position: {
@@ -218,6 +219,7 @@ export let fadeOut = function(el) {
  * 控制台输出
  */
 function _log() {
+  if (!getConfig("isDebugLog")) return function() {};
   let dn = 1;
   return function(...str) {
     let special1 = "";

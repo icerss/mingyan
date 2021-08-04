@@ -32,6 +32,7 @@
 import MYFooter from "./MYFooter.vue";
 import FancyImage from "./FancyImage.vue";
 import { fadeIn } from "../js/tools";
+import { apiUrls } from "../js/init";
 
 const columns = [
   {
@@ -73,9 +74,7 @@ export default {
     fadeIn(".my--donate");
 
     let root = this;
-    fetch(
-      "https://www.erssmy.com/api/get-sponsor-list?t=_" + new Date().getTime()
-    )
+    fetch(`${apiUrls.donate_list}?t=_${new Date().getTime()}`)
       .then((r) => r.json())
       .then(function(res) {
         root.handleData(res);

@@ -162,10 +162,7 @@ export let MY_starApi = {
   getHistoryRanking: function() {
     if (!Promise) return;
     return new Promise(function(resolve, reject) {
-      fetch(
-        "https://www.erssmy.com/api/get-ranking-history?_t=" +
-          new Date().getTime()
-      )
+      fetch(`${apiUrls.ranking_history}?t=_${new Date().getTime()}`)
         .then((res) => res.json())
         .then((json) => {
           log(json);

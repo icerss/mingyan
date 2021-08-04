@@ -20,6 +20,7 @@ import {
   Pagination,
 } from "ant-design-vue";
 import { kv } from "./js/tools";
+import { getConfig } from "./js/init";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -39,63 +40,58 @@ Vue.use(VueLazyload, {
   loading: "assets/loading.svg",
 });
 
-let aegisUin = {};
-if (kv.get("MY_TOKEN")) aegisUin = { uin: kv.get("MY_TOKEN") };
-let Aegis = window.Aegis;
-export const aegis = new Aegis({
-  // eslint-disable-line
-  id: "jYr96KM75PZJAq3LvV",
-  ...aegisUin,
-  reportApiSpeed: true,
-  reportAssetSpeed: true,
-  spa: true,
-  version: "3.0.0",
-});
+let aegis;
+if (getConfig("isInsertAegis")) {
+  let aegisUin = {};
+  if (kv.get("MY_TOKEN")) aegisUin = { uin: kv.get("MY_TOKEN") };
+  let Aegis = window.Aegis;
+  aegis = new Aegis({
+    // eslint-disable-line
+    id: "jYr96KM75PZJAq3LvV",
+    ...aegisUin,
+    reportApiSpeed: true,
+    reportAssetSpeed: true,
+    spa: true,
+    version: "3.0.0",
+  });
+}
 
 Vue.config.productionTip = false;
 Vue.config.errorHandler = function(err, vm, info) {
-  aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
-  console.error(`Error: ${err.toString()}\nInfo: ${info}`);
+  if (getConfig("isInsertAegis"))
+    aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
+  if (getConfig("isShowError"))
+    console.error(`Error: ${err.toString()}\nInfo: ${info}`);
 };
 
-let _hmt = [];
-(function() {
-  let hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
-  let s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-window._hmt = _hmt;
+if (getConfig("isInsertBaidu")) {
+  let _hmt = [];
+  (function() {
+    let hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
+    let s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  window._hmt = _hmt;
 
-(function() {
-  var bp = document.createElement("script");
-  var curProtocol = window.location.protocol.split(":")[0];
-  if (curProtocol === "https") {
-    bp.src = "https://zz.bdstatic.com/linksubmit/push.js";
-  } else {
-    bp.src = "http://push.zhanzhang.baidu.com/push.js";
-  }
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(bp, s);
-})();
+  (function() {
+    var bp = document.createElement("script");
+    var curProtocol = window.location.protocol.split(":")[0];
+    if (curProtocol === "https") {
+      bp.src = "https://zz.bdstatic.com/linksubmit/push.js";
+    } else {
+      bp.src = "http://push.zhanzhang.baidu.com/push.js";
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+}
 
 new Vue({
   router,
   // i18n,
   render: (h) => h(App),
 }).$mount("#app");
-
-// // router 兼容旧版
-// function handleHash() {
-//   let hash = location.hash.split("#")[1] || "";
-//   for (let item of routes) {
-//     if ((item.path === hash && hash !== "*") || /\/@*/.test(hash)) {
-//       location.href = location.origin + hash;
-//     }
-//   }
-// }
-// handleHash();
-// window.addEventListener("hashchange", handleHash);
 
 /**
  * 耶！！写完啦！！
