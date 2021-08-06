@@ -133,7 +133,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/zh-cn";
 import md5 from "md5";
-import { kv, log, NotyfAlert } from "../js/tools";
+import { kv, kvName, log, NotyfAlert } from "../js/tools";
 import { MY_commentApi } from "../js/feat/commentApi";
 
 export default {
@@ -152,8 +152,8 @@ export default {
       isLoadData: false,
       isBoyHide: false,
       md5: md5,
-      name: JSON.parse(kv.get("___mingyan_comment_user_") || "{}").name || "",
-      mail: JSON.parse(kv.get("___mingyan_comment_user_") || "{}").mail || "",
+      name: JSON.parse(kv.get(kvName.commentUser) || "{}").name || "",
+      mail: JSON.parse(kv.get(kvName.commentUser) || "{}").mail || "",
       mailAvatar: "",
       comment_input: "",
       textarea_height: "36px",
@@ -176,17 +176,17 @@ export default {
     },
     mail() {
       this.handleMailAvatar();
-      let d = JSON.parse(kv.get("___mingyan_comment_user_") || "{}");
+      let d = JSON.parse(kv.get(kvName.commentUser) || "{}");
       if (d === {}) d = { name: "", mail: "" };
       d.mail = this.mail;
       this.mail_md5 = md5(this.mail);
-      kv.put("___mingyan_comment_user_", JSON.stringify(d));
+      kv.put(kvName.commentUser, JSON.stringify(d));
     },
     name() {
-      let d = JSON.parse(kv.get("___mingyan_comment_user_") || "{}");
+      let d = JSON.parse(kv.get(kvName.commentUser) || "{}");
       if (d === {}) d = { name: "", mail: "" };
       d.name = this.name;
-      kv.put("___mingyan_comment_user_", JSON.stringify(d));
+      kv.put(kvName.commentUser, JSON.stringify(d));
     },
     comment_input() {
       if (this.comment_input) {

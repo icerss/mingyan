@@ -30,7 +30,7 @@ import {
   Divider,
   Pagination,
 } from "ant-design-vue";
-import { kv } from "./js/tools";
+import { kv, kvName } from "./js/tools";
 import { getConfig } from "./js/init";
 
 Vue.use(Row);
@@ -54,7 +54,7 @@ Vue.use(VueLazyload, {
 let aegis;
 if (getConfig("isInsertAegis")) {
   let aegisUin = {};
-  if (kv.get("MY_TOKEN")) aegisUin = { uin: kv.get("MY_TOKEN") };
+  if (kv.get(kvName.MY_TOKEN)) aegisUin = { uin: kv.get(kvName.MY_TOKEN) };
   let Aegis = window.Aegis;
   aegis = new Aegis({
     // eslint-disable-line

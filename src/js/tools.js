@@ -98,13 +98,13 @@ import { getConfig } from "./init";
  * @returns MY_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  */
 export let getUid = function() {
-  if (kv.get("MY_TOKEN")) return kv.get("MY_TOKEN");
+  if (kv.get(kvName.MY_TOKEN)) return kv.get(kvName.MY_TOKEN);
   let tk =
     "MY_" +
     uuidv4()
       .replace(/-/g, "")
       .toLocaleUpperCase();
-  kv.put("MY_TOKEN", tk);
+  kv.put(kvName.MY_TOKEN, tk);
   return tk;
 };
 
@@ -197,6 +197,11 @@ export let kv = {
 
 export let kvName = {
   mingyanId: "___mingyan_id__",
+  commentUser: "___mingyan_comment_user_",
+  shaVersion: "sha_version",
+  rankingIp: "___mingyan_2021_ranking_data__",
+  rankingName: "___mingyan_2021_ranking_name__",
+  MY_TOKEN: "MY_TOKEN",
 };
 
 export let fadeIn = function(el) {

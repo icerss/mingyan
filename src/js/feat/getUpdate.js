@@ -1,5 +1,5 @@
 import { apiUrls, normalPostHeader } from "../init";
-import { kv, log } from "../tools";
+import { kv, kvName, log } from "../tools";
 
 /**
  * 自动更新缓存
@@ -13,14 +13,14 @@ export function MY_getUpdate() {
   })
     .then((r) => r.json())
     .then(function(res) {
-      let localHash = kv.get("sha_version");
+      let localHash = kv.get(kvName.shaVersion);
       let fetchHash = res.data.sha || "";
       if (localHash !== fetchHash) {
         (async function() {
           // 重新注册 serviceWorker && 删除缓存
           if (
             "serviceWorker" in navigator &&
-            kv.get("___mingyan_2021_ranking_data__") &&
+            kv.get(kvName.rankingIp) &&
             kv.get("___mingyan_sw_version__")
           ) {
             await caches.keys().then((cacheNames) => {
@@ -42,7 +42,7 @@ export function MY_getUpdate() {
                     //   });
                     // }
                     log("已更新缓存");
-                    kv.put("sha_version", fetchHash);
+                    kv.put(kvName.shaVersion, fetchHash);
                   });
                 }
               });

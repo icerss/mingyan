@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Xhemj</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,user-scalable=no"
+    />
+    <style>
+      .container {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+          sans-serif;
+        cursor: default;
+        user-select: none;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px;
+      }
+      .main {
+        height: 100%;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        align-items: center;
+        -webkit-box-align: center;
+        flex-direction: column;
+      }
+      section {
+        display: flex;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        flex-direction: column;
+        height: 40px;
+        flex-direction: row;
+      }
+      .code {
+        font-size: 28px;
+        font-weight: 500;
+        display: block;
+        text-align: center;
+        width: 200px;
+        border-bottom: 0;
+        border-right: 1px solid #eaeaea;
+        padding: 0 20px 0 20px;
+        width: auto;
+        height: 100%;
+        line-height: 40px;
+      }
+      .msg {
+        margin: 20px 0 0 0;
+        height: 100%;
+        line-height: 40px;
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+        padding-left: 20px;
+      }
+      main {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main">
+        <section>
+          <span class="code">加载中</span>
+          <p class="msg">Loading</p>
+        </section>
+        <main><p id="msg">该网站已暂时停止访问</p></main>
+      </div>
+    </div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw@v2.js").then((reg) => {
+            document.querySelector("#msg").innerText =
+              "注册成功，进入原始界面中。。。";
+            window.location.search = `?t=${new Date().getTime()}`;
+          });
+        });
+      }
+    </script>
+    <script
+      async
+      src="https://log.erss.club/web.js"
+      data-ackee-server="https://log.erss.club"
+      data-ackee-domain-id="02aee3a0-78dd-4cfd-9931-72de457d0c75"
+      data-ackee-opts='{ "detailed": true }'
+    ></script>
+  </body>
+</html>

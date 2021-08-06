@@ -4,25 +4,52 @@ const path = require("path");
 const webpack = require("webpack");
 const version = require("./.github/version.json").version;
 const dayjs = require("dayjs");
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const isProduction = process.env.NODE_ENV === "production";
 require("dayjs/locale/zh-cn");
 dayjs.locale("zh-cn");
 
+let time = dayjs().format("YYYY-M-D HH:mm:ss");
+
 module.exports = {
   productionSourceMap: false,
-  configureWebpack: {
-    externals: {
+  configureWebpack: (config) => {
+    if (isProduction) {
+      config.plugins.push(
+        new CompressionWebpackPlugin({
+          algorithm: "gzip",
+          test: /\.js$|\.html$|\.json$|\.css/,
+          threshold: 10240,
+          minRatio: 0.8,
+        })
+      );
+    }
+    config.externals = {
       vue: "Vue",
       marked: "marked",
       "vue-router": "VueRouter",
-    },
-    resolve: {
+    };
+    config.resolve = {
       alias: {
         "@ant-design/icons/lib/dist$": path.resolve(
           __dirname,
           "./src/js/icons.js"
         ),
       },
-    },
+    };
+    config.optimization = {
+      runtimeChunk: "single",
+      splitChunks: {
+        chunks: "all",
+        maxInitialRequests: Infinity,
+        minSize: 20000,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+          },
+        },
+      },
+    };
     // plugins: [new BundleAnalyzerPlugin()],
   },
   chainWebpack: (config) => {
@@ -32,12 +59,27 @@ module.exports = {
         [
           "ERSS SAYING",
           `(c) 2020-${new Date().getFullYear()} Xhemj`,
-          `Build: ${dayjs().format("YYYY-M-D HH:mm:ss")}`,
+          `Build: ${time}`,
           `Version: ${version}`,
           "====",
           "o(〃＾▽＾〃)o",
         ].join("\n"),
       ]);
+    config.plugin("html").tap((args) => {
+      args[0].TIME = time;
+      args[0].VERSION = version;
+      args[0].NOW_YEAR = new Date().getFullYear();
+      args[0].minify = {
+        collapseWhitespace: true,
+        keepClosingSlash: true,
+        removeComments: false,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      };
+      return args;
+    });
   },
   // filenameHashing: false,
   css: {
@@ -54,52 +96,4 @@ module.exports = {
       },
     },
   },
-  // pwa: {
-  //     name: "耳斯名言",
-  //     description: "快来看看厦门市音乐学校老师和同学们的名言吧！——ERSS！",
-  //     themeColor: "#5676dc",
-  //     msTileColor: "#5676dc",
-  //     appleMobileWebAppCapable: "yes",
-  //     manifestPath: "manifest.json",
-  //     display: "standalone",
-  //     startUrl: "/?from=pwa",
-  //     iconPaths: null,
-  //     icon: [
-  //         {
-  //             "src": "https://cdn.erssmy.com/image/static/mingyan-js-org/new-logo/v2/512x512.png",
-  //             "type": "image/png",
-  //             "sizes": "512x512",
-  //             "purpose": "any maskable"
-  //         },
-  //         {
-  //             "src": "https://cdn.erssmy.com/image/static/mingyan-js-org/new-logo/v2/256x256.png",
-  //             "type": "image/png",
-  //             "sizes": "256x256",
-  //             "purpose": "any maskable"
-  //         },
-  //         {
-  //             "src": "https://cdn.erssmy.com/image/static/mingyan-js-org/new-logo/v2/64x64.png",
-  //             "type": "image/png",
-  //             "sizes": "64x64",
-  //             "purpose": "any maskable"
-  //         }
-  //     ],
-  //     workboxOptions: {
-  //         importWorkboxFrom: "cdn",
-  //         skipWaiting: true,
-  //         runtimeCaching: [
-  //             {
-  //                 urlPattern: new RegExp("dogecdn.com"),
-  //                 handler: "NetworkFirst",
-  //                 options: {
-  //                     networkTimeoutSeconds: 20,
-  //                     cacheName: "image-cache",
-  //                     cacheableResponse: {
-  //                         statuses: [200]
-  //                     }
-  //                 }
-  //             }
-  //         ]
-  //     },
-  // },
 };

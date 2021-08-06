@@ -42,7 +42,7 @@
 
 <script>
 import { mingyan } from "../js/mingyan";
-import { kv, randomNumber } from "../js/tools";
+import { kv, kvName, randomNumber } from "../js/tools";
 import router from "../router";
 // import PopoverItem from "./PopoverItem.vue";
 
@@ -59,9 +59,7 @@ export default {
       length: mingyan.length,
       wordsList: [
         `欢迎${
-          kv.get("___mingyan_2021_ranking_name__")
-            ? kv.get("___mingyan_2021_ranking_name__")
-            : ""
+          kv.get(kvName.rankingName) ? kv.get(kvName.rankingName) : ""
         }来到耳斯名言`,
         "耳斯，名言专家",
         "你喜欢的名言都在耳斯名言！",

@@ -2,21 +2,21 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 const MYMain = () =>
-  import(/* webpackChunkName: "main" */ "@/views/MYMain.vue");
+  import(/* webpackChunkName: "main" */ "./views/MYMain.vue");
 const MYSearch = () =>
-  import(/* webpackChunkName: "search" */ "@/views/MYSearch.vue");
+  import(/* webpackChunkName: "search" */ "./views/MYSearch.vue");
 const MYMore = () =>
-  import(/* webpackChunkName: "page" */ "@/components/MYMore.vue");
+  import(/* webpackChunkName: "page" */ "./components/MYMore.vue");
 const MYAbout = () =>
-  import(/* webpackChunkName: "page" */ "@/components/MYAbout.vue");
+  import(/* webpackChunkName: "page" */ "./components/MYAbout.vue");
 const MYFaq = () =>
-  import(/* webpackChunkName: "page" */ "@/components/MYFaq.vue");
+  import(/* webpackChunkName: "page" */ "./components/MYFaq.vue");
 const MYDonate = () =>
-  import(/* webpackChunkName: "page" */ "@/components/MYDonate.vue");
+  import(/* webpackChunkName: "page" */ "./components/MYDonate.vue");
 const MYRanking = () =>
-  import(/* webpackChunkName: "action-page" */ "@/components/MYRanking.vue");
+  import(/* webpackChunkName: "action-page" */ "./components/MYRanking.vue");
 const MYSubmit = () =>
-  import(/* webpackChunkName: "action-page" */ "@/components/MYSubmit.vue");
+  import(/* webpackChunkName: "action-page" */ "./components/MYSubmit.vue");
 
 Vue.use(VueRouter);
 

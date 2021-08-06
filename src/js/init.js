@@ -15,7 +15,7 @@ for (let key in defaultCfg) {
   if (!window["my_cfg"][key]) window["my_cfg"][key] = defaultCfg[key];
 }
 export function getConfig(key) {
-  console.log("getConfig：", { key, value: window["my_cfg"][key] });
+  // console.log("getConfig：", { key, value: window["my_cfg"][key] });
   return window["my_cfg"][key] || undefined;
 }
 

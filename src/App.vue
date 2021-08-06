@@ -7,7 +7,7 @@
 
 <script>
 import MYHeader from "./components/MYHeader.vue";
-import { kv, log, qs } from "./js/tools";
+import { kv, kvName, log, qs } from "./js/tools";
 import { MY_getUpdate } from "./js/feat/getUpdate";
 import { doConsole } from "./js/init";
 import "./js/feat/ranking";
@@ -31,10 +31,7 @@ export default {
       if (/#\d/.test(hash)) window.location.href = "./" + hash;
     });
     window.doRanking = function() {
-      if (
-        qs("force_action") == "2020" ||
-        !kv.get("___mingyan_2021_ranking_data__")
-      ) {
+      if (qs("force_action") == "2020" || !kv.get(kvName.rankingIp)) {
         // 如果是新用户
         window.MY_ranking();
       }
