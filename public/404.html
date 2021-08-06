@@ -1,0 +1,13 @@
+<h1>ClientWorker</h1>
+<p id="msg">加载中……</p>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw@v2.js").then((reg) => {
+        document.querySelector("#msg").innerText =
+          "注册成功，进入原始界面中。。。";
+        window.location.search = `?t=${new Date().getTime()}`;
+      });
+    });
+  }
+</script>
