@@ -3,6 +3,7 @@ let proxyDomain = [
   "localhost",
   //   "127.0.0.1",
   "www.erssmy.com",
+  "dev.erssmy.com",
   "www.erss.club",
   "www.xhemj.top",
 ].join("|");
