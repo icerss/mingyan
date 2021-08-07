@@ -81,7 +81,7 @@ module.exports = {
       return args;
     });
   },
-  // filenameHashing: false,
+  filenameHashing: false,
   css: {
     extract: true,
     loaderOptions: {

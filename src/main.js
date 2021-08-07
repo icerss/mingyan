@@ -32,6 +32,7 @@ import {
 } from "ant-design-vue";
 import { kv, kvName } from "./js/tools";
 import { getConfig } from "./js/init";
+import loadingSvg from "./assets/loading.svg";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -48,7 +49,7 @@ Vue.use(Comment);
 Vue.use(Divider);
 Vue.use(Pagination);
 Vue.use(VueLazyload, {
-  loading: "assets/loading.svg",
+  loading: loadingSvg,
 });
 
 let aegis;
