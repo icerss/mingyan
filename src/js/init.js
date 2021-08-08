@@ -3,7 +3,7 @@
  */
 let defaultCfg = {
   isSpecifyMingyanId: true,
-  specifyId: 23,
+  specifyId: null,
   isAutoShowMingyan: true,
   isInsertBaidu: true,
   isInsertAegis: true,

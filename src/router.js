@@ -17,6 +17,7 @@ const MYRanking = () =>
   import(/* webpackChunkName: "action-page" */ "./components/MYRanking.vue");
 const MYSubmit = () =>
   import(/* webpackChunkName: "action-page" */ "./components/MYSubmit.vue");
+import MYDebugPage from "./components/MYDebugPage.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,7 @@ export let routes = [
   { path: "/ranking", name: "ranking", component: MYRanking },
   { path: "/donate", name: "donate", component: MYDonate },
   { path: "/submit", name: "submit", component: MYSubmit },
+  { path: "/debug", name: "debug", component: MYDebugPage },
   { path: "/sponsor", redirect: "/donate" },
   { path: "*", redirect: "/" },
 ];

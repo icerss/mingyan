@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { addClickEvent, isShow, log, NotyfAlert } from "../js/tools";
+import { isShow, log, NotyfAlert } from "../js/tools";
 import { MingyanLOGO } from "../js/init";
 import { MY_starApi } from "../js/feat/starApi";
 import swal from "sweetalert";
@@ -38,7 +38,7 @@ export default {
     window.addEventListener("hashchange", function() {
       this.starEvent = "addstar";
     });
-    addClickEvent("#star-logo", this.doStar);
+    // addClickEvent("#star-logo", this.doStar);
   },
   created() {
     this.doStar = this.star;
@@ -54,6 +54,7 @@ export default {
       return (document.querySelector("#star-logo").style.color = "#000000A3");
     },
     star() {
+      let root = this;
       log(this.mingyan);
       if (!this.isSwalShow()) {
         swal({
@@ -62,12 +63,16 @@ export default {
           icon: MingyanLOGO,
           button: "关闭",
         }).then(() => {
-          this.starEvent = "addstar";
+          root.starEvent = "addstar";
+          document.removeEventListener("click", root.doStar);
         });
         document.querySelector(
           ".swal-icon.swal-icon--custom>img"
         ).style.maxWidth = "150px";
         document.querySelector(".swal-text").innerHTML = this.loadingHtml;
+        document
+          .querySelector("#star-logo")
+          .addEventListener("click", this.doStar);
         this.turnGray();
 
         switch (this.starEvent) {

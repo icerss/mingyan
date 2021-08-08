@@ -18,7 +18,8 @@ window["grecaptchaready"] = grecaptchaready;
 /**
  * 获取 reCaptcha
  */
-export let loadCaptcha = function() {
+export let loadCaptcha = function(action) {
+  action = action || "addstar";
   return new Promise(function(resolve, reject) {
     // log("[点赞系统 v2.1] 正在进行人机验证……");
     // NotyfAlert.info("正在进行人机验证……");
@@ -26,7 +27,7 @@ export let loadCaptcha = function() {
       reject("人机验证正在加载中，请稍后再试");
     }
     window.grecaptcha
-      .execute(reCaptchaKey, { action: "addstar" })
+      .execute(reCaptchaKey, { action: action })
       .then(function(tk) {
         // log("[点赞系统 v2.1] 人机验证成功");
         // setTimeout(function(){
@@ -41,6 +42,9 @@ export let loadCaptcha = function() {
 
         // resolve({ tft, tsk, ttd, tfs, tff });
         resolve(tk);
+      })
+      .catch(function(err) {
+        reject(err);
       });
   });
 };

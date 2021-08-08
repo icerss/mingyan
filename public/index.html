@@ -91,6 +91,8 @@
     ></script>
     <script>
       window["my_cfg"] = {};
+      window["my_cfg"].buildTime = "<%= htmlWebpackPlugin.options.TIME %>";
+      window["my_cfg"].version = "<%= htmlWebpackPlugin.options.VERSION %>";
     </script>
   </body>
 </html>
