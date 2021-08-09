@@ -153,7 +153,7 @@ export default {
     fadeIn(".my--more");
 
     let root = this;
-    loadJs("https://cdn.jsdelivr.net/npm/twikoo@1.4.1/dist/twikoo.min.js").then(
+    loadJs("https://cdn.jsdelivr.net/npm/twikoo@1.4.1/dist/twikoo.all.min.js").then(
       function() {
         twikoo // eslint-disable-line
           .init({
