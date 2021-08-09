@@ -11,6 +11,7 @@ import { kv, kvName, log, qs } from "./js/tools";
 import { MY_getUpdate } from "./js/feat/getUpdate";
 import { doConsole } from "./js/init";
 import "./js/feat/ranking";
+import { MY_ranking } from "./js/feat/ranking";
 
 export default {
   name: "App",
@@ -30,12 +31,10 @@ export default {
       let hash = window.location.hash;
       if (/#\d/.test(hash)) window.location.href = "./" + hash;
     });
-    window.doRanking = function() {
-      if (qs("force_action") == "2020" || !kv.get(kvName.rankingIp)) {
-        // 如果是新用户
-        window.MY_ranking();
-      }
-    };
+    // 2021 打卡彩蛋
+    if (qs("force_action") == "2020" || !kv.get(kvName.rankingIp)) {
+      MY_ranking();
+    }
     // 控制台彩蛋
     doConsole();
     // 检查更新

@@ -4,72 +4,58 @@ import swal from "sweetalert";
 
 /**
  * 2021彩蛋主函数
+ * 于 2021/08/09 重写
  */
-MY_rankingApi.then(function(rankingApi) {
-  window.MY_ranking = function() {
-    if (new Date().getTime() < 1609430400000 /* 2021-01-01 00:00:00 */) return;
-    if (
-      navigator.userAgent.toString().indexOf("bot") != -1 &&
-      navigator.userAgent.toString().indexOf("spider") !=
-        -1 /* 防止搜索引擎激活 */
-    )
-      return;
-    if (kv.get(kvName.rankingIp)) return;
-    if (qs("force_action") == "skip_ranking" || qs("do") == "sr") {
-      kv.put(kvName.rankingIp, "__SKIP__");
-      return;
-    }
-    let id = null;
-    let ip = null;
-    let num = null;
-    rankingApi
-      .getIp() // 先来一个ip看看
-      .then(function(ip_data) {
-        // db(ip_data.ip);
-        ip = ip_data.ip;
-        // 如果没有存过数据
-        // db("新用户");
-        kv.put(kvName.rankingIp, `__${ip}__`); // 那就存一个吧
-        return rankingApi.add("一位不知道名字的访客", ip);
-      }) // 默认给一个名字
-      .then(function(add_data) {
-        kv.put(kvName.rankingIp, `__${ip}__`); // 不知道为什么要再存一遍，但不想删了
-        id = add_data.result.res.id; // 留id以便于之后更新名字
-        return rankingApi.getNum();
-      })
-      .then(function(num_data) {
-        // 获取当前排名
-        num = num_data["result"]["res1"]["data"][0]["num"];
-        // 弹窗
-        return swal({
-          title: `第${num}个人！！`,
-          text: `恭喜你成为2021年第${num}个查看名言的人！！`, // 解决了！！（2021-01-26）
-          icon: "success",
-          content: {
-            element: "input",
-            attributes: {
-              placeholder: "写个名字记录一下你是谁吧！",
-              type: "text",
-            },
+export let MY_ranking = function() {
+  if (new Date().getTime() < 1609430400000 /* 2021-01-01 00:00:00 */) return;
+  if (
+    navigator.userAgent.toString().indexOf("bot") != -1 &&
+    navigator.userAgent.toString().indexOf("spider") !=
+      -1 /* 防止搜索引擎激活 */
+  )
+    return;
+  if (kv.get(kvName.rankingIp)) return;
+  if (qs("force_action") == "skip_ranking" || qs("do") == "sr") {
+    kv.put(kvName.rankingIp, "__SKIP__");
+    return;
+  }
+  let id = null;
+  let ip = null;
+  let num = null;
+  MY_rankingApi.getIp()
+    .then(function(ipRes) {
+      ip = ipRes.ip;
+      return MY_rankingApi.add("一位不知道名字的访客", ip);
+    })
+    .then(function(addRes) {
+      id = addRes.rid;
+      return MY_rankingApi.getNum();
+    })
+    .then(function(numData) {
+      num = numData.num;
+      return swal({
+        title: `第${num}个人！！`,
+        text: `恭喜你成为2021年第${num}个查看名言的人！！`,
+        icon: "success",
+        content: {
+          element: "input",
+          attributes: {
+            placeholder: "写个名字记录一下你是谁吧！",
+            type: "text",
           },
-          closeOnClickOutside: false,
-        });
-      })
-      .then(function(name) {
-        if (name) {
-          // 之后就是更新名字啦！
-          kv.put(kvName.rankingName, name);
-          return rankingApi.update(id, name, num);
-        } else {
-          location.href = "./";
-        }
-      })
-      .then(function() {
-        // db(update_data);
-        location.href = "./";
-      })
-      .catch(function(e) {
-        console.error(e);
+        },
+        closeOnClickOutside: false,
       });
-  };
-});
+    })
+    .then(function(name) {
+      kv.put(kvName.rankingIp, ip);
+      if (!name) return (location.href = "./");
+      return MY_rankingApi.update(id, name);
+    })
+    .then(function() {
+      location.href = "./";
+    })
+    .catch(function(e) {
+      console.error(e);
+    });
+};

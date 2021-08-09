@@ -2,119 +2,97 @@
  * 2021彩蛋!!!
  * 打卡系统
  * 2020/12/31
+ * 于 2021/08/09 重写
  */
 
-import cloudbase from "@cloudbase/js-sdk";
-import { apiUrls } from "../init";
+import { apiUrls, normalPostHeader } from "../init";
 
-export let MY_rankingApi = (async function() {
-  // 初始化tcb
-  let app = null;
-  // 匿名登录
-  let auth = null;
-  async function login() {
-    await auth.anonymousAuthProvider().signIn();
-    let loginState = await auth.getLoginState();
-    // log("登陆成功");
-    console.log(loginState);
-  }
-  app = cloudbase.init({ env: "xhemj-0gjckebwf7276129" });
-  auth = app.auth();
-  login(); // 云开发
+let apiUrl = apiUrls["2021_ranking"];
+// apiUrl = "http://localhost:3000/api/v2/2021-ranking";
 
-  setTimeout(() => {
-    window.doRanking();
-  }, 500);
-  // 基础函数
-  return {
-    // 添加
-    add: function(name, ip) {
-      if (!Promise) return;
-      return new Promise(function(resolve, reject) {
-        app
-          .callFunction({
-            name: "mingyan",
-            data: {
-              event: "add",
-              name: name.toString(),
-              ip: ip,
-              ua: navigator.userAgent.toString() || "",
-            },
-          })
-          .then((res) => {
-            // log("添加成功");
-            // log(res);
-            resolve(res);
-          })
-          .catch(function(e) {
-            reject(e);
-          });
-      });
-    },
-    // 更新呢
-    update: function(id, name, num) {
-      if (!Promise) return;
-      return new Promise(function(resolve, reject) {
-        app
-          .callFunction({
-            name: "mingyan",
-            data: {
-              event: "update",
-              id: id,
-              data: {
-                name: name,
-              },
-              num: num,
-            },
-          })
-          .then((res) => {
-            // log("获取成功");
-            // log(res);
-            resolve(res);
-          })
-          .catch(function(e) {
-            reject(e);
-          });
-      });
-    },
-    // 获取IP
-    getIp: function() {
-      if (!Promise) return;
-      return new Promise(function(resolve, reject) {
-        fetch(apiUrls.ip)
-          .then((r) => r.json())
-          .then(function(json) {
-            // log("获取成功");
-            let res = {
-              ip: json.ip,
-            };
-            resolve(res);
-          })
-          .catch(function(e) {
-            reject(e);
-          });
-      });
-    },
-    //获取当前排名人数
-    getNum: function() {
-      if (!Promise) return;
-      return new Promise(function(resolve, reject) {
-        app
-          .callFunction({
-            name: "mingyan",
-            data: {
-              event: "getnum",
-            },
-          })
-          .then((res) => {
-            // log("获取成功");
-            // log(res);
-            resolve(res);
-          })
-          .catch(function(e) {
-            reject(e);
-          });
-      });
-    },
-  };
-})();
+export let MY_rankingApi = {
+  add: function(name, ip) {
+    return new Promise(function(resolve, reject) {
+      fetch(apiUrl, {
+        ...normalPostHeader,
+        body: JSON.stringify({
+          event: "add",
+          data: {
+            name: name || "",
+            ip: ip || "",
+            t: new Date().getTime(),
+          },
+        }),
+      })
+        .then((r) => r.json())
+        .then(function(res) {
+          if (res.code !== 0) reject(res.msg);
+          resolve(res.data);
+        })
+        .catch(function(err) {
+          reject(err);
+        });
+    });
+  },
+  update: function(id, name) {
+    return new Promise(function(resolve, reject) {
+      fetch(apiUrl, {
+        ...normalPostHeader,
+        body: JSON.stringify({
+          event: "update",
+          data: {
+            name: name || "",
+            rid: id || "",
+            t: new Date().getTime(),
+          },
+        }),
+      })
+        .then((r) => r.json())
+        .then(function(res) {
+          if (res.code !== 0) reject(res.msg);
+          resolve(res.data);
+        })
+        .catch(function(err) {
+          reject(err);
+        });
+    });
+  },
+  getIp: function() {
+    if (!Promise) return;
+    return new Promise(function(resolve, reject) {
+      fetch(apiUrls.ip)
+        .then((r) => r.json())
+        .then(function(json) {
+          // log("获取成功");
+          let res = {
+            ip: json.ip,
+          };
+          resolve(res);
+        })
+        .catch(function(e) {
+          reject(e);
+        });
+    });
+  },
+  getNum: function() {
+    return new Promise(function(resolve, reject) {
+      fetch(apiUrl, {
+        ...normalPostHeader,
+        body: JSON.stringify({
+          event: "getnum",
+          data: {
+            t: new Date().getTime(),
+          },
+        }),
+      })
+        .then((r) => r.json())
+        .then(function(res) {
+          if (res.code !== 0) reject(res.msg);
+          resolve(res.data);
+        })
+        .catch(function(err) {
+          reject(err);
+        });
+    });
+  },
+};

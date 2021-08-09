@@ -79,5 +79,3 @@ export let MY_commentApi = {
     });
   },
 };
-
-window.MY_commentApi = MY_commentApi;

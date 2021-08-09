@@ -32,6 +32,7 @@ export let $myInfo = ".my--mingyan-info";
 export let picBaseUrl = "https://cdn.erssmy.com/image"; // 图片cdn链接
 
 export let apiUrls = {
+  "2021_ranking": "https://api.erss.club/api/v2/2021-ranking",
   star: "https://api.erss.club/api/star",
   star_v2: "https://api.erss.club/api/v2/star",
   submit: "https://api.erss.club/api/contribute",
