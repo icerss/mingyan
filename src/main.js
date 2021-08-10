@@ -66,14 +66,15 @@ if (getConfig("isInsertAegis")) {
     version: "3.0.0",
   });
 }
+window.aegis = aegis;
 
 Vue.config.productionTip = false;
-Vue.config.errorHandler = function(err, vm, info) {
-  if (getConfig("isInsertAegis"))
-    aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
-  if (getConfig("isShowError"))
-    console.error(`Error: ${err.toString()}\nInfo: ${info}`);
-};
+// Vue.config.errorHandler = function(err, vm, info) {
+//   if (getConfig("isInsertAegis"))
+//     aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
+//   if (getConfig("isShowError"))
+//     console.error(`Error: ${err.toString()}\nInfo: ${info}`);
+// };
 
 if (getConfig("isInsertBaidu")) {
   let _hmt = [];

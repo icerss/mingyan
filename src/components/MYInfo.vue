@@ -10,6 +10,8 @@
 import { MingyanLOGO } from "../js/init";
 import { MY_showFromApi } from "./../js/feat/infoApi";
 import swal from "sweetalert";
+import { formatMingyan, mingyanPicUrl, solvePicUrl } from "../js/mingyan";
+import { EventBus } from "../js/eventBus";
 
 export default {
   name: "MYInfo",
@@ -20,6 +22,8 @@ export default {
     return {
       type: "世界馆",
       showFromData: "",
+      solvePicUrl: solvePicUrl,
+      mingyanPicUrl: mingyanPicUrl,
     };
   },
   mounted() {
@@ -59,7 +63,14 @@ export default {
     },
     loadType() {
       let root = this;
-      MY_showFromApi.getinfo(root.mingyan).then(function(info) {
+      let picPath = null;
+      if (formatMingyan(this.mingyan).text === "解") {
+        picPath = this.solvePicUrl[formatMingyan(this.mingyan).teacher];
+      } else {
+        picPath = this.mingyanPicUrl[formatMingyan(this.mingyan).text];
+      }
+      picPath = picPath || "";
+      MY_showFromApi.getinfo(this.mingyan, picPath).then(function(info) {
         root.showFromData = info.data;
         // db("showFromData", showFromData);
         let submit_type = root.showFromData.from.type;
@@ -68,6 +79,11 @@ export default {
         }
         root.type = submit_type;
         root.isReady = true;
+        // 图片彩蛋部分
+        EventBus.$emit(
+          "MingyanInfoLoaded",
+          JSON.stringify(root.showFromData.pic)
+        );
       });
     },
   },

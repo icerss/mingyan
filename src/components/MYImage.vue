@@ -13,8 +13,9 @@
 <script>
 import FancyImage from "./FancyImage.vue";
 import { mingyanPicUrl, solvePicUrl } from "../js/mingyan";
-import { deviceIsPhone } from "../js/tools";
-import { picBaseUrl } from "../js/init";
+import { deviceIsPhone, isSupportWebp, log } from "../js/tools";
+// import { picBaseUrl } from "../js/init";
+import { EventBus } from "../js/eventBus";
 
 export default {
   name: "MYImage",
@@ -30,10 +31,11 @@ export default {
       solvePicUrl: solvePicUrl,
       imgClassName: "",
       styleMinWidth: 0,
+      imgSrc: "assets/loading.svg",
     };
   },
   mounted() {
-    //console.log(this.rawMingyan);
+    let root = this;
     if (deviceIsPhone()) {
       this.styleMinWidth = 28 * this.text.split("").length - 50;
       this.imgClassName = "phone-img";
@@ -41,6 +43,18 @@ export default {
       this.styleMinWidth = 28 * this.text.split("").length - 50;
       this.imgClassName = "pc-img";
     }
+
+    EventBus.$on("MingyanInfoLoaded", function(info) {
+      info = JSON.parse(info);
+      log(info);
+      let url = {};
+      if (isSupportWebp()) {
+        url = info.webp;
+      } else {
+        url = info.normal;
+      }
+      root.imgSrc = url.href + url.path + "?" + url.query;
+    });
   },
   computed: {
     text() {
@@ -49,11 +63,6 @@ export default {
         (this.rawMingyan.split("：")[2] ? "：" : "") +
         (this.rawMingyan.split("：")[2] || "")
       );
-    },
-    imgSrc() {
-      if (this.rawMingyan.split("：")[1] === "解")
-        return picBaseUrl + this.solvePicUrl[this.rawMingyan.split("：")[0]];
-      return picBaseUrl + this.mingyanPicUrl[this.text];
     },
   },
 };

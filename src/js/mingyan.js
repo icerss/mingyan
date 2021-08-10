@@ -886,8 +886,13 @@ export let genNextId = function() {
   return window["nowId"];
 };
 
-export let formatMingyan = function(id) {
-  let _my = mingyan[id];
+export let formatMingyan = function(input) {
+  let _my = "";
+  if (String(Number(input)) === "NaN") {
+    _my = input;
+  } else {
+    _my = mingyan[input];
+  }
   let teacher = _my.split("：")[0];
   let text =
     _my.split("：")[1] +

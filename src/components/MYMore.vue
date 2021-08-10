@@ -153,25 +153,24 @@ export default {
     fadeIn(".my--more");
 
     let root = this;
-    loadJs("https://cdn.jsdelivr.net/npm/twikoo@1.4.1/dist/twikoo.all.min.js").then(
-      function() {
-        twikoo // eslint-disable-line
-          .init({
-            envId: "xhemj-0gjckebwf7276129",
-            el: "#tcomment",
-            path: "/",
-          })
-          .then(function() {
-            try {
-              document.querySelector(
-                ".tk-footer"
-              ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://www.erssmy.com/">ERSS名言</a></div>`;
-            } catch {} // eslint-disable-line
-            document.querySelector(".el-textarea__inner").style.height =
-              "150px";
-          });
-      }
-    );
+    loadJs(
+      "https://cdn.jsdelivr.net/npm/twikoo@1.4.1/dist/twikoo.all.min.js"
+    ).then(function() {
+      twikoo // eslint-disable-line
+        .init({
+          envId: "xhemj-0gjckebwf7276129",
+          el: "#tcomment",
+          path: "/",
+        })
+        .then(function() {
+          try {
+            document.querySelector(
+              ".tk-footer"
+            ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://www.erssmy.com/">ERSS名言</a></div>`;
+          } catch {} // eslint-disable-line
+          document.querySelector(".el-textarea__inner").style.height = "150px";
+        });
+    });
     fetch("https://api.github.com/repos/xhemj/mingyan")
       .then((r) => r.json())
       .then(function(data) {
