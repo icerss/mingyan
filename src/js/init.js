@@ -42,6 +42,7 @@ export let apiUrls = {
   update: "https://api.erss.club/api/getupdate",
   ranking_history: "https://api.erss.club/api/get-ranking-history",
   donate_list: "https://api.erss.club/api/get-donate-info",
+  image: "https://api.erss.club/api/image",
 };
 
 String.prototype.trim = function() {

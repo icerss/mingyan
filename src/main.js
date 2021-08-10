@@ -68,7 +68,7 @@ if (getConfig("isInsertAegis")) {
 }
 window.aegis = aegis;
 
-Vue.config.productionTip = false;
+// Vue.config.devtools = true;
 // Vue.config.errorHandler = function(err, vm, info) {
 //   if (getConfig("isInsertAegis"))
 //     aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);

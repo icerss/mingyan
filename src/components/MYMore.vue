@@ -19,13 +19,7 @@
       </div>
       <router-link to="/donate">
         <div class="my--sponsor">
-          <img
-            class="banner"
-            v-lazy="
-              'https://cdn.erssmy.com/image/2021/05/03/lnUX9FrvT8ockbY.png'
-            "
-            alt="鼓励我们"
-          />
+          <img class="banner" :src="bannerImg" alt="鼓励我们" />
         </div>
       </router-link>
 
@@ -100,7 +94,13 @@
 
 <script>
 import { mingyan } from "../js/mingyan";
-import { fadeIn, loadJs, SaveAs } from "../js/tools";
+import {
+  fadeIn,
+  loadJs,
+  SaveAs,
+  getImageLink,
+  isSupportWebp,
+} from "../js/tools";
 import MYFooter from "./MYFooter.vue";
 
 export default {
@@ -110,6 +110,7 @@ export default {
       hitCount: "9999+",
       uptime: "2021-00-00 00:00:00",
       sitetime: "很久很久~~",
+      bannerImg: "assets/loading.svg",
     };
   },
   components: {
@@ -185,6 +186,10 @@ export default {
     setInterval(function() {
       root.sitetime = root.siteTime();
     }, 250);
+
+    getImageLink("/2021/05/03/lnUX9FrvT8ockbY.png").then(function(res) {
+      root.bannerImg = res[isSupportWebp() ? "webp" : "normal"];
+    });
   },
 };
 </script>

@@ -44,6 +44,7 @@ export default {
       this.imgClassName = "pc-img";
     }
 
+    // 监听从 MYInfo 传来的图片信息
     EventBus.$on("MingyanInfoLoaded", function(info) {
       info = JSON.parse(info);
       log(info);
@@ -53,8 +54,11 @@ export default {
       } else {
         url = info.normal;
       }
-      root.imgSrc = url.href + url.path + "?" + url.query;
+      if (url) root.imgSrc = url.href + url.path + "?" + url.query;
     });
+  },
+  destroyed() {
+    EventBus.$off("MingyanInfoLoaded", {});
   },
   computed: {
     text() {

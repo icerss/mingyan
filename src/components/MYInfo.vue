@@ -65,7 +65,7 @@ export default {
       let root = this;
       let picPath = null;
       if (formatMingyan(this.mingyan).text === "解") {
-        picPath = this.solvePicUrl[formatMingyan(this.mingyan).teacher];
+        picPath = this.solvePicUrl[formatMingyan(this.mingyan).te];
       } else {
         picPath = this.mingyanPicUrl[formatMingyan(this.mingyan).text];
       }

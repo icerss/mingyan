@@ -91,7 +91,7 @@ export let isShow = function(el) {
 };
 
 import { v4 as uuidv4 } from "uuid";
-import { getConfig } from "./init";
+import { apiUrls, getConfig, normalPostHeader } from "./init";
 
 /**
  * 获取 UID
@@ -276,3 +276,22 @@ export let SaveAs = function(data, type, name) {
   link.download = exportName + "." + type;
   link.click();
 };
+
+export function getImageLink(path) {
+  return new Promise(function(resolve, reject) {
+    fetch(apiUrls.image, {
+      ...normalPostHeader,
+      body: JSON.stringify({
+        picPath: path,
+        t: new Date().getTime(),
+      }),
+    })
+      .then((r) => r.json())
+      .then(function(res) {
+        resolve(res);
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
+}
