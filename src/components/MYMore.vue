@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { loadingImg } from "../js/init";
 import { mingyan } from "../js/mingyan";
 import {
   fadeIn,
@@ -110,7 +111,7 @@ export default {
       hitCount: "9999+",
       uptime: "2021-00-00 00:00:00",
       sitetime: "很久很久~~",
-      bannerImg: "assets/loading.svg",
+      bannerImg: loadingImg,
     };
   },
   components: {

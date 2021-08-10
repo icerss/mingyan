@@ -31,7 +31,7 @@ import {
   Pagination,
 } from "ant-design-vue";
 import { kv, kvName } from "./js/tools";
-import { getConfig } from "./js/init";
+import { getConfig, loadingImg } from "./js/init";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -48,7 +48,7 @@ Vue.use(Comment);
 Vue.use(Divider);
 Vue.use(Pagination);
 Vue.use(VueLazyload, {
-  loading: "assets/loading.svg",
+  loading: loadingImg,
 });
 
 let aegis;
@@ -68,7 +68,7 @@ if (getConfig("isInsertAegis")) {
 }
 window.aegis = aegis;
 
-// Vue.config.devtools = true;
+Vue.config.devtools = process.env.NODE_ENV === "development";
 // Vue.config.errorHandler = function(err, vm, info) {
 //   if (getConfig("isInsertAegis"))
 //     aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);

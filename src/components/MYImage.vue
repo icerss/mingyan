@@ -4,7 +4,7 @@
       :src="imgSrc"
       :title="rawMingyan"
       description="拍摄：耳斯名言制作团队"
-      className="mdui-img-rounded my--mingyan-pic"
+      className="my--mingyan-pic"
       :alt="rawMingyan"
     />
   </div>
