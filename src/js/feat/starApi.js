@@ -9,7 +9,7 @@ import { getUid, NotyfAlert, log } from "../tools";
 import { loadCaptcha } from "./loadCaptcha";
 
 let starApiUrl = apiUrls.star_v2;
-//  starApiUrl = "http://localhost:3000/api/v2/star";
+// starApiUrl = "http://localhost:3000/api/v2/star";
 // 感谢Vercel的服务！！
 // 感谢MongoDB提供免费的数据库！！
 

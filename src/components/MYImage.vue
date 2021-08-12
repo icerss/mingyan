@@ -16,6 +16,7 @@ import { mingyanPicUrl, solvePicUrl } from "../js/mingyan";
 import { deviceIsPhone, isSupportWebp, log } from "../js/tools";
 // import { picBaseUrl } from "../js/init";
 import { EventBus } from "../js/eventBus";
+import { loadingImg } from "../js/init";
 
 export default {
   name: "MYImage",
@@ -31,8 +32,13 @@ export default {
       solvePicUrl: solvePicUrl,
       imgClassName: "",
       styleMinWidth: 0,
-      imgSrc: "assets/loading.svg",
+      imgSrc: loadingImg,
     };
+  },
+  watch: {
+    "$route.path"() {
+      this.imgSrc = loadingImg;
+    },
   },
   mounted() {
     let root = this;
@@ -58,7 +64,7 @@ export default {
     });
   },
   destroyed() {
-    EventBus.$off("MingyanInfoLoaded", {});
+    EventBus.$off("MingyanInfoLoaded");
   },
   computed: {
     text() {

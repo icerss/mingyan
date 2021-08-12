@@ -75,6 +75,7 @@ import { mingyan } from "../js/mingyan";
 import MYFooter from "../components/MYFooter.vue";
 import MYSearchHighlight from "../components/MYSearchHighlight.vue";
 import { MY_starApi } from "../js/feat/starApi";
+import { log } from "../js/tools";
 
 export default {
   name: "MYSearch",
@@ -184,14 +185,27 @@ export default {
 
     getHistoryRanking() {
       let root = this;
-      MY_starApi.getHistoryRanking().then(function(res) {
-        let data = [];
-        for (let i = 0; i < 15; i++) {
-          data.push(res[i]);
-        }
-        root.historyDataList = data;
-        root.isLoading = false;
-      });
+      MY_starApi.getHistoryRanking()
+        .then(function(res) {
+          let data = [];
+          for (let i = 0; i < 15; i++) {
+            data.push(res[i]);
+          }
+          root.historyDataList = data;
+          root.isLoading = false;
+        })
+        .catch(function(err) {
+          log(err);
+          // 若获取失败，就加载实时排行榜
+          MY_starApi.getRanking().then(function(res) {
+            res = res.data;
+            for (let i = 0; i < 15; i++) {
+              data.push(res[i]);
+            }
+            root.historyDataList = data;
+            root.isLoading = false;
+          });
+        });
       setTimeout(function() {
         if (!root.historyDataList === []) root.isLoading = false;
       }, 2000);

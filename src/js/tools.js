@@ -277,7 +277,7 @@ export let SaveAs = function(data, type, name) {
   link.click();
 };
 
-export function getImageLink(path) {
+export let getImageLink = function(path) {
   return new Promise(function(resolve, reject) {
     fetch(apiUrls.image, {
       ...normalPostHeader,
@@ -294,4 +294,13 @@ export function getImageLink(path) {
         reject(err);
       });
   });
-}
+};
+
+export let getImageSize = function(url) {
+  let image = new Image();
+  image.src = url;
+  return {
+    height: image.height,
+    width: image.width,
+  };
+};

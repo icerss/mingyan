@@ -3,7 +3,11 @@
     <div class="my--donate">
       <h1>鼓励我们</h1>
       <div class="qrcode">
-        <FancyImage :src="donateImg" title="鼓励我们" className="qr-img" />
+        <FancyImage
+          src="https://static-cdn.erssmy.com/public/donate-qrcode.png"
+          title="鼓励我们"
+          className="qr-img"
+        />
         <p class="qrcode-text">点击图片可以放大</p>
       </div>
 
@@ -27,8 +31,8 @@
 <script>
 import MYFooter from "./MYFooter.vue";
 import FancyImage from "./FancyImage.vue";
-import { fadeIn, getImageLink, isSupportWebp } from "../js/tools";
-import { apiUrls, loadingImg } from "../js/init";
+import { fadeIn } from "../js/tools";
+import { apiUrls } from "../js/init";
 
 const columns = [
   {
@@ -64,7 +68,6 @@ export default {
       isFinishLoading: false,
       listData: [],
       columns: columns,
-      donateImg: loadingImg,
     };
   },
   mounted() {
@@ -76,10 +79,6 @@ export default {
       .then(function(res) {
         root.handleData(res);
       });
-
-    getImageLink("/2021/05/04/1zfBCJSGmbKcs9e.png").then(function(res) {
-      root.donateImg = res[isSupportWebp() ? "webp" : "normal"];
-    });
   },
   methods: {
     handleData(data) {

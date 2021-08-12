@@ -114,7 +114,7 @@ export default {
 
 .icon.my--header-logo {
   background: transparent center/contain no-repeat;
-  background-image: url("https://cdn.erssmy.com/image/2021/05/23/ldzxMt9PYQ3LNyU.png");
+  background-image: url("https://static-cdn.erssmy.com/public/web-logo.png");
 }
 
 @media only screen and (max-width: 480px) {

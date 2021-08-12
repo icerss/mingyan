@@ -60,8 +60,7 @@ export let normalPostHeader = {
 };
 
 export let reCaptchaKey = "6LdOb_gaAAAAAAIQpvSd_6a5yjeneoVlvM159zwH";
-export let MingyanLOGO =
-  "https://cdn.erssmy.com/image/2021/05/23/ldzxMt9PYQ3LNyU.png";
+export let MingyanLOGO = "https://static-cdn.erssmy.com/public/web-logo.png";
 
 export function doConsole() {
   // 控制台彩蛋
