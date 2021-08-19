@@ -106,13 +106,11 @@ export default {
       kv.put(kvName.mingyanId, id);
       fadeIn(".my--main");
     },
-
     nextMingyan() {
       let nextId = genNextId();
       router.push("/@" + nextId);
       this.showMingyan(nextId);
     },
-
     onTextClick() {
       alert("你点击了名言");
     },
@@ -165,5 +163,26 @@ export default {
 
 #reload {
   cursor: pointer;
+}
+
+.my--main.is-mouse-enter > *:not([class="my--knowledge-box"]) {
+  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateX(100vw);
+}
+
+.my--main.is-mouse-leave > *:not([class="my--knowledge-box"]) {
+  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateX(0);
+}
+
+.my--main.is-mouse-enter > .my--knowledge-box {
+  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
+  left: 0;
+  right: 0;
+}
+
+.my--main.is-mouse-leave > .my--knowledge-box {
+  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
+  left: -100vw;
 }
 </style>

@@ -2,7 +2,6 @@
  * 名言主配置
  */
 let defaultCfg = {
-  isSpecifyMingyanId: true,
   specifyId: null,
   isAutoShowMingyan: true,
   isInsertBaidu: true,
@@ -33,8 +32,8 @@ export let picBaseUrl = "https://cdn.erssmy.com/image"; // 图片cdn链接
 
 export let apiUrls = {
   "2021_ranking": "https://api.erss.club/api/v2/2021-ranking",
-  star: "https://api.erss.club/api/star",
   star_v2: "https://api.erss.club/api/v2/star",
+  star_v3: "https://api.erss.club/api/v3/star",
   submit: "https://api.erss.club/api/contribute",
   comment: "https://api.erss.club/api/comment",
   showfrom: "https://api.erss.club/api/info",

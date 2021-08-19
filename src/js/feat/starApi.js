@@ -8,7 +8,7 @@ import { apiUrls, normalPostHeader } from "../init";
 import { getUid, NotyfAlert, log } from "../tools";
 import { loadCaptcha } from "./loadCaptcha";
 
-let starApiUrl = apiUrls.star_v2;
+let starApiUrl = apiUrls.star_v3;
 // starApiUrl = "http://localhost:3000/api/v2/star";
 // 感谢Vercel的服务！！
 // 感谢MongoDB提供免费的数据库！！
@@ -51,7 +51,7 @@ export let MY_starApi = {
    * 点赞
    * @param {String} my 完整名言
    */
-  addStar: async function(my, id) {
+  addStar: async function(my, id, recaptcha_token) {
     if (!Promise) return;
     if (!my && !id)
       my =
@@ -64,7 +64,7 @@ export let MY_starApi = {
     if (!id && my) _find = { MY_text: my };
     // 接入recaptcha 验证
     try {
-      let recaptcha_token = await loadCaptcha();
+      recaptcha_token = recaptcha_token || (await loadCaptcha());
       return new Promise(function(resolve, reject) {
         fetch(starApiUrl, {
           ...normalPostHeader,
@@ -95,16 +95,17 @@ export let MY_starApi = {
    * 取消点赞
    * @param {String} my 完整名言
    */
-  removeStar: async function(my) {
+  removeStar: async function(my, id, recaptcha_token) {
     if (!Promise) return;
     if (!my)
       my =
         document.querySelector(".my--mingyan-name").innerText.trim() +
         "：" +
         document.querySelector(".my--mingyan-text").innerText.trim();
+    id = id || "";
     // 接入recaptcha 验证
     try {
-      let recaptcha_token = await loadCaptcha();
+      recaptcha_token = recaptcha_token || (await loadCaptcha());
       return new Promise(function(resolve, reject) {
         fetch(starApiUrl, {
           ...normalPostHeader,

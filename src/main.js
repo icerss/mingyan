@@ -103,6 +103,9 @@ new Vue({
   router,
   // i18n,
   render: (h) => h(App),
+  mounted() {
+    document.dispatchEvent(new Event("render-event"));
+  },
 }).$mount("#app");
 
 /**

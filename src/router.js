@@ -32,11 +32,11 @@ export let routes = [
   { path: "/submit", name: "submit", component: MYSubmit },
   { path: "/debug", name: "debug", component: MYDebugPage },
   { path: "/sponsor", redirect: "/donate" },
-  { path: "*", redirect: "/" },
+  // { path: "*", redirect: "/" },
 ];
 
 let router = new VueRouter({
-  mode: "hash",
+  mode: "history",
   base: process.env.BASE_URL,
   routes: routes,
 });

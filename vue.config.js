@@ -8,8 +8,7 @@ const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const isProduction = process.env.NODE_ENV === "production";
 require("dayjs/locale/zh-cn");
 dayjs.locale("zh-cn");
-
-let time = dayjs().format("YYYY-M-D HH:mm:ss");
+const time = dayjs().format("YYYY-M-D HH:mm:ss");
 
 module.exports = {
   productionSourceMap: false,
@@ -50,7 +49,6 @@ module.exports = {
         },
       },
     };
-    // plugins: [new BundleAnalyzerPlugin()],
   },
   chainWebpack: (config) => {
     config
@@ -83,7 +81,7 @@ module.exports = {
   },
   filenameHashing: false,
   css: {
-    extract: true,
+    extract: false,
     loaderOptions: {
       less: {
         javascriptEnabled: true,

@@ -1,6 +1,6 @@
 <template>
   <!-- 点赞 -->
-  <a class="my--star-btn label label-rounded label-warning" @click="doStar">
+  <a class="my--star-btn label label-rounded label-warning" @click="doStar()">
     <i class="mdui-icon material-icons" style="font-size: 15px">&#xe8dc;</i
     >&nbsp; 点赞</a
   >
@@ -53,7 +53,7 @@ export default {
     turnGray() {
       return (document.querySelector("#star-logo").style.color = "#000000A3");
     },
-    star() {
+    star(my, id, recaptcha_token) {
       let root = this;
       log(this.mingyan);
       if (!this.isSwalShow()) {
@@ -72,23 +72,26 @@ export default {
         document.querySelector(".swal-text").innerHTML = this.loadingHtml;
         document
           .querySelector("#star-logo")
-          .addEventListener("click", this.doStar);
+          .addEventListener("click", function() {
+            root.doStar();
+          });
         this.turnGray();
 
         switch (this.starEvent) {
           case "addstar":
-            this.addStar();
+            this.addStar(my, id, recaptcha_token);
             break;
           case "removestar":
-            this.removeStar();
+            this.removeStar(my, id, recaptcha_token);
             break;
         }
       }
     },
-    addStar() {
+    addStar(my, id, recaptcha_token) {
+      log(my);
       let root = this;
       root.turnGray();
-      MY_starApi.addStar()
+      MY_starApi.addStar(my, id, recaptcha_token)
         .then(function(addStar_res) {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
@@ -99,6 +102,8 @@ export default {
               root.turnRed();
               root.starEvent = "removestar";
             }
+            if (addStar_res.msg.indexOf("人机验证") !== -1)
+              return root.reVerify("addstar");
           } else {
             NotyfAlert.su(addStar_res.msg);
             document.querySelector(".my--star-num").innerHTML =
@@ -113,10 +118,10 @@ export default {
           NotyfAlert.err("错误：\n" + err);
         });
     },
-    removeStar() {
+    removeStar(my, id, recaptcha_token) {
       let root = this;
       root.turnGray();
-      MY_starApi.removeStar()
+      MY_starApi.removeStar(my, id, recaptcha_token)
         .then(function(addStar_res) {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
@@ -127,6 +132,8 @@ export default {
               root.turnGray();
               root.starEvent = "addstar";
             }
+            if (addStar_res.msg.indexOf("人机验证") !== -1)
+              return root.reVerify("removestar");
           } else {
             NotyfAlert.su(addStar_res.msg);
             document.querySelector(".my--star-num").innerHTML =
@@ -140,6 +147,27 @@ export default {
         .catch(function(err) {
           NotyfAlert.err("错误：\n" + err);
         });
+    },
+    reVerify(event) {
+      let root = this;
+      swal({
+        title:
+          "感谢您对耳斯名言的支持，但为了防止恶意刷赞行为，我们不得不对您的身份进行验证。若您多次收到验证提示，建议您稍后再试。",
+        text: "加载中……",
+        icon: "",
+        button: "继续",
+      }).then(() => {
+        let reToken = window.grecaptcha.getResponse();
+        if (!reToken) return NotyfAlert.err("验证失败：请重试");
+        root.starEvent = event;
+        return root.star(null, null, "reverify@" + reToken);
+      });
+      document.querySelector(".swal-title").style.fontSize = "20px";
+      document.querySelector(".swal-text").innerHTML = `验证码加载中……`;
+      document.querySelector(".swal-text").id = "star-reverify";
+      window.grecaptcha.render("star-reverify", {
+        sitekey: "6Lf9VgccAAAAAO2KrVDJGSuDXIHXD3lnV7T2nzP9",
+      });
     },
   },
 };

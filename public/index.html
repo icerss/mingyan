@@ -23,22 +23,19 @@
     <link rel="manifest" href="manifest.json?v=2" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="ERSS名言" />
-    <meta
-      name="description"
-      content="快来看看厦门市音乐学校老师和同学们的名言吧！——ERSS！"
-    />
+    <meta name="apple-mobile-web-app-title" content="耳斯名言" />
+    <meta name="description" content="快来看看老师和同学们的名言吧！——ERSS！" />
     <meta
       name="keywords"
       content="耳斯名言,ERSS名言,音校师生名言,恪人族,xhemj,BlackToy,Oranjezelv,厦门市音乐学校,耳散伞"
     />
     <meta name="theme-color" content="#5676dc" />
-    <meta property="og:title" content="ERSS名言 · ERSS" />
+    <meta property="og:title" content="耳斯名言 · ERSS" />
     <meta
       property="og:description"
-      content="快来看看厦门市音乐学校老师和同学们的名言吧！——ERSS！"
+      content="快来看看老师和同学们的名言吧！——ERSS！"
     />
-    <meta property="og:site_name" content="ERSS名言 · ERSS" />
+    <meta property="og:site_name" content="耳斯名言 · ERSS" />
     <meta property="og:url" content="https://www.erssmy.com/" />
     <meta name="baidu-site-verification" content="code-KGWoLKBpRa" />
     <meta name="sogou_site_verification" content="p3nx0HOwni" />
@@ -48,7 +45,7 @@
       name="shenma-site-verification"
       content="3307e4d3cb69ad02b89471aa9bc3b00e_1606139601"
     />
-    <title>ERSS名言&nbsp;·&nbsp;ERSS</title>
+    <title>耳斯名言&nbsp;·&nbsp;ERSS</title>
     <link
       rel="apple-touch-icon"
       href="https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/512x512.png"
@@ -58,28 +55,31 @@
       rel="shortcut icon"
       href="https://s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/new-logo/v2/64x64.png"
     />
-    <script src="https://cdn-go.cn/aegis/aegis-sdk/latest/aegis.min.js"></script>
+    <script src="//cdn-go.cn/aegis/aegis-sdk/latest/aegis.min.js"></script>
+    <style>
+      #loading-mask {
+        display: none;
+        text-align: center;
+        padding: 50px 0;
+        font-size: 18px;
+        color: #303742;
+      }
+    </style>
   </head>
 
   <body>
-    <div
-      id="loading-mask"
-      style="display:none;text-align:center;padding:50px 0;font-size:18px;color:#303742"
-    >
+    <div id="loading-mask">
       快了快了，耳斯名言马上就加载好了~<br />ψ(｀∇´)ψ
       <script>
         document.querySelector("#loading-mask").style.display = "block";
       </script>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked@2.1.3/marked.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue-router@3.5.2/dist/vue-router.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/marked@2.1.3/marked.min.js"></script>
     <div id="app">
       <noscript>
-        <div
-          id="loading-mask"
-          style="display:block;text-align:center;padding:50px 0;font-size:18px;color:#303742"
-        >
+        <div id="loading-mask">
           唔ヾ(≧▽≦*)o 你需要启用 Javascript 才能来看名言哦！
         </div>
       </noscript>
@@ -88,7 +88,7 @@
     <script
       async
       defer
-      src="https://log.erss.club/web.js?v=2.4.1"
+      src="//log.erss.club/web.js?v=2.4.1"
       data-ackee-server="https://log.erss.club"
       data-ackee-domain-id="0e584eea-a8cf-42e2-8602-2d62bb782b4c"
       data-ackee-opts='{ "detailed": true }'
