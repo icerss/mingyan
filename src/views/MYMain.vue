@@ -40,7 +40,7 @@
 
 <script>
 import MYStar from "../components/MYStar.vue";
-import MYInfo from "../components/MYInfo.vue";
+import MYInfo from "./MYInfo.vue";
 import MYFooter from "../components/MYFooter.vue";
 import MYImage from "../components/MYImage.vue";
 import {

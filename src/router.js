@@ -6,18 +6,18 @@ const MYMain = () =>
 const MYSearch = () =>
   import(/* webpackChunkName: "search" */ "./views/MYSearch.vue");
 const MYMore = () =>
-  import(/* webpackChunkName: "page" */ "./components/MYMore.vue");
+  import(/* webpackChunkName: "page" */ "./views/pages/MYMore.vue");
 const MYAbout = () =>
-  import(/* webpackChunkName: "page" */ "./components/MYAbout.vue");
+  import(/* webpackChunkName: "page" */ "./views/pages/MYAbout.vue");
 const MYFaq = () =>
-  import(/* webpackChunkName: "page" */ "./components/MYFaq.vue");
+  import(/* webpackChunkName: "page" */ "./views/pages/MYFaq.vue");
 const MYDonate = () =>
-  import(/* webpackChunkName: "page" */ "./components/MYDonate.vue");
+  import(/* webpackChunkName: "page" */ "./views/pages/MYDonate.vue");
 const MYRanking = () =>
-  import(/* webpackChunkName: "action-page" */ "./components/MYRanking.vue");
+  import(/* webpackChunkName: "action-page" */ "./views/pages/MYRanking.vue");
 const MYSubmit = () =>
-  import(/* webpackChunkName: "action-page" */ "./components/MYSubmit.vue");
-import MYDebugPage from "./components/MYDebugPage.vue";
+  import(/* webpackChunkName: "action-page" */ "./views/pages/MYSubmit.vue");
+import MYDebugPage from "./views/pages/MYDebugPage.vue";
 
 Vue.use(VueRouter);
 
@@ -36,7 +36,7 @@ export let routes = [
 ];
 
 let router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes: routes,
 });

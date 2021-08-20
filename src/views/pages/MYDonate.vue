@@ -29,10 +29,10 @@
 </template>
 
 <script>
-import MYFooter from "./MYFooter.vue";
-import FancyImage from "./FancyImage.vue";
-import { fadeIn } from "../js/tools";
-import { apiUrls } from "../js/init";
+import MYFooter from "../../components/MYFooter.vue";
+import FancyImage from "../../components/FancyImage.vue";
+import { fadeIn } from "../../js/tools";
+import { apiUrls } from "../../js/init";
 
 const columns = [
   {

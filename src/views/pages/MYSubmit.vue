@@ -62,9 +62,9 @@
 
 <script>
 import swal from "sweetalert";
-import { fadeIn, NotyfAlert } from "../js/tools";
-import { apiUrls } from "../js/init";
-import MYFooter from "./MYFooter.vue";
+import { fadeIn, NotyfAlert } from "../../js/tools";
+import { apiUrls } from "../../js/init";
+import MYFooter from "../../components/MYFooter.vue";
 
 export default {
   name: "MYSubmit",

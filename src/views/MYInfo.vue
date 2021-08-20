@@ -8,7 +8,7 @@
 
 <script>
 import { MingyanLOGO } from "../js/init";
-import { MY_showFromApi } from "./../js/feat/infoApi";
+import { MY_showFromApi } from "../js/feat/infoApi";
 import swal from "sweetalert";
 import { formatMingyan, mingyanPicUrl, solvePicUrl } from "../js/mingyan";
 import { EventBus } from "../js/eventBus";

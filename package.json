@@ -45,6 +45,8 @@
     "less-loader": "^5.0.0",
     "promise-polyfill": "^8.2.0",
     "puppeteer": "^10.2.0",
+    "sass": "^1.38.0",
+    "sass-loader": "^12.1.0",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^4.4.2",
     "whatwg-fetch": "^3.6.2"

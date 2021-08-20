@@ -52,10 +52,10 @@
 </template>
 
 <script>
-import MYFooter from "./MYFooter.vue";
-import { MY_starApi } from "../js/feat/starApi";
-import { deviceIsPhone, fadeIn } from "../js/tools";
-import { mingyan } from "../js/mingyan";
+import MYFooter from "../../components/MYFooter.vue";
+import { MY_starApi } from "../../js/feat/starApi";
+import { deviceIsPhone, fadeIn } from "../../js/tools";
+import { mingyan } from "../../js/mingyan";
 
 export default {
   name: "MYRanking",

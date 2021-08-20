@@ -126,10 +126,10 @@
 </template>
 
 <script>
-import MYFooter from "./MYFooter.vue";
-import ListItem from "./ListItem.vue";
+import MYFooter from "../../components/MYFooter.vue";
+import ListItem from "../../components/ListItem.vue";
 import swal from "sweetalert";
-import { fadeIn } from "../js/tools";
+import { fadeIn } from "../../js/tools";
 
 export default {
   name: "MYAbout",

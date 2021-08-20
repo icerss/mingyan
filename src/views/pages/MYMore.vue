@@ -97,9 +97,9 @@
 </template>
 
 <script>
-import { mingyan } from "../js/mingyan";
-import { fadeIn, loadJs, SaveAs } from "../js/tools";
-import MYFooter from "./MYFooter.vue";
+import { mingyan } from "../../js/mingyan";
+import { fadeIn, loadJs, SaveAs } from "../../js/tools";
+import MYFooter from "../../components/MYFooter.vue";
 
 export default {
   name: "MYMore",
@@ -188,6 +188,11 @@ export default {
 </script>
 
 <style scoped>
+img {
+  max-width: 400px;
+  border-radius: 5px;
+}
+
 .github-badge {
   display: inline-block;
   border-radius: 4px;

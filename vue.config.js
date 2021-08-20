@@ -4,8 +4,6 @@ const path = require("path");
 const webpack = require("webpack");
 const version = require("./.github/version.json").version;
 const dayjs = require("dayjs");
-const CompressionWebpackPlugin = require("compression-webpack-plugin");
-const isProduction = process.env.NODE_ENV === "production";
 require("dayjs/locale/zh-cn");
 dayjs.locale("zh-cn");
 const time = dayjs().format("YYYY-M-D HH:mm:ss");
@@ -13,16 +11,6 @@ const time = dayjs().format("YYYY-M-D HH:mm:ss");
 module.exports = {
   productionSourceMap: false,
   configureWebpack: (config) => {
-    if (isProduction) {
-      config.plugins.push(
-        new CompressionWebpackPlugin({
-          algorithm: "gzip",
-          test: /\.js$|\.html$|\.json$|\.css/,
-          threshold: 10240,
-          minRatio: 0.8,
-        })
-      );
-    }
     config.externals = {
       vue: "Vue",
       marked: "marked",

@@ -18,15 +18,6 @@ export function getConfig(key) {
   return window["my_cfg"][key] || undefined;
 }
 
-/**
- * 界面元素定义
- */
-export let $main = ".my--main";
-export let $search = ".my--search";
-export let $page = ".my--page";
-export let $footer = ".my--footer-html";
-export let $myInfo = ".my--mingyan-info";
-
 /* 常量 */
 export let picBaseUrl = "https://cdn.erssmy.com/image"; // 图片cdn链接
 

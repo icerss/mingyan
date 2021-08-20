@@ -118,9 +118,9 @@
 </template>
 
 <script>
-import MYFooter from "./MYFooter.vue";
+import MYFooter from "../../components/MYFooter.vue";
 import marked from "marked";
-import { fadeIn } from "../js/tools";
+import { fadeIn } from "../../js/tools";
 
 export default {
   name: "MYFaq",

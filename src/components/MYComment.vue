@@ -303,7 +303,7 @@ export default {
     },
     handleDisplayComment() {
       let displayLength = (this.displayCommentPage - 1) * 5 + 5;
-      log({ displayLength });
+      // log({ displayLength });
       let o = [];
       for (let i = (this.displayCommentPage - 1) * 5; i < displayLength; i++) {
         let item = this.comments[i];
@@ -312,7 +312,7 @@ export default {
       }
       this.displayCommentId++;
       this.displayComments = o;
-      log({ o });
+      // log({ o });
     },
     handleChange(e) {
       this.comment_input = e.target.value;

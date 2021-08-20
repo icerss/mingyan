@@ -7,7 +7,7 @@
 
 <script>
 import MYHeader from "./components/MYHeader.vue";
-import { kv, kvName, log, qs } from "./js/tools";
+import { kv, kvName, qs } from "./js/tools";
 import { MY_getUpdate } from "./js/feat/getUpdate";
 import { doConsole } from "./js/init";
 import "./js/feat/ranking";
@@ -18,13 +18,8 @@ export default {
   components: {
     MYHeader,
   },
-  watch: {
-    "$route.path"(val) {
-      log(val);
-    },
-  },
   mounted() {
-    document.title = "ERSS名言 · ERSS";
+    document.title = "耳斯名言 · ERSS";
     document.querySelector("#loading-mask").style.display = "none";
     document.querySelector("#loading-mask").remove();
     window.addEventListener("hashchange", function() {
@@ -44,7 +39,6 @@ export default {
 </script>
 
 <style>
-/* zcool-kuaile-regular */
 @font-face {
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
