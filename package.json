@@ -10,6 +10,7 @@
     "render": "set DEBUG=info* & node ./build/pre-render.js"
   },
   "dependencies": {
+    "ant-design": "^1.0.0",
     "ant-design-vue": "^1.7.6",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.6",

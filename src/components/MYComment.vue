@@ -84,7 +84,8 @@
       </div>
       <a-divider v-if="!isOpenInput" class="comment-open-tip">
         <span @click="isOpenInput = true" class="comment-click-to-send"
-          >{{ comments.length === 0 ? "暂无评论，" : "" }}点我发送评论</span
+          >{{ comments.length === 0 ? "暂无评论，" : ""
+          }}<span style="color: #9b4dca">点我</span>发送评论</span
         >
       </a-divider>
     </div>

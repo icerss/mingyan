@@ -1,6 +1,7 @@
 <template>
   <div id="my--main-app">
-    <div class="my--main">
+    <div class="my--main" :class="{ 'is-open-story': isClickStoryTips }">
+      <!-- <MYStory @onClickStoryTips="onClickStoryTips" /> -->
       <h3 class="my--mingyan-show">
         <span class="my--mingyan-name icon my--name-wave label">
           {{ teacher }} </span
@@ -40,9 +41,10 @@
 
 <script>
 import MYStar from "../components/MYStar.vue";
-import MYInfo from "./MYInfo.vue";
+import MYInfo from "../components/MYInfo.vue";
 import MYFooter from "../components/MYFooter.vue";
 import MYImage from "../components/MYImage.vue";
+// import MYStory from "../components/MYStory.vue";
 import {
   mingyan,
   getNowId,
@@ -66,6 +68,7 @@ export default {
     MYFooter,
     MYImage,
     MYComment,
+    // MYStory,
   },
   data() {
     return {
@@ -75,6 +78,7 @@ export default {
       rawMingyan: mingyan[getNowId()],
       starEvent: "addstar",
       isFirstTime: true,
+      isClickStoryTips: false,
     };
   },
   watch: {
@@ -113,6 +117,9 @@ export default {
     },
     onTextClick() {
       alert("你点击了名言");
+    },
+    onClickStoryTips(event) {
+      this.isClickStoryTips = event.isClickTips;
     },
   },
 };
@@ -165,24 +172,17 @@ export default {
   cursor: pointer;
 }
 
-.my--main.is-mouse-enter > *:not([class="my--knowledge-box"]) {
-  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
-  transform: translateX(100vw);
+.my--main.is-open-story > *:not([class="my--story"]) {
+  animation: openStoryArea 1s ease-in-out;
+  animation-fill-mode: forwards;
 }
 
-.my--main.is-mouse-leave > *:not([class="my--knowledge-box"]) {
-  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
-  transform: translateX(0);
-}
-
-.my--main.is-mouse-enter > .my--knowledge-box {
-  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
-  left: 0;
-  right: 0;
-}
-
-.my--main.is-mouse-leave > .my--knowledge-box {
-  transition: 1.2s cubic-bezier(0, 0, 0.2, 1);
-  left: -100vw;
+@keyframes openStoryArea {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
 }
 </style>
