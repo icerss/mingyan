@@ -17,8 +17,12 @@
 </template>
 
 <script>
+/**
+ * TODO
+ */
 import { EventBus } from "../js/eventBus";
 import { fadeIn, fadeOut } from "../js/tools";
+
 export default {
   name: "MYStory",
   props: {

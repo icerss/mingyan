@@ -1,7 +1,7 @@
 {
   "name": "耳斯名言",
   "short_name": "耳斯名言",
-  "description": "快来看看厦门市音乐学校老师和同学们的名言吧！——ERSS！",
+  "description": "快来看看老师和同学们的名言吧！——ERSS！",
   "start_url": "/?from=pwa",
   "background_color": "#fff",
   "display": "standalone",
