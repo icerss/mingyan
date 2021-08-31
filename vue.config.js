@@ -69,7 +69,7 @@ module.exports = {
   },
   filenameHashing: false,
   css: {
-    extract: false,
+    extract: true,
     loaderOptions: {
       less: {
         javascriptEnabled: true,

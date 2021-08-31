@@ -51,7 +51,7 @@ export default {
     }
 
     // 监听从 MYInfo 传来的图片信息
-    EventBus.$on("MingyanInfoLoaded", function(info) {
+    EventBus.$on("PicUrlLoaded", function(info) {
       info = JSON.parse(info);
       log(info);
       let url = {};
@@ -64,7 +64,7 @@ export default {
     });
   },
   destroyed() {
-    EventBus.$off("MingyanInfoLoaded");
+    EventBus.$off("PicUrlLoaded");
   },
   computed: {
     text() {

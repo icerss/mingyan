@@ -1,7 +1,11 @@
 <template>
   <div id="my--main-app">
-    <div class="my--main" :class="{ 'is-open-story': isClickStoryTips }">
-      <!-- <MYStory @onClickStoryTips="onClickStoryTips" /> -->
+    <div class="my--main" :class="mainClassName">
+      <!-- <MYStory
+        nofade
+        @onClickStoryTips="onClickStoryTips"
+        :isClickStoryTips="isClickStoryTips"
+      /> -->
       <h3 class="my--mingyan-show">
         <span class="my--mingyan-name icon my--name-wave label">
           {{ teacher }} </span
@@ -57,6 +61,7 @@ import { fadeIn, kv, kvName } from "../js/tools";
 import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
 import { getConfig } from "../js/init";
+import { EventBus } from "../js/eventBus";
 const MYComment = () =>
   import(/* webpackChunkName: "comment" */ "../components/MYComment.vue");
 
@@ -79,17 +84,35 @@ export default {
       starEvent: "addstar",
       isFirstTime: true,
       isClickStoryTips: false,
+      mainClassName: "",
     };
   },
   watch: {
     "$route.path"() {
       this.showMingyan(getNowId());
     },
+    isClickStoryTips() {
+      this.mainClassName = this.isClickStoryTips
+        ? "is-open-story"
+        : "is-close-story";
+    },
   },
   mounted() {
     this.showMingyan(getNowId());
     MY_incidents();
     // if (location.pathname !== "/") location.pathname = "/";
+    let root = this;
+    window.onresize = function() {
+      root.isClickStoryTips = false;
+      document.querySelector(".my--main").classList.remove("is-close-story");
+    };
+    EventBus.$on("onReload", function() {
+      root.isClickStoryTips = false;
+      document.querySelector(".my--main").classList.remove("is-close-story");
+    });
+  },
+  destroyed() {
+    EventBus.$off("onReload");
   },
   computed: {
     mingyanConj() {
@@ -131,6 +154,7 @@ export default {
   z-index: 1;
   text-align: center;
   margin-top: 90px;
+  transition: 1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .my--mingyan-text {
@@ -173,16 +197,17 @@ export default {
 }
 
 .my--main.is-open-story > *:not([class="my--story"]) {
-  animation: openStoryArea 1s ease-in-out;
-  animation-fill-mode: forwards;
+  transition: 1s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateX(100vw);
 }
 
-@keyframes openStoryArea {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(100vw);
-  }
+.my--main.is-close-story > *:not([class="my--story"]) {
+  transition: 1s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateX(0);
+}
+
+.is-close-story,
+.is-open-story {
+  overflow: hidden;
 }
 </style>

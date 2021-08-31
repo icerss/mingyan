@@ -80,9 +80,11 @@ export default {
         root.type = submit_type;
         root.isReady = true;
         // 图片彩蛋部分
+        EventBus.$emit("PicUrlLoaded", JSON.stringify(root.showFromData.pic));
+        // 小故事
         EventBus.$emit(
-          "MingyanInfoLoaded",
-          JSON.stringify(root.showFromData.pic)
+          "StoryLoaded",
+          root.showFromData.story || "暂时还没有故事哦~~"
         );
       });
     },

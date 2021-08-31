@@ -163,6 +163,10 @@ export let MY_starApi = {
   getHistoryRanking: function() {
     if (!Promise) return;
     return new Promise(function(resolve, reject) {
+      // 若加载时间超过 2s，自动 reject
+      setTimeout(() => {
+        reject("请求超时");
+      }, 2000);
       fetch(`${apiUrls.ranking_history}?t=_${new Date().getTime()}`)
         .then((res) => res.json())
         .then((json) => {

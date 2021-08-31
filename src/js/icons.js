@@ -12,3 +12,4 @@ export { default as ReloadOutline } from "@ant-design/icons/lib/outline/ReloadOu
 export { default as LeftOutline } from "@ant-design/icons/lib/outline/LeftOutline";
 export { default as RightOutline } from "@ant-design/icons/lib/outline/RightOutline";
 export { default as CloseCircleOutline } from "@ant-design/icons/lib/outline/CloseCircleOutline";
+export { default as RightSquareOutline } from "@ant-design/icons/lib/outline/RightSquareOutline";

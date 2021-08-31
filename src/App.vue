@@ -199,7 +199,7 @@ a:hover {
   }
 }
 
-.fadeIn {
+.fadeIn > *:not([nofade]) {
   animation: fadeIn 0.8s;
 }
 
@@ -213,7 +213,7 @@ a:hover {
   }
 }
 
-.fadeOut {
+.fadeOut > *:not([nofade]) {
   animation: fadeOut 0.8s;
 }
 

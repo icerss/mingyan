@@ -343,6 +343,8 @@ export default {
 .my--comment {
   text-align: left;
   margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .my--comment-input {

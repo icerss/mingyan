@@ -205,16 +205,20 @@ export let kvName = {
 };
 
 export let fadeIn = function(el) {
+  if (!document.querySelector(el)) return;
   document.querySelector(el).classList.add("fadeIn");
+  document.querySelector(el).style.display = "block";
   setTimeout(function() {
-    document.querySelector(el).style.display = "";
+    if (!document.querySelector(el)) return;
     document.querySelector(el).classList.remove("fadeIn");
   }, 500);
 };
 
 export let fadeOut = function(el) {
+  if (!document.querySelector(el)) return;
   document.querySelector(el).classList.add("fadeOut");
   setTimeout(function() {
+    if (!document.querySelector(el)) return;
     document.querySelector(el).style.display = "none";
     document.querySelector(el).classList.remove("fadeOut");
   }, 500);

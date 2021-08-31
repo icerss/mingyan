@@ -44,6 +44,7 @@
 <script>
 import Headroom from "headroom.js";
 import Tooltip from "./Tooltip.vue";
+import { EventBus } from "../js/eventBus";
 
 export default {
   name: "MYHeader",
@@ -66,8 +67,10 @@ export default {
   },
   methods: {
     reload() {
+      EventBus.$emit("onReload");
       if (/\/$|\/@\d/.test(location.pathname)) {
-        document.querySelector("#reload").click();
+        document.querySelector("#reload") &&
+          document.querySelector("#reload").click();
       } else {
         location.pathname = "/";
       }

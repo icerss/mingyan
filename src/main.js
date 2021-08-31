@@ -30,7 +30,6 @@ import {
   Divider,
   Pagination,
 } from "ant-design-vue";
-import { kv, kvName } from "./js/tools";
 import { getConfig, loadingImg } from "./js/init";
 
 Vue.use(Row);
@@ -50,23 +49,6 @@ Vue.use(Pagination);
 Vue.use(VueLazyload, {
   loading: loadingImg,
 });
-
-let aegis;
-if (getConfig("isInsertAegis")) {
-  let aegisUin = {};
-  if (kv.get(kvName.MY_TOKEN)) aegisUin = { uin: kv.get(kvName.MY_TOKEN) };
-  let Aegis = window.Aegis;
-  aegis = new Aegis({
-    // eslint-disable-line
-    id: "jYr96KM75PZJAq3LvV",
-    ...aegisUin,
-    reportApiSpeed: true,
-    reportAssetSpeed: true,
-    spa: true,
-    version: "3.0.0",
-  });
-}
-window.aegis = aegis;
 
 Vue.config.devtools = process.env.NODE_ENV === "development";
 // Vue.config.errorHandler = function(err, vm, info) {
@@ -103,9 +85,6 @@ new Vue({
   router,
   // i18n,
   render: (h) => h(App),
-  mounted() {
-    document.dispatchEvent(new Event("render-event"));
-  },
 }).$mount("#app");
 
 /**
