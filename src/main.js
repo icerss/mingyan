@@ -31,6 +31,8 @@ import {
   Pagination,
 } from "ant-design-vue";
 import { getConfig, loadingImg } from "./js/init";
+import * as Sentry from "@sentry/vue";
+import { Integrations } from "@sentry/tracing";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -80,6 +82,19 @@ if (getConfig("isInsertBaidu")) {
     s.parentNode.insertBefore(bp, s);
   })();
 }
+
+Sentry.init({
+  Vue,
+  dsn:
+    "https://f7bf4b21b7854f3aa3c3a94513603d85@o947661.ingest.sentry.io/5896972",
+  integrations: [
+    new Integrations.BrowserTracing({
+      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+      tracingOrigins: ["localhost", "erssmy.com", /^\//],
+    }),
+  ],
+  tracesSampleRate: 1.0,
+});
 
 new Vue({
   router,
