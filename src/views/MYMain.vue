@@ -111,7 +111,7 @@ export default {
       document.querySelector(".my--main").classList.remove("is-close-story");
     });
   },
-  destroyed() {
+  beforeDestroy() {
     EventBus.$off("onReload");
   },
   computed: {

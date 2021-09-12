@@ -63,7 +63,7 @@ export default {
       if (url) root.imgSrc = url.href + url.path + "?" + url.query;
     });
   },
-  destroyed() {
+  beforeDestroy() {
     EventBus.$off("PicUrlLoaded");
   },
   computed: {

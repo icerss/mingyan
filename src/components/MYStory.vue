@@ -55,7 +55,7 @@ export default {
       root.isClickTips = false;
     };
   },
-  destroyed() {
+  beforeDestroy() {
     EventBus.$off("onReload");
   },
   methods: {
