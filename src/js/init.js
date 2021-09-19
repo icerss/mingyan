@@ -50,6 +50,7 @@ export let normalPostHeader = {
 };
 
 export let reCaptchaKey = "6LdOb_gaAAAAAAIQpvSd_6a5yjeneoVlvM159zwH";
+export let mtCaptchaKey = "MTPublic-hOK4QMED5";
 export let MingyanLOGO = "https://static-cdn.erssmy.com/public/web-logo.png";
 
 export function doConsole() {

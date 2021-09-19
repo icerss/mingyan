@@ -7,9 +7,10 @@
 </template>
 
 <script>
-import { isShow, log, NotyfAlert } from "../js/tools";
+import { isShow, log, NotyfAlert, qs } from "../js/tools";
 import { MingyanLOGO } from "../js/init";
 import { MY_starApi } from "../js/feat/starApi";
+import { loadMtCaptcha } from "../js/feat/loadMtCaptcha";
 import swal from "sweetalert";
 
 export default {
@@ -102,7 +103,7 @@ export default {
               root.turnRed();
               root.starEvent = "removestar";
             }
-            if (addStar_res.msg.indexOf("人机验证") !== -1)
+            if (addStar_res.msg.indexOf("人机验证") !== -1 || qs("captcha"))
               return root.reVerify("addstar");
           } else {
             NotyfAlert.su(addStar_res.msg);
@@ -132,7 +133,7 @@ export default {
               root.turnGray();
               root.starEvent = "addstar";
             }
-            if (addStar_res.msg.indexOf("人机验证") !== -1)
+            if (addStar_res.msg.indexOf("人机验证") !== -1 || qs("captcha"))
               return root.reVerify("removestar");
           } else {
             NotyfAlert.su(addStar_res.msg);
@@ -157,17 +158,19 @@ export default {
         icon: "",
         button: "继续",
       }).then(() => {
-        let reToken = window.grecaptcha.getResponse();
+        let reToken = window.mtcaptcha.getVerifiedToken(); // window.grecaptcha.getResponse();
         if (!reToken) return NotyfAlert.err("验证失败：请重试");
         root.starEvent = event;
-        return root.star(null, null, "reverify@" + reToken);
+        return root.star(null, null, "reverify_mtcaptcha@" + reToken);
       });
       document.querySelector(".swal-title").style.fontSize = "20px";
       document.querySelector(".swal-text").innerHTML = `验证码加载中……`;
       document.querySelector(".swal-text").id = "star-reverify";
-      window.grecaptcha.render("star-reverify", {
-        sitekey: "6Lf9VgccAAAAAO2KrVDJGSuDXIHXD3lnV7T2nzP9",
-      });
+      document.querySelector("#star-reverify").style.margin = "-30px";
+      loadMtCaptcha("star-reverify", "addstar");
+      // window.grecaptcha.render("star-reverify", {
+      //   sitekey: "6Lf9VgccAAAAAO2KrVDJGSuDXIHXD3lnV7T2nzP9",
+      // });
     },
   },
 };

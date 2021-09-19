@@ -1,6 +1,9 @@
 import { reCaptchaKey } from "../init";
 import { loadJs, log } from "../tools";
 
+/**
+ * 加载 reCaptcha
+ */
 loadJs(
   "https://recaptcha.net/recaptcha/api.js?onload=grecaptchaready&render=6LdOb_gaAAAAAAIQpvSd_6a5yjeneoVlvM159zwH",
   {
@@ -10,7 +13,7 @@ loadJs(
 );
 let isAlready = false;
 let grecaptchaready = function() {
-  log("人机验证加载成功！");
+  log("人机验证（reCaptcha）加载成功！");
   isAlready = true;
 };
 window["grecaptchaready"] = grecaptchaready;

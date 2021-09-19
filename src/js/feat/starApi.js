@@ -8,8 +8,8 @@ import { apiUrls, normalPostHeader } from "../init";
 import { getUid, NotyfAlert, log } from "../tools";
 import { loadCaptcha } from "./loadCaptcha";
 
-let starApiUrl = apiUrls.star_v3;
-// starApiUrl = "http://localhost:3000/api/v2/star";
+let starApiUrl = apiUrls.star_v3 + "?captcha=1";
+// starApiUrl = "http://localhost:3000/api/v3/star";
 // 感谢Vercel的服务！！
 // 感谢MongoDB提供免费的数据库！！
 
