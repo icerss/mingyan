@@ -3,9 +3,11 @@
     <a-row class="container">
       <a-col :span="2">
         <router-link to="/more" id="el-a" title="更多">
-          <Tooltip tip="更多">
-            <div class="header-icon"><a-icon type="more" /></div>
-          </Tooltip>
+          <span @click="onClickMoreButton">
+            <Tooltip tip="更多">
+              <div class="header-icon"><a-icon type="more" /></div>
+            </Tooltip>
+          </span>
         </router-link>
       </a-col>
       <a href="./">
@@ -46,6 +48,7 @@ import Headroom from "headroom.js";
 import Tooltip from "./Tooltip.vue";
 import { EventBus } from "../js/eventBus";
 import { querySelector } from "../js/utils";
+import { recordEvent, recordEventId } from "../js/log";
 
 export default {
   name: "MYHeader",
@@ -68,12 +71,16 @@ export default {
   },
   methods: {
     reload() {
+      recordEvent(recordEventId.clickMYReloadButton);
       EventBus.$emit("onReload");
       if (/\/$|\/@\d/.test(location.pathname)) {
         querySelector("#reload") && querySelector("#reload").click();
       } else {
         location.pathname = "/";
       }
+    },
+    onClickMoreButton() {
+      recordEvent(recordEventId.clickMYMorePageButton);
     },
   },
 };

@@ -11,6 +11,7 @@ import { isShow, log, NotyfAlert, qs, querySelector, swal } from "../js/utils";
 import { MingyanLOGO } from "../js/init";
 import { MY_starApi } from "../js/feat/starApi";
 import { loadMtCaptcha } from "../js/feat/loadMtCaptcha";
+import { recordEvent, recordEventId } from "../js/log";
 
 export default {
   name: "MYStar",
@@ -54,6 +55,7 @@ export default {
       return (querySelector("#star-logo").style.color = "#000000A3");
     },
     star(my, id, recaptcha_token) {
+      recordEvent(recordEventId.clickMYStarButton);
       let root = this;
       log(this.mingyan);
       if (!this.isSwalShow()) {

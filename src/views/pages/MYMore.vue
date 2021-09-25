@@ -5,7 +5,9 @@
       <div class="my--more-main">
         <h1>更多</h1>
         <h3>
-          <router-link to="submit">名言投稿</router-link>
+          <router-link to="submit"
+            ><span @click="onClickSubmitButton">名言投稿</span></router-link
+          >
         </h3>
         <h3>
           <router-link to="ranking">名言排行榜</router-link>
@@ -18,7 +20,7 @@
         </h3>
       </div>
       <router-link to="/donate">
-        <div class="my--sponsor">
+        <div class="my--sponsor" @click="onClickDonateBanner">
           <img
             class="banner"
             src="https://static-cdn.erssmy.com/public/donate-banner.png"
@@ -100,6 +102,7 @@
 import { mingyan } from "../../js/mingyan";
 import { fadeIn, loadJs, querySelector, SaveAs } from "../../js/utils";
 import MYFooter from "../../components/MYFooter.vue";
+import { recordEvent, recordEventId } from "../../js/log";
 
 export default {
   name: "MYMore",
@@ -139,12 +142,19 @@ export default {
       return dnum + " 天 " + hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     },
     downloadMingyan() {
+      recordEvent(recordEventId.clickMYDownloadButton);
       let time = new Date().toLocaleString();
       SaveAs(
         `耳斯名言列表（下载时间：${time}）\n==========\n` + mingyan.join("\n"),
         "txt",
         `耳斯名言列表（下载时间：${time}）`
       );
+    },
+    onClickSubmitButton() {
+      recordEvent(recordEventId.clickMYSubmitButton);
+    },
+    onClickDonateBanner() {
+      recordEvent(recordEventId.clickDonateBanner);
     },
   },
   mounted() {

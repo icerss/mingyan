@@ -3,14 +3,17 @@
     <div class="my--footer-normal" v-if="!mode || mode === 'normal'">
       <div class="my--footer-html">
         当前名言数量：{{ length }}<br />
-        <router-link class="my-el-a" to="/submit">投稿</router-link
+        <router-link class="my-el-a" to="/submit"
+          ><span @click="onClickSubmitButton">投稿</span></router-link
         >&nbsp;&nbsp;|&nbsp;&nbsp;
         <router-link class="my-el-a" to="/search">搜索</router-link
         >&nbsp;&nbsp;|&nbsp;&nbsp;
         <a class="my-el-a" href="https://jq.qq.com/?_wv=1027&k=jKy2qW7R"
           >交流群</a
         >&nbsp;&nbsp;|&nbsp;&nbsp;
-        <router-link class="my-el-a" to="/more">更多</router-link>
+        <router-link class="my-el-a" to="/more"
+          ><span @click="onClickMoreButton">更多</span></router-link
+        >
       </div>
       <!-- <PopoverItem :content="words">
         <i
@@ -41,6 +44,7 @@
 </template>
 
 <script>
+import { recordEvent, recordEventId } from "../js/log";
 import { mingyan } from "../js/mingyan";
 import { kv, kvName, randomNumber } from "../js/utils";
 import router from "../router";
@@ -81,9 +85,14 @@ export default {
       // window.history.go(-1);
       router.go(-1);
     },
-
     handleWords() {
       this.words = this.wordsList[randomNumber(0, this.wordsList.length - 1)];
+    },
+    onClickMoreButton() {
+      recordEvent(recordEventId.clickMYMorePageButton);
+    },
+    onClickSubmitButton() {
+      recordEvent(recordEventId.clickMYSubmitButton);
     },
   },
 };

@@ -86,7 +86,7 @@
         </a-comment>
       </div>
       <a-divider v-if="!isOpenInput" class="comment-open-tip">
-        <span @click="isOpenInput = true" class="comment-click-to-send"
+        <span @click="onClickSendButton" class="comment-click-to-send"
           >{{ comments.length === 0 ? "暂无评论，" : ""
           }}<span style="color: #9b4dca">点我</span>发送评论</span
         >
@@ -139,6 +139,7 @@ import "dayjs/locale/zh-cn";
 import md5 from "md5";
 import { kv, kvName, log, NotyfAlert } from "../js/utils";
 import { MY_commentApi } from "../js/feat/commentApi";
+import { recordEvent, recordEventId } from "../js/log";
 
 export default {
   name: "MYComment",
@@ -206,6 +207,10 @@ export default {
     },
   },
   methods: {
+    onClickSendButton() {
+      recordEvent(recordEventId.clickMYCommentButton);
+      this.isOpenInput = true;
+    },
     handleMailAvatar() {
       let mail = this.mail;
       let root = this;

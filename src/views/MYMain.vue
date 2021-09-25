@@ -62,6 +62,7 @@ import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
 import { getConfig } from "../js/init";
 import { EventBus } from "../js/eventBus";
+import { recordEvent, recordEventId } from "../js/log";
 const MYComment = () =>
   import(/* webpackChunkName: "comment" */ "../components/MYComment.vue");
 
@@ -134,6 +135,7 @@ export default {
       fadeIn(".my--main");
     },
     nextMingyan() {
+      recordEvent(recordEventId.clickMYReloadButton);
       let nextId = genNextId();
       router.push("/@" + nextId);
       this.showMingyan(nextId);
