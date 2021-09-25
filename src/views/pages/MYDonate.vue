@@ -31,7 +31,7 @@
 <script>
 import MYFooter from "../../components/MYFooter.vue";
 import FancyImage from "../../components/FancyImage.vue";
-import { fadeIn } from "../../js/tools";
+import { fadeIn } from "../../js/utils";
 import { apiUrls } from "../../js/init";
 
 const columns = [

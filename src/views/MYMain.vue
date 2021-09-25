@@ -57,7 +57,7 @@ import {
   mingyanPicUrl,
   specialConjList,
 } from "../js/mingyan";
-import { fadeIn, kv, kvName } from "../js/tools";
+import { fadeIn, kv, kvName, querySelector } from "../js/utils";
 import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
 import { getConfig } from "../js/init";
@@ -104,11 +104,11 @@ export default {
     let root = this;
     window.onresize = function() {
       root.isClickStoryTips = false;
-      document.querySelector(".my--main").classList.remove("is-close-story");
+      querySelector(".my--main").classList.remove("is-close-story");
     };
     EventBus.$on("onReload", function() {
       root.isClickStoryTips = false;
-      document.querySelector(".my--main").classList.remove("is-close-story");
+      querySelector(".my--main").classList.remove("is-close-story");
     });
   },
   beforeDestroy() {

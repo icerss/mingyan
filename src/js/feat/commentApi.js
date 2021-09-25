@@ -1,5 +1,5 @@
 import { apiUrls, normalPostHeader } from "../init";
-import { getUid } from "../tools";
+import { getUid } from "../utils";
 
 let apiUrl = apiUrls.comment;
 // apiUrl = "http://localhost:3000/api/comment";

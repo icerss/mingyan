@@ -75,7 +75,7 @@ import { mingyan } from "../js/mingyan";
 import MYFooter from "../components/MYFooter.vue";
 import MYSearchHighlight from "../components/MYSearchHighlight.vue";
 import { MY_starApi } from "../js/feat/starApi";
-import { log } from "../js/tools";
+import { log } from "../js/utils";
 
 export default {
   name: "MYSearch",

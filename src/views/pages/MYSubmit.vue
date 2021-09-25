@@ -61,8 +61,7 @@
 </template>
 
 <script>
-import swal from "sweetalert";
-import { fadeIn, NotyfAlert } from "../../js/tools";
+import { fadeIn, NotyfAlert, swal } from "../../js/utils";
 import { apiUrls } from "../../js/init";
 import MYFooter from "../../components/MYFooter.vue";
 

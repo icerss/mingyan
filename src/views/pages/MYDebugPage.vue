@@ -22,7 +22,7 @@
 <script>
 import { loadCaptcha } from "../../js/feat/loadCaptcha";
 import { apiUrls, reCaptchaKey } from "../../js/init";
-import { kv, kvName, loadJs } from "../../js/tools";
+import { kv, kvName, loadJs } from "../../js/utils";
 
 let getFailed = "获取失败";
 export default {

@@ -1,4 +1,4 @@
-import { log, notyf } from "../tools";
+import { log, notyf } from "../utils";
 
 export let MY_incidents = function() {
   fetch(

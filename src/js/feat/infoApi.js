@@ -1,4 +1,5 @@
 import { apiUrls, normalPostHeader } from "../init";
+import { querySelector } from "../utils";
 /**
  * 显示名言来源Api
  */
@@ -11,9 +12,9 @@ export let MY_showFromApi = {
         body: JSON.stringify({
           mingyan:
             my ||
-            document.querySelector(".my--mingyan-name").innerText.trim() +
+            querySelector(".my--mingyan-name").innerText.trim() +
               "：" +
-              document.querySelector(".my--mingyan-text").innerText.trim(),
+              querySelector(".my--mingyan-text").innerText.trim(),
           picPath: picPath,
           t: new Date().getTime(),
         }),

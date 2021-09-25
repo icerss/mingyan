@@ -1,13 +1,17 @@
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
+import { v4 as uuidv4 } from "uuid";
+import { apiUrls, getConfig, normalPostHeader } from "./init";
+import swal from "sweetalert";
+export { swal };
 
 /**
  * 动态加载JS
  */
 export function loadJs(src, opt) {
   return new Promise(function(resolve) {
-    let script = document.createElement("script"),
-      head = document.getElementsByTagName("head")[0];
+    let script = document.createElement("script");
+    let head = document.getElementsByTagName("head")[0];
     script.type = "text/javascript";
     script.src = src;
     if (opt) {
@@ -16,19 +20,11 @@ export function loadJs(src, opt) {
       }
     }
     if (script.addEventListener) {
-      script.addEventListener(
-        "load",
-        function() {
-          resolve();
-        },
-        false
-      );
+      script.addEventListener("load", resolve, false);
     } else if (script.attachEvent) {
       script.attachEvent("onreadystatechange", function() {
         let target = window.event.srcElement;
-        if (target.readyState == "loaded") {
-          resolve();
-        }
+        if (target.readyState == "loaded") resolve();
       });
     }
     head.appendChild(script);
@@ -77,21 +73,25 @@ export function randomNumber(minNum, maxNum) {
 }
 
 /**
+ * 代替 document.querySelector
+ */
+export function querySelector(el) {
+  return document.querySelector(el);
+}
+
+/**
  * 元素是否显示
  */
 export let isShow = function(el) {
   try {
     return (
-      document.querySelector(el).style === "none" ||
-      document.querySelector(el).style.visibility === "hidden"
+      querySelector(el).style === "none" ||
+      querySelector(el).style.visibility === "hidden"
     );
   } catch {
     return false;
   }
 };
-
-import { v4 as uuidv4 } from "uuid";
-import { apiUrls, getConfig, normalPostHeader } from "./init";
 
 /**
  * 获取 UID
@@ -186,6 +186,9 @@ export let deviceIsPhone = function() {
   return window.innerWidth <= 480;
 };
 
+/**
+ * 替代 localStorage
+ */
 export let kv = {
   get(name) {
     return localStorage.getItem(name) || null;
@@ -195,6 +198,9 @@ export let kv = {
   },
 };
 
+/**
+ * localStorage 的 key
+ */
 export let kvName = {
   mingyanId: "___mingyan_id__",
   commentUser: "___mingyan_comment_user_",
@@ -204,23 +210,29 @@ export let kvName = {
   MY_TOKEN: "MY_TOKEN",
 };
 
+/**
+ * 渐入
+ */
 export let fadeIn = function(el) {
-  if (!document.querySelector(el)) return;
-  document.querySelector(el).classList.add("fadeIn");
-  document.querySelector(el).style.display = "block";
+  if (!querySelector(el)) return;
+  querySelector(el).classList.add("fadeIn");
+  querySelector(el).style.display = "block";
   setTimeout(function() {
-    if (!document.querySelector(el)) return;
-    document.querySelector(el).classList.remove("fadeIn");
+    if (!querySelector(el)) return;
+    querySelector(el).classList.remove("fadeIn");
   }, 500);
 };
 
+/**
+ * 渐出
+ */
 export let fadeOut = function(el) {
-  if (!document.querySelector(el)) return;
-  document.querySelector(el).classList.add("fadeOut");
+  if (!querySelector(el)) return;
+  querySelector(el).classList.add("fadeOut");
   setTimeout(function() {
-    if (!document.querySelector(el)) return;
-    document.querySelector(el).style.display = "none";
-    document.querySelector(el).classList.remove("fadeOut");
+    if (!querySelector(el)) return;
+    querySelector(el).style.display = "none";
+    querySelector(el).classList.remove("fadeOut");
   }, 500);
 };
 
@@ -244,6 +256,9 @@ function _log() {
 export let log = _log();
 window["log"] = log;
 
+/**
+ * 加点击事件
+ */
 export let addClickEvent = function(el, callback) {
   try {
     document.addEventListener("click", function(event) {
@@ -272,6 +287,12 @@ export let addClickEvent = function(el, callback) {
   } catch {} // eslint-disable-line
 };
 
+/**
+ * 下载文字
+ * @param {String} data 内容
+ * @param {String} type 格式
+ * @param {String} name 文件名
+ */
 export let SaveAs = function(data, type, name) {
   let link = document.createElement("a");
   let exportName = name ? name : "data";
@@ -281,6 +302,11 @@ export let SaveAs = function(data, type, name) {
   link.click();
 };
 
+/**
+ * 获取图片
+ * @param {String} path 图片路径
+ * @returns 图片
+ */
 export let getImageLink = function(path) {
   return new Promise(function(resolve, reject) {
     fetch(apiUrls.image, {
@@ -300,6 +326,11 @@ export let getImageLink = function(path) {
   });
 };
 
+/**
+ * 获取图片大侠
+ * @param {String} url 图片链接
+ * @returns 大小
+ */
 export let getImageSize = function(url) {
   let image = new Image();
   image.src = url;
@@ -308,3 +339,48 @@ export let getImageSize = function(url) {
     width: image.width,
   };
 };
+
+// /**
+//  * Object 是否为空
+//  */
+// function isEmptyObject(obj) {
+//   for (let key in obj) {
+//     if (key) return false;
+//   }
+//   return true;
+// }
+
+// /**
+//  * 重写 swal 来解决重复弹窗的问题
+//  */
+// export function swal(opt) {
+//   let _swal = sweetalert;
+//   let { title, text, icon, button, ...other } = opt;
+//   log({ title, text, icon, button, other, _swal });
+//   // 若出现高级用法，不做了，直接调用原来的
+//   if (!isEmptyObject(other)) return _swal(opt);
+//   // 若 icon 是默认的 icon，直接调用
+//   if (["success", "info", "warning"].includes(icon)) return _swal(opt);
+//   // 若 swal 窗口已经显示过了
+//   if (document.querySelector(".swal-overlay")) {
+//     document.querySelector(".swal-content").remove(); // 移除输入框（如果存在）
+//     document.querySelector(".swal-text").innerHTML = text; // 绑定文字
+//     // 移除 icon 原有 class
+//     document.querySelector(".swal-icon").classList.forEach(function(item) {
+//       if (item !== "swal-icon")
+//         document.querySelector(".swal-icon").classList.remove(item);
+//     });
+//     // 加上自定义 icon 的 class
+//     document.querySelector(".swal-icon").classList.add("swal-icon--custom");
+//     // 写入图片链接
+//     document.querySelector(".swal-icon").innerHTML = `<img src="${icon}">`;
+//     // 写入 title，text，button
+//     document.querySelector(".swal-title").innerHTML = title;
+//     document.querySelector(".swal-text").innerHTML = text;
+//     document.querySelector(".swal-button").innerText = button || "ok";
+//     // 显示
+//     document
+//       .querySelector(".swal-overlay")
+//       .classList.add("swal-overlay--show-modal");
+//   }
+// }

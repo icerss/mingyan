@@ -13,7 +13,7 @@
 <script>
 import FancyImage from "./FancyImage.vue";
 import { mingyanPicUrl, solvePicUrl } from "../js/mingyan";
-import { deviceIsPhone, isSupportWebp, log } from "../js/tools";
+import { deviceIsPhone, isSupportWebp, log } from "../js/utils";
 // import { picBaseUrl } from "../js/init";
 import { EventBus } from "../js/eventBus";
 import { loadingImg } from "../js/init";

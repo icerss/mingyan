@@ -1,5 +1,5 @@
 import { apiUrls, normalPostHeader } from "../init";
-import { kv, kvName, log } from "../tools";
+import { kv, kvName, log } from "../utils";
 
 /**
  * 自动更新缓存

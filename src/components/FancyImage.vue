@@ -17,7 +17,7 @@
 <script>
 import CoolLightBox from "vue-cool-lightbox";
 import "vue-cool-lightbox/dist/vue-cool-lightbox.min.css";
-import { fadeIn } from "../js/tools";
+import { fadeIn } from "../js/utils";
 
 export default {
   name: "FancyImage",

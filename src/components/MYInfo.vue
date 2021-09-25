@@ -9,9 +9,9 @@
 <script>
 import { MingyanLOGO } from "../js/init";
 import { MY_showFromApi } from "../js/feat/infoApi";
-import swal from "sweetalert";
 import { formatMingyan, mingyanPicUrl, solvePicUrl } from "../js/mingyan";
 import { EventBus } from "../js/eventBus";
+import { querySelector, swal } from "../js/utils";
 
 export default {
   name: "MYInfo",
@@ -54,11 +54,10 @@ export default {
           icon: MingyanLOGO,
           button: "关闭",
         });
-        document.querySelector(
-          ".swal-icon.swal-icon--custom>img"
-        ).style.maxWidth = "150px";
-        document.querySelector(".swal-text").style.fontSize = "26px";
-        document.querySelector(".swal-text").style.textAlign = "center";
+        querySelector(".swal-icon.swal-icon--custom>img").style.maxWidth =
+          "150px";
+        querySelector(".swal-text").style.fontSize = "26px";
+        querySelector(".swal-text").style.textAlign = "center";
       }
     },
     loadType() {

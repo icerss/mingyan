@@ -1,6 +1,5 @@
 import { MY_rankingApi } from "./rankingApi";
-import { kv, kvName, qs } from "../tools";
-import swal from "sweetalert";
+import { kv, kvName, qs, swal } from "../utils";
 
 /**
  * 2021彩蛋主函数

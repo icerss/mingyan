@@ -21,7 +21,7 @@
  * TODO
  */
 import { EventBus } from "../js/eventBus";
-import { fadeIn, fadeOut } from "../js/tools";
+import { fadeIn, fadeOut, querySelector } from "../js/utils";
 
 export default {
   name: "MYStory",
@@ -72,12 +72,12 @@ export default {
       this.$emit("onClickStoryTips", {
         isClickTips: this.isClickTips,
       });
-      document.querySelector(".my--main").style.display = "none";
+      querySelector(".my--main").style.display = "none";
       fadeIn(".my--main");
       fadeIn(".my--comment");
       fadeIn(".story-tips");
       setTimeout(() => {
-        document.querySelector(".my--main").classList.remove("is-close-story");
+        querySelector(".my--main").classList.remove("is-close-story");
       }, 1000);
     },
   },

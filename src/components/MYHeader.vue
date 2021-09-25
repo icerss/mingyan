@@ -45,6 +45,7 @@
 import Headroom from "headroom.js";
 import Tooltip from "./Tooltip.vue";
 import { EventBus } from "../js/eventBus";
+import { querySelector } from "../js/utils";
 
 export default {
   name: "MYHeader",
@@ -57,7 +58,7 @@ export default {
      */
     let headroom = null;
     if (Headroom.cutsTheMustard) {
-      let myElement = document.querySelector(".my--header");
+      let myElement = querySelector(".my--header");
       headroom = new Headroom(myElement, {
         offset: 300,
         tolerance: 5,
@@ -69,8 +70,7 @@ export default {
     reload() {
       EventBus.$emit("onReload");
       if (/\/$|\/@\d/.test(location.pathname)) {
-        document.querySelector("#reload") &&
-          document.querySelector("#reload").click();
+        querySelector("#reload") && querySelector("#reload").click();
       } else {
         location.pathname = "/";
       }

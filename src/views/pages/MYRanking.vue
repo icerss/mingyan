@@ -54,7 +54,7 @@
 <script>
 import MYFooter from "../../components/MYFooter.vue";
 import { MY_starApi } from "../../js/feat/starApi";
-import { deviceIsPhone, fadeIn } from "../../js/tools";
+import { deviceIsPhone, fadeIn } from "../../js/utils";
 import { mingyan } from "../../js/mingyan";
 
 export default {

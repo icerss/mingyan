@@ -128,8 +128,7 @@
 <script>
 import MYFooter from "../../components/MYFooter.vue";
 import ListItem from "../../components/ListItem.vue";
-import swal from "sweetalert";
-import { fadeIn } from "../../js/tools";
+import { fadeIn, querySelector, swal } from "../../js/utils";
 
 export default {
   name: "MYAbout",
@@ -160,9 +159,8 @@ export default {
           icon: "info",
           button: "关闭",
         }).then(function() {
-          document.querySelector("body").style.transition =
-            "transform 1s ease 0s";
-          document.querySelector("body").style.transform = "rotateY(180deg)";
+          querySelector("body").style.transition = "transform 1s ease 0s";
+          querySelector("body").style.transform = "rotateY(180deg)";
           root.clickTime = "";
         });
       }

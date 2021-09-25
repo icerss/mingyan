@@ -5,10 +5,11 @@
  */
 
 import { apiUrls, normalPostHeader } from "../init";
-import { getUid, NotyfAlert, log } from "../tools";
+import { recordEvent, recordEventId } from "../log";
+import { getUid, NotyfAlert, log, querySelector } from "../utils";
 import { loadCaptcha } from "./loadCaptcha";
 
-let starApiUrl = apiUrls.star_v3 + "?captcha=1";
+let starApiUrl = apiUrls.star_v3;
 // starApiUrl = "http://localhost:3000/api/v3/star";
 // 感谢Vercel的服务！！
 // 感谢MongoDB提供免费的数据库！！
@@ -22,9 +23,9 @@ export let MY_starApi = {
     if (!Promise) return;
     if (!my)
       my =
-        document.querySelector(".my--mingyan-name").innerText.trim() +
+        querySelector(".my--mingyan-name").innerText.trim() +
         "：" +
-        document.querySelector(".my--mingyan-text").innerText.trim();
+        querySelector(".my--mingyan-text").innerText.trim();
     return new Promise(function(resolve, reject) {
       fetch(starApiUrl, {
         ...normalPostHeader,
@@ -55,9 +56,9 @@ export let MY_starApi = {
     if (!Promise) return;
     if (!my && !id)
       my =
-        document.querySelector(".my--mingyan-name").innerText.trim() +
+        querySelector(".my--mingyan-name").innerText.trim() +
         "：" +
-        document.querySelector(".my--mingyan-text").innerText.trim();
+        querySelector(".my--mingyan-text").innerText.trim();
     let _find = {};
     if (id && my) _find = { MY_text: my };
     if (id && !my) _find = { MY_ID: id };
@@ -81,6 +82,7 @@ export let MY_starApi = {
           .then((res) => res.json())
           .then((json) => {
             resolve(json);
+            if (json.code === 0) recordEvent(recordEventId.addStarEvent);
           })
           .catch(function(e) {
             reject(e);
@@ -99,9 +101,9 @@ export let MY_starApi = {
     if (!Promise) return;
     if (!my)
       my =
-        document.querySelector(".my--mingyan-name").innerText.trim() +
+        querySelector(".my--mingyan-name").innerText.trim() +
         "：" +
-        document.querySelector(".my--mingyan-text").innerText.trim();
+        querySelector(".my--mingyan-text").innerText.trim();
     id = id || "";
     // 接入recaptcha 验证
     try {
@@ -122,6 +124,7 @@ export let MY_starApi = {
           .then((res) => res.json())
           .then((json) => {
             resolve(json);
+            if (json.code === 0) recordEvent(recordEventId.removeStarEvent);
           })
           .catch(function(e) {
             reject(e);
@@ -150,6 +153,7 @@ export let MY_starApi = {
         .then((res) => res.json())
         .then((json) => {
           resolve(json);
+          recordEvent(recordEventId.getCurrentRanking);
         })
         .catch(function(e) {
           reject(e);
@@ -171,7 +175,10 @@ export let MY_starApi = {
         .then((res) => res.json())
         .then((json) => {
           log(json);
-          if (json.msg == "请求成功") resolve(json.data);
+          if (json.msg == "请求成功") {
+            resolve(json.data);
+            recordEvent(recordEventId.getHistoryRanking);
+          }
           reject(json.msg);
         });
     });
@@ -185,9 +192,9 @@ export let MY_starApi = {
     if (!Promise) return;
     if (!my && !id)
       my =
-        document.querySelector(".my--mingyan-name").innerText.trim() +
+        querySelector(".my--mingyan-name").innerText.trim() +
         "：" +
-        document.querySelector(".my--mingyan-text").innerText.trim();
+        querySelector(".my--mingyan-text").innerText.trim();
     let _find = {};
     if (id && my) _find = { MY_text: my };
     if (id && !my) _find = { MY_ID: id };

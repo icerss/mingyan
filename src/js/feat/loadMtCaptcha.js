@@ -1,5 +1,5 @@
 import { mtCaptchaKey } from "../init";
-import { loadJs, log } from "../tools";
+import { loadJs, log } from "../utils";
 
 /**
  * 加载 mtCaptcha

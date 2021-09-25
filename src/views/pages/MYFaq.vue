@@ -120,7 +120,7 @@
 <script>
 import MYFooter from "../../components/MYFooter.vue";
 import marked from "marked";
-import { fadeIn } from "../../js/tools";
+import { fadeIn, querySelector } from "../../js/utils";
 
 export default {
   name: "MYFaq",
@@ -138,8 +138,8 @@ export default {
     marked.setOptions({
       breaks: true,
     });
-    this.rawHtml = marked(document.querySelector(".markdown-raw").innerHTML);
-    document.querySelector(".markdown-raw").remove();
+    this.rawHtml = marked(querySelector(".markdown-raw").innerHTML);
+    querySelector(".markdown-raw").remove();
   },
 };
 </script>

@@ -1,3 +1,6 @@
+<!--
+  写得太乱了[捂脸]，等待下次重写……
+-->
 <template>
   <div class="my--comment">
     <div class="comment-load" v-if="isLoadData">
@@ -134,7 +137,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/zh-cn";
 import md5 from "md5";
-import { kv, kvName, log, NotyfAlert } from "../js/tools";
+import { kv, kvName, log, NotyfAlert } from "../js/utils";
 import { MY_commentApi } from "../js/feat/commentApi";
 
 export default {

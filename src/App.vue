@@ -7,7 +7,7 @@
 
 <script>
 import MYHeader from "./components/MYHeader.vue";
-import { kv, kvName, qs } from "./js/tools";
+import { kv, kvName, qs, querySelector } from "./js/utils";
 import { MY_getUpdate } from "./js/feat/getUpdate";
 import { doConsole } from "./js/init";
 import "./js/feat/ranking";
@@ -20,8 +20,8 @@ export default {
   },
   mounted() {
     document.title = "耳斯名言 · ERSS";
-    document.querySelector("#loading-mask").style.display = "none";
-    document.querySelector("#loading-mask").remove();
+    querySelector("#loading-mask").style.display = "none";
+    querySelector("#loading-mask").remove();
     window.addEventListener("hashchange", function() {
       let hash = window.location.hash;
       if (/#\d/.test(hash)) window.location.href = "./" + hash;

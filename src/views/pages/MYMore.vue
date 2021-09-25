@@ -98,7 +98,7 @@
 
 <script>
 import { mingyan } from "../../js/mingyan";
-import { fadeIn, loadJs, SaveAs } from "../../js/tools";
+import { fadeIn, loadJs, querySelector, SaveAs } from "../../js/utils";
 import MYFooter from "../../components/MYFooter.vue";
 
 export default {
@@ -162,11 +162,11 @@ export default {
         })
         .then(function() {
           try {
-            document.querySelector(
+            querySelector(
               ".tk-footer"
             ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://www.erssmy.com/">ERSS名言</a></div>`;
           } catch {} // eslint-disable-line
-          document.querySelector(".el-textarea__inner").style.height = "150px";
+          querySelector(".el-textarea__inner").style.height = "150px";
         });
     });
     fetch("https://api.github.com/repos/xhemj/mingyan")

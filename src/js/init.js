@@ -21,18 +21,19 @@ export function getConfig(key) {
 /* 常量 */
 export let picBaseUrl = "https://cdn.erssmy.com/image"; // 图片cdn链接
 
+let apiUrlBase = "https://api.erss.club/api";
 export let apiUrls = {
-  "2021_ranking": "https://api.erss.club/api/v2/2021-ranking",
-  star_v2: "https://api.erss.club/api/v2/star",
-  star_v3: "https://api.erss.club/api/v3/star",
-  submit: "https://api.erss.club/api/contribute",
-  comment: "https://api.erss.club/api/comment",
-  showfrom: "https://api.erss.club/api/info",
-  ip: "https://api.erss.club/api/ip",
-  update: "https://api.erss.club/api/getupdate",
-  ranking_history: "https://api.erss.club/api/get-ranking-history",
-  donate_list: "https://api.erss.club/api/get-donate-info",
-  image: "https://api.erss.club/api/image",
+  "2021_ranking": `${apiUrlBase}/v2/2021-ranking`,
+  star_v2: `${apiUrlBase}/v2/star`,
+  star_v3: `${apiUrlBase}/v3/star`,
+  submit: `${apiUrlBase}/contribute`,
+  comment: `${apiUrlBase}/comment`,
+  showfrom: `${apiUrlBase}/info`,
+  ip: `${apiUrlBase}/ip`,
+  update: `${apiUrlBase}/getupdate`,
+  ranking_history: `${apiUrlBase}/get-ranking-history`,
+  donate_list: `${apiUrlBase}/get-donate-info`,
+  image: `${apiUrlBase}/image`,
 };
 
 String.prototype.trim = function() {

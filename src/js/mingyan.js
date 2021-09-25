@@ -1,5 +1,5 @@
 import router from "../router";
-import { kv, kvName, randomNumber } from "./tools";
+import { kv, kvName, randomNumber } from "./utils";
 import { mingyan } from "./rawMingyan";
 
 export { mingyan };

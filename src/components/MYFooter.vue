@@ -42,7 +42,7 @@
 
 <script>
 import { mingyan } from "../js/mingyan";
-import { kv, kvName, randomNumber } from "../js/tools";
+import { kv, kvName, randomNumber } from "../js/utils";
 import router from "../router";
 // import PopoverItem from "./PopoverItem.vue";
 

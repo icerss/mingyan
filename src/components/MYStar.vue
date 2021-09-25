@@ -7,11 +7,10 @@
 </template>
 
 <script>
-import { isShow, log, NotyfAlert, qs } from "../js/tools";
+import { isShow, log, NotyfAlert, qs, querySelector, swal } from "../js/utils";
 import { MingyanLOGO } from "../js/init";
 import { MY_starApi } from "../js/feat/starApi";
 import { loadMtCaptcha } from "../js/feat/loadMtCaptcha";
-import swal from "sweetalert";
 
 export default {
   name: "MYStar",
@@ -49,17 +48,17 @@ export default {
       return isShow(".swal-overlay--show-modal");
     },
     turnRed() {
-      return (document.querySelector("#star-logo").style.color = "red");
+      return (querySelector("#star-logo").style.color = "red");
     },
     turnGray() {
-      return (document.querySelector("#star-logo").style.color = "#000000A3");
+      return (querySelector("#star-logo").style.color = "#000000A3");
     },
     star(my, id, recaptcha_token) {
       let root = this;
       log(this.mingyan);
       if (!this.isSwalShow()) {
         swal({
-          title: document.querySelector(".my--mingyan-text").innerText,
+          title: querySelector(".my--mingyan-text").innerText,
           text: "加载出错了？刷新试试？",
           icon: MingyanLOGO,
           button: "关闭",
@@ -67,10 +66,9 @@ export default {
           root.starEvent = "addstar";
           document.removeEventListener("click", root.doStar);
         });
-        document.querySelector(
-          ".swal-icon.swal-icon--custom>img"
-        ).style.maxWidth = "150px";
-        document.querySelector(".swal-text").innerHTML = this.loadingHtml;
+        querySelector(".swal-icon.swal-icon--custom>img").style.maxWidth =
+          "150px";
+        querySelector(".swal-text").innerHTML = this.loadingHtml;
         document
           .querySelector("#star-logo")
           .addEventListener("click", function() {
@@ -97,8 +95,7 @@ export default {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
             NotyfAlert.err(addStar_res.msg);
-            document.querySelector(".my--star-num").innerHTML =
-              addStar_res.data.starNum;
+            querySelector(".my--star-num").innerHTML = addStar_res.data.starNum;
             if (addStar_res.data.isStar) {
               root.turnRed();
               root.starEvent = "removestar";
@@ -107,8 +104,7 @@ export default {
               return root.reVerify("addstar");
           } else {
             NotyfAlert.su(addStar_res.msg);
-            document.querySelector(".my--star-num").innerHTML =
-              addStar_res.data.starNum;
+            querySelector(".my--star-num").innerHTML = addStar_res.data.starNum;
             if (addStar_res.data.isStar) {
               root.turnRed();
               root.starEvent = "removestar";
@@ -127,8 +123,7 @@ export default {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
             NotyfAlert.err(addStar_res.msg);
-            document.querySelector(".my--star-num").innerHTML =
-              addStar_res.data.starNum;
+            querySelector(".my--star-num").innerHTML = addStar_res.data.starNum;
             if (!addStar_res.data.isStar) {
               root.turnGray();
               root.starEvent = "addstar";
@@ -137,8 +132,7 @@ export default {
               return root.reVerify("removestar");
           } else {
             NotyfAlert.su(addStar_res.msg);
-            document.querySelector(".my--star-num").innerHTML =
-              addStar_res.data.starNum;
+            querySelector(".my--star-num").innerHTML = addStar_res.data.starNum;
             if (!addStar_res.data.isStar) {
               root.turnGray();
               root.starEvent = "addstar";
@@ -163,10 +157,10 @@ export default {
         root.starEvent = event;
         return root.star(null, null, "reverify_mtcaptcha@" + reToken);
       });
-      document.querySelector(".swal-title").style.fontSize = "20px";
-      document.querySelector(".swal-text").innerHTML = `验证码加载中……`;
-      document.querySelector(".swal-text").id = "star-reverify";
-      document.querySelector("#star-reverify").style.margin = "-30px";
+      querySelector(".swal-title").style.fontSize = "20px";
+      querySelector(".swal-text").innerHTML = `验证码加载中……`;
+      querySelector(".swal-text").id = "star-reverify";
+      querySelector("#star-reverify").style.margin = "-30px";
       loadMtCaptcha("star-reverify", "addstar");
       // window.grecaptcha.render("star-reverify", {
       //   sitekey: "6Lf9VgccAAAAAO2KrVDJGSuDXIHXD3lnV7T2nzP9",
