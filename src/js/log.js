@@ -68,7 +68,7 @@ export let recordEventId = {
 
 export function recordEvent(eventId) {
   if (!eventId) return;
-  console.log(`Record：\`${eventId.n}\``);
+  // console.log(`Record：\`${eventId.n}\``);
   return track.action(eventId.id, {
     key: eventId.n,
     value: 1,
