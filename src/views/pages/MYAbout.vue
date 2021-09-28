@@ -86,9 +86,7 @@
         href="https://jq.qq.com/?_wv=1027&amp;k=jKy2qW7R"
         ><a-icon type="qq" /> QQ交流群</ListItem
       >
-      <ListItem
-        description="feedback@erssmy.com"
-        href="mailto:feedback@erssmy.com"
+      <ListItem description="xhemj@erssmy.com" href="mailto:xhemj@erssmy.com"
         ><a-icon type="mail" /> 反馈邮箱</ListItem
       >
       <ListItem
