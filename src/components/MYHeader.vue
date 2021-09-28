@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     reload() {
-      recordEvent(recordEventId.clickMYReloadButton);
+      // recordEvent(recordEventId.clickMYReloadButton);
       EventBus.$emit("onReload");
       if (/\/$|\/@\d/.test(location.pathname)) {
         querySelector("#reload") && querySelector("#reload").click();
