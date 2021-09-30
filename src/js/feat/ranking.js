@@ -32,6 +32,7 @@ export let MY_ranking = function() {
     })
     .then(function(numData) {
       num = numData.num;
+      kv.put(kvName.rankingIp, ip);
       return swal({
         title: `第${num}个人！！`,
         text: `恭喜你成为2021年第${num}个查看名言的人！！`,
@@ -47,9 +48,8 @@ export let MY_ranking = function() {
       });
     })
     .then(function(name) {
-      kv.put(kvName.rankingIp, ip);
       if (!name) return (location.href = "./");
-      return MY_rankingApi.update(id, name);
+      return MY_rankingApi.update(id, name, num);
     })
     .then(function() {
       location.href = "./";

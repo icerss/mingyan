@@ -34,7 +34,7 @@ export let MY_rankingApi = {
         });
     });
   },
-  update: function(id, name) {
+  update: function(id, name, rank) {
     return new Promise(function(resolve, reject) {
       fetch(apiUrl, {
         ...normalPostHeader,
@@ -43,6 +43,7 @@ export let MY_rankingApi = {
           data: {
             name: name || "",
             rid: id || "",
+            rank: rank || "",
             t: new Date().getTime(),
           },
         }),
