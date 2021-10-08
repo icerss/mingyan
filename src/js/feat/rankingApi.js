@@ -11,7 +11,7 @@ let apiUrl = apiUrls["2021_ranking"];
 // apiUrl = "http://localhost:3000/api/v2/2021-ranking";
 
 export let MY_rankingApi = {
-  add: function(name, ip) {
+  add: function(name, ip, rank) {
     return new Promise(function(resolve, reject) {
       fetch(apiUrl, {
         ...normalPostHeader,
@@ -20,6 +20,7 @@ export let MY_rankingApi = {
           data: {
             name: name || "",
             ip: ip || "",
+            rank: rank || "",
             t: new Date().getTime(),
           },
         }),

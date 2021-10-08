@@ -25,8 +25,11 @@ module.exports = {
       },
     };
     config.optimization = {
-      runtimeChunk: "single",
+      runtimeChunk: {
+        name: (entrypoint) => `runtime-${entrypoint.name}`,
+      },
       splitChunks: {
+        automaticNameDelimiter: "-",
         chunks: "all",
         maxInitialRequests: Infinity,
         minSize: 20000,
