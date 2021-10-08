@@ -83,10 +83,12 @@
       <h1>联系</h1>
       <ListItem
         description="1084808352"
-        href="https://jq.qq.com/?_wv=1027&amp;k=jKy2qW7R"
+        href="https://jq.qq.com/?_wv=1027&k=jKy2qW7R"
         ><a-icon type="qq" /> QQ交流群</ListItem
       >
-      <ListItem description="xhemj@erssmy.com" href="mailto:xhemj@erssmy.com"
+      <ListItem
+        description="feedback@erssmy.com"
+        href="mailto:feedback@erssmy.com"
         ><a-icon type="mail" /> 反馈邮箱</ListItem
       >
       <ListItem
