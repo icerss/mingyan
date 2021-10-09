@@ -80,8 +80,8 @@ export default {
         }
         root.type = submit_type;
         root.isReady = true;
-        // 图片彩蛋部分
-        EventBus.$emit("PicUrlLoaded", JSON.stringify(root.showFromData.pic));
+        // // 图片彩蛋部分
+        // EventBus.$emit("PicUrlLoaded", JSON.stringify(root.showFromData.pic));
         // 小故事
         EventBus.$emit(
           "StoryLoaded",
