@@ -4,6 +4,7 @@
     </CoolLightBox>
     <img
       :alt="alt"
+      :title="alt"
       v-lazy="src"
       class="fancy-img-item"
       :class="className"

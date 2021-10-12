@@ -47,6 +47,7 @@ export let mingyanPicUrl = {
   面包: "/2021/01/24/ulS3M2oRcmyNQqZ.jpg",
   小菊快跑: "/2021/03/30/4XhOQvIlUCzgkPd.jpg",
   "非常近，很快就到了": "/2021/05/16/NTpS7jGxJnwiodt.png",
+  "祝潘哥生日快乐！": "/2021/10/13/rQkc3dqw6oRYvAF.jpg@1.0.1",
   /* @图片地址!! */
 };
 /**
@@ -117,8 +118,16 @@ export let getNowId = function() {
     : window["nowId"];
 };
 
+let i = 0;
 export let genNextId = function() {
   window["nowId"] = randomNumber(0, mingyan.length - 1);
+  let date = new Date().getTime();
+  if (date >= 1634054400000 && date <= 1634140800000 && i === 1) {
+    window["nowId"] = 486; // 潘哥生日彩蛋
+    i = 0;
+  } else {
+    i = 1;
+  }
   kv.put(kvName.mingyanId, window["nowId"]);
   return window["nowId"];
 };

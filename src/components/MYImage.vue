@@ -81,7 +81,7 @@ export default {
       let path = mingyanPicUrl[text];
       let targetVersion = path.split("@")[1] || "1.0.0";
       url = url.replace("[version]", targetVersion);
-      return url + path;
+      return url + path.split("@")[0];
     },
   },
 };
