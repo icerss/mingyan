@@ -8,7 +8,7 @@
 
 <script>
 import { isShow, log, NotyfAlert, qs, querySelector, swal } from "../js/utils";
-import { MingyanLOGO } from "../js/init";
+import { MingyanLogoBase64 } from "../js/init";
 import { MY_starApi } from "../js/feat/starApi";
 import { loadMtCaptcha } from "../js/feat/loadMtCaptcha";
 import { recordEvent, recordEventId } from "../js/log";
@@ -62,7 +62,7 @@ export default {
         swal({
           title: querySelector(".my--mingyan-text").innerText,
           text: "加载出错了？刷新试试？",
-          icon: MingyanLOGO,
+          icon: MingyanLogoBase64,
           button: "关闭",
         }).then(() => {
           root.starEvent = "addstar";

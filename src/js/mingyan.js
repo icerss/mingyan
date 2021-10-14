@@ -47,7 +47,7 @@ export let mingyanPicUrl = {
   面包: "/2021/01/24/ulS3M2oRcmyNQqZ.jpg",
   小菊快跑: "/2021/03/30/4XhOQvIlUCzgkPd.jpg",
   "非常近，很快就到了": "/2021/05/16/NTpS7jGxJnwiodt.png",
-  "祝潘哥生日快乐！": "/2021/10/13/rQkc3dqw6oRYvAF.jpg@1.0.1",
+  "祝潘哥生日快乐！": "/2021/10/13/rQkc3dqw6oRYvAF.jpg",
   /* @图片地址!! */
 };
 /**

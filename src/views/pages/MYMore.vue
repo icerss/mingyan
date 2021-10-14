@@ -23,7 +23,7 @@
         <div class="my--sponsor" @click="onClickDonateBanner">
           <img
             class="banner"
-            src="https://static-cdn.erssmy.com/public/donate-banner.png"
+            src="https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/donate-banner.png"
             alt="鼓励我们"
           />
         </div>

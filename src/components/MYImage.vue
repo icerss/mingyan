@@ -30,6 +30,7 @@ export default {
     return {
       imgClassName: "",
       styleMinWidth: 0,
+      commonVersion: "1.0.2",
     };
   },
   // watch: {
@@ -73,13 +74,13 @@ export default {
       if (text === "解") {
         let url = cdnUrl;
         let path = solvePicUrl[name];
-        let targetVersion = path.split("@")[1] || "1.0.0";
+        let targetVersion = path.split("@")[1] || this.commonVersion;
         url = url.replace("[version]", targetVersion);
         return url + path;
       }
       let url = cdnUrl;
       let path = mingyanPicUrl[text];
-      let targetVersion = path.split("@")[1] || "1.0.0";
+      let targetVersion = path.split("@")[1] || this.commonVersion;
       url = url.replace("[version]", targetVersion);
       return url + path.split("@")[0];
     },
