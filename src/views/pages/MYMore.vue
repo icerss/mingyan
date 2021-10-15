@@ -162,11 +162,11 @@ export default {
 
     let root = this;
     loadJs(
-      "https://cdn.jsdelivr.net/npm/twikoo@1.4.1/dist/twikoo.all.min.js"
+      "https://cdn.jsdelivr.net/npm/twikoo@1.4.9/dist/twikoo.all.min.js"
     ).then(function() {
       twikoo // eslint-disable-line
         .init({
-          envId: "xhemj-0gjckebwf7276129",
+          envId: "https://api.erss.club/api/twikoo",
           el: "#tcomment",
           path: "/",
         })

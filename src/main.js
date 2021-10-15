@@ -54,12 +54,6 @@ Vue.use(VueLazyload, {
 });
 
 Vue.config.devtools = process.env.NODE_ENV === "development";
-// Vue.config.errorHandler = function(err, vm, info) {
-//   if (getConfig("isInsertAegis"))
-//     aegis.error(`Error: ${err.toString()}\nInfo: ${info}`);
-//   if (getConfig("isShowError"))
-//     console.error(`Error: ${err.toString()}\nInfo: ${info}`);
-// };
 
 if (getConfig("isInsertBaidu")) {
   let _hmt = [];
