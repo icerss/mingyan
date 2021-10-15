@@ -161,24 +161,24 @@ export default {
     fadeIn(".my--more");
 
     let root = this;
-    loadJs(
-      "https://cdn.jsdelivr.net/npm/twikoo@1.4.9/dist/twikoo.all.min.js"
-    ).then(function() {
-      twikoo // eslint-disable-line
-        .init({
-          envId: "https://api.erss.club/api/twikoo",
-          el: "#tcomment",
-          path: "/",
-        })
-        .then(function() {
-          try {
-            querySelector(
-              ".tk-footer"
-            ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://www.erssmy.com/">ERSS名言</a></div>`;
-          } catch {} // eslint-disable-line
-          querySelector(".el-textarea__inner").style.height = "150px";
-        });
-    });
+    loadJs("https://cdn.jsdelivr.net/npm/twikoo@1.4.9/dist/twikoo.min.js").then(
+      function() {
+        twikoo // eslint-disable-line
+          .init({
+            envId: "https://api.erss.club/api/twikoo",
+            el: "#tcomment",
+            path: "/",
+          })
+          .then(function() {
+            try {
+              querySelector(
+                ".tk-footer"
+              ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://www.erssmy.com/">ERSS名言</a></div>`;
+            } catch {} // eslint-disable-line
+            querySelector(".el-textarea__inner").style.height = "150px";
+          });
+      }
+    );
     fetch("https://api.github.com/repos/xhemj/mingyan")
       .then((r) => r.json())
       .then(function(data) {
@@ -334,5 +334,45 @@ h3 {
 <style>
 .twikoo {
   text-align: left;
+}
+
+.tk-content {
+  background: #f2f5f9 !important;
+  border-radius: 8px !important;
+  padding-left: 20px !important;
+  padding-top: 10px !important;
+  padding-bottom: 0 !important;
+}
+
+.tk-avatar {
+  height: 3rem !important;
+  width: 3rem !important;
+}
+.tk-avatar-img {
+  height: 3rem !important;
+}
+
+.tk-action-icon > svg {
+  fill: #5676dc !important;
+}
+
+.tk-action-count {
+  color: #5676dc !important;
+}
+
+.OwO-logo > svg {
+  fill: #5676dc !important;
+}
+
+.tk-input {
+  background-color: #fff !important;
+}
+
+.tk-meta-input > .el-input {
+  background-color: #fff !important;
+}
+
+.tk-tag-green {
+  display: none !important;
 }
 </style>
