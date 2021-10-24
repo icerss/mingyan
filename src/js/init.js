@@ -34,6 +34,7 @@ export let apiUrls = {
   ranking_history: `${apiUrlBase}/get-ranking-history`,
   donate_list: `${apiUrlBase}/get-donate-info`,
   image: `${apiUrlBase}/image`,
+  announce: `https://api.erssmy.com/api/getannounce`,
 };
 
 String.prototype.trim = function() {

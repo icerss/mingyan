@@ -39,14 +39,12 @@
       </div>
     </div>
     <MYComment :rawMingyan="rawMingyan" />
-    <MYFooter />
   </div>
 </template>
 
 <script>
 import MYStar from "../components/MYStar.vue";
 import MYInfo from "../components/MYInfo.vue";
-import MYFooter from "../components/MYFooter.vue";
 import MYImage from "../components/MYImage.vue";
 // import MYStory from "../components/MYStory.vue";
 import {
@@ -71,7 +69,6 @@ export default {
   components: {
     MYStar,
     MYInfo,
-    MYFooter,
     MYImage,
     MYComment,
     // MYStory,

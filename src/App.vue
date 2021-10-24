@@ -2,11 +2,13 @@
   <div id="app">
     <MYHeader />
     <router-view />
+    <MYFooter />
   </div>
 </template>
 
 <script>
 import MYHeader from "./components/MYHeader.vue";
+import MYFooter from "./components/MYFooter.vue";
 import { kv, kvName, qs, querySelector } from "./js/utils";
 import { MY_getUpdate } from "./js/feat/getUpdate";
 import { doConsole } from "./js/init";
@@ -17,6 +19,7 @@ export default {
   name: "App",
   components: {
     MYHeader,
+    MYFooter,
   },
   mounted() {
     document.title = "耳斯名言 · ERSS";
@@ -311,5 +314,24 @@ img {
 .grecaptcha-badge {
   display: none !important;
   visibility: hidden !important;
+}
+
+.ant-notification {
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  margin-right: 10px;
+  margin-top: 30px;
+  opacity: 0.9;
+}
+
+.ant-notification-notice-message {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ant-notification-notice-description {
+  color: #000000a6;
+  font-size: 14px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <footer class="my--footer">
     <div class="my--footer-normal" v-if="!mode || mode === 'normal'">
-      <div class="my--footer-html">
+      <template class="my--footer-html">
         当前名言数量：{{ length }}<br />
         <router-link class="my-el-a" to="/submit"
           ><span @click="onClickSubmitButton">投稿</span></router-link
@@ -14,7 +14,7 @@
         <router-link class="my-el-a" to="/more"
           ><span @click="onClickMoreButton">更多</span></router-link
         >
-      </div>
+      </template>
       <!-- <PopoverItem :content="words">
         <i
           class="icon my--mingyan-boy"
@@ -24,13 +24,9 @@
       </PopoverItem> -->
     </div>
     <div class="my--footer-back" v-else-if="mode === 'back'">
-      <div class="my--footer-html">
-        <div class="my--footer-html">
-          当前名言数量：{{ length }}<br /><a @click="back" class="aline"
-            >返回</a
-          >
-        </div>
-      </div>
+      <template class="my--footer-html">
+        当前名言数量：{{ length }}<br /><a @click="back" class="aline">返回</a>
+      </template>
       <!-- <PopoverItem :content="words">
         <i
           class="icon my--mingyan-boy"
@@ -52,14 +48,27 @@ import router from "../router";
 
 export default {
   name: "MYFooter",
-  props: {
-    mode: String,
-  },
-  components: {
-    // PopoverItem,
+  watch: {
+    "$route.path"() {
+      console.log(this.$route.path);
+      let backUrl = [
+        "/search",
+        "/more",
+        "/about",
+        "/faq",
+        "/ranking",
+        "/donate",
+        "/submit",
+        "/debug",
+        "/sponsor",
+      ];
+      let hash = location.hash.split("#")[1];
+      this.mode = backUrl.includes(hash) ? "back" : "normal";
+    },
   },
   data() {
     return {
+      mode: "normal",
       length: mingyan.length,
       wordsList: [
         `欢迎${

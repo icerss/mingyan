@@ -1,78 +1,70 @@
 <template>
-  <div id="my--search-app">
-    <div class="my--search">
-      <input
-        type="search"
-        id="searchbar"
-        class="my--search-bar"
-        placeholder="搜索……"
-        results="5"
-        v-model="inputValue"
-        v-if="!isLoading"
-      />
-      <div class="search-list" v-if="listMode === 'search'">
-        <div class="search-item" v-for="item of displayMingyan" :key="item">
-          <router-link
-            class="showall-item"
-            v-if="isStartInput"
-            :to="'/@' + findMingyan(item)"
-          >
-            <MYSearchHighlight
-              :searchText="inputValue"
-              :text="item"
-              v-if="item"
-            />
-          </router-link>
-          <router-link
-            class="showall-item"
-            :to="'/@' + findMingyan(item)"
-            v-else
-          >
-            {{ item }}
-          </router-link>
-        </div>
+  <div class="my--search">
+    <input
+      type="search"
+      id="searchbar"
+      class="my--search-bar"
+      placeholder="搜索……"
+      results="5"
+      v-model="inputValue"
+      v-if="!isLoading"
+    />
+    <div class="search-list" v-if="listMode === 'search'">
+      <div class="search-item" v-for="item of displayMingyan" :key="item">
+        <router-link
+          class="showall-item"
+          v-if="isStartInput"
+          :to="'/@' + findMingyan(item)"
+        >
+          <MYSearchHighlight
+            :searchText="inputValue"
+            :text="item"
+            v-if="item"
+          />
+        </router-link>
+        <router-link class="showall-item" :to="'/@' + findMingyan(item)" v-else>
+          {{ item }}
+        </router-link>
       </div>
-      <div class="search-history-list" v-if="listMode === 'ranking'">
-        <div class="history-loading-mask" v-if="!isLoadHitsory">
-          <span class="loading-svg" v-html="loadingSvg"></span>
-          <h3>搜索加载中……</h3>
-        </div>
-
-        <div class="history-list" v-else>
-          <div class="search-history-list-tip">每日精选名言：</div>
-          <div
-            class="search-history-item"
-            v-for="(item, index) of historyDataList"
-            :key="item.text"
-          >
-            <a-row>
-              <a-col :span="historyListWidth[0]" id="star-ranking-num">
-                <router-link :to="'/@' + findMingyan(item.text)">
-                  {{ new Number(index) + 1 }}
-                </router-link>
-              </a-col>
-              <a-col
-                :span="historyListWidth[1]"
-                class="my--star-ranking-text"
-                id="star-ranking-text"
-              >
-                <router-link :to="'/@' + findMingyan(item.text)">
-                  {{ item.text }}
-                </router-link>
-              </a-col>
-            </a-row>
-          </div>
-        </div>
-      </div>
-      <span class="my--search-no-result" v-if="isNoResult">无结果</span>
     </div>
-    <MYFooter mode="back" />
+    <div class="search-history-list" v-if="listMode === 'ranking'">
+      <div class="history-loading-mask" v-if="!isLoadHitsory">
+        <span class="loading-svg" v-html="loadingSvg"></span>
+        <h3>搜索加载中……</h3>
+      </div>
+
+      <div class="history-list" v-else>
+        <div class="search-history-list-tip">每日精选名言：</div>
+        <div
+          class="search-history-item"
+          v-for="(item, index) of historyDataList"
+          :key="item.text"
+        >
+          <a-row>
+            <a-col :span="historyListWidth[0]" id="star-ranking-num">
+              <router-link :to="'/@' + findMingyan(item.text)">
+                {{ new Number(index) + 1 }}
+              </router-link>
+            </a-col>
+            <a-col
+              :span="historyListWidth[1]"
+              class="my--star-ranking-text"
+              id="star-ranking-text"
+            >
+              <router-link :to="'/@' + findMingyan(item.text)">
+                {{ item.text }}
+              </router-link>
+            </a-col>
+          </a-row>
+        </div>
+      </div>
+    </div>
+    <span class="my--search-no-result" v-if="isNoResult">无结果</span>
   </div>
 </template>
 
 <script>
 import { mingyan } from "../js/mingyan";
-import MYFooter from "../components/MYFooter.vue";
 import MYSearchHighlight from "../components/MYSearchHighlight.vue";
 import { MY_starApi } from "../js/feat/starApi";
 import { log } from "../js/utils";
@@ -81,7 +73,6 @@ export default {
   name: "MYSearch",
   components: {
     MYSearchHighlight,
-    MYFooter,
   },
   data() {
     return {

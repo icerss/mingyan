@@ -1,107 +1,102 @@
 <template>
-  <div class="my--more-app">
-    <div class="my--more">
-      <!-- Start more.html -->
-      <div class="my--more-main">
-        <h1>更多</h1>
-        <h3>
-          <router-link to="submit"
-            ><span @click="onClickSubmitButton">名言投稿</span></router-link
-          >
-        </h3>
-        <h3>
-          <router-link to="ranking">名言排行榜</router-link>
-        </h3>
-        <h3>
-          <a id="download_btn" @click="downloadMingyan">下载名言列表（.txt）</a>
-        </h3>
-        <h3>
-          <router-link to="/about">关于</router-link>
-        </h3>
-      </div>
-      <router-link to="/donate">
-        <div class="my--sponsor" @click="onClickDonateBanner">
-          <img
-            class="banner"
-            src="https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/donate-banner.png"
-            alt="鼓励我们"
-          />
-        </div>
-      </router-link>
-
-      <hr />
-
-      <div id="tcomment"></div>
-
-      <hr />
-
-      <div style="text-align: center">
-        <div style="color: gray">
-          自 2020年04月30日 以来，ERSS名言已经陪伴你们走过了
-          <span class="sitetime">{{ sitetime }}</span>
-        </div>
-        <a href="https://icp.gov.moe" target="_blank" style="color: #d6d9e2"
-          >萌备 </a
-        ><a
-          href="https://icp.gov.moe/?keyword=20200503"
-          target="_blank"
-          style="color: #d6d9e2"
+  <div class="my--more">
+    <!-- Start more.html -->
+    <div class="my--more-main">
+      <h1>更多</h1>
+      <h3>
+        <router-link to="submit"
+          ><span @click="onClickSubmitButton">名言投稿</span></router-link
         >
-          20200503号</a
-        >
-      </div>
-
-      <div style="text-align: center">
-        <div class="github-badge" title="作者就是我啦！！">
-          <span class="badge-subject">Author</span
-          ><span class="badge-value bg-blue">xhemj</span>
-        </div>
-        <div class="github-badge" title="速度还可以吧？">
-          <span class="badge-subject">Hosted</span
-          ><span class="badge-value bg-red"
-            ><span id="host">Vercel && Github</span></span
-          >
-        </div>
-        <div
-          class="github-badge"
-          title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速"
-        >
-          <span class="badge-subject">CDN</span
-          ><span class="badge-value bg-pink">Jsdelivr & DogeCloud CDN</span>
-        </div>
-        <div class="github-badge" title="ERSS~~~">
-          <span class="badge-subject">&copy;</span
-          ><span class="badge-value bg-brightgreen">Xhemj</span>
-        </div>
-        <div class="github-badge" title="ERSS~~~">
-          <span class="badge-subject">&copy;</span
-          ><span class="badge-value theme-bg blue">IYAMAYA工作室</span>
-        </div>
-        <div class="github-badge" title="多来看看呀！">
-          <span class="badge-subject">PV</span
-          ><span class="badge-value bg-yellow"
-            ><span id="hit-count"> {{ hitCount }}</span></span
-          >
-        </div>
-        <br />
-        <div class="github-badge" title="会慢慢更新的">
-          <span class="badge-subject">更新时间</span
-          ><span class="badge-value bg-lightgrey"
-            ><span id="uptime">{{ uptime }}</span></span
-          >
-        </div>
-        <br />
-      </div>
+      </h3>
+      <h3>
+        <router-link to="ranking">名言排行榜</router-link>
+      </h3>
+      <h3>
+        <a id="download_btn" @click="downloadMingyan">下载名言列表（.txt）</a>
+      </h3>
+      <h3>
+        <router-link to="/about">关于</router-link>
+      </h3>
     </div>
-    <!-- End more.html -->
-    <MYFooter mode="back" />
+    <router-link to="/donate">
+      <div class="my--sponsor" @click="onClickDonateBanner">
+        <img
+          class="banner"
+          src="https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/donate-banner.png"
+          alt="鼓励我们"
+        />
+      </div>
+    </router-link>
+
+    <hr />
+
+    <div id="tcomment"></div>
+
+    <hr />
+
+    <div style="text-align: center">
+      <div style="color: gray">
+        自 2020年04月30日 以来，ERSS名言已经陪伴你们走过了
+        <span class="sitetime">{{ sitetime }}</span>
+      </div>
+      <a href="https://icp.gov.moe" target="_blank" style="color: #d6d9e2"
+        >萌备 </a
+      ><a
+        href="https://icp.gov.moe/?keyword=20200503"
+        target="_blank"
+        style="color: #d6d9e2"
+      >
+        20200503号</a
+      >
+    </div>
+
+    <div style="text-align: center">
+      <div class="github-badge" title="作者就是我啦！！">
+        <span class="badge-subject">Author</span
+        ><span class="badge-value bg-blue">xhemj</span>
+      </div>
+      <div class="github-badge" title="速度还可以吧？">
+        <span class="badge-subject">Hosted</span
+        ><span class="badge-value bg-red"
+          ><span id="host">Vercel && Github</span></span
+        >
+      </div>
+      <div
+        class="github-badge"
+        title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速"
+      >
+        <span class="badge-subject">CDN</span
+        ><span class="badge-value bg-pink">Jsdelivr & DogeCloud CDN</span>
+      </div>
+      <div class="github-badge" title="ERSS~~~">
+        <span class="badge-subject">&copy;</span
+        ><span class="badge-value bg-brightgreen">Xhemj</span>
+      </div>
+      <div class="github-badge" title="ERSS~~~">
+        <span class="badge-subject">&copy;</span
+        ><span class="badge-value theme-bg blue">IYAMAYA工作室</span>
+      </div>
+      <div class="github-badge" title="多来看看呀！">
+        <span class="badge-subject">PV</span
+        ><span class="badge-value bg-yellow"
+          ><span id="hit-count"> {{ hitCount }}</span></span
+        >
+      </div>
+      <br />
+      <div class="github-badge" title="会慢慢更新的">
+        <span class="badge-subject">更新时间</span
+        ><span class="badge-value bg-lightgrey"
+          ><span id="uptime">{{ uptime }}</span></span
+        >
+      </div>
+      <br />
+    </div>
   </div>
 </template>
 
 <script>
 import { mingyan } from "../../js/mingyan";
 import { fadeIn, loadJs, querySelector, SaveAs } from "../../js/utils";
-import MYFooter from "../../components/MYFooter.vue";
 import { recordEvent, recordEventId } from "../../js/log";
 
 export default {
@@ -112,9 +107,6 @@ export default {
       uptime: "2021-00-00 00:00:00",
       sitetime: "很久很久~~",
     };
-  },
-  components: {
-    MYFooter,
   },
   methods: {
     siteTime() {
@@ -336,12 +328,16 @@ h3 {
   text-align: left;
 }
 
-.tk-content {
+.tk-main > .tk-content {
   background: #f2f5f9 !important;
   border-radius: 8px !important;
   padding-left: 20px !important;
   padding-top: 10px !important;
   padding-bottom: 0 !important;
+}
+
+.tk-time {
+  color: #999999 !important;
 }
 
 .tk-avatar {

@@ -1,35 +1,31 @@
 <template>
-  <div class="my--donate-app">
-    <div class="my--donate">
-      <h1>鼓励我们</h1>
-      <div class="qrcode">
-        <FancyImage
-          src="https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.2/public/donate-qrcode.png"
-          title="鼓励我们"
-          className="qr-img"
-        />
-        <p class="qrcode-text">点击图片可以放大</p>
-      </div>
+  <div class="my--donate">
+    <h1>鼓励我们</h1>
+    <div class="qrcode">
+      <FancyImage
+        src="https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.2/public/donate-qrcode.png"
+        title="鼓励我们"
+        className="qr-img"
+      />
+      <p class="qrcode-text">点击图片可以放大</p>
+    </div>
 
-      <div class="sponsor-table">
-        <span class="sponsor-table-loading" v-if="!isFinishLoading"
-          >加载中……</span
-        >
-        <div class="sponsor-table-load" v-else>
-          <a-table
-            :columns="columns"
-            :data-source="listData"
-            :row-key="(data) => data.name + data.timestamp"
-          ></a-table>
-        </div>
+    <div class="sponsor-table">
+      <span class="sponsor-table-loading" v-if="!isFinishLoading"
+        >加载中……</span
+      >
+      <div class="sponsor-table-load" v-else>
+        <a-table
+          :columns="columns"
+          :data-source="listData"
+          :row-key="(data) => data.name + data.timestamp"
+        ></a-table>
       </div>
     </div>
-    <MYFooter mode="back" />
   </div>
 </template>
 
 <script>
-import MYFooter from "../../components/MYFooter.vue";
 import FancyImage from "../../components/FancyImage.vue";
 import { fadeIn } from "../../js/utils";
 import { apiUrls } from "../../js/init";
@@ -60,7 +56,6 @@ const columns = [
 export default {
   name: "MYDonate",
   components: {
-    MYFooter,
     FancyImage,
   },
   data() {

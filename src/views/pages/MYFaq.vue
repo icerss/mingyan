@@ -1,7 +1,6 @@
 <template>
-  <div class="my--faq-app">
-    <div class="my--faq">
-      <pre class="markdown-raw">
+  <div class="my--faq">
+    <pre class="markdown-raw">
       <!-- Start faq.html -->
 <div data-id="page.faq">
 <h1 style="text-align: center" class="markdown-title">🍕一篇文章教你如何玩转耳斯名言🍕 <br/> （FAQ）</h1>
@@ -111,22 +110,16 @@
 </div>
 <!-- END faq.html -->
     </pre>
-      <div class="markdown-html" v-html="rawHtml"></div>
-    </div>
-    <MYFooter mode="back" />
+    <div class="markdown-html" v-html="rawHtml"></div>
   </div>
 </template>
 
 <script>
-import MYFooter from "../../components/MYFooter.vue";
 import marked from "marked";
 import { fadeIn, querySelector } from "../../js/utils";
 
 export default {
   name: "MYFaq",
-  components: {
-    MYFooter,
-  },
   data() {
     return {
       rawHtml: "",
