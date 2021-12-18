@@ -7,6 +7,7 @@ import { kv, kvName, qs, swal } from "../utils";
  */
 export let MY_ranking = function() {
   if (new Date().getTime() < 1609430400000 /* 2021-01-01 00:00:00 */) return;
+  if (new Date().getTime() > 1640451599000 /* 2021-12-25 24:59:59 */) return;
   if (
     navigator.userAgent.toString().indexOf("bot") != -1 &&
     navigator.userAgent.toString().indexOf("spider") !=
