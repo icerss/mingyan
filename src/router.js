@@ -19,7 +19,6 @@ const MYSubmit = () =>
   import(/* webpackChunkName: "action-page" */ "./views/pages/MYSubmit.vue");
 import MYDebugPage from "./views/pages/MYDebugPage.vue";
 
-
 Vue.use(VueRouter);
 
 export let routes = [

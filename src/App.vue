@@ -48,21 +48,21 @@ export default {
   font-weight: regular;
   font-display: swap;
   /* lib.baomitu.com */
-  src: url("//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.eot"); /* IE9 Compat Modes */
+  src: url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.eot"); /* IE9 Compat Modes */
   src: local("ZCOOL KuaiLe"), local("ZCOOLKuaiLe-Normal"),
-    url("//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular-ie.eot?#iefix")
+    url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular-ie.eot?#iefix")
       format("embedded-opentype"),
     /* IE6-IE8 */
-      url("//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.woff2")
+      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff2")
       format("woff2"),
     /* Super Modern Browsers */
-      url("//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.woff")
+      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff")
       format("woff"),
     /* Modern Browsers */
-      url("//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.ttf")
+      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.ttf")
       format("truetype"),
     /* Safari, Android, iOS */
-      url("//s-sh-1943-pic1.oss.dogecdn.com/static/mingyan-js-org/fonts/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe")
+      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe")
       format("svg"); /* Legacy iOS */
 }
 
@@ -71,9 +71,9 @@ export default {
   font-family: "Material Icons";
   font-style: normal;
   src: local("Material Icons"), local("MaterialIcons-Regular"),
-    url("//cdn.jsdelivr.net/npm/mdui@1.0.1/dist/icons/material-icons/MaterialIcons-Regular.woff2")
+    url("//s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff2")
       format("woff2"),
-    url("//cdn.jsdelivr.net/npm/mdui@1.0.1/dist/icons/material-icons/MaterialIcons-Regular.woff")
+    url("//s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff")
       format("woff");
 }
 
