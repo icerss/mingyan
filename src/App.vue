@@ -153,7 +153,7 @@ body {
   padding-right: 10%;
   position: relative;
   font-family: "ZCOOL KuaiLe";
-  background-image: url("https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/web-bg.png");
+  background-image: url("https://unpkg.zhimg.com/@icerss/mingyan-oss@1.0.0/public/web-bg.png");
   color: #303742 !important;
   margin-bottom: 120px;
   transition: padding 0.3s cubic-bezier(0, 0, 0.2, 1);

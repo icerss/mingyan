@@ -9,19 +9,19 @@
   "theme_color": "#5676dc",
   "icons": [
     {
-      "src": "https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/logo-v2/512x512.png",
+      "src": "https://unpkg.zhimg.com/@icerss/mingyan-oss@1.0.0/public/logo-v2/512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/logo-v2/256x256.png",
+      "src": "https://unpkg.zhimg.com/@icerss/mingyan-oss@1.0.0/public/logo-v2/256x256.png",
       "type": "image/png",
       "sizes": "256x256",
       "purpose": "any maskable"
     },
     {
-      "src": "https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/logo-v2/64x64.png",
+      "src": "https://unpkg.zhimg.com/@icerss/mingyan-oss@1.0.0/public/logo-v2/64x64.png",
       "type": "image/png",
       "sizes": "64x64",
       "purpose": "any maskable"

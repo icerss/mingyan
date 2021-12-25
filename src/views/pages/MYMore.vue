@@ -22,7 +22,7 @@
       <div class="my--sponsor" @click="onClickDonateBanner">
         <img
           class="banner"
-          src="https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/donate-banner.png"
+          src="https://unpkg.zhimg.com/@icerss/mingyan-oss@1.0.0/public/donate-banner.png"
           alt="鼓励我们"
         />
       </div>
@@ -153,7 +153,7 @@ export default {
     fadeIn(".my--more");
 
     let root = this;
-    loadJs("https://cdn.jsdelivr.net/npm/twikoo@1.4.9/dist/twikoo.min.js").then(
+    loadJs("https://unpkg.zhimg.com/twikoo@1.4.9/dist/twikoo.min.js").then(
       function() {
         twikoo // eslint-disable-line
           .init({
