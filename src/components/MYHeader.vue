@@ -124,7 +124,7 @@ export default {
 
 .icon.my--header-logo {
   background: transparent center/contain no-repeat;
-  background-image: url("https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/web-logo.png");
+  background-image: url("https://s2.cdn.h36.top/www.erssmy.com/images/web-logo.png");
 }
 
 @media only screen and (max-width: 480px) {
