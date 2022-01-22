@@ -60,7 +60,7 @@ export default {
     //   }
     //   if (url)
     //     root.imgSrc =
-    //       "https://unpkg.zhimg.com/@icerss/mingyan-oss/" + url.path;
+    //       "https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss/" + url.path;
     // });
   },
   // beforeDestroy() {
@@ -70,7 +70,7 @@ export default {
     imgSrc() {
       let text = formatMingyan(this.rawMingyan).text;
       let name = formatMingyan(this.rawMingyan).teacher;
-      let cdnUrl = "https://unpkg.zhimg.com/@icerss/mingyan-oss@[version]";
+      let cdnUrl = "https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@[version]";
       if (text === "解") {
         let url = cdnUrl;
         let path = solvePicUrl[name];

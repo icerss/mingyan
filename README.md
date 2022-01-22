@@ -8,6 +8,6 @@
 
 ### 快来看看大家的名言吧！
 
-[https://www.erssmy.com/](https://s.erssmy.com/40m3)
+[https://www.erssmy.com/](https://www.erssmy.com/)
 
 </div>

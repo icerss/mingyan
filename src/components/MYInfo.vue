@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { MingyanLOGO } from "../js/init";
+import { MingyanLogoBase64 } from "../js/init";
 import { MY_showFromApi } from "../js/feat/infoApi";
 import { formatMingyan, mingyanPicUrl, solvePicUrl } from "../js/mingyan";
 import { EventBus } from "../js/eventBus";
@@ -53,7 +53,7 @@ export default {
         swal({
           title: "",
           text: `提供者：${name}\n出自：${comefrom}`,
-          icon: MingyanLOGO,
+          icon: MingyanLogoBase64,
           button: "关闭",
         });
         querySelector(".swal-icon.swal-icon--custom>img").style.maxWidth =

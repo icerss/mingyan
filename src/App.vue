@@ -9,11 +9,11 @@
 <script>
 import MYHeader from "./components/MYHeader.vue";
 import MYFooter from "./components/MYFooter.vue";
-import { kv, kvName, qs, querySelector } from "./js/utils";
+import { querySelector } from "./js/utils";
 import { MY_getUpdate } from "./js/feat/getUpdate";
 import { doConsole } from "./js/init";
 import "./js/feat/ranking";
-import { MY_ranking } from "./js/feat/ranking";
+// import { MY_ranking } from "./js/feat/ranking";
 
 export default {
   name: "App",
@@ -29,11 +29,10 @@ export default {
       let hash = window.location.hash;
       if (/#\d/.test(hash)) window.location.href = "./" + hash;
     });
-    // 2021 打卡彩蛋
-    if (qs("force_action") == "2020" || !kv.get(kvName.rankingIp)) {
-      MY_ranking();
-    }
-    // 控制台彩蛋
+    // // 2021 打卡彩蛋
+    // if (qs("force_action") == "2020" || !kv.get(kvName.rankingIp)) {
+    //   MY_ranking();
+    // }
     doConsole();
     // 检查更新
     MY_getUpdate();
@@ -48,21 +47,21 @@ export default {
   font-weight: regular;
   font-display: swap;
   /* lib.baomitu.com */
-  src: url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.eot"); /* IE9 Compat Modes */
+  src: url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.eot"); /* IE9 Compat Modes */
   src: local("ZCOOL KuaiLe"), local("ZCOOLKuaiLe-Normal"),
-    url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular-ie.eot?#iefix")
+    url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular-ie.eot?#iefix")
       format("embedded-opentype"),
     /* IE6-IE8 */
-      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff2")
+      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff2")
       format("woff2"),
     /* Super Modern Browsers */
-      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff")
+      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff")
       format("woff"),
     /* Modern Browsers */
-      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.ttf")
+      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.ttf")
       format("truetype"),
     /* Safari, Android, iOS */
-      url("//s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe")
+      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe")
       format("svg"); /* Legacy iOS */
 }
 
@@ -71,9 +70,9 @@ export default {
   font-family: "Material Icons";
   font-style: normal;
   src: local("Material Icons"), local("MaterialIcons-Regular"),
-    url("//s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff2")
+    url("https://s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff2")
       format("woff2"),
-    url("//s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff")
+    url("https://s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff")
       format("woff");
 }
 
@@ -153,7 +152,7 @@ body {
   padding-right: 10%;
   position: relative;
   font-family: "ZCOOL KuaiLe";
-  background-image: url("https://unpkg.zhimg.com/@icerss/mingyan-oss@1.0.0/public/web-bg.png");
+  background-image: url("https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.0/public/web-bg.png");
   color: #303742 !important;
   margin-bottom: 120px;
   transition: padding 0.3s cubic-bezier(0, 0, 0.2, 1);

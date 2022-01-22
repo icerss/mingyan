@@ -3,7 +3,7 @@
     <h1>鼓励我们</h1>
     <div class="qrcode">
       <FancyImage
-        src="https://unpkg.zhimg.com/@icerss/mingyan-oss@1.0.2/public/donate-qrcode.png"
+        src="https://cdn.jsdelivr.net/npm/@icerss/mingyan-oss@1.0.2/public/donate-qrcode.png"
         title="鼓励我们"
         className="qr-img"
       />

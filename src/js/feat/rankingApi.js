@@ -7,7 +7,7 @@
 
 import { apiUrls, normalPostHeader } from "../init";
 
-let apiUrl = apiUrls["2021_ranking"];
+let apiUrl = apiUrls["2022_ranking"];
 // apiUrl = "http://localhost:3000/api/v2/2021-ranking";
 
 export let MY_rankingApi = {

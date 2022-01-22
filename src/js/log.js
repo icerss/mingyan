@@ -1,6 +1,6 @@
 import * as ackeeTracker from "ackee-tracker";
 
-let track = ackeeTracker.create("https://log.xhemj.top", {
+let track = ackeeTracker.create("https://wow.xhemj.com", {
   detailed: true,
   ignoreLocalhost: false,
 });
