@@ -1,6 +1,6 @@
 import * as ackeeTracker from "ackee-tracker";
 
-export let track = ackeeTracker.create("https://wow.xhemj.com", {
+export let track = ackeeTracker.create("https://www.xhemj.com", {
   detailed: true,
   ignoreLocalhost: false,
 });
@@ -79,7 +79,7 @@ export function recordEvent(eventId) {
 /**
  * 页面加载耗时
  */
-window.onload = function() {
+window.onload = function () {
   let loadTime =
     window.performance.timing.domContentLoadedEventEnd -
     window.performance.timing.navigationStart;
