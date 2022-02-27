@@ -94,6 +94,9 @@ export default {
         ? "is-open-story"
         : "is-close-story";
     },
+    rawMingyan() {
+      recordSayingTextEvent(this.rawMingyan);
+    },
   },
   mounted() {
     this.showMingyan(getNowId());
@@ -129,9 +132,6 @@ export default {
       this.teacher = formatMingyan(id).teacher;
       this.text = formatMingyan(id).text;
       kv.put(kvName.mingyanId, id);
-
-      recordSayingTextEvent(this.rawMingyan);
-
       fadeIn(".my--main");
     },
     nextMingyan() {
