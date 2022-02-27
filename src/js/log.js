@@ -10,6 +10,9 @@ let StarEventId = "5a556871-bb03-4c29-9d4b-675a9696a067";
 // let OtherEventId = "fb561421-03a7-44f4-ac41-c0f069d4a08b";
 let ClickEventId = "d8cf3a61-3845-4c5a-9fe9-9f5056d004d9";
 let PageSpeedEventId = "0de96fd6-b5e3-4c9f-ab55-119093ab4057";
+let SayingTypeEventId = "d04c0203-67e5-4f24-a3c4-5fcac88d5f9e";
+let SayingTextEventId = "28ce91b5-f3da-45ac-b436-565fa623546f";
+
 export let recordEventId = {
   /* StarEvent */
   addStarEvent: {
@@ -72,6 +75,20 @@ export function recordEvent(eventId) {
   // console.log(`Record：\`${eventId.n}\``);
   return track.action(eventId.id, {
     key: eventId.n,
+    value: 1,
+  });
+}
+
+export function recordSayingTypeEvent(type) {
+  return track.action(SayingTypeEventId, {
+    key: type,
+    value: 1,
+  });
+}
+
+export function recordSayingTextEvent(text) {
+  return track.action(SayingTextEventId, {
+    key: text,
     value: 1,
   });
 }

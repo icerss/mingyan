@@ -12,7 +12,7 @@ import { MY_showFromApi } from "../js/feat/infoApi";
 import { formatMingyan, mingyanPicUrl, solvePicUrl } from "../js/mingyan";
 import { EventBus } from "../js/eventBus";
 import { querySelector, swal } from "../js/utils";
-import { recordEvent, recordEventId } from "../js/log";
+import { recordEvent, recordEventId, recordSayingTypeEvent } from "../js/log";
 
 export default {
   name: "MYInfo",
@@ -42,7 +42,7 @@ export default {
       let root = this;
       if (!root.showFromData) {
         root.showFromData = "";
-        MY_showFromApi.getinfo(root.mingyan).then(function(info) {
+        MY_showFromApi.getinfo(root.mingyan).then(function (info) {
           root.showFromData = info.data;
           return root.showInfo();
         });
@@ -71,7 +71,7 @@ export default {
         picPath = this.mingyanPicUrl[formatMingyan(this.mingyan).text];
       }
       picPath = picPath || "";
-      MY_showFromApi.getinfo(this.mingyan, picPath).then(function(info) {
+      MY_showFromApi.getinfo(this.mingyan, picPath).then(function (info) {
         root.showFromData = info.data;
         // db("showFromData", showFromData);
         let submit_type = root.showFromData.from.type;
@@ -80,6 +80,9 @@ export default {
         }
         root.type = submit_type;
         root.isReady = true;
+
+        recordSayingTypeEvent(submit_type);
+
         // // 图片彩蛋部分
         // EventBus.$emit("PicUrlLoaded", JSON.stringify(root.showFromData.pic));
         // 小故事

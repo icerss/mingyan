@@ -6,7 +6,7 @@
 
     <h1>制作人员</h1>
     <ListItem
-      href="https://www.iymy.top/"
+      href="#"
       imgSrc="https://cdn.erssmy.com/image/2021/05/23/Tp9Q5qaP8A1cG2C.jpg"
     >
       <h3>IYAMAYA菌屋工作室</h3>
@@ -98,7 +98,6 @@
 
     <hr />
 
-    <h2>注意</h2>
     <div class="google-recaptcha-tip">
       <a-icon type="info-circle" /> This site is protected by reCAPTCHA and the
       Google
@@ -150,7 +149,7 @@ export default {
           text: "[]~(￣▽￣)~*]",
           icon: "info",
           button: "关闭",
-        }).then(function() {
+        }).then(function () {
           querySelector("body").style.transition = "transform 1s ease 0s";
           querySelector("body").style.transform = "rotateY(180deg)";
           root.clickTime = "";

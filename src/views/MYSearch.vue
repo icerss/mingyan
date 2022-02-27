@@ -100,7 +100,9 @@ export default {
       }
       //console.log(this.displayMingyan);
       let result = "";
-      for (let item of this.displayMingyan) if (item) result += item;
+      for (let item of this.displayMingyan) {
+        if (item) result += item;
+      }
       if (!result) {
         this.isNoResult = true;
       } else {
@@ -118,7 +120,7 @@ export default {
   },
   computed: {
     displayDataList() {
-      return this.displayMingyan.filter(function(item, index) {
+      return this.displayMingyan.filter(function (item, index) {
         index < this.displayLength;
       });
     },
@@ -131,7 +133,7 @@ export default {
         }
         return o;
       } else {
-        let data = this.mingyan.filter(function(item) {
+        let data = this.mingyan.filter(function (item) {
           if (
             item
               .toLocaleLowerCase()
@@ -177,7 +179,7 @@ export default {
     getHistoryRanking() {
       let root = this;
       MY_starApi.getHistoryRanking()
-        .then(function(res) {
+        .then(function (res) {
           let data = [];
           for (let i = 0; i < 15; i++) {
             data.push(res[i]);
@@ -185,10 +187,10 @@ export default {
           root.historyDataList = data;
           root.isLoading = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           log(err);
           // 若获取失败，就加载实时排行榜
-          MY_starApi.getRanking().then(function(res) {
+          MY_starApi.getRanking().then(function (res) {
             res = res.data;
             let data = [];
             for (let i = 0; i < 15; i++) {
@@ -198,7 +200,7 @@ export default {
             root.isLoading = false;
           });
         });
-      setTimeout(function() {
+      setTimeout(function () {
         if (!root.historyDataList === []) root.isLoading = false;
       }, 2000);
     },
@@ -220,6 +222,7 @@ export default {
 <style scoped>
 .my--search {
   display: block;
+  text-align: center;
 }
 
 #searchbar {

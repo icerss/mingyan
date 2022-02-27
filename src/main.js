@@ -57,7 +57,7 @@ Vue.config.devtools = process.env.NODE_ENV === "development";
 
 if (getConfig("isInsertBaidu")) {
   let _hmt = [];
-  (function() {
+  (function () {
     let hm = document.createElement("script");
     hm.src = "https://hm.baidu.com/hm.js?0673dbbe4e6ea51a92a74e3ba2bc051b";
     let s = document.getElementsByTagName("script")[0];
@@ -65,7 +65,7 @@ if (getConfig("isInsertBaidu")) {
   })();
   window._hmt = _hmt;
 
-  (function() {
+  (function () {
     var bp = document.createElement("script");
     var curProtocol = window.location.protocol.split(":")[0];
     if (curProtocol === "https") {
@@ -80,8 +80,7 @@ if (getConfig("isInsertBaidu")) {
 
 Sentry.init({
   Vue,
-  dsn:
-    "https://f7bf4b21b7854f3aa3c3a94513603d85@o947661.ingest.sentry.io/5896972",
+  dsn: "https://f7bf4b21b7854f3aa3c3a94513603d85@o947661.ingest.sentry.io/5896972",
   integrations: [
     new Integrations.BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
@@ -98,7 +97,6 @@ new Vue({
 }).$mount("#app");
 
 /**
- * 耶！！写完啦！！
  * 从2020-04-30 到  现在，
  * 这个网最初只是我们几个人开玩笑着说一说，
  * 谁知道真的能成功呢？

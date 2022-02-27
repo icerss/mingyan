@@ -60,7 +60,7 @@ import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
 import { getConfig } from "../js/init";
 import { EventBus } from "../js/eventBus";
-import { recordEvent, recordEventId } from "../js/log";
+import { recordEvent, recordEventId, recordSayingTextEvent } from "../js/log";
 const MYComment = () =>
   import(/* webpackChunkName: "comment" */ "../components/MYComment.vue");
 
@@ -100,11 +100,11 @@ export default {
     MY_incidents();
     // if (location.pathname !== "/") location.pathname = "/";
     let root = this;
-    window.onresize = function() {
+    window.onresize = function () {
       root.isClickStoryTips = false;
       querySelector(".my--main").classList.remove("is-close-story");
     };
-    EventBus.$on("onReload", function() {
+    EventBus.$on("onReload", function () {
       root.isClickStoryTips = false;
       querySelector(".my--main").classList.remove("is-close-story");
     });
@@ -129,6 +129,9 @@ export default {
       this.teacher = formatMingyan(id).teacher;
       this.text = formatMingyan(id).text;
       kv.put(kvName.mingyanId, id);
+
+      recordSayingTextEvent(this.rawMingyan);
+
       fadeIn(".my--main");
     },
     nextMingyan() {

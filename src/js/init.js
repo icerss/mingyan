@@ -21,7 +21,7 @@ export function getConfig(key) {
 /* 常量 */
 export let picBaseUrl = "https://cdn.erssmy.com/image"; // 图片cdn链接
 
-let apiUrlBase = "https://api.erss.club/api";
+let apiUrlBase = "https://api.xmsyyxx.com/api";
 export let apiUrls = {
   "2022_ranking": `${apiUrlBase}/v2/2022-ranking`,
   star_v2: `${apiUrlBase}/v2/star`,
@@ -34,10 +34,11 @@ export let apiUrls = {
   ranking_history: `${apiUrlBase}/get-ranking-history`,
   donate_list: `${apiUrlBase}/get-donate-info`,
   image: `${apiUrlBase}/image`,
+  twikoo: `${apiUrlBase}/twikoo`,
   announce: `https://api.erssmy.com/api/getannounce`,
 };
 
-String.prototype.trim = function() {
+String.prototype.trim = function () {
   return this.replace(/(^\s*)|(\s*$)/g, "");
 };
 

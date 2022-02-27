@@ -36,7 +36,7 @@
 
     <div style="text-align: center">
       <div style="color: gray">
-        自 2020年04月30日 以来，ERSS名言已经陪伴你们走过了
+        自 2020年04月30日 以来，耳斯名言已经陪伴你们走过了
         <span class="sitetime">{{ sitetime }}</span>
       </div>
       <a href="https://icp.gov.moe" target="_blank" style="color: #d6d9e2"
@@ -61,12 +61,9 @@
           ><span id="host">Vercel && Github</span></span
         >
       </div>
-      <div
-        class="github-badge"
-        title="Jsdelivr的静态文件加速和Cloudflare的部分页面加速"
-      >
+      <div class="github-badge" title="由Cloudflare提供网站加速服务">
         <span class="badge-subject">CDN</span
-        ><span class="badge-value bg-pink">Jsdelivr & DogeCloud CDN</span>
+        ><span class="badge-value bg-pink">Cloudflare</span>
       </div>
       <div class="github-badge" title="ERSS~~~">
         <span class="badge-subject">&copy;</span
@@ -98,6 +95,7 @@
 import { mingyan } from "../../js/mingyan";
 import { fadeIn, loadJs, querySelector, SaveAs } from "../../js/utils";
 import { recordEvent, recordEventId } from "../../js/log";
+import { apiUrls } from "../../js/init";
 
 export default {
   name: "MYMore",
@@ -154,18 +152,18 @@ export default {
 
     let root = this;
     loadJs("https://s3.cdn.h36.top/twikoo@1.4.9/dist/twikoo.min.js").then(
-      function() {
+      function () {
         twikoo // eslint-disable-line
           .init({
-            envId: "https://api.erss.club/api/twikoo",
+            envId: apiUrls.twikoo,
             el: "#tcomment",
             path: "/",
           })
-          .then(function() {
+          .then(function () {
             try {
               querySelector(
                 ".tk-footer"
-              ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2021 <a href="https://www.erssmy.com/">ERSS名言</a></div>`;
+              ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2022 <a href="https://www.erssmy.com/">耳斯名言</a></div>`;
             } catch {} // eslint-disable-line
             querySelector(".el-textarea__inner").style.height = "150px";
           });
@@ -173,7 +171,7 @@ export default {
     );
     fetch("https://api.github.com/repos/xhemj/mingyan")
       .then((r) => r.json())
-      .then(function(data) {
+      .then(function (data) {
         var a = data["updated_at"];
         root.uptime = new Date(a).toLocaleString();
       });
@@ -182,7 +180,7 @@ export default {
       .then((res) => {
         root.hitCount = res.data.count;
       });
-    setInterval(function() {
+    setInterval(function () {
       root.sitetime = root.siteTime();
     }, 250);
   },
