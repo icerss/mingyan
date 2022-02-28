@@ -70,7 +70,7 @@ module.exports = {
       return args;
     });
   },
-  filenameHashing: false,
+  filenameHashing: true,
   css: {
     extract: true,
     loaderOptions: {
