@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import MYStar from "../components/MYStar.vue";
-import MYInfo from "../components/MYInfo.vue";
-import MYImage from "../components/MYImage.vue";
+const MYStar = () => import("../components/MYStar.vue");
+const MYInfo = () => import("../components/MYInfo.vue");
+const MYImage = () => import("../components/MYImage.vue");
 // import MYStory from "../components/MYStory.vue";
 import {
   mingyan,
@@ -61,8 +61,7 @@ import { MY_incidents } from "../js/feat/incidentsReport";
 import { getConfig } from "../js/init";
 import { EventBus } from "../js/eventBus";
 import { recordEvent, recordEventId, recordSayingTextEvent } from "../js/log";
-const MYComment = () =>
-  import(/* webpackChunkName: "comment" */ "../components/MYComment.vue");
+const MYComment = () => import("../components/MYComment.vue");
 
 export default {
   name: "MYMain",

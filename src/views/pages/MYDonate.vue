@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import FancyImage from "../../components/FancyImage.vue";
+const FancyImage = () => import("../../components/FancyImage.vue");
 import { fadeIn } from "../../js/utils";
 import { apiUrls } from "../../js/init";
 
@@ -71,7 +71,7 @@ export default {
     let root = this;
     fetch(`${apiUrls.donate_list}?t=_${new Date().getTime()}`)
       .then((r) => r.json())
-      .then(function(res) {
+      .then(function (res) {
         root.handleData(res);
       });
   },

@@ -65,7 +65,7 @@
 
 <script>
 import { mingyan } from "../js/mingyan";
-import MYSearchHighlight from "../components/MYSearchHighlight.vue";
+const MYSearchHighlight = () => import("../components/MYSearchHighlight.vue");
 import { MY_starApi } from "../js/feat/starApi";
 import { log } from "../js/utils";
 

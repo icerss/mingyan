@@ -9,7 +9,7 @@ export { swal };
  * 动态加载JS
  */
 export function loadJs(src, opt) {
-  return new Promise(function(resolve) {
+  return new Promise(function (resolve) {
     let script = document.createElement("script");
     let head = document.getElementsByTagName("head")[0];
     script.type = "text/javascript";
@@ -22,7 +22,7 @@ export function loadJs(src, opt) {
     if (script.addEventListener) {
       script.addEventListener("load", resolve, false);
     } else if (script.attachEvent) {
-      script.attachEvent("onreadystatechange", function() {
+      script.attachEvent("onreadystatechange", function () {
         let target = window.event.srcElement;
         if (target.readyState == "loaded") resolve();
       });
@@ -82,7 +82,7 @@ export function querySelector(el) {
 /**
  * 元素是否显示
  */
-export let isShow = function(el) {
+export let isShow = function (el) {
   try {
     return (
       querySelector(el).style === "none" ||
@@ -97,13 +97,9 @@ export let isShow = function(el) {
  * 获取 UID
  * @returns MY_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  */
-export let getUid = function() {
+export let getUid = function () {
   if (kv.get(kvName.MY_TOKEN)) return kv.get(kvName.MY_TOKEN);
-  let tk =
-    "MY_" +
-    uuidv4()
-      .replace(/-/g, "")
-      .toLocaleUpperCase();
+  let tk = "MY_" + uuidv4().replace(/-/g, "").toLocaleUpperCase();
   kv.put(kvName.MY_TOKEN, tk);
   return tk;
 };
@@ -150,28 +146,28 @@ export let notyf = new Notyf({
  * Notyf 弹窗
  */
 export let NotyfAlert = {
-  su: function(text) {
+  su: function (text) {
     return notyf.success(text);
   },
-  warn: function(text) {
+  warn: function (text) {
     return notyf.open({
       type: "warning",
       message: text,
     });
   },
-  err: function(text) {
+  err: function (text) {
     return notyf.open({
       type: "error",
       message: text,
     });
   },
-  info: function(text) {
+  info: function (text) {
     return notyf.open({
       type: "info",
       message: text,
     });
   },
-  test: function(text) {
+  test: function (text) {
     return notyf.open({
       type: "test",
       message: text,
@@ -182,7 +178,7 @@ export let NotyfAlert = {
 /**
  * 看是不是手机（测试中……）
  */
-export let deviceIsPhone = function() {
+export let deviceIsPhone = function () {
   return window.innerWidth <= 480;
 };
 
@@ -213,11 +209,11 @@ export let kvName = {
 /**
  * 渐入
  */
-export let fadeIn = function(el) {
+export let fadeIn = function (el) {
   if (!querySelector(el)) return;
   querySelector(el).classList.add("fadeIn");
   querySelector(el).style.display = "block";
-  setTimeout(function() {
+  setTimeout(function () {
     if (!querySelector(el)) return;
     querySelector(el).classList.remove("fadeIn");
   }, 500);
@@ -226,10 +222,10 @@ export let fadeIn = function(el) {
 /**
  * 渐出
  */
-export let fadeOut = function(el) {
+export let fadeOut = function (el) {
   if (!querySelector(el)) return;
   querySelector(el).classList.add("fadeOut");
-  setTimeout(function() {
+  setTimeout(function () {
     if (!querySelector(el)) return;
     querySelector(el).style.display = "none";
     querySelector(el).classList.remove("fadeOut");
@@ -240,9 +236,9 @@ export let fadeOut = function(el) {
  * 控制台输出
  */
 function _log() {
-  if (!getConfig("isDebugLog")) return function() {};
+  if (!getConfig("isDebugLog")) return function () {};
   let dn = 1;
-  return function(...str) {
+  return function (...str) {
     let special1 = "";
     let special2 = "";
     console.log(
@@ -259,9 +255,9 @@ window["log"] = log;
 /**
  * 加点击事件
  */
-export let addClickEvent = function(el, callback) {
+export let addClickEvent = function (el, callback) {
   try {
-    document.addEventListener("click", function(event) {
+    document.addEventListener("click", function (event) {
       let path = event.path;
       for (let item of path) {
         let classname, id;
@@ -293,7 +289,7 @@ export let addClickEvent = function(el, callback) {
  * @param {String} type 格式
  * @param {String} name 文件名
  */
-export let SaveAs = function(data, type, name) {
+export let SaveAs = function (data, type, name) {
   let link = document.createElement("a");
   let exportName = name ? name : "data";
   let url = "data:text/" + type + ";charset=utf-8,\uFEFF" + encodeURI(data);
@@ -307,8 +303,8 @@ export let SaveAs = function(data, type, name) {
  * @param {String} path 图片路径
  * @returns 图片
  */
-export let getImageLink = function(path) {
-  return new Promise(function(resolve, reject) {
+export let getImageLink = function (path) {
+  return new Promise(function (resolve, reject) {
     fetch(apiUrls.image, {
       ...normalPostHeader,
       body: JSON.stringify({
@@ -317,10 +313,10 @@ export let getImageLink = function(path) {
       }),
     })
       .then((r) => r.json())
-      .then(function(res) {
+      .then(function (res) {
         resolve(res);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         reject(err);
       });
   });
@@ -331,7 +327,7 @@ export let getImageLink = function(path) {
  * @param {String} url 图片链接
  * @returns 大小
  */
-export let getImageSize = function(url) {
+export let getImageSize = function (url) {
   let image = new Image();
   image.src = url;
   return {

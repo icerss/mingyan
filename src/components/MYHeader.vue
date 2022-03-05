@@ -45,7 +45,7 @@
 
 <script>
 import Headroom from "headroom.js";
-import Tooltip from "./Tooltip.vue";
+const Tooltip = () => import("./Tooltip.vue");
 import { EventBus } from "../js/eventBus";
 import { querySelector } from "../js/utils";
 import { recordEvent, recordEventId } from "../js/log";

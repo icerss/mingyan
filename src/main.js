@@ -2,12 +2,8 @@
  * 大型 polyfill 引用区 ~~
  */
 (() => import("babel-polyfill"))();
-if (!window["fetch"])
-  window["fetch"] = () =>
-    import(/* webpackChunkName: "fetch-polyfill" */ "whatwg-fetch");
-if (!window["Promise"])
-  window["Promise"] = () =>
-    import(/* webpackChunkName: "promise-polyfill" */ "promise-polyfill");
+if (!window["fetch"]) window["fetch"] = () => import("whatwg-fetch");
+if (!window["Promise"]) window["Promise"] = () => import("promise-polyfill");
 (() => import("./js/log"))();
 
 import Vue from "vue";

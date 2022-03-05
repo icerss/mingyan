@@ -32,7 +32,8 @@ module.exports = {
         automaticNameDelimiter: "-",
         chunks: "all",
         maxInitialRequests: Infinity,
-        minSize: 20000,
+        minSize: 1000,
+        minChunks: 1,
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,

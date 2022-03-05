@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import ListItem from "../../components/ListItem.vue";
+const ListItem = () => import("../../components/ListItem.vue");
 import { fadeIn, querySelector, swal } from "../../js/utils";
 
 export default {
