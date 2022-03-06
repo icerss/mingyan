@@ -26,7 +26,10 @@
 </template>
 
 <script>
-const FancyImage = () => import("../../components/FancyImage.vue");
+const FancyImage = () =>
+  import(
+    /* webpackChunkName: "FancyImage" */ "../../components/FancyImage.vue"
+  );
 import { fadeIn } from "../../js/utils";
 import { apiUrls } from "../../js/init";
 

@@ -10,11 +10,11 @@
           </span>
         </router-link>
       </a-col>
-      <a href="./">
+      <router-link to="/">
         <span class="my--title" title="ERSS名言">
           <i class="icon my--header-logo"></i>
         </span>
-      </a>
+      </router-link>
       <a-col :span="16"></a-col>
       <a-col :span="2">
         <router-link to="/search" id="el-a" title="搜索">
@@ -45,7 +45,7 @@
 
 <script>
 import Headroom from "headroom.js";
-const Tooltip = () => import("./Tooltip.vue");
+const Tooltip = () => import(/* webpackChunkName: "Tooltip" */ "./Tooltip.vue");
 import { EventBus } from "../js/eventBus";
 import { querySelector } from "../js/utils";
 import { recordEvent, recordEventId } from "../js/log";
@@ -73,10 +73,10 @@ export default {
     reload() {
       // recordEvent(recordEventId.clickMYReloadButton);
       EventBus.$emit("onReload");
-      if (/\/$|\/@\d/.test(location.pathname)) {
+      if (/\/$|\/shuangshi$|\/@\d/.test(location.pathname)) {
         querySelector("#reload") && querySelector("#reload").click();
       } else {
-        location.pathname = "/";
+        location.pathname = "/" + window["my_cfg"].source || "/";
       }
     },
     onClickMoreButton() {

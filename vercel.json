@@ -1,12 +1,17 @@
 {
-    "routes": [
-        {
-            "handle": "filesystem"
-        },
-        {
-            "src": "/(.*)",
-            "status": 404,
-            "dest": "/index.html"
-        }
-    ]
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/shuangshi",
+      "status": 200,
+      "dest": "/index.html"
+    },
+    {
+      "src": "/",
+      "status": 200,
+      "dest": "/index.html"
+    }
+  ]
 }

@@ -11,7 +11,8 @@
 </template>
 
 <script>
-const FancyImage = () => import("./FancyImage.vue");
+const FancyImage = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./FancyImage.vue");
 import { formatMingyan, mingyanPicUrl, solvePicUrl } from "../js/mingyan";
 import { deviceIsPhone } from "../js/utils";
 // import { picBaseUrl } from "../js/init";

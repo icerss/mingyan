@@ -1,15 +1,24 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-const MYMain = () => import("./views/MYMain.vue");
-const MYSearch = () => import("./views/MYSearch.vue");
-const MYMore = () => import("./views/pages/MYMore.vue");
-const MYAbout = () => import("./views/pages/MYAbout.vue");
-const MYFaq = () => import("./views/pages/MYFaq.vue");
-const MYDonate = () => import("./views/pages/MYDonate.vue");
-const MYRanking = () => import("./views/pages/MYRanking.vue");
-const MYSubmit = () => import("./views/pages/MYSubmit.vue");
-const MYDebugPage = () => import("./views/pages/MYDebugPage.vue");
+const MYMain = () =>
+  import(/* webpackChunkName: "MYMain" */ "./views/MYMain.vue");
+const MYSearch = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/MYSearch.vue");
+const MYMore = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/pages/MYMore.vue");
+const MYAbout = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/pages/MYAbout.vue");
+const MYFaq = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/pages/MYFaq.vue");
+const MYDonate = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/pages/MYDonate.vue");
+const MYRanking = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/pages/MYRanking.vue");
+const MYSubmit = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/pages/MYSubmit.vue");
+const MYDebugPage = () =>
+  import(/* webpackChunkName: "FancyImage" */ "./views/pages/MYDebugPage.vue");
 
 Vue.use(VueRouter);
 

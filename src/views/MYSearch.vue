@@ -65,7 +65,10 @@
 
 <script>
 import { mingyan } from "../js/mingyan";
-const MYSearchHighlight = () => import("../components/MYSearchHighlight.vue");
+const MYSearchHighlight = () =>
+  import(
+    /* webpackChunkName: "MYSearchHighlight" */ "../components/MYSearchHighlight.vue"
+  );
 import { MY_starApi } from "../js/feat/starApi";
 import { log } from "../js/utils";
 
@@ -178,10 +181,10 @@ export default {
 
     getHistoryRanking() {
       let root = this;
-      MY_starApi.getHistoryRanking()
+      MY_starApi.getHistoryRanking(window["my_cfg"].source)
         .then(function (res) {
           let data = [];
-          for (let i = 0; i < 15; i++) {
+          for (let i in res) {
             data.push(res[i]);
           }
           root.historyDataList = data;

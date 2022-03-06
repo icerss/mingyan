@@ -119,7 +119,8 @@
 </template>
 
 <script>
-const ListItem = () => import("../../components/ListItem.vue");
+const ListItem = () =>
+  import(/* webpackChunkName: "ListItem" */ "../../components/ListItem.vue");
 import { fadeIn, querySelector, swal } from "../../js/utils";
 
 export default {

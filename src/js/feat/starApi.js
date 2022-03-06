@@ -19,14 +19,14 @@ export let MY_starApi = {
    * 获取当前点赞数
    * @param {String} my 完整名言
    */
-  getNum: function(my) {
+  getNum: function (my) {
     if (!Promise) return;
     if (!my)
       my =
         querySelector(".my--mingyan-name").innerText.trim() +
         "：" +
         querySelector(".my--mingyan-text").innerText.trim();
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       fetch(starApiUrl, {
         ...normalPostHeader,
         body: JSON.stringify({
@@ -42,7 +42,7 @@ export let MY_starApi = {
         .then((json) => {
           resolve(json);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           reject(e);
         });
     });
@@ -52,7 +52,7 @@ export let MY_starApi = {
    * 点赞
    * @param {String} my 完整名言
    */
-  addStar: async function(my, id, recaptcha_token) {
+  addStar: async function (my, id, recaptcha_token) {
     if (!Promise) return;
     if (!my && !id)
       my =
@@ -66,7 +66,7 @@ export let MY_starApi = {
     // 接入recaptcha 验证
     try {
       recaptcha_token = recaptcha_token || (await loadCaptcha());
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         fetch(starApiUrl, {
           ...normalPostHeader,
           body: JSON.stringify({
@@ -84,7 +84,7 @@ export let MY_starApi = {
             resolve(json);
             if (json.code === 0) recordEvent(recordEventId.addStarEvent);
           })
-          .catch(function(e) {
+          .catch(function (e) {
             reject(e);
           });
       });
@@ -97,7 +97,7 @@ export let MY_starApi = {
    * 取消点赞
    * @param {String} my 完整名言
    */
-  removeStar: async function(my, id, recaptcha_token) {
+  removeStar: async function (my, id, recaptcha_token) {
     if (!Promise) return;
     if (!my)
       my =
@@ -108,7 +108,7 @@ export let MY_starApi = {
     // 接入recaptcha 验证
     try {
       recaptcha_token = recaptcha_token || (await loadCaptcha());
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         fetch(starApiUrl, {
           ...normalPostHeader,
           body: JSON.stringify({
@@ -126,7 +126,7 @@ export let MY_starApi = {
             resolve(json);
             if (json.code === 0) recordEvent(recordEventId.removeStarEvent);
           })
-          .catch(function(e) {
+          .catch(function (e) {
             reject(e);
           });
       });
@@ -138,9 +138,9 @@ export let MY_starApi = {
   /**
    * 获取排行榜
    */
-  getRanking: function() {
+  getRanking: function () {
     if (!Promise) return;
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       fetch(starApiUrl, {
         ...normalPostHeader,
         body: JSON.stringify({
@@ -155,7 +155,7 @@ export let MY_starApi = {
           resolve(json);
           recordEvent(recordEventId.getCurrentRanking);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           reject(e);
         });
     });
@@ -164,14 +164,16 @@ export let MY_starApi = {
   /**
    * 获取临时排行榜数据
    */
-  getHistoryRanking: function() {
+  getHistoryRanking: function (source) {
     if (!Promise) return;
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       // 若加载时间超过 2s，自动 reject
       setTimeout(() => {
         reject("请求超时");
       }, 2000);
-      fetch(`${apiUrls.ranking_history}?t=_${new Date().getTime()}`)
+      fetch(
+        `${apiUrls.ranking_history}?t=_${new Date().getTime()}&source=${source}`
+      )
         .then((res) => res.json())
         .then((json) => {
           log(json);
@@ -188,7 +190,7 @@ export let MY_starApi = {
    * 兼容 V1 数据格式
    * @param {String} my 完整名言
    */
-  update: function(my, id) {
+  update: function (my, id) {
     if (!Promise) return;
     if (!my && !id)
       my =
@@ -199,7 +201,7 @@ export let MY_starApi = {
     if (id && my) _find = { MY_text: my };
     if (id && !my) _find = { MY_ID: id };
     if (!id && my) _find = { MY_text: my };
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       fetch(starApiUrl, {
         ...normalPostHeader,
         body: JSON.stringify({
@@ -215,7 +217,7 @@ export let MY_starApi = {
         .then((json) => {
           resolve(json);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           reject(e);
         });
     });

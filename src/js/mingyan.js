@@ -1,8 +1,7 @@
 import router from "../router";
 import { kv, kvName, randomNumber } from "./utils";
-import { mingyan } from "./rawMingyan";
-
-export { mingyan };
+import { mingyan, submitMingyan } from "./rawMingyan";
+let rawMingyan = mingyan;
 /**
  * 格式：
  * "名言": "图片链接"
@@ -101,16 +100,14 @@ export let mingyanSpecialEvent = {
     "来一起唱啊！！": {
       name: "Shape of You",
       artist: "Ed Sheeran",
-      url:
-        "https://cdn.erssmy.com/image/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
+      url: "https://cdn.erssmy.com/image/static%2Fmingyan-js-org%2FEd%20Sheeran%20-%20Shape%20of%20You.mp3",
       cover: "https://cdn.erssmy.com/image/2020/12/19/L1NY8U7nhRjyQMa.jpg",
-      lrc:
-        "https://cdn.erssmy.com/image/static%2Fmingyan-js-org%2FShape%20of%20You.lrc",
+      lrc: "https://cdn.erssmy.com/image/static%2Fmingyan-js-org%2FShape%20of%20You.lrc",
     },
   },
 };
 
-export let getNowId = function() {
+export let getNowId = function () {
   let routerPath = router.history.current.fullPath;
   if (/\d/.test(routerPath.split("/@")[1])) return routerPath.split("/@")[1];
   return /#\d/.test(location.hash)
@@ -118,9 +115,19 @@ export let getNowId = function() {
     : window["nowId"];
 };
 
+/**
+ * 双十馆专场
+ */
+const urlpath = location.pathname;
+if (urlpath === "/shuangshi") {
+  window["my_cfg"].source = "shuangshi";
+  rawMingyan = submitMingyan.shuangshiguan;
+}
+export { rawMingyan as mingyan };
+
 let i = 0;
-export let genNextId = function() {
-  window["nowId"] = randomNumber(0, mingyan.length - 1);
+export let genNextId = function () {
+  window["nowId"] = randomNumber(0, rawMingyan.length - 1);
   let date = new Date().getTime();
   if (date >= 1634054400000 && date <= 1634140800000 && i === 1) {
     window["nowId"] = 486; // 潘哥生日彩蛋
@@ -132,12 +139,12 @@ export let genNextId = function() {
   return window["nowId"];
 };
 
-export let formatMingyan = function(input) {
+export let formatMingyan = function (input) {
   let _my = "";
   if (String(Number(input)) === "NaN") {
     _my = input;
   } else {
-    _my = mingyan[input];
+    _my = rawMingyan[input];
   }
   let teacher = _my.split("：")[0];
   let text =
@@ -147,10 +154,17 @@ export let formatMingyan = function(input) {
   return { teacher, text };
 };
 
-window["mingyan"] = mingyan;
+function getLocalMingyanId() {
+  let localId = kv.get(kvName.mingyanId);
+  if (localId > rawMingyan.length)
+    localId = randomNumber(0, rawMingyan.length - 1);
+  return localId;
+}
+
+window["mingyan"] = rawMingyan;
 window["nowId"] =
   window["my_cfg"].specifyId ||
   window["nowId"] ||
-  kv.get(kvName.mingyanId) ||
-  randomNumber(0, mingyan.length - 1) ||
+  getLocalMingyanId() ||
+  randomNumber(0, rawMingyan.length - 1) ||
   0;
