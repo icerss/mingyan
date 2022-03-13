@@ -184,7 +184,8 @@ export default {
       MY_starApi.getHistoryRanking(window["my_cfg"].source)
         .then(function (res) {
           let data = [];
-          for (let i in res) {
+          let len = res.length < 15 ? res.length : 15;
+          for (let i = 0; i < len; i++) {
             data.push(res[i]);
           }
           root.historyDataList = data;

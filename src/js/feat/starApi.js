@@ -138,7 +138,7 @@ export let MY_starApi = {
   /**
    * 获取排行榜
    */
-  getRanking: function () {
+  getRanking: function (source) {
     if (!Promise) return;
     return new Promise(function (resolve, reject) {
       fetch(starApiUrl, {
@@ -147,6 +147,7 @@ export let MY_starApi = {
           event: "ranking",
           data: {
             t: new Date().getTime(),
+            source,
           },
         }),
       })
