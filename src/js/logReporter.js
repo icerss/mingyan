@@ -1,4 +1,5 @@
 import * as ackeeTracker from "ackee-tracker";
+import { apiUrls, normalPostHeader } from "./init";
 
 export let track = ackeeTracker.create("https://www.xhemj.com", {
   detailed: true,
@@ -12,6 +13,7 @@ let ClickEventId = "d8cf3a61-3845-4c5a-9fe9-9f5056d004d9";
 let PageSpeedEventId = "0de96fd6-b5e3-4c9f-ab55-119093ab4057";
 let SayingTypeEventId = "d04c0203-67e5-4f24-a3c4-5fcac88d5f9e";
 let SayingTextEventId = "28ce91b5-f3da-45ac-b436-565fa623546f";
+let ResourceLoadEventId = "8c4a7f5f-d909-432f-a6bc-e0f78df3fa99";
 
 export let recordEventId = {
   /* StarEvent */
@@ -103,5 +105,24 @@ window.onload = function () {
   track.action(PageSpeedEventId, {
     key: location.origin + location.pathname,
     value: loadTime,
+  });
+
+  let resources = window.performance.getEntriesByType("resource");
+  let data = [];
+  for (let item of resources) {
+    let { duration, name } = item;
+    data.push({
+      key: name,
+      value: duration,
+    });
+  }
+  let apiUrl = apiUrls.performance_report;
+  // apiUrl = "http://localhost:3000/api/report/web";
+  fetch(apiUrl, {
+    ...normalPostHeader,
+    body: JSON.stringify({
+      input: data,
+      id: ResourceLoadEventId,
+    }),
   });
 };

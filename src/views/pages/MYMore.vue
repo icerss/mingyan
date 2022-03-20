@@ -94,7 +94,7 @@
 <script>
 import { mingyan } from "../../js/mingyan";
 import { fadeIn, loadJs, querySelector, SaveAs } from "../../js/utils";
-import { recordEvent, recordEventId } from "../../js/log";
+import { recordEvent, recordEventId } from "../../js/logReporter";
 import { apiUrls } from "../../js/init";
 
 export default {

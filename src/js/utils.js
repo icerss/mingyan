@@ -236,7 +236,7 @@ export let fadeOut = function (el) {
  * 控制台输出
  */
 function _log() {
-  if (!getConfig("isDebugLog")) return function () {};
+  if (!getConfig("isDebuglog")) return function () {};
   let dn = 1;
   return function (...str) {
     let special1 = "";

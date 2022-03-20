@@ -100,7 +100,13 @@
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
-            style="margin: auto;background: none;shape-rendering: auto;position: relative;transform: translateY(5px);"
+            style="
+              margin: auto;
+              background: none;
+              shape-rendering: auto;
+              position: relative;
+              transform: translateY(5px);
+            "
             width="15px"
             height="15px"
             viewBox="0 0 100 100"
@@ -139,7 +145,7 @@ import "dayjs/locale/zh-cn";
 import md5 from "md5";
 import { kv, kvName, log, NotyfAlert } from "../js/utils";
 import { MY_commentApi } from "../js/feat/commentApi";
-import { recordEvent, recordEventId } from "../js/log";
+import { recordEvent, recordEventId } from "../js/logReporter";
 
 export default {
   name: "MYComment",
@@ -221,11 +227,11 @@ export default {
           `https://cdn.erssmy.com/qqface/${qqNum}?_my_cache_=no&t=_${new Date().getTime()}`
         )
           .then((r) => r.json())
-          .then(function(res) {
+          .then(function (res) {
             root.mailAvatar = res.data;
             root.isQQmail = true;
           })
-          .catch(function() {
+          .catch(function () {
             root.mailAvatar = root.mail
               ? `https://cdn.erssmy.com/gravatar/${md5(
                   root.mail
@@ -246,7 +252,7 @@ export default {
       let root = this;
       this.isLoadData = false;
       MY_commentApi.getComment(this.rawMingyan)
-        .then(function(res) {
+        .then(function (res) {
           log("获取到评论", res);
           let o = [];
           for (let item of res) {
@@ -263,7 +269,7 @@ export default {
           root.isLoadData = true;
           root.handleDisplayComment();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           NotyfAlert.err("评论失败：\n" + err);
         });
     },
@@ -283,7 +289,7 @@ export default {
           nick: this.name,
           mail: this.mail,
         })
-          .then(function(res) {
+          .then(function (res) {
             log("评论成功", res);
             root.submitting = false;
             root.comment_input = "";
@@ -302,7 +308,7 @@ export default {
             root.handleDisplayComment();
             NotyfAlert.su("评论成功！");
           })
-          .catch(function(err) {
+          .catch(function (err) {
             NotyfAlert.err("评论失败：\n" + err);
             this.submitting = false;
           });

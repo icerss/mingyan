@@ -63,7 +63,11 @@ import router from "../router";
 import { MY_incidents } from "../js/feat/incidentsReport";
 import { getConfig } from "../js/init";
 import { EventBus } from "../js/eventBus";
-import { recordEvent, recordEventId, recordSayingTextEvent } from "../js/log";
+import {
+  recordEvent,
+  recordEventId,
+  recordSayingTextEvent,
+} from "../js/logReporter";
 const MYComment = () =>
   import(/* webpackChunkName: "MYComment" */ "../components/MYComment.vue");
 

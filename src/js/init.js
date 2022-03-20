@@ -35,6 +35,7 @@ export let apiUrls = {
   donate_list: `${apiUrlBase}/get-donate-info`,
   image: `${apiUrlBase}/image`,
   twikoo: `${apiUrlBase}/twikoo`,
+  performance_report: `${apiUrlBase}/report/web`,
   announce: `https://api.erssmy.com/api/getannounce`,
 };
 

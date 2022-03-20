@@ -12,7 +12,11 @@ import { MY_showFromApi } from "../js/feat/infoApi";
 import { formatMingyan, mingyanPicUrl, solvePicUrl } from "../js/mingyan";
 import { EventBus } from "../js/eventBus";
 import { querySelector, swal } from "../js/utils";
-import { recordEvent, recordEventId, recordSayingTypeEvent } from "../js/log";
+import {
+  recordEvent,
+  recordEventId,
+  recordSayingTypeEvent,
+} from "../js/logReporter";
 
 export default {
   name: "MYInfo",

@@ -8,7 +8,7 @@ if (!window["fetch"])
 if (!window["Promise"])
   window["Promise"] = () =>
     import(/* webpackChunkName: "promise-polyfill" */ "promise-polyfill");
-(() => import(/* webpackChunkName: "MYLog" */ "./js/log"))();
+(() => import(/* webpackChunkName: "log-reporter" */ "./js/logReporter"))();
 
 import Vue from "vue";
 import router from "./router";

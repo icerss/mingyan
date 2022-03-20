@@ -11,7 +11,7 @@ import { isShow, log, NotyfAlert, qs, querySelector, swal } from "../js/utils";
 import { MingyanLogoBase64 } from "../js/init";
 import { MY_starApi } from "../js/feat/starApi";
 import { loadMtCaptcha } from "../js/feat/loadMtCaptcha";
-import { recordEvent, recordEventId } from "../js/log";
+import { recordEvent, recordEventId } from "../js/logReporter";
 
 export default {
   name: "MYStar",
@@ -36,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("hashchange", function() {
+    window.addEventListener("hashchange", function () {
       this.starEvent = "addstar";
     });
     // addClickEvent("#star-logo", this.doStar);
@@ -73,7 +73,7 @@ export default {
         querySelector(".swal-text").innerHTML = this.loadingHtml;
         document
           .querySelector("#star-logo")
-          .addEventListener("click", function() {
+          .addEventListener("click", function () {
             root.doStar();
           });
         this.turnGray();
@@ -93,7 +93,7 @@ export default {
       let root = this;
       root.turnGray();
       MY_starApi.addStar(my, id, recaptcha_token)
-        .then(function(addStar_res) {
+        .then(function (addStar_res) {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
             NotyfAlert.err(addStar_res.msg);
@@ -113,7 +113,7 @@ export default {
             }
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           NotyfAlert.err("错误：\n" + err);
         });
     },
@@ -121,7 +121,7 @@ export default {
       let root = this;
       root.turnGray();
       MY_starApi.removeStar(my, id, recaptcha_token)
-        .then(function(addStar_res) {
+        .then(function (addStar_res) {
           let statusCode = addStar_res.code;
           if (statusCode != 0) {
             NotyfAlert.err(addStar_res.msg);
@@ -141,7 +141,7 @@ export default {
             }
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           NotyfAlert.err("错误：\n" + err);
         });
     },

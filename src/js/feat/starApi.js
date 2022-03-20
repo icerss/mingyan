@@ -5,7 +5,7 @@
  */
 
 import { apiUrls, normalPostHeader } from "../init";
-import { recordEvent, recordEventId } from "../log";
+import { recordEvent, recordEventId } from "../logReporter";
 import { getUid, NotyfAlert, log, querySelector } from "../utils";
 import { loadCaptcha } from "./loadCaptcha";
 

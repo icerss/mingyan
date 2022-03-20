@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { recordEvent, recordEventId } from "../js/log";
+import { recordEvent, recordEventId } from "../js/logReporter";
 import { mingyan } from "../js/mingyan";
 import { kv, kvName, randomNumber } from "../js/utils";
 import router from "../router";

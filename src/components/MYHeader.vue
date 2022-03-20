@@ -48,7 +48,7 @@ import Headroom from "headroom.js";
 const Tooltip = () => import(/* webpackChunkName: "Tooltip" */ "./Tooltip.vue");
 import { EventBus } from "../js/eventBus";
 import { querySelector } from "../js/utils";
-import { recordEvent, recordEventId } from "../js/log";
+import { recordEvent, recordEventId } from "../js/logReporter";
 
 export default {
   name: "MYHeader",
