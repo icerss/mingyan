@@ -9,7 +9,7 @@ dayjs.locale("zh-cn");
 const time = dayjs().format("YYYY-M-D HH:mm:ss");
 
 module.exports = {
-  publicPath: "https://www-erssmy-com.xmsyyxx.com/",
+  // publicPath: "https://www-erssmy-com.xmsyyxx.com/",
   productionSourceMap: false,
   configureWebpack: (config) => {
     config.externals = {

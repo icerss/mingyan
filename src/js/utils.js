@@ -335,3 +335,14 @@ export let getImageSize = function (url) {
     width: image.width,
   };
 };
+
+/**
+ * Cloudflare Zaraz
+ */
+export function ZarazTrack(...data) {
+  if (window.zaraz && window.zaraz.track) {
+    return window.zaraz.track(...data);
+  } else {
+    return console.log("Zazaz Track: ", ...data);
+  }
+}
