@@ -40,12 +40,7 @@
 </template>
 
 <script>
-const recordEvent = () =>
-  import(/* webpackChunkName: "log-reporter" */ "../js/logReporter")
-    .recordEvent;
-const recordEventId = () =>
-  import(/* webpackChunkName: "log-reporter" */ "../js/logReporter")
-    .recordEventId;
+import { recordEvent, recordEventId } from "../js/logReporter";
 import { mingyan } from "../js/mingyan";
 import { kv, kvName, randomNumber } from "../js/utils";
 import router from "../router";
