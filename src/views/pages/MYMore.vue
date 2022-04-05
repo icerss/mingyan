@@ -22,7 +22,7 @@
       <div class="my--sponsor" @click="onClickDonateBanner">
         <img
           class="banner"
-          src="https://s3.cdn.h36.top/@icerss/mingyan-oss@1.0.0/public/donate-banner.png"
+          src="https://s-sh-1943-mingyan-static.oss.dogecdn.com/image/public/donate-banner.png"
           alt="鼓励我们"
         />
       </div>
@@ -151,24 +151,24 @@ export default {
     fadeIn(".my--more");
 
     let root = this;
-    loadJs("https://s3.cdn.h36.top/twikoo@1.4.9/dist/twikoo.min.js").then(
-      function () {
-        twikoo // eslint-disable-line
-          .init({
-            envId: apiUrls.twikoo,
-            el: "#tcomment",
-            path: "/",
-          })
-          .then(function () {
-            try {
-              querySelector(
-                ".tk-footer"
-              ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2022 <a href="https://www.erssmy.com/">耳斯名言</a></div>`;
-            } catch {} // eslint-disable-line
-            querySelector(".el-textarea__inner").style.height = "150px";
-          });
-      }
-    );
+    loadJs(
+      "https://s-sh-1943-mingyan-static.oss.dogecdn.com/static/js/twikoo.min.js"
+    ).then(function () {
+      twikoo // eslint-disable-line
+        .init({
+          envId: apiUrls.twikoo,
+          el: "#tcomment",
+          path: "/",
+        })
+        .then(function () {
+          try {
+            querySelector(
+              ".tk-footer"
+            ).innerHTML = `Powered by <a href="https://twikoo.js.org" target="_blank" rel="nofollow">Twikoo</a></br>&copy; 2022 <a href="https://www.erssmy.com/">耳斯名言</a></div>`;
+          } catch {} // eslint-disable-line
+          querySelector(".el-textarea__inner").style.height = "150px";
+        });
+    });
     fetch("https://api.github.com/repos/xhemj/mingyan")
       .then((r) => r.json())
       .then(function (data) {

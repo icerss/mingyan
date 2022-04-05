@@ -71,19 +71,15 @@ export default {
     imgSrc() {
       let text = formatMingyan(this.rawMingyan).text;
       let name = formatMingyan(this.rawMingyan).teacher;
-      let cdnUrl = "https://s3.cdn.h36.top/@icerss/mingyan-oss@[version]";
+      let cdnUrl = "https://s-sh-1943-mingyan-static.oss.dogecdn.com/image";
       if (text === "解") {
         let url = cdnUrl;
         let path = solvePicUrl[name];
-        let targetVersion = path.split("@")[1] || this.commonVersion;
-        url = url.replace("[version]", targetVersion);
         return url + path;
       }
       let url = cdnUrl;
       let path = mingyanPicUrl[text];
-      let targetVersion = path.split("@")[1] || this.commonVersion;
-      url = url.replace("[version]", targetVersion);
-      return url + path.split("@")[0];
+      return url + path;
     },
   },
 };

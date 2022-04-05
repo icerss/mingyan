@@ -25,7 +25,7 @@ export default {
     document.title = "耳斯名言 · ERSS";
     querySelector("#loading-mask").style.display = "none";
     querySelector("#loading-mask").remove();
-    window.addEventListener("hashchange", function() {
+    window.addEventListener("hashchange", function () {
       let hash = window.location.hash;
       if (/#\d/.test(hash)) window.location.href = "./" + hash;
     });
@@ -47,21 +47,21 @@ export default {
   font-weight: regular;
   font-display: swap;
   /* lib.baomitu.com */
-  src: url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.eot"); /* IE9 Compat Modes */
+  src: url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/zcool-kuaile/zcool-kuaile-regular.eot"); /* IE9 Compat Modes */
   src: local("ZCOOL KuaiLe"), local("ZCOOLKuaiLe-Normal"),
-    url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular-ie.eot?#iefix")
+    url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/zcool-kuaile/zcool-kuaile-regular-ie.eot?#iefix")
       format("embedded-opentype"),
     /* IE6-IE8 */
-      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff2")
+      url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/zcool-kuaile/zcool-kuaile-regular.woff2")
       format("woff2"),
     /* Super Modern Browsers */
-      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.woff")
+      url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/zcool-kuaile/zcool-kuaile-regular.woff")
       format("woff"),
     /* Modern Browsers */
-      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.ttf")
+      url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/zcool-kuaile/zcool-kuaile-regular.ttf")
       format("truetype"),
     /* Safari, Android, iOS */
-      url("https://s2.cdn.h36.top/www.erssmy.com/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe")
+      url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/zcool-kuaile/zcool-kuaile-regular.svg#ZCOOLKuaiLe")
       format("svg"); /* Legacy iOS */
 }
 
@@ -70,9 +70,9 @@ export default {
   font-family: "Material Icons";
   font-style: normal;
   src: local("Material Icons"), local("MaterialIcons-Regular"),
-    url("https://s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff2")
+    url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/material-icons/MaterialIcons-Regular.woff2")
       format("woff2"),
-    url("https://s2.cdn.h36.top/www.erssmy.com/material-icons/MaterialIcons-Regular.woff")
+    url("//s-sh-1943-mingyan-static.oss.dogecdn.com/static/fonts/material-icons/MaterialIcons-Regular.woff")
       format("woff");
 }
 
