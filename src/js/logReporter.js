@@ -1,6 +1,6 @@
 import * as ackeeTracker from "ackee-tracker";
 import { apiUrls, normalPostHeader } from "./init";
-import { ZarazTrack } from "./utils";
+// import { ZarazTrack } from "./utils";
 // import { log } from "./utils";
 
 export let track = ackeeTracker.create("https://www.xhemj.com", {
@@ -89,7 +89,7 @@ export let recordEventId = {
 
 export function recordEvent(eventId) {
   if (!eventId) return;
-  ZarazTrack(eventId.e, { type: eventId.n });
+  // ZarazTrack(eventId.e, { type: eventId.n });
   // console.log(`Record：\`${eventId.n}\``);
   return track.action(eventId.id, {
     key: eventId.n,
@@ -98,7 +98,7 @@ export function recordEvent(eventId) {
 }
 
 export function recordSayingTypeEvent(type) {
-  ZarazTrack("event_saying_from", { type });
+  // ZarazTrack("event_saying_from", { type });
   return track.action(SayingTypeEventId, {
     key: type,
     value: 1,
@@ -106,7 +106,7 @@ export function recordSayingTypeEvent(type) {
 }
 
 export function recordSayingTextEvent(text) {
-  ZarazTrack("event_saying_text", { text });
+  // ZarazTrack("event_saying_text", { text });
   return track.action(SayingTextEventId, {
     key: text,
     value: 1,
