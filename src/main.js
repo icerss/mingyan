@@ -11,7 +11,6 @@ if (!window["Promise"])
 
 import Vue from "vue";
 import router from "./router";
-// import i18n from "./i18n/i18n";
 import App from "./App.vue";
 import VueLazyload from "vue-lazyload";
 import {
@@ -33,7 +32,6 @@ import {
 import { getConfig, loadingImg } from "./js/init";
 import * as Sentry from "@sentry/vue";
 import { Integrations } from "@sentry/tracing";
-import { getUid, loadJs } from "./js/utils";
 
 Vue.use(Row);
 Vue.use(Col);
@@ -90,22 +88,8 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-loadJs("https://www.xhemj.com/ga/js?id=G-T59J90NXW4", {
-  async: "async",
-});
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-  window.dataLayer.push(arguments);
-}
-gtag("js", new Date());
-gtag("config", "G-T59J90NXW4", {
-  anonymize_ip: true,
-  user_id: getUid(),
-});
-
 new Vue({
   router,
-  // i18n,
   render: (h) => h(App),
 }).$mount("#app");
 

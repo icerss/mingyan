@@ -1,6 +1,6 @@
 const path = require("path");
-// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-//   .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const webpack = require("webpack");
 const version = require("./.github/version.json").version;
 const dayjs = require("dayjs");
@@ -33,11 +33,15 @@ module.exports = {
         automaticNameDelimiter: "-",
         chunks: "all",
         maxInitialRequests: Infinity,
-        minSize: 1000,
+        minSize: 50000,
+        maxSize: 50000,
         minChunks: 1,
         cacheGroups: {
           vendor: {
+            name: "vendor",
+            minChunks: 2,
             test: /[\\/]node_modules[\\/]/,
+            priority: -50,
           },
         },
       },
@@ -71,6 +75,9 @@ module.exports = {
       };
       return args;
     });
+    config.plugin("webpack-bundle-analyzer").use(BundleAnalyzerPlugin);
+    config.plugins.delete("preload");
+    config.plugins.delete("prefetch");
   },
   filenameHashing: true,
   css: {
