@@ -1,4 +1,4 @@
-import * as ackeeTracker from "ackee-tracker";
+import * as ackeeTracker from "../lib/ackee";
 import { apiUrls, normalPostHeader } from "./init";
 // import { ZarazTrack } from "./utils";
 // import { log } from "./utils";
